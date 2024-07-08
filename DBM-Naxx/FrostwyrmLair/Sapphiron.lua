@@ -79,7 +79,7 @@ function mod:OnCombatStart(delay)
 	self:SetStage(1)
 	self.vb.isFlying = false
 	warnDrainLifeSoon:Schedule(6.5-delay)
-	timerDrainLife:Start(12-delay) -- (25man Lordaeron 2022/09/02) - 12.0
+	timerDrainLife:Start(16-delay) -- (25man Lordaeron 2022/09/02) - 12.0
 	timerBlizzard:Start(6.1-delay) -- REVIEW! ~3s variance? (25man Lordaeron 2022/09/02 || 25man Lordaeron 2022/10/16) - 8.8 || 6.1
 	timerTailSweep:Start(-delay)
 	warnAirPhaseSoon:Schedule(38.4-delay)
