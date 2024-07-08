@@ -27,8 +27,8 @@ mod:AddBoolOption("ArachnophobiaTimer", true, "timer", nil, nil, nil, "at1859")-
 
 function mod:OnCombatStart(delay)
 	if self:IsDifficulty("normal25") then
-		timerLocustIn:Start(100 - delay)
-		warningLocustSoon:Schedule(90 - delay)
+		timerLocustIn:Start(60 - delay)
+		warningLocustSoon:Schedule(50 - delay)
 	else
 		timerLocustIn:Start(91 - delay)
 		warningLocustSoon:Schedule(76 - delay)
