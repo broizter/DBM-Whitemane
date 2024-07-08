@@ -25,8 +25,8 @@ local specWarnAdds		= mod:NewSpecialWarningAdds(29212, "-Healer", nil, nil, 1, 2
 
 local timerTeleport		= mod:NewTimer(90, "TimerTeleport", 46573, nil, nil, 6)
 local timerTeleportBack	= mod:NewTimer(70, "TimerTeleportBack", 46573, nil, nil, 6)
-local timerCurseCD		= mod:NewCDTimer(56.7, 29213, nil, nil, nil, 5, nil, DBM_COMMON_L.CURSE_ICON) -- REVIEW! variance? (25man Frostmourne 2022/05/25 || 25man Lordaeron 2022/10/16) -  56.7, 99.1! || 57.4
-local timerAddsCD		= mod:NewAddsTimer(30, 29212, nil, "-Healer")
+local timerCurseCD		= mod:NewCDTimer(25, 29213, nil, nil, nil, 5, nil, DBM_COMMON_L.CURSE_ICON) -- REVIEW! variance? (25man Frostmourne 2022/05/25 || 25man Lordaeron 2022/10/16) -  56.7, 99.1! || 57.4
+local timerAddsCD		= mod:NewAddsTimer(25, 29212, nil, "-Healer")
 local timerBlink		= mod:NewNextTimer(30, 29208) -- (25N Lordaeron 2022/10/16) - 30.1, 30.0
 
 mod.vb.teleCount = 0
@@ -79,9 +79,9 @@ function mod:OnCombatStart(delay)
 	self.vb.teleCount = 0
 	self.vb.addsCount = 0
 	self.vb.curseCount = 0
-	timerAddsCD:Start(7-delay)
+	timerAddsCD:Start(25-delay)
 	timerCurseCD:Start(15-delay) -- REVIEW! variance? (25man Lordaeron 2022/10/16) - 15.0
-	timerBlink:Start(23.8-delay) -- REVIEW! variance? (25man Lordaeron 2022/10/16) - 23.8
+	timerBlink:Start(26-delay) -- REVIEW! variance? (25man Lordaeron 2022/10/16) - 23.8
 	timerTeleport:Start(90-delay)
 	warnTeleportSoon:Schedule(80-delay)
 --	self:ScheduleMethod(90.8-delay, "Balcony")
@@ -162,9 +162,9 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, spellName)
 		warnTeleportSoon:Schedule(timer - 10)
 		warnTeleportNow:Show()
 		if self.vb.teleCount == 4 then--11-12 except after 4th return it's 17
-			timerCurseCD:Start(17)--verify consistency though
+			timerCurseCD:Start(15)--verify consistency though
 		else
-			timerCurseCD:Start(11)
+			timerCurseCD:Start(15)
 		end
 --		self:ScheduleMethod(timer, "Balcony")
 	end
