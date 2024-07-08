@@ -24,7 +24,7 @@ local warnRemoveCurse		= mod:NewSpellAnnounce(30281, 3)
 local warnHealSoon	= mod:NewAnnounce("WarningHealSoon", 4, 48071, nil, nil, nil, 55593)
 local warnHealNow	= mod:NewAnnounce("WarningHealNow", 1, 48071, false, nil, nil, 55593)
 
-local timerSpore	= mod:NewNextTimer(36, 32329, nil, nil, nil, 5, 42524, DBM_COMMON_L.DAMAGE_ICON)
+local timerSpore	= mod:NewNextTimer(15, 32329, nil, nil, nil, 5, 42524, DBM_COMMON_L.DAMAGE_ICON)
 local timerDoom		= mod:NewNextTimer(180, 29204, nil, nil, nil, 2)
 --local timerRemoveCurseCD	= mod:NewNextTimer(30.8, 30281, nil, nil, nil, 5)
 local timerAura		= mod:NewBuffActiveTimer(17, 55593, nil, nil, nil, 5, nil, DBM_COMMON_L.HEALER_ICON)
@@ -37,7 +37,7 @@ end
 mod:AddDropdownOption("CorruptedSorting", {"Alphabetical", "Duration"}, "Alphabetical", "misc", nil, 55593)
 
 mod.vb.doomCounter	= 0
-mod.vb.sporeTimer	= 36
+mod.vb.sporeTimer	= 15
 mod.vb.sporeCounter = 0
 local hadCorrupted	= {}
 
@@ -80,12 +80,13 @@ function mod:OnCombatStart(delay)
 	self.vb.sporeCounter = 0
 --	timerRemoveCurseCD:Start(3 - delay)
 	if self:IsDifficulty("normal25") then
-		self.vb.sporeTimer = 15
+		self.vb.sporeTimer = 18
 		timerDoom:Start(90 - delay, 1)
 	else
 		self.vb.sporeTimer = 36
 		timerDoom:Start(120 - delay, 1)
 	end
+	timerAura:Start(12)
 	timerSpore:Start(self.vb.sporeTimer - delay, 1)
 	warnSporeSoon:Schedule(self.vb.sporeTimer - 5 - delay)
 
