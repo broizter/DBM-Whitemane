@@ -27,11 +27,11 @@ local specWarnMarkOnPlayer		= mod:NewSpecialWarning("SpecialWarningMarkOnPlayer"
 local specWarnVoidZone			= mod:NewSpecialWarningYou(28863, nil, nil, nil, 1, 2)
 local yellVoidZone				= mod:NewYell(28863)
 
-local timerLadyMark				= mod:NewNextTimer(16, 28833, nil, nil, nil, 3)
-local timerZeliekMark			= mod:NewNextTimer(16, 28835, nil, nil, nil, 3)
+local timerLadyMark				= mod:NewNextTimer(15, 28833, nil, nil, nil, 3)
+local timerZeliekMark			= mod:NewNextTimer(15, 28835, nil, nil, nil, 3)
 local timerBaronMark			= mod:NewNextTimer(15, 28834, nil, nil, nil, 3)
 local timerThaneMark			= mod:NewNextTimer(15, 28832, nil, nil, nil, 3)
-local timerMeteorCD				= mod:NewCDTimer(11.1, 57467, nil, nil, nil, 3, nil, nil, true) -- REVIEW! ~10s variance? Added "keep" arg (25man Lordaeron 2022/10/16 wipe || 25man Lordaeron 2022/10/16 kill) - 17.8, 17.7, 17.8, 17.7, 15.5 || 17.7, 15.5, 17.8, 17.9, 11.1, 17.7, 13.4, 20.0, 13.3, 20.0
+local timerMeteorCD				= mod:NewCDTimer(20, 57467, nil, nil, nil, 3, nil, nil, true) -- REVIEW! ~10s variance? Added "keep" arg (25man Lordaeron 2022/10/16 wipe || 25man Lordaeron 2022/10/16 kill) - 17.8, 17.7, 17.8, 17.7, 15.5 || 17.7, 15.5, 17.8, 17.9, 11.1, 17.7, 13.4, 20.0, 13.3, 20.0
 --local timerVoidZoneCD			= mod:NewCDTimer(12.9, 28863, nil, nil, nil, 3)-- 12.9-16
 local timerHolyWrathCD			= mod:NewCDTimer(13, 28883, nil, nil, nil, 3)
 local timerBoneBarrier			= mod:NewTargetTimer(20, 29061, nil, nil, nil, 5)
@@ -56,10 +56,10 @@ end]]
 
 function mod:OnCombatStart()
 	self.vb.markCount = 0
-	timerLadyMark:Start()
-	timerZeliekMark:Start()
-	timerBaronMark:Start()
-	timerThaneMark:Start()
+	timerLadyMark:Start(32)
+	timerZeliekMark:Start(32)
+	timerBaronMark:Start(32)
+	timerThaneMark:Start(32)
 	warnMarkSoon:Schedule(12)
 	timerMeteorCD:Start()
 	timerHolyWrathCD:Start(10.1) -- REVIEW! ~2s variance? (25man Lordaeron 2022/10/16 wipe || 25man Lordaeron 2022/10/16 kill) - 12.3 || 10.1
