@@ -23,7 +23,7 @@ local yellInjection			= mod:NewYellMe(28169, nil, false)
 
 local timerInjection		= mod:NewTargetTimer(10, 28169, nil, nil, nil, 3)
 local timerCloud			= mod:NewNextTimer(15, 28240, nil, nil, nil, 5, nil, DBM_COMMON_L.TANK_ICON)
-local timerSlimeSprayCD		= mod:NewCDTimer(32, 54364, nil, nil, nil, 2) -- Transcriptor snippet below
+local timerSlimeSprayCD		= mod:NewCDTimer(15, 54364, nil, nil, nil, 2) -- Transcriptor snippet below
 local enrageTimer			= mod:NewBerserkTimer(720)
 
 mod:AddSetIconOption("SetIconOnInjectionTarget", 28169, false, false, {1, 2, 3, 4})
@@ -52,8 +52,8 @@ function mod:OnCombatStart(delay)
 	self.vb.slimeSprays = 1
 	table.wipe(mutateIcons)
 	enrageTimer:Start(-delay)
-	warnSlimeSpraySoon:Schedule(27)
-	timerSlimeSprayCD:Start(31) -- REVIEW! variance? (25man Lordaeron 2022/10/16) - 31.0
+	warnSlimeSpraySoon:Schedule(5)
+	timerSlimeSprayCD:Start(10) -- REVIEW! variance? (25man Lordaeron 2022/10/16) - 31.0
 end
 
 function mod:OnCombatEnd()
@@ -94,13 +94,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 	elseif args:IsSpellID(28157, 54364) then
 		warnSlimeSprayNow:Show()
 		self.vb.slimeSprays = self.vb.slimeSprays + 1
-		 -- REVIEW! variance? (25man Lordaeron 2022/10/16) - pull:31.0, 27.7, 61.1, 25.5
-		if self.vb.slimeSprays % 2 == 0 then -- every 2/4/6... spray short cd
-			warnSlimeSpraySoon:Schedule(20.5)
-			timerSlimeSprayCD:Start(25.5)
-		else -- every 3/5/7... spray long cd
-			warnSlimeSpraySoon:Schedule(54)
-			timerSlimeSprayCD:Start(59)
-		end
+		warnSlimeSpraySoon:Schedule(10)
+		timerSlimeSprayCD:Start()
 	end
 end
