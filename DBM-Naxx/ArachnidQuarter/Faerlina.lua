@@ -22,15 +22,15 @@ local specWarnEnrage		= mod:NewSpecialWarningDefensive(28131, nil, nil, nil, 3, 
 local specWarnGTFO			= mod:NewSpecialWarningGTFO(28794, nil, nil, nil, 1, 8)
 
 local timerEmbrace			= mod:NewBuffActiveTimer(30, 28732, nil, nil, nil, 6)
-local timerEnrage			= mod:NewCDTimer(60, 28131, nil, nil, nil, 6)
-local timerPoisonVolleyCD	= mod:NewCDTimer(8.2, 54098, nil, nil, nil, 5) -- REVIEW! ~1s variance? (25man Lordaeron 2022/10/16) - 9.1, 9.3, 9.1, 8.5, 8.4, 8.5, 8.2, 8.8
+local timerEnrage			= mod:NewCDTimer(70, 28131, nil, nil, nil, 6)
+local timerPoisonVolleyCD	= mod:NewCDTimer(14, 54098, nil, nil, nil, 5) -- REVIEW! ~1s variance? (25man Lordaeron 2022/10/16) - 9.1, 9.3, 9.1, 8.5, 8.4, 8.5, 8.2, 8.8
 
 mod.vb.enraged = false
 
 function mod:OnCombatStart(delay)
 	timerEnrage:Start(-delay)
 	warnEnrageSoon:Schedule(55 - delay)
-	timerPoisonVolleyCD:Start(12.6-delay) -- REVIEW! variance? (25man Lordaeron 2022/10/16) - 12.6
+	timerPoisonVolleyCD:Start(14 - delay) -- REVIEW! variance? (25man Lordaeron 2022/10/16) - 12.6
 	self.vb.enraged = false
 end
 
@@ -65,7 +65,7 @@ end
 
 function mod:SPELL_CAST_SUCCESS(args)
 	if args:IsSpellID(28796, 54098) then -- Poison Bolt Volley
-		timerPoisonVolleyCD:Start(10)
+		timerPoisonVolleyCD:Start(14)
 	end
 end
 
