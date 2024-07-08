@@ -23,9 +23,9 @@ local warnChargeNotChanged	= mod:NewSpecialWarning("WarningChargeNotChanged", fa
 local yellShift				= mod:NewShortPosYell(28089, DBM_CORE_L.AUTO_YELL_CUSTOM_POSITION)
 
 local enrageTimer			= mod:NewBerserkTimer(365)
-local timerNextShift		= mod:NewNextTimer(30, 28089, nil, nil, nil, 2, nil, DBM_COMMON_L.DEADLY_ICON)
+local timerNextShift		= mod:NewNextTimer(20, 28089, nil, nil, nil, 2, nil, DBM_COMMON_L.DEADLY_ICON)
 local timerShiftCast		= mod:NewCastTimer(3, 28089, nil, nil, nil, 2)
-local timerThrow			= mod:NewNextTimer(20.6, 28338, nil, nil, nil, 5, nil, DBM_COMMON_L.TANK_ICON)
+local timerThrow			= mod:NewNextTimer(27, 28338, nil, nil, nil, 5, nil, DBM_COMMON_L.TANK_ICON)
 
 if not DBM.Options.GroupOptionsBySpell then
 	mod:AddMiscLine(DBM_CORE_L.OPTION_CATEGORY_DROPDOWNS)
@@ -46,17 +46,17 @@ local function TankThrow(self)
 		return
 	end
 	timerThrow:Start()
-	warnThrowSoon:Schedule(17.6)
-	self:Schedule(20.6, TankThrow, self)
+	warnThrowSoon:Schedule(20)
+	self:Schedule(25, TankThrow, self)
 end
 
 function mod:OnCombatStart(delay)
 	self:SetStage(1)
 	currentCharge = nil
 	down = 0
-	self:Schedule(20.6 - delay, TankThrow, self)
+	self:Schedule(25 - delay, TankThrow, self)
 	timerThrow:Start(-delay)
-	warnThrowSoon:Schedule(17.6 - delay)
+	warnThrowSoon:Schedule(20 - delay)
 end
 
 do
@@ -115,8 +115,8 @@ do
 	end
 end
 
-function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
-	if msg:match(L.Emote) or msg:match(L.Emote2) or msg:find(L.Emote) or msg:find(L.Emote2) or msg == L.Emote or msg == L.Emote2 then
+function mod:CHAT_MSG_RAID_BOSS_YELL(msg)
+	if msg:match(L.Yell2) or msg:find(L.Yell2) or msg == L.Yell2 then
 		down = down + 1
 		if down >= 2 then
 			self:Unschedule(TankThrow)
