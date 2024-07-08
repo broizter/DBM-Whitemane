@@ -22,8 +22,8 @@ local timerShieldWall	= mod:NewCDTimer(20, 29061, nil, nil, nil, 5, nil, DBM_COM
 local timerMindControl	= mod:NewBuffActiveTimer(60, 605, nil, nil, nil, 6)
 
 function mod:OnCombatStart(delay)
-	timerShout:Start(16 - delay)
-	warnShoutSoon:Schedule(11 - delay)
+	timerShout:Start(15 - delay)
+	warnShoutSoon:Schedule(10 - delay)
 end
 
 function mod:SPELL_CAST_SUCCESS(args)
