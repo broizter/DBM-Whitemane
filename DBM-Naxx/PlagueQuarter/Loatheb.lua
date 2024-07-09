@@ -44,6 +44,7 @@ function mod:OnCombatStart(delay)
 	end
 	timerSpore:Start(18 - delay, 1)
 	warnSporeSoon:Schedule(18 - 5 - delay)
+	timerAura:Start(12 - delay)
 end
 
 function mod:SPELL_SUMMON(args)
