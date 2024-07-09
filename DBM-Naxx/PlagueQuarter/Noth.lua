@@ -36,7 +36,7 @@ local timerBlink		= mod:NewNextTimer(30, 29208)
 
 
 function mod:OnCombatStart(delay)
-	timerAddsCD:Start(-delay)
+	timerAddsCD:Start(25-delay)
 	timerCurseCD:Start(15-delay)
 	if self:IsDifficulty("normal25") then
 		timerBlink:Start(26-delay)
