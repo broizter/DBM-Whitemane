@@ -18,7 +18,7 @@ local warnImpale			= mod:NewTargetNoFilterAnnounce(28783, 3, nil, false)
 local specialWarningLocust	= mod:NewSpecialWarningSpell(28785, nil, nil, nil, 2, 2)
 local yellImpale			= mod:NewYell(28783, nil, false)
 
-local timerLocustIn			= mod:NewCDTimer(75, 28785, nil, nil, nil, 6)
+local timerLocustIn			= mod:NewCDTimer(80, 28785, nil, nil, nil, 6)
 local timerLocustFade		= mod:NewBuffActiveTimer(23, 28785, nil, nil, nil, 6)
 local timerImpale			= mod:NewCDTimer(20, 56090, nil, nil, nil, 3)
 
@@ -26,8 +26,8 @@ mod:AddBoolOption("ArachnophobiaTimer", true, "timer", nil, nil, nil, "at1859")-
 
 function mod:OnCombatStart(delay)
 	if self:IsDifficulty("normal25") then
-		timerLocustIn:Start(75 - delay)
-		warningLocustSoon:Schedule(65 - delay)
+		timerLocustIn:Start(60 - delay)
+		warningLocustSoon:Schedule(50 - delay)
 	else
 		timerLocustIn:Start(91 - delay)
 		warningLocustSoon:Schedule(76 - delay)
