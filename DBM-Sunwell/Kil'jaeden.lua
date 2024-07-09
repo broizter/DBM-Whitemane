@@ -34,7 +34,7 @@ local specWarnShield	= mod:NewSpecialWarningSpell(45848)
 local specWarnDarkOrb	= mod:NewSpecialWarning("SpecWarnDarkOrb", false)
 local specWarnBlueOrb	= mod:NewSpecialWarning("SpecWarnBlueOrb", false)
 
-local timerBloomCD		= mod:NewCDTimer(20, 45641, nil, nil, nil, 2)
+local timerBloomCD		= mod:NewCDTimer(40, 45641, nil, nil, nil, 2)
 local timerDartCD		= mod:NewCDTimer(20, 45740, nil, nil, nil, 2)--Targeted or aoe?
 local timerBomb			= mod:NewCastTimer(9, 46605, nil, nil, nil, 2, nil, DBM_COMMON_L.DEADLY_ICON)
 local timerBombCD		= mod:NewCDTimer(45, 46605, nil, nil, nil, 2, nil, DBM_COMMON_L.DEADLY_ICON)
@@ -62,6 +62,7 @@ function mod:OnCombatStart(delay)
 	table.wipe(orbGUIDs)
 	self.vb.bloomIcon = 8
 	self:SetStage(1)
+	timerBloomCD:Start(11-delay)
 	berserkTimer:Start(-delay)
 	if self.Options.RangeFrame then
 		DBM.RangeCheck:Show()

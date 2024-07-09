@@ -11,7 +11,7 @@ mod:RegisterEventsInCombat(
 	"SPELL_MISSED 28308 59192"
 )
 
-local enrageTimer	= mod:NewBerserkTimer(360)
+local enrageTimer	= mod:NewBerserkTimer(300)
 local timerAchieve	= mod:NewAchievementTimer(180, 1857)
 
 mod:AddBoolOption("WarningHateful", false, "announce", nil, nil, nil, 28308)
@@ -21,7 +21,11 @@ local function announceStrike(target, damage)
 end
 
 function mod:OnCombatStart(delay)
-	enrageTimer:Start(-delay)
+	if self:IsDifficulty("normal25") then
+		enrageTimer:Start(-delay)
+	else
+		enrageTimer:Start(360-delay)
+	end
 	timerAchieve:Start(-delay)
 end
 

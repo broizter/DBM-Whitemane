@@ -25,7 +25,7 @@ L:SetGeneralLocalization({
 })
 
 L:SetMiscLocalization({
-	YellTenebronPull	= "You have no place here! Your place... is among the departed!",
+	YellTenebronPull	= "You have no place here. Your place is among the departed.",
 })
 
 ----------------
@@ -38,7 +38,7 @@ L:SetGeneralLocalization({
 })
 
 L:SetMiscLocalization({
-	YellVesperonPull	= "You pose no threat, lesser beings! Give me your worst!",
+	YellVesperonPull	= "You pose no threat, lesser beings...give me your worst!",
 })
 
 ------------------

@@ -26,10 +26,10 @@ local specWarnMeteor	= mod:NewSpecialWarningStack(45150, nil, 4, nil, nil, 1, 6)
 local specWarnBurn		= mod:NewSpecialWarningYou(46394, nil, nil, nil, 1, 2)
 local yellBurn			= mod:NewYell(46394)
 
-local timerMeteorCD		= mod:NewCDTimer(12, 45150, nil, nil, nil, 3)
-local timerStompCD		= mod:NewCDTimer(31, 45185, nil, nil, nil, 2)
+local timerMeteorCD		= mod:NewCDTimer(10, 45150, nil, nil, nil, 3)
+local timerStompCD		= mod:NewCDTimer(30, 45185, nil, nil, nil, 2)
 local timerBurn			= mod:NewTargetTimer(60, 46394, nil, "false", 2, 3)
-local timerBurnCD		= mod:NewCDTimer(20, 46394, nil, nil, nil, 3)
+local timerBurnCD		= mod:NewCDTimer(60, 46394, nil, nil, nil, 3)
 
 local berserkTimer		= mod:NewBerserkTimer(mod:IsTimewalking() and 300 or 360)
 
@@ -50,7 +50,8 @@ end
 
 function mod:OnCombatStart(delay)
 	self.vb.burnIcon = 8
-	timerBurnCD:Start(-delay)
+	timerBurnCD:Start(46-delay)
+	timerMeteorCD:Start(12-delay)
 	timerStompCD:Start(-delay)
 	berserkTimer:Start(-delay)
 	if self.Options.RangeFrame and self.Options.RangeFrameActivation == "AlwaysOn" then
