@@ -46,7 +46,7 @@ local warnBreathInc				= mod:NewSoonAnnounce(56505, 3)
 local specWarnBreath			= mod:NewSpecialWarningSpell(56505, nil, nil, nil, 2, 2)
 
 local timerBreath				= mod:NewBuffActiveTimer(8, 56505, nil, nil, nil, 5) --lasts 5 seconds plus 3 sec cast.
-local timerBreathCD				= mod:NewCDTimer(80, 56505, nil, nil, nil, 2)
+local timerBreathCD				= mod:NewCDTimer(70, 56505, nil, nil, nil, 2)
 local timerIntermission			= mod:NewPhaseTimer(22)
 
 -- Stage Three
@@ -206,7 +206,7 @@ function mod:OnSync(event, arg)
 		warnVortexSoon:Cancel()
 		warnPhase2:Show()
 		timerIntermission:Start()
-		timerBreathCD:Start()
+		timerBreathCD:Start(78)
 	elseif event == "BreathSoon" then
 		warnBreathInc:Show()
 	elseif event == "Phase3" then
