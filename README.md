@@ -9,4 +9,4 @@ You can also contact me on Discord if you prefer that: zin.01
 
 Core addon backport from retail by Barsoomx: (https://github.com/Barsoomx/DBM-wowcircle).  
 Forked from Zidra's excellent continuation of the addon: (https://github.com/Zidras/DBM-Warmane)  
-Merged fixes from DBM circulating in the Whitemane community. Please contact me if you're the author of that DBM version.
+Tons of T7 fixes provided by Oomshroom.  
