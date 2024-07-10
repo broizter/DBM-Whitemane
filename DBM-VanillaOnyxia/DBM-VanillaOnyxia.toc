@@ -28,6 +28,7 @@
 ## X-DBM-Mod-Name-zhCN: 奥妮克希亚的巢穴 (Vanilla)
 ## X-DBM-Mod-Name-koKR: 오닉시아 (클래식)
 ## X-DBM-Mod-Name-deDE: Onyxias Hort (Vanilla)
+## X-DBM-Mod-BlockRealm: Frostmourne, Frostmourne Test Realm
 ## X-DBM-Mod-LoadZone: Onyxia's Lair
 ## X-DBM-Mod-LoadZone-frFR: Repaire d'Onyxia
 ## X-DBM-Mod-LoadZone-ruRU: Логово Ониксии
