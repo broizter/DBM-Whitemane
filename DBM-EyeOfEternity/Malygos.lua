@@ -34,7 +34,7 @@ local warnChilledtotheBone		= mod:NewCountAnnounce(70106, 2, nil, false)
 local specWarnChilledtotheBone	= mod:NewSpecialWarningStack(70106, nil, 6, nil, nil, 1, 2)
 
 local timerSummonPowerSpark		= mod:NewNextTimer(21, 56140, nil, nil, nil, 1, 59381, DBM_COMMON_L.DAMAGE_ICON)
-local timerVortex				= mod:NewCastTimer(20, 56105, nil, nil, nil, 5, nil, DBM_COMMON_L.HEALER_ICON)
+local timerVortex				= mod:NewCastTimer(13.5, 56105, nil, nil, nil, 5, nil, DBM_COMMON_L.HEALER_ICON)
 local timerVortexCD				= mod:NewNextTimer(80, 56105, nil, nil, nil, 2)
 local timerChilledtotheBone		= mod:NewBuffFadesTimer(8, 70106, nil, nil, nil, 5)
 
