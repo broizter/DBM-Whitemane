@@ -88,7 +88,7 @@ function mod:OnCombatStart(delay)
 	enrageTimer:Start(-delay)
 	timerAchieve:Start(-delay)
 	timerVortexCD:Start(38-delay)
-	timerSummonPowerSpark:Start(-delay)
+	timerSummonPowerSpark:Start(19-delay)
 	table.wipe(guids)
 end
 
