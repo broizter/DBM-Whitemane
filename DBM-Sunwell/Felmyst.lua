@@ -48,7 +48,7 @@ function mod:Groundphase()
 	warnPhase:Show(L.Ground)
 	timerGasCD:Start(21.5)
 	timerPhase:Start(60, L.Air)
-	timerEncapsCD:Start(29)
+	timerEncapsCD:Start(24)
 end
 
 function mod:EncapsulateTarget(targetname)
@@ -75,7 +75,7 @@ function mod:OnCombatStart(delay)
 	timerGasCD:Start(21.5-delay)
 	timerPhase:Start(-delay, L.Air)
 	berserkTimer:Start(-delay)
-	timerEncapsCD:Start(29-delay)
+	timerEncapsCD:Start(26-delay)
 end
 
 

@@ -33,7 +33,7 @@ local warnChilledtotheBone		= mod:NewCountAnnounce(70106, 2, nil, false)
 
 local specWarnChilledtotheBone	= mod:NewSpecialWarningStack(70106, nil, 6, nil, nil, 1, 2)
 
-local timerSummonPowerSpark		= mod:NewNextTimer(25, 56140, nil, nil, nil, 1, 59381, DBM_COMMON_L.DAMAGE_ICON)
+local timerSummonPowerSpark		= mod:NewNextTimer(21, 56140, nil, nil, nil, 1, 59381, DBM_COMMON_L.DAMAGE_ICON)
 local timerVortex				= mod:NewCastTimer(20, 56105, nil, nil, nil, 5, nil, DBM_COMMON_L.HEALER_ICON)
 local timerVortexCD				= mod:NewNextTimer(80, 56105, nil, nil, nil, 2)
 local timerChilledtotheBone		= mod:NewBuffFadesTimer(8, 70106, nil, nil, nil, 5)
@@ -82,13 +82,13 @@ local function buildGuidTable()
 end
 
 function mod:OnCombatStart(delay)
-	nextVortex = GetTime()+40-delay
+	nextVortex = GetTime()+37-delay
 	tableBuild = false
 	self:SetStage(1)
 	enrageTimer:Start(-delay)
 	timerAchieve:Start(-delay)
-	timerVortexCD:Start(40-delay)
-	timerSummonPowerSpark:Start(15-delay) -- Whitemane PTR: seen 17,20,25. guessing 15 is min
+	timerVortexCD:Start(37-delay)
+	timerSummonPowerSpark:Start(-delay)
 	table.wipe(guids)
 end
 
@@ -174,11 +174,10 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 	end
 end
 
-function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg,_,_,_,targetName)
+function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg,sourceName)
 	if msg == L.EmoteSpark or msg:find(L.EmoteSpark) then
 		self:SendSync("Spark")
-	--elseif msg == L.EmoteSurge or msg:find(L.EmoteSurge) then
-	elseif targetName == UnitName("player") then -- emote isn't working quite right on Whitemane PTR, using another method
+	elseif msg == L.EmoteSurge or msg:find(L.EmoteSurge) or msg == L.EmoteSurge:gsub("%%s", sourceName) then -- emote isn't working quite right on Whitemane PTR, using another method
 		self:SendSync("MalygosSurge", UnitName("player"), syncSpam)
 		syncSpam = syncSpam % 2 + 1 -- dummy alternating arg to bypass DBM's 8-second sync antispam (hardcoded in :SendSync()). needed as Surge happens more often than that on Whitemane PTR
 	end
@@ -189,8 +188,8 @@ function mod:OnSync(event, arg)
 	if event == "Spark" then
 		warnSummonPowerSpark:Show()
 		local t = GetTime()
-		if t+25 >= nextVortex then
-			timerSummonPowerSpark:Start(nextVortex+35-t)
+		if t+21 >= nextVortex then
+			timerSummonPowerSpark:Start(nextVortex+30-t)
 		else
 			timerSummonPowerSpark:Start()
 		end

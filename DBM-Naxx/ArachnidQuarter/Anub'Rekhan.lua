@@ -8,6 +8,7 @@ mod:RegisterCombat("combat_yell", L.Pull1, L.Pull2)
 
 mod:RegisterEventsInCombat(
 	"SPELL_CAST_START 28783 56090 28785 54021",
+	"SPELL_CAST_SUCCESS 56090",
 	"SPELL_AURA_REMOVED 28785 54021"
 )
 
@@ -18,7 +19,7 @@ local warnImpale			= mod:NewTargetNoFilterAnnounce(28783, 3, nil, false)
 local specialWarningLocust	= mod:NewSpecialWarningSpell(28785, nil, nil, nil, 2, 2)
 local yellImpale			= mod:NewYell(28783, nil, false)
 
-local timerLocustIn			= mod:NewCDTimer(80, 28785, nil, nil, nil, 6)
+local timerLocustIn			= mod:NewCDTimer(60, 28785, nil, nil, nil, 6)
 local timerLocustFade		= mod:NewBuffActiveTimer(23, 28785, nil, nil, nil, 6)
 local timerImpale			= mod:NewCDTimer(20, 56090, nil, nil, nil, 3)
 
@@ -32,7 +33,7 @@ function mod:OnCombatStart(delay)
 		timerLocustIn:Start(91 - delay)
 		warningLocustSoon:Schedule(76 - delay)
 	end
-	timerImpale:Start(15-delay)
+	timerImpale:Start(11-delay)
 end
 
 function mod:OnCombatEnd(wipe)
@@ -59,6 +60,8 @@ function mod:SPELL_CAST_START(args)
 		end
 	end
 end
+
+mod.SPELL_CAST_SUCCESS = mod.SPELL_CAST_START
 
 function mod:SPELL_AURA_REMOVED(args)
 	if args:IsSpellID(28785, 54021)

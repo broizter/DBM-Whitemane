@@ -6,7 +6,8 @@ mod:SetCreatureID(15952)
 mod:RegisterCombat("combat")
 
 mod:RegisterEventsInCombat(
-	"SPELL_AURA_APPLIED 28622 29484 54125"
+	"SPELL_AURA_APPLIED 28622 29484 54125",
+	"CHAT_MSG_RAID_BOSS_EMOTE"
 )
 
 --TODO, verify nax40 web wrap timer
@@ -19,26 +20,18 @@ local warnSpidersNow	= mod:NewAnnounce("WarningSpidersNow", 4, 17332)
 local specWarnWebWrap	= mod:NewSpecialWarningSwitch(28622, "RangedDps", nil, nil, 1, 2)
 local yellWebWrap		= mod:NewYellMe(28622)
 
-local timerWebSpray		= mod:NewNextTimer(30, 29484, nil, nil, nil, 2)
+local timerWebSpray		= mod:NewNextTimer(30.5, 29484, nil, nil, nil, 2)
 local timerWebWrap		= mod:NewNextTimer(30, 28622, nil, "RangedDps|Healer", nil, 3)
-local timerSpider		= mod:NewTimer(40, "TimerSpider", 17332, nil, nil, 1)
+local timerSpider		= mod:NewTimer(30.2, "TimerSpider", 17332, nil, nil, 1)
 
-local function Spiderlings(self)
-	warnSpidersSoon:Schedule(25)
-	warnSpidersNow:Schedule(30)
-	timerSpider:Start(30)
-	self:Unschedule(Spiderlings)
-	self:Schedule(30, Spiderlings, self)
-end
+local emoteSpiderlings = "Spiderlings appear on the web!"
 
 function mod:OnCombatStart(delay)
-	warnWebSpraySoon:Schedule(30 - delay)
-	timerWebSpray:Start(35 - delay)
+	warnWebSpraySoon:Schedule(30.5 - delay)
+	timerWebSpray:Start(35.5 - delay)
 	timerWebWrap:Start(15 - delay)
-	warnSpidersSoon:Schedule(25 - delay)
-	warnSpidersNow:Schedule(30 - delay)
-	timerSpider:Start(30 - delay)
-	self:Schedule(25 - delay, Spiderlings, self)
+	warnSpidersSoon:Schedule(20.2 - delay)
+	timerSpider:Start(25.2 - delay)
 end
 
 function mod:OnCombatEnd(wipe)
@@ -68,7 +61,21 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 	elseif args:IsSpellID(29484, 54125) and self:AntiSpam(3, 3) then -- Web Spray
 		warnWebSprayNow:Show()
-		warnWebSpraySoon:Schedule(25)
+		warnWebSpraySoon:Schedule(30.5)
 		timerWebSpray:Start()
+	end
+end
+
+function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
+	if msg == emoteSpiderlings then
+		self:SendSync("Spiderlings")
+	end
+end
+
+function mod:OnSync(event)
+	if event == "Spiderlings" then
+		warnSpidersNow:Show()
+		warnSpidersSoon:Schedule(25.2)
+		timerSpider:Start()
 	end
 end

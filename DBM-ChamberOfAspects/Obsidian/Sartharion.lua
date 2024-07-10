@@ -14,7 +14,8 @@ mod:RegisterEventsInCombat(
 	"SPELL_AURA_APPLIED 57491",
 	"SPELL_DAMAGE 59128",
 	"CHAT_MSG_RAID_BOSS_EMOTE",
-	"CHAT_MSG_MONSTER_EMOTE"
+	"CHAT_MSG_MONSTER_EMOTE",
+	"UNIT_DIED"
 )
 
 local warnFissure				= mod:NewTargetNoFilterAnnounce(59127, 4)
@@ -43,11 +44,12 @@ local timerVesperon				= mod:NewTimer(138, "TimerVesperon", 61251, nil, nil, 1)
 local timerTenebronWhelps		= mod:NewTimer(80, "TimerTenebronWhelps", 1022)
 local timerShadronPortal		= mod:NewTimer(132, "TimerShadronPortal", 11420)
 local timerVesperonPortal		= mod:NewTimer(168, "TimerVesperonPortal", 57988)
-local timerVesperonPortal2		= mod:NewTimer(199, "TimerVesperonPortal2", 57988) -- what's the purpose of this?
 
 mod:AddBoolOption("AnnounceFails", true, "announce")
 
 mod:GroupSpells(59127, 59128)--Shadow fissure with void blast
+
+local vesperonPortalEmote = "You pose no threat, lesser beings! Give me your worst!"
 
 local lastvoids = {}
 local lastfire = {}
@@ -69,30 +71,28 @@ local function CheckDrakes(self, delay)
 		DBM.BossHealth:AddBoss(28860, "Sartharion")
 	end
 	if isunitdebuffed(DBM:GetSpellInfo(61248)) then	-- Power of Tenebron
-		timerTenebron:Start(43 - delay)
-		warnTenebron:Schedule(38 - delay)
-		timerTenebronWhelps:Start(81 - delay)
-		warnTenebronWhelpsSoon:Schedule(76 - delay)
+		timerTenebron:Start(52-5 - delay)
+		warnTenebron:Schedule(47-5 - delay)
+		timerTenebronWhelps:Start(93.5-5 - delay)
+		warnTenebronWhelpsSoon:Schedule(88.5-5 - delay)
 		if self.Options.HealthFrame then
 			DBM.BossHealth:AddBoss(30452, "Tenebron")
 		end
 	end
 	if isunitdebuffed(DBM:GetSpellInfo(58105)) then	-- Power of Shadron
-		timerShadron:Start(82 - delay)
-		warnShadron:Schedule(77 - delay)
-		timerShadronPortal:Start(97 - delay)
-		warnShadronPortalSoon:Schedule(92 - delay)
+		timerShadron:Start(90-5 - delay)
+		warnShadron:Schedule(85-5 - delay)
+		timerShadronPortal:Start(105-5 - delay)
+		warnShadronPortalSoon:Schedule(100-5 - delay)
 		if self.Options.HealthFrame then
 			DBM.BossHealth:AddBoss(30451, "Shadron")
 		end
 	end
 	if isunitdebuffed(DBM:GetSpellInfo(61251)) then	-- Power of Vesperon
-		timerVesperon:Start(132 - delay)
-		warnVesperon:Schedule(127 - delay)
-		timerVesperonPortal:Start(160 - delay)
-		--timerVesperonPortal2:Start(- delay)
-		warnVesperonPortalSoon:Schedule(155 - delay)
-		--warnVesperonPortalSoon:Schedule(194 - delay)
+		timerVesperon:Start(138-5 - delay)
+		warnVesperon:Schedule(133-5 - delay)
+		timerVesperonPortal:Start(168-5 - delay)
+		warnVesperonPortalSoon:Schedule(163-5 - delay)
 		if self.Options.HealthFrame then
 			DBM.BossHealth:AddBoss(30449, "Vesperon")
 		end
@@ -185,7 +185,7 @@ end
 function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, mob)
 	if msg == L.Wall or msg:find(L.Wall) then
 		self:SendSync("FireWall")
-	elseif msg == L.Portal or msg:find(L.Portal) then
+	elseif msg == L.Portal or msg:find(L.Portal) or msg == L.Portal:gsub("%%s", mob) or msg == vesperonPortalEmote then
 		if mob == L.NameVesperon then
 			self:SendSync("VesperonPortal")
 		elseif mob == L.NameTenebron then
@@ -196,6 +196,12 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, mob)
 	end
 end
 mod.CHAT_MSG_MONSTER_EMOTE = mod.CHAT_MSG_RAID_BOSS_EMOTE
+
+function mod:UNIT_DIED(args)
+	if self:GetCIDFromGUID(args.destGUID) == 31219 then -- Acolyte of Vesperon
+		self:SendSync("VesperonAcolyte")
+	end
+end
 
 function mod:OnSync(event)
 	if event == "FireWall" then
@@ -211,7 +217,10 @@ function mod:OnSync(event)
 	elseif event == "ShadronPortal" then
 		specWarnShadronPortal:Show()
 		specWarnShadronPortal:Play("newportal")
-		timerShadronPortal:Start(132)
-		warnShadronPortalSoon:Schedule(127)
+		--timerShadronPortal:Start(132)
+		--warnShadronPortalSoon:Schedule(127)
+	elseif event == "VesperonAcolyte" then
+		timerVesperonPortal:Start(30)
+		warnVesperonPortalSoon:Schedule(25)
 	end
 end

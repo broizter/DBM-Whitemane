@@ -1,0 +1,88 @@
+KNOWN ISSUES
+------------
+EoE timers are not great, seem inconsistent
+SWP needs more work
+some warnings on Sapphiron and KT get messed up if you're not targeting or focusing the boss
+
+
+1.09
+----
+Maexxna improvements
+OS improvements and added accurate timer for vesperon portals after the first
+
+1.08
+----
+timers adjusted according to week 1 of live server
+bug fixes and improvements
+
+1.07
+----
+Malygos surge emote detection improvement
+
+1.06
+----
+Initial fixes and adjustments for SWP from available data
+
+1.05
+----
+Workaround for broken hp%-based warnings on Sapphiron and KT due to a DBM-Core bug
+Sapphiron: removed Blizzard timer (wasn't possible to detect well and not important anyway)
+
+1.04
+----
+fixes and timer adjustments, mostly for OS
+
+1.03
+----
+10m timers fixed and adjusted for Ascended version (10m normal is probably the same, but not going to bother checking)
+Many fixes and improvements for various timers and features
+Loatheb: removed stuff only relevant to Naxx40
+
+1.02
+----
+Malygos: re-added and fixed Static Field warnings and target detection (possible to detect now)
+Gluth: performance improvement
+
+1.01
+----
+Horsemen total marks threshold increased to 4
+Sapphiron cooldown timing announce: added short timer with dsac icon
+Noth: special warning for decursers
+decurse special warnings will not show for druids in cat/bear
+
+1.00
+----
+Everything fixed and adjusted as much as possible from available vods and logs
+
+ADDED:
+KT:
+Frostbolt interrupt group 1/2 announce
+guardian spawn soon warning before 75/50/25
+
+Sapphiron:
+announce to use dsac/am just before first ice bolt (paladins only)
+special warning for decursers on drain life
+special warning to taunt when tank has Stomp (tank only)
+
+Grobbulus:
+slime counter and warning to heal/dps if there are too many alive
+special warning for tank to move the boss when a cloud is placed
+special warning for non-tank to move out from cloud damage
+
+Gluth:
+special warning to hunters on enrage
+
+Thaddius:
+special warning to taunt when tank has Stomp (tank only)
+
+Horsemen:
+special warning if you have 3 TOTAL marks
+
+Noth:
+special warning to interrupters on arcane explosion cast start
+
+OS:
+distance-based announce for shadow fissure like on KT
+
+Malygos:
+chilled to the bone stacks warning

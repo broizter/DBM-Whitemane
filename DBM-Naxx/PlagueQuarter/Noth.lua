@@ -28,7 +28,7 @@ local specWarnAdds		= mod:NewSpecialWarningAdds(29212, "-Healer", nil, nil, 1, 2
 local specWarnExplosion	= mod:NewSpecialWarningInterrupt(54891)
 local specWarnDecurse	= mod:NewSpecialWarningDispel(29213, "RemoveCurse", nil, nil, 1, 2)
 
-local timerTeleport		= mod:NewTimer(110, "TimerTeleport", 46573, nil, nil, 6)
+local timerTeleport		= mod:NewTimer(80, "TimerTeleport", 46573, nil, nil, 6)
 local timerTeleportBack	= mod:NewTimer(70, "TimerTeleportBack", 46573, nil, nil, 6)
 local timerCurseCD		= mod:NewCDTimer(25, 29213, nil, nil, nil, 5, nil, DBM_COMMON_L.CURSE_ICON) -- Whitemane PTR - buff notes say 15s, vod says consistent 25s
 local timerAddsCD		= mod:NewAddsTimer(25, 29212, nil, "-Healer")
@@ -36,14 +36,14 @@ local timerBlink		= mod:NewNextTimer(30, 29208)
 
 
 function mod:OnCombatStart(delay)
-	timerAddsCD:Start(25-delay)
+	timerAddsCD:Start(-delay)
 	timerCurseCD:Start(15-delay)
 	if self:IsDifficulty("normal25") then
 		timerBlink:Start(26-delay)
 		warnBlinkSoon:Schedule(23-delay)
 	end
 	timerTeleport:Start(-delay)
-	warnTeleportSoon:Schedule(100-delay)
+	warnTeleportSoon:Schedule(70-delay)
 end
 
 function mod:SPELL_CAST_SUCCESS(args)
@@ -102,7 +102,7 @@ function mod:OnSync(msg)
 			warnBlinkSoon:Schedule(23)
 		end
 		timerTeleport:Start()
-		warnTeleportSoon:Schedule(100)
+		warnTeleportSoon:Schedule(70)
 	elseif msg == "Adds" then -- Boss Grounded
 		specWarnAdds:Show()
 		specWarnAdds:Play("killmob")		
