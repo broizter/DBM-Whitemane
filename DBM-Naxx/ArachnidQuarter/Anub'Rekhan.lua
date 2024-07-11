@@ -26,13 +26,8 @@ local timerImpale			= mod:NewCDTimer(20, 56090, nil, nil, nil, 3)
 mod:AddBoolOption("ArachnophobiaTimer", true, "timer", nil, nil, nil, "at1859")--Sad caveat that 10 and 25 man have own achievements and we have to show only 1 in GUI
 
 function mod:OnCombatStart(delay)
-	if self:IsDifficulty("normal25") then
-		timerLocustIn:Start(60 - delay)
-		warningLocustSoon:Schedule(50 - delay)
-	else
-		timerLocustIn:Start(91 - delay)
-		warningLocustSoon:Schedule(76 - delay)
-	end
+	timerLocustIn:Start(60 - delay)
+	warningLocustSoon:Schedule(50 - delay)
 	timerImpale:Start(11-delay)
 end
 
