@@ -460,6 +460,7 @@ local bannedMods = { -- a list of "banned" (meaning they are replaced by another
 	"DBM-Outlands",
 	"DBM-Battlegrounds", --replaced by DBM-PvP
 	"DBM-VanillaNaxx",
+	"DBM-VanillaOnyxia",
 	"DBM-Profiles" -- replaced by inline module since 7.00
 }
 
