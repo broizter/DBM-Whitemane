@@ -459,8 +459,8 @@ local bannedMods = { -- a list of "banned" (meaning they are replaced by another
 	"DBM_API",
 	"DBM-Outlands",
 	"DBM-Battlegrounds", --replaced by DBM-PvP
-	"DBM-VanillaNaxx",
-	"DBM-VanillaOnyxia",
+	"DBM-VanillaNaxx", -- to prevent double loading on Whitemane
+	"DBM-VanillaOnyxia", -- to prevent double loading on Whitemane
 	"DBM-Profiles" -- replaced by inline module since 7.00
 }
 
