@@ -214,7 +214,7 @@ function mod:OnSync(event, arg)
 		warnPhase3:Show()
 		self:Schedule(6, buildGuidTable)
 		timerBreathCD:Cancel()
-		timerStaticFieldCD:Start(19.5)
+		timerStaticFieldCD:Start(13)
 	elseif event == "MalygosSurge" then
 		warnSurge:CombinedShow(0.2, arg)
 		if arg == UnitName("player") then
