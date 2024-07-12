@@ -189,7 +189,7 @@ function mod:OnSync(event, arg)
 		warnSummonPowerSpark:Show()
 		local t = GetTime()
 		if t+21 >= nextVortex then
-			timerSummonPowerSpark:Start(nextVortex+41-t)
+			timerSummonPowerSpark:Start(nextVortex+33-t)
 		else
 			timerSummonPowerSpark:Start()
 		end
