@@ -46,7 +46,7 @@ mod.vb.breathCounter = 0
 function mod:Groundphase()
 	self.vb.breathCounter = 0
 	warnPhase:Show(L.Ground)
-	timerGasCD:Start(21.5)
+	timerGasCD:Start(15.3)
 	timerPhase:Start(60, L.Air)
 	timerEncapsCD:Start(24)
 end
