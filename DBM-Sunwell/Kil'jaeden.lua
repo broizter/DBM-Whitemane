@@ -132,7 +132,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 	elseif args.spellId == 45848 then
 		warnShield:Show()
 		specWarnShield:Show()
-	elseif args.spellId == 45892 then
+	elseif args.spellId == 45892 and self:AntiSpam(5) then
 		self:SetStage(0)
 		if self.vb.phase == 2 then
 			warnPhase2:Show()
