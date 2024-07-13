@@ -105,9 +105,6 @@ function mod:ShadowNovaTarget(targetname)
 		specWarnNova:Show()
 		specWarnNova:Play("targetyou")
 		yellNova:Yell()
-	elseif self:CheckNearby(2, targetname) then
-		specWarnNovaNear:Show(targetname)
-		specWarnNovaNear:Play("runaway")
 	else
 		warnNova:Show(targetname)
 	end
