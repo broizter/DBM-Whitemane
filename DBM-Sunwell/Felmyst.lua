@@ -72,7 +72,7 @@ end
 
 function mod:OnCombatStart(delay)
 	self.vb.breathCounter = 0
-	timerGasCD:Start(21.5-delay)
+	timerGasCD:Start(18.2-delay)
 	timerPhase:Start(-delay, L.Air)
 	berserkTimer:Start(-delay)
 	timerEncapsCD:Start(26-delay)
