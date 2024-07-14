@@ -8,6 +8,7 @@ mod:RegisterCombat("combat")
 
 mod:RegisterEventsInCombat(
 	"SPELL_AURA_APPLIED 45996",
+	"SPELL_CAST_SUCCESS 46177",
 	"SPELL_SUMMON 46268 46282",
 	"UNIT_DIED"
 )
@@ -55,6 +56,8 @@ end
 local function phase2(self)
 	self:SetStage(2)
 	warnPhase2:Show()
+	self:Unschedule(HumanSpawn)
+	self:Unschedule(VoidSpawn)
 	timerBlackHoleCD:Start(17)
 	if self.Options.HealthFrame then
 		DBM.BossHealth:Clear()
@@ -97,19 +100,20 @@ function mod:SPELL_SUMMON(args)
 	end
 end
 
-function mod:UNIT_DIED(args)
-	local cid = self:GetCIDFromGUID(args.destGUID)
-	if cid == 25741 then
+function mod:SPELL_CAST_SUCCESS(args)
+	if args.spellId == 46177 then
 		timerNextDarkness:Cancel()
 		timerHuman:Cancel()
 		timerVoid:Cancel()
-		self:Unschedule(HumanSpawn)
-		self:Unschedule(VoidSpawn)
 		specWarnVW:Cancel()
 		timerPhase:Start()
 		specWarnDarknessSoon:Cancel()
 		self:Schedule(10, phase2, self)
-	elseif cid == 25840 then
+	end
+end
+
+function mod:UNIT_DIED(args)
+	if self:GetCIDFromGUID(args.destGUID) == 25840 then
 		DBM:EndCombat(self)
 	end
 end
