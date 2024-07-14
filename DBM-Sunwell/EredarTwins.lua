@@ -119,9 +119,6 @@ function mod:ConflagrationTarget(targetname)
 		specWarnConflag:Show()
 		specWarnConflag:Play("targetyou")
 		yellConflag:Yell()
-	elseif self:CheckNearby(2, targetname) then
-		specWarnConflagNear:Show(targetname)
-		specWarnConflagNear:Play("runaway")
 	else
 		warnConflag:Show(targetname)
 	end
@@ -156,9 +153,6 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target)
 			specWarnNova:Show()
 			specWarnNova:Play("targetyou")
 			yellNova:Yell()
-		elseif self:CheckNearby(2, target) then
-			specWarnNovaNear:Show(target)
-			specWarnNovaNear:Play("runaway")
 		else
 			warnNova:Show(target)
 		end
@@ -174,9 +168,6 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target)
 			specWarnConflag:Show()
 			specWarnConflag:Play("targetyou")
 			yellConflag:Yell()
-		elseif self:CheckNearby(2, target) then
-			specWarnConflagNear:Show(target)
-			specWarnConflagNear:Play("runaway")
 		else
 			warnConflag:Show(target)
 		end
