@@ -138,7 +138,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 			warnPhase2:Show()
 			timerBlueOrb:Start()
 			timerDartCD:Start(59)
-			timerBombCD:Start(77)
+			timerBombCD:Start(47)
 		elseif self.vb.phase == 3 then
 			warnPhase3:Show()
 			timerBlueOrb:Cancel()
@@ -146,7 +146,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 			timerBombCD:Cancel()
 			timerBlueOrb:Start()
 			timerDartCD:Start(48.7)
-			timerBombCD:Start(77)
+			timerBombCD:Start(43)
 		elseif self.vb.phase == 4 then
 			warnPhase4:Show()
 			timerBlueOrb:Cancel()
@@ -154,7 +154,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 			timerBombCD:Cancel()
 			timerBlueOrb:Start(45)
 			timerDartCD:Start(49)
-			timerBombCD:Start(58)
+			timerBombCD:Start(48.7)
 		end
 	elseif args.spellId == 46589 and args.destName ~= nil then
 		if args.destName == UnitName("player") then
