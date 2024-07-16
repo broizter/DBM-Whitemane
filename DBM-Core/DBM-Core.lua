@@ -11379,6 +11379,9 @@ function bossModPrototype:RegisterCombat(cType, ...)
 	if self.WBEsync then
 		info.WBEsync = self.WBEsync
 	end
+	if self.noBossDeathKill then
+		info.noBossDeathKill = self.noBossDeathKill
+	end
 	-- use pull-mobs as kill mobs by default, can be overriden by RegisterKill
 	if self.multiMobPullDetection then
 		for _, v in ipairs(self.multiMobPullDetection) do
