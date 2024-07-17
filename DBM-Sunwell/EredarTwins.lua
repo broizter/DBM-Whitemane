@@ -180,5 +180,7 @@ end
 function mod:UNIT_DIED(args)
 	if self:GetCIDFromGUID(args.destGUID) == 21566 then -- Grand Warlock Alythess
 		self:SetStage(2)
+	elseif self:GetCIDFromGUID(args.destGUID) == 25165 then -- Lady Sacrolash
+		timerConflagCD:Cancel()
 	end
 end
