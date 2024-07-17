@@ -37,9 +37,9 @@ local specWarnPyro			= mod:NewSpecialWarningDispel(45230, "MagicDispeller", nil,
 local specWarnDarkTouch		= mod:NewSpecialWarningStack(45347, false, 5, nil, 2, 1, 6)
 local specWarnFlameTouch	= mod:NewSpecialWarningStack(45348, false, 5, nil, nil, 1, 6)
 
-local timerBladeCD			= mod:NewCDTimer(11.5, 45248, nil, "Melee", 2, 2)
-local timerBlowCD			= mod:NewCDTimer(20, 45256, nil, nil, nil, 3)
-local timerConflagCD		= mod:NewCDTimer(31, 45333, nil, nil, nil, 3, nil, nil, true) -- Added "keep" arg. Considerable variation, and 31s default might an overexageration
+local timerBladeCD			= mod:NewCDTimer(10, 45248, nil, "Melee", 2, 2)
+local timerBlowCD			= mod:NewCDTimer(16.7, 45256, nil, nil, nil, 3)
+local timerConflagCD		= mod:NewCDTimer(32.8, 45333, nil, nil, nil, 3, nil, nil, true) -- Added "keep" arg. Considerable variation, and 31s default might an overexageration
 local timerNovaCD			= mod:NewCDTimer(31, 45329, nil, nil, nil, 3)
 local timerConflag			= mod:NewCastTimer(3.5, 45333, nil, false, 2)
 local timerNova				= mod:NewCastTimer(3.5, 45329, nil, false, 2)
@@ -53,7 +53,10 @@ mod:AddSetIconOption("NovaIcon", 45329, false, false, {8})
 function mod:OnCombatStart(delay)
 	self:SetStage(1)
 	berserkTimer:Start(-delay)
-	timerConflagCD:Start(18) -- variable (18-22?)
+	timerConflagCD:Start(30-delay)
+	timerBladeCD:Start(16-delay)
+	timerBlowCD:Start(46-delay)
+	timerNovaCD:Start(58-delay)
 	if self.Options.RangeFrame then
 		DBM.RangeCheck:Show()
 	end
@@ -102,9 +105,6 @@ function mod:ShadowNovaTarget(targetname)
 		specWarnNova:Show()
 		specWarnNova:Play("targetyou")
 		yellNova:Yell()
-	elseif self:CheckNearby(2, targetname) then
-		specWarnNovaNear:Show(targetname)
-		specWarnNovaNear:Play("runaway")
 	else
 		warnNova:Show(targetname)
 	end
@@ -119,9 +119,6 @@ function mod:ConflagrationTarget(targetname)
 		specWarnConflag:Show()
 		specWarnConflag:Play("targetyou")
 		yellConflag:Yell()
-	elseif self:CheckNearby(2, targetname) then
-		specWarnConflagNear:Show(targetname)
-		specWarnConflagNear:Play("runaway")
 	else
 		warnConflag:Show(targetname)
 	end
@@ -156,9 +153,6 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target)
 			specWarnNova:Show()
 			specWarnNova:Play("targetyou")
 			yellNova:Yell()
-		elseif self:CheckNearby(2, target) then
-			specWarnNovaNear:Show(target)
-			specWarnNovaNear:Play("runaway")
 		else
 			warnNova:Show(target)
 		end
@@ -174,9 +168,6 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target)
 			specWarnConflag:Show()
 			specWarnConflag:Play("targetyou")
 			yellConflag:Yell()
-		elseif self:CheckNearby(2, target) then
-			specWarnConflagNear:Show(target)
-			specWarnConflagNear:Play("runaway")
 		else
 			warnConflag:Show(target)
 		end

@@ -28,7 +28,7 @@ local specWarnDarknessSoon	= mod:NewSpecialWarning("specWarnDarknessSoon", "Mele
 local timerHuman			= mod:NewTimer(60, "TimerHuman", 27778, nil, nil, 6)
 local timerVoid				= mod:NewTimer(30, "TimerVoid", 46087, nil, nil, 6)
 local timerNextDarkness		= mod:NewNextTimer(45, 45996, nil, nil, nil, 2)
-local timerDarknessDura		= mod:NewBuffActiveTimer(20, 45996)
+local timerDarknessDura		= mod:NewBuffActiveTimer(21, 45996)
 local timerBlackHoleCD		= mod:NewCDTimer(15, 46282)
 local timerPhase			= mod:NewTimer(10, "TimerPhase", 46087, nil, nil, 6)
 local timerSingularity		= mod:NewNextTimer(3.2, 46238)
@@ -69,13 +69,13 @@ function mod:OnCombatStart(delay)
 	self:SetStage(1)
 	self.vb.humanCount = 1
 	self.vb.voidCount = 1
-	timerHuman:Start(15-delay, 1)
+	timerHuman:Start(10-delay, 1)
 	timerVoid:Start(36.5-delay, 1)
-	specWarnVW:Schedule(31.5)
-	timerNextDarkness:Start(-delay)
-	specWarnDarknessSoon:Schedule(42)
-	self:Schedule(15, HumanSpawn, self)
-	self:Schedule(36.5, VoidSpawn, self)
+	specWarnVW:Schedule(31.5-delay)
+	timerNextDarkness:Start(48-delay)
+	specWarnDarknessSoon:Schedule(45-delay)
+	self:Schedule(10-delay, HumanSpawn, self)
+	self:Schedule(36.5-delay, VoidSpawn, self)
 	berserkTimer:Start(-delay)
 end
 
@@ -89,6 +89,17 @@ function mod:SPELL_AURA_APPLIED(args)
 	end
 end
 
+function mod:SPELL_SUMMON(args)
+	if args.spellId == 46268 then
+		warnFiend:Show()
+	elseif args.spellId == 46282 then
+		warnBlackHole:Show()
+		specWarnBH:Show()
+		timerBlackHoleCD:Start()
+		timerSingularity:Start()
+	end
+end
+
 function mod:SPELL_CAST_SUCCESS(args)
 	if args.spellId == 46177 then
 		timerNextDarkness:Cancel()
@@ -98,17 +109,6 @@ function mod:SPELL_CAST_SUCCESS(args)
 		timerPhase:Start()
 		specWarnDarknessSoon:Cancel()
 		self:Schedule(10, phase2, self)
-	end
-end
-
-function mod:SPELL_SUMMON(args)
-	if args.spellId == 46268 then
-		warnFiend:Show()
-	elseif args.spellId == 46282 then
-		warnBlackHole:Show()
-		specWarnBH:Show()
-		timerBlackHoleCD:Start()
-		timerSingularity:Start()
 	end
 end
 

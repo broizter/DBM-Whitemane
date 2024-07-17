@@ -68,6 +68,9 @@ function mod:OnCombatStart(delay)
 		DBM.BossHealth:AddBoss(24850, L.name)
 		DBM.BossHealth:AddBoss(24892, L.Demon)
 	end
+	timerNextPortal:Start(20-delay, 1)
+	timerBreathCD:Start(15-delay)
+	timerBuffetCD:Start(6-delay)
 end
 
 function mod:OnCombatEnd()

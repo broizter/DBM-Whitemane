@@ -57,7 +57,7 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	Pull			= "Ah, more lambs to the slaughter!"
+	Pull			= "Ahh! More lambs to the slaughter!"
 })
 
 --------------
@@ -176,8 +176,8 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	YellPull		= "The expendable have perished. So be it! Now I shall succeed where Sargeras could not! I will bleed this wretched world and secure my place as the true master of the Burning Legion! The end has come! Let the unravelling of this world commence!",
-	OrbYell1		= "I will channel my powers into the orbs! Be ready!",
+	YellPull		= "The expendible have perished... So be it! Now I shall succeed where Sargeras could not! I will bleed this wretched world and secure my place as the true master of the Burning Legion. The end has come! Let the unraveling of this world commence!",
+	OrbYell1		= "I will channel my power into the orbs, be ready!",
 	OrbYell2		= "I have empowered another orb! Use it quickly!",
 	OrbYell3		= "Another orb is ready! Make haste!",
 	OrbYell4		= "I have channeled all I can! The power is in your hands!"

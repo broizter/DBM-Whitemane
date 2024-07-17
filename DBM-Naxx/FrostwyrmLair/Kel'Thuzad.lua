@@ -17,7 +17,8 @@ mod:RegisterEventsInCombat(
 	"SPELL_AURA_APPLIED 27808 27819 28410",
 	"SPELL_AURA_REMOVED 28410",
 	"SPELL_CAST_SUCCESS 27810 27819 27808 28410",
-	"UNIT_HEALTH boss1"
+	"SPELL_CAST_START 55802",
+	"UNIT_HEALTH_UNFILTERED" -- have to do unfiltered because Zidras doesn't feel like fixing his stuff
 )
 
 local warnAddsSoon			= mod:NewAnnounce("warnAddsSoon", 1, "Interface\\Icons\\INV_Misc_MonsterSpiderCarapace_01")
@@ -36,15 +37,19 @@ local specWarnBlast			= mod:NewSpecialWarningTarget(27808, "Healer", nil, nil, 1
 local specWarnFissureYou	= mod:NewSpecialWarningYou(27810, nil, nil, nil, 3, 2)
 local specWarnFissureClose	= mod:NewSpecialWarningClose(27810, nil, nil, nil, 2, 8)
 local yellFissure			= mod:NewYellMe(27810)
+local specWarnKickGroups	= mod:NewSpecialWarningInterrupt(55802, "HasInterrupt", "KickGroups", nil, 1, 2)
 
 local blastTimer			= mod:NewBuffActiveTimer(4, 27808, nil, nil, nil, 5, nil, DBM_COMMON_L.HEALER_ICON)
-local timerManaBomb			= mod:NewCDTimer(20, 27819, nil, nil, nil, 3)--20-50
-local timerFrostBlast		= mod:NewCDTimer(30, 27808, nil, nil, nil, 3, nil, DBM_COMMON_L.DEADLY_ICON)--40-46 (retail 40.1)
+local timerManaBomb			= mod:NewCDTimer(20, 27819, nil, nil, nil, 3)
+local timerFrostBlast		= mod:NewCDTimer(45, 27808, nil, nil, nil, 3, nil, DBM_COMMON_L.DEADLY_ICON)
 local timerFissure			= mod:NewTargetTimer(5, 27810, nil, nil, 2, 3)
-local timerFissureCD 		= mod:NewCDTimer(11.5, 27810, nil, nil, nil, 3, nil, nil, true) -- Huge variance! Added "keep" arg (25m Lordaeron 2022/10/16) - Stage 2/*, 22.8, 41.2, 77.5, 11.5
+local timerFissureCD 		= mod:NewCDTimer(15, 27810, nil, nil, nil, 3) -- sometimes skips one?
 local timerMC				= mod:NewBuffActiveTimer(20, 28410, nil, nil, nil, 3)
-local timerMCCD				= mod:NewCDTimer(90, 28410, nil, nil, nil, 3)--actually 60 second cdish but its easier to do it this way for the first one.
-local timerPhase2			= mod:NewTimer(228, "TimerPhase2", nil, nil, nil, 6) -- (25m Lordaeron 2022/10/16) - 228.0
+local timerMCCD				= mod:NewCDTimer(90, 28410, nil, nil, nil, 3)
+local timerPhase2			= mod:NewTimer(228, "TimerPhase2", nil, nil, nil, 6)
+
+specWarnKickGroups:SetText("Group %d")
+DBM:GetModLocalization("Kel'Thuzad"):SetOptionLocalization({KickGroups="Voice announcement for $spell:55802 interrupt groups"})
 
 mod:AddRangeFrameOption(12, 27819)
 mod:AddSetIconOption("SetIconOnMC", 28410, true, false, {1, 2, 3})
@@ -83,12 +88,14 @@ local function selfSchedWarnMissingSet(self)
 end
 mod:Schedule(0.5, selfSchedWarnMissingSet, mod) -- mod options default values were being read before SV ones, so delay this
 
-mod.vb.warnedAdds = false
+mod.vb.nextWarnAdds = 0.75
+mod.vb.addPeriod = 0.25
 mod.vb.MCIcon = 1
 local frostBlastTargets = {}
 local chainsTargets = {}
 local isHunter = select(2, UnitClass("player")) == "HUNTER"
 local playerClass = select(2, UnitClass("player"))
+local nextGroup = 1
 
 local function UnWKT(self)
 	if (self.Options.EqUneqWeaponsKT or self.Options.EqUneqWeaponsKT2) and self:IsEquipmentSetAvailable("pve") then
@@ -226,12 +233,15 @@ local function StartPhase2(self)
 		self:SetStage(2)
 		warnPhase2:Show()
 		warnPhase2:Play("ptwo")
+		timerFissureCD:Start(25)
+		timerManaBomb:Start(20)
+		timerFrostBlast:Start(45)
 		if self:IsDifficulty("normal25") then
-			timerMCCD:Start(31)
-			warnMindControlSoon:Schedule(26)
+			timerMCCD:Start(50)
+			warnMindControlSoon:Schedule(45)
 			if self.Options.EqUneqWeaponsKT and self:IsDps() then
-				self:Schedule(60, UnWKT, self)
-				self:Schedule(60.5, UnWKT, self)
+				self:Schedule(48, UnWKT, self)
+				self:Schedule(48.5, UnWKT, self)
 			end
 		end
 		if self.Options.RangeFrame then
@@ -244,14 +254,18 @@ function mod:OnCombatStart(delay)
 	self:SetStage(1)
 	table.wipe(chainsTargets)
 	table.wipe(frostBlastTargets)
-	self.vb.warnedAdds = false
+	if self:IsDifficulty("normal25") then
+		self.vb.nextWarnAdds = 0.75
+		self.vb.addPeriod = 0.25
+	else
+		self.vb.nextWarnAdds = 0.4
+		self.vb.addPeriod = 0.4
+	end
 	self.vb.MCIcon = 1
 	specwarnP2Soon:Schedule(218-delay)
 	timerPhase2:Start()
---	self:Schedule(226, StartPhase2, self)
-	self:RegisterShortTermEvents(
-		"INSTANCE_ENCOUNTER_ENGAGE_UNIT"
-	)
+	self:Schedule(228, StartPhase2, self)
+	nextGroup = 1
 end
 
 function mod:OnCombatEnd()
@@ -323,7 +337,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		if self:AntiSpam() then
 			timerMC:Start()
 			timerMCCD:Start()
-			warnMindControlSoon:Schedule(60)
+			warnMindControlSoon:Schedule(85)
 		end
 		if self.Options.SetIconOnMC then
 			self:SetIcon(args.destName, self.vb.MCIcon)
@@ -336,8 +350,8 @@ function mod:SPELL_AURA_APPLIED(args)
 			self:Schedule(1.0, AnnounceChainsTargets, self)
 		end
 		if self.Options.EqUneqWeaponsKT and self:IsDps() then
-			self:Schedule(58.0, UnWKT, self)
-			self:Schedule(58.5, UnWKT, self)
+			self:Schedule(88.0, UnWKT, self)
+			self:Schedule(88.5, UnWKT, self)
 		end
 	end
 end
@@ -359,16 +373,17 @@ function mod:SPELL_AURA_REMOVED(args)
 	end
 end
 
-function mod:INSTANCE_ENCOUNTER_ENGAGE_UNIT()
-	if UnitExists("boss1") and self:GetUnitCreatureId("boss1") == 15990 then
-		StartPhase2(self)
-		self:UnregisterShortTermEvents()
+function mod:SPELL_CAST_START(args)
+	if args.spellId == 55802 and self.Options.KickGroups then -- Frostbolt
+		specWarnKickGroups:Play("count\\"..nextGroup)
+		specWarnKickGroups:Show(nextGroup, "")
+		nextGroup = nextGroup%2+1
 	end
 end
 
-function mod:UNIT_HEALTH(uId)
-	if not self.vb.warnedAdds and self:GetUnitCreatureId(uId) == 15990 and UnitHealth(uId) / UnitHealthMax(uId) <= 0.48 then
-		self.vb.warnedAdds = true
+function mod:UNIT_HEALTH_UNFILTERED(uId)
+	if uId == "boss1" and self.vb.nextWarnAdds > 0 and self:GetUnitCreatureId(uId) == 15990 and UnitHealth(uId) / UnitHealthMax(uId) <= self.vb.nextWarnAdds+0.02 then
+		self.vb.nextWarnAdds = self.vb.nextWarnAdds - self.vb.addPeriod
 		warnAddsSoon:Show()
 	end
 end

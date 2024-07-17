@@ -6,8 +6,8 @@ mod:SetCreatureID(15952)
 mod:RegisterCombat("combat")
 
 mod:RegisterEventsInCombat(
-	"SPELL_AURA_APPLIED 28622",
-	"SPELL_CAST_SUCCESS 29484 54125"
+	"SPELL_AURA_APPLIED 28622 29484 54125",
+	"CHAT_MSG_RAID_BOSS_EMOTE"
 )
 
 --TODO, verify nax40 web wrap timer
@@ -20,26 +20,18 @@ local warnSpidersNow	= mod:NewAnnounce("WarningSpidersNow", 4, 17332)
 local specWarnWebWrap	= mod:NewSpecialWarningSwitch(28622, "RangedDps", nil, nil, 1, 2)
 local yellWebWrap		= mod:NewYellMe(28622)
 
-local timerWebSpray		= mod:NewNextTimer(40, 29484, nil, nil, nil, 2)
-local timerWebWrap		= mod:NewNextTimer(39.6, 28622, nil, "RangedDps|Healer", nil, 3)-- 39.593-40.885
-local timerSpider		= mod:NewTimer(30, "TimerSpider", 17332, nil, nil, 1)
+local timerWebSpray		= mod:NewNextTimer(30.5, 29484, nil, nil, nil, 2)
+local timerWebWrap		= mod:NewNextTimer(30, 28622, nil, "RangedDps|Healer", nil, 3)
+local timerSpider		= mod:NewTimer(30.2, "TimerSpider", 17332, nil, nil, 1)
 
-local function Spiderlings(self)
-	warnSpidersSoon:Schedule(35)
-	warnSpidersNow:Schedule(40)
-	timerSpider:Start(40)
-	self:Unschedule(Spiderlings)
-	self:Schedule(40, Spiderlings, self)
-end
+local emoteSpiderlings = "Spiderlings appear on the web!"
 
 function mod:OnCombatStart(delay)
-	warnWebSpraySoon:Schedule(35 - delay)
-	timerWebSpray:Start(40 - delay)
-	timerWebWrap:Start(20.1 - delay)--20.095-21.096
-	warnSpidersSoon:Schedule(25 - delay)
-	warnSpidersNow:Schedule(30 - delay)
-	timerSpider:Start(30 - delay)
-	self:Schedule(30 - delay, Spiderlings, self)
+	warnWebSpraySoon:Schedule(30.5 - delay)
+	timerWebSpray:Start(35.5 - delay)
+	timerWebWrap:Start(15 - delay)
+	warnSpidersSoon:Schedule(20.2 - delay)
+	timerSpider:Start(25.2 - delay)
 end
 
 function mod:OnCombatEnd(wipe)
@@ -53,20 +45,37 @@ end
 function mod:SPELL_AURA_APPLIED(args)
 	if args.spellId == 28622 then -- Web Wrap
 		warnWebWrap:CombinedShow(0.5, args.destName)
+		if self:AntiSpam(3, 1) then
+			specWarnWebWrap:Show()
+			if self:IsDifficulty("normal25") then
+				timerWebWrap:Start()
+			else
+				timerWebWrap:Start(25)
+			end
+		end
+		
 		if args.destName == UnitName("player") then
 			yellWebWrap:Yell()
-		elseif not DBM:UnitDebuff("player", args.spellName) and self:AntiSpam(3, 1) then
-			specWarnWebWrap:Show()
+		elseif not DBM:UnitDebuff("player", args.spellName) and self:AntiSpam(3, 2) then
 			specWarnWebWrap:Play("targetchange")
-			timerWebWrap:Start()
 		end
+	elseif args:IsSpellID(29484, 54125) and self:AntiSpam(3, 3) then -- Web Spray
+		warnWebSprayNow:Show()
+		warnWebSpraySoon:Schedule(30.5)
+		timerWebSpray:Start()
 	end
 end
 
-function mod:SPELL_CAST_SUCCESS(args)
-	if args:IsSpellID(29484, 54125) then -- Web Spray
-		warnWebSprayNow:Show()
-		warnWebSpraySoon:Schedule(35)
-		timerWebSpray:Start()
+function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
+	if msg == emoteSpiderlings then
+		self:SendSync("Spiderlings")
+	end
+end
+
+function mod:OnSync(event)
+	if event == "Spiderlings" then
+		warnSpidersNow:Show()
+		warnSpidersSoon:Schedule(25.2)
+		timerSpider:Start()
 	end
 end

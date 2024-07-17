@@ -16,22 +16,32 @@ local warnShoutNow		= mod:NewSpellAnnounce(29107, 1)
 local warnShoutSoon		= mod:NewSoonAnnounce(29107, 3)
 local warnShieldWall	= mod:NewAnnounce("WarningShieldWallSoon", 3, 29061, nil, nil, nil, 29061)
 
-local timerShout		= mod:NewNextTimer(15, 29107, nil, nil, nil, 2)
+local timerShout		= mod:NewNextTimer(15, 29107, nil, nil, nil, 2) -- Whitemane PTR buff notes say it should be 12, but was consistently 15s in the vod
 local timerTaunt		= mod:NewCDTimer(20, 29060, nil, nil, nil, 5, nil, DBM_COMMON_L.TANK_ICON)
 local timerShieldWall	= mod:NewCDTimer(20, 29061, nil, nil, nil, 5, nil, DBM_COMMON_L.TANK_ICON)
 local timerMindControl	= mod:NewBuffActiveTimer(60, 605, nil, nil, nil, 6)
 
 function mod:OnCombatStart(delay)
-	timerShout:Start(16 - delay)
-	warnShoutSoon:Schedule(11 - delay)
+	if self:IsDifficulty("normal25") then
+		timerShout:Start(15 - delay)
+		warnShoutSoon:Schedule(10 - delay)
+	else
+		timerShout:Start(25 - delay)
+		warnShoutSoon:Schedule(20 - delay)
+	end
 end
 
 function mod:SPELL_CAST_SUCCESS(args)
 	local spellId = args.spellId
 	if args:IsSpellID(55543, 29107) then  -- Disrupting Shout
-		timerShout:Start()
 		warnShoutNow:Show()
-		warnShoutSoon:Schedule(11)
+		if self:IsDifficulty("normal25") then
+			timerShout:Start()
+			warnShoutSoon:Schedule(10)
+		else
+			timerShout:Start(25)
+			warnShoutSoon:Schedule(20)
+		end
 	elseif spellId == 29060 then -- Taunt
 		timerTaunt:Start(20, args.sourceGUID)
 	elseif spellId == 29061 then -- ShieldWall

@@ -82,9 +82,9 @@ local function currentFullDate()
 end
 
 DBM = {
-	Revision = parseCurseDate("2024025190711"),
-	DisplayVersion = "10.1.12 alpha", -- the string that is shown as version
-	ReleaseRevision = releaseDate(2024, 02, 21) -- the date of the latest stable version that is available, optionally pass hours, minutes, and seconds for multiple releases in one day
+	Revision = parseCurseDate("20240715200302"),
+	DisplayVersion = "11.3.2", -- the string that is shown as version
+	ReleaseRevision = releaseDate(2024, 07, 15) -- the date of the latest stable version that is available, optionally pass hours, minutes, and seconds for multiple releases in one day
 }
 
 local fakeBWVersion = 7558
@@ -459,6 +459,8 @@ local bannedMods = { -- a list of "banned" (meaning they are replaced by another
 	"DBM_API",
 	"DBM-Outlands",
 	"DBM-Battlegrounds", --replaced by DBM-PvP
+	"DBM-VanillaNaxx", -- to prevent double loading on Whitemane
+	"DBM-VanillaOnyxia", -- to prevent double loading on Whitemane
 	"DBM-Profiles" -- replaced by inline module since 7.00
 }
 
@@ -797,15 +799,17 @@ do
 			local zones = v.zones
 			local handler = v[event]
 			local modEvents = v.registeredUnitEvents
-			if isUnitEvent --[[and v.id == DBM.currentModId]] then -- Me and Kader initially coded a current mod check to save some CPU but noticed it would not work with RegisterEvents (to be listened out of modCombat) since currentModId is being set on StartCombat
+			--if isUnitEvent --[[and v.id == DBM.currentModId]] then -- Me and Kader initially coded a current mod check to save some CPU but noticed it would not work with RegisterEvents (to be listened out of modCombat) since currentModId is being set on StartCombat
 				-- Workaround for retail-like mod:RegisterEvents("UNIT_SPELLCAST_START boss1"). Check if we have valid units registered and filter out everything else.
 				-- v is mod here... so we check registered mods for registered events with registered uIds (v.registeredUnitEvents[event]).
 				-- then we check if we have our unit (args) in the table ... self.registeredUnitEvents[event] = args which is defined below
-				if modEvents and modEvents[event] and not checkEntry(modEvents[event], ...) then return end
-			end
+				--if modEvents and modEvents[event] and not checkEntry(modEvents[event], ...) then return end
+			--end
 
-			if handler and (not zones or zones[LastInstanceMapID] or zones[LastInstanceZoneName]) and not (not v.isTrashModBossFightAllowed and v.isTrashMod and #inCombat > 0) then
-				handler(v, ...)
+			if not (isUnitEvent and modEvents and modEvents[event] and not checkEntry(modEvents[event], ...)) then
+				if handler and (not zones or zones[LastInstanceMapID] or zones[LastInstanceZoneName]) and not (not v.isTrashModBossFightAllowed and v.isTrashMod and #inCombat > 0) then
+					handler(v, ...)
+				end
 			end
 		end
 	end
@@ -1804,6 +1808,7 @@ do
 			return
 		end
 		DBT:CreateBar(time, text, "Interface\\Icons\\SPELL_HOLY_BORROWEDTIME")
+		fireEvent("DBM_TimerStart", "DBMPizzaTimer", text, time, "Interface\\Icons\\SPELL_HOLY_BORROWEDTIME", "pizzatimer", nil, 0)
 		if broadcast and self:GetRaidRank() >= 1 then
 			sendSync("DBMv4-Pizza", ("%s\t%s"):format(time, text))
 		end
@@ -4530,9 +4535,9 @@ do
 		local combat = combatInfo[LastInstanceMapID] or combatInfo[LastInstanceZoneName]
 		if dbmIsEnabled and combat then
 			for _, v in ipairs(combat) do
-				if v.type == type and checkEntry(v.msgs, msg) or v.type == type .. "_regex" and checkExpressionList(v.msgs, msg) and not (#inCombat > 0 and v.noMultiBoss) then
+				if (v.type == type and checkEntry(v.msgs, msg) or v.type == type .. "_regex" and checkExpressionList(v.msgs, msg)) and not (#inCombat > 0 and v.noMultiBoss) then
 					self:StartCombat(v.mod, 0, "MONSTER_MESSAGE")
-				elseif v.type == "combat_" .. type .. "find" and tContains(v.msgs, msg) or v.type == "combat_" .. type and checkEntry(v.msgs, msg) and not (#inCombat > 0 and v.noMultiBoss) then
+				elseif (v.type == "combat_" .. type .. "find" and tContains(v.msgs, msg) or v.type == "combat_" .. type and checkEntry(v.msgs, msg)) and not (#inCombat > 0 and v.noMultiBoss) then
 					if IsInInstance() then--Indoor boss that uses both combat and message for combat, so in other words (such as hodir), don't require "target" of boss for yell like scanForCombat does for World Bosses
 						self:StartCombat(v.mod, 0, "MONSTER_MESSAGE")
 					else--World Boss

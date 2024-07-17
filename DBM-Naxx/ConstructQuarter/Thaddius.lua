@@ -9,7 +9,8 @@ mod:RegisterCombat("combat_yell", L.Yell)
 
 mod:RegisterEventsInCombat(
 	"SPELL_CAST_START 28089",
-	"CHAT_MSG_RAID_BOSS_EMOTE",
+	"SPELL_AURA_APPLIED 45185",
+	"CHAT_MSG_MONSTER_YELL",
 	"UNIT_AURA player"
 )
 
@@ -20,12 +21,13 @@ local warnThrowSoon			= mod:NewSoonAnnounce(28338, 1)
 
 local warnChargeChanged		= mod:NewSpecialWarning("WarningChargeChanged", nil, nil, nil, 3, 2, nil, nil, 28089)
 local warnChargeNotChanged	= mod:NewSpecialWarning("WarningChargeNotChanged", false, nil, nil, 1, 12, nil, nil, 28089)
+local specWarnStomp			= mod:NewSpecialWarningTaunt(45185, nil, nil, nil, 1, 2)
 local yellShift				= mod:NewShortPosYell(28089, DBM_CORE_L.AUTO_YELL_CUSTOM_POSITION)
 
 local enrageTimer			= mod:NewBerserkTimer(365)
-local timerNextShift		= mod:NewNextTimer(30, 28089, nil, nil, nil, 2, nil, DBM_COMMON_L.DEADLY_ICON)
+local timerNextShift		= mod:NewNextTimer(20, 28089, nil, nil, nil, 2, nil, DBM_COMMON_L.DEADLY_ICON)
 local timerShiftCast		= mod:NewCastTimer(3, 28089, nil, nil, nil, 2)
-local timerThrow			= mod:NewNextTimer(20.6, 28338, nil, nil, nil, 5, nil, DBM_COMMON_L.TANK_ICON)
+local timerThrow			= mod:NewNextTimer(28, 28338, nil, nil, nil, 5, nil, DBM_COMMON_L.TANK_ICON)
 
 if not DBM.Options.GroupOptionsBySpell then
 	mod:AddMiscLine(DBM_CORE_L.OPTION_CATEGORY_DROPDOWNS)
@@ -38,7 +40,6 @@ mod:SetBossHealthInfo(
 )
 
 local currentCharge
-local down = 0
 
 local function TankThrow(self)
 	if not self:IsInCombat() or self.vb.phase == 2 then
@@ -46,28 +47,32 @@ local function TankThrow(self)
 		return
 	end
 	timerThrow:Start()
-	warnThrowSoon:Schedule(17.6)
-	self:Schedule(20.6, TankThrow, self)
+	warnThrowSoon:Schedule(23)
+	self:Schedule(28, TankThrow, self)
 end
 
 function mod:OnCombatStart(delay)
 	self:SetStage(1)
 	currentCharge = nil
-	down = 0
-	self:Schedule(20.6 - delay, TankThrow, self)
-	timerThrow:Start(-delay)
-	warnThrowSoon:Schedule(17.6 - delay)
+	self:Schedule(25 - delay, TankThrow, self)
+	timerThrow:Start(25-delay)
+	warnThrowSoon:Schedule(20 - delay)
 end
 
 do
 	local lastShift
 	function mod:SPELL_CAST_START(args)
-		if args.spellId == 28089 then
+		if args.spellId == 28089 then -- Polarity Shift
 			self:SetStage(2)
-			timerNextShift:Start()
+			if self:IsDifficulty("normal25") then
+				timerNextShift:Start()
+				warnShiftSoon:Schedule(15)
+			else
+				timerNextShift:Start(30)
+				warnShiftSoon:Schedule(25)
+			end
 			timerShiftCast:Start()
 			warnShiftCasting:Show()
-			warnShiftSoon:Schedule(25)
 			lastShift = GetTime()
 		end
 	end
@@ -115,16 +120,29 @@ do
 	end
 end
 
-function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
-	if msg:match(L.Emote) or msg:match(L.Emote2) or msg:find(L.Emote) or msg:find(L.Emote2) or msg == L.Emote or msg == L.Emote2 then
-		down = down + 1
-		if down >= 2 then
-			self:Unschedule(TankThrow)
-			timerThrow:Cancel()
-			warnThrowSoon:Cancel()
-			DBM.BossHealth:Hide()
-			enrageTimer:Start()
+function mod:SPELL_AURA_APPLIED(args)
+	if args.spellId == 45185 then
+		if not args:IsPlayer() then
+			specWarnStomp:Show(args.destName)
+			specWarnStomp:Play("tauntboss")
 		end
+	end
+end
+
+function mod:CHAT_MSG_MONSTER_YELL(msg, npc)
+	if npc == L.name and self.vb.phase ~= 2 then
+		self:SendSync("P2")
+	end
+end
+
+function mod:OnSync(msg)
+	if msg == "P2" then
+		self:Unschedule(TankThrow)
+		timerThrow:Cancel()
+		warnThrowSoon:Cancel()
+		DBM.BossHealth:Hide()
+		enrageTimer:Start()
+		self:SetStage(2)
 	end
 end
 
