@@ -28,8 +28,8 @@ local timerArchavonEnrage	= mod:NewBerserkTimer(300, nil, "ArchavonEnrage")
 
 function mod:OnCombatStart(delay)
 	timerArchavonEnrage:Start()
-	timerNextStomp:Start(42.91-delay)
-	warnStompSoon:Schedule(37.91-delay)
+	timerNextStomp:Start(44.1-delay)
+	warnStompSoon:Schedule(39-delay)
 end
 
 function mod:SPELL_CAST_START(args)
