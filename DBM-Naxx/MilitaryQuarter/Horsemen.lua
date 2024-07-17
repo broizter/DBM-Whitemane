@@ -74,7 +74,7 @@ function mod:OnCombatStart()
 	timerBaronMark:Start(32)
 	timerThaneMark:Start(32)
 	warnMarkSoon:Schedule(27)
-	timerMeteorCD:Start()
+	timerMeteorCD:Start(22.3)
 	timerHolyWrathCD:Start(10.1) -- REVIEW! ~2s variance? (25man Lordaeron 2022/10/16 wipe || 25man Lordaeron 2022/10/16 kill) - 12.3 || 10.1
 	if self.Options.RangeFrame then
 		DBM.RangeCheck:Show(12)
