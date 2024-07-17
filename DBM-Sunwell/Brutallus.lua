@@ -102,7 +102,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerStompCD:Start()
 	elseif args.spellId == 45150 and args:IsPlayer() then
 		local amount = args.amount or 1
-		if (amount >= 4) or (amount >= 2 and self:IsTimewalking()) then
+		if amount >= 4 then
 			specWarnMeteor:Show(amount)
 			specWarnMeteor:Play("stackhigh")
 		end
