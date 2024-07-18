@@ -293,7 +293,7 @@ L:SetMiscLocalization({
 	EmoteLGift			= "begins to grow!", -- A |cFF00FFFFLifebinder's Gift|r begins to grow!
 	TrashRespawnTimer	= "Freya trash respawn",
 	YellPullNormal		= "The Conservatory must be protected!",
-	YellPullHard		= "Elders grant me your strength!"
+	YellPullHard		= "Elders, grant me your strength!"
 })
 
 ----------------------
