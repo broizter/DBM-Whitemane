@@ -393,7 +393,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerNextFlames:Start(7) -- S2 VOD review
 		self:Schedule(7, Flames, self)
 		warnFlamesSoon:Schedule(2)
-		timerNextShockBlast:Start(35.8) -- REVIEW! variance? (S3 HM log 2022/07/17 || 25H Lordaeron 2022/10/09) - 37.9, 37.7 || 35.8
+		timerNextShockBlast:Start(37.2)
 		timerEnrage:Start(600) -- REVIEW! 10 or 8 mins? By the yells, it is 10 mins, but wowhead states 8 min enrage timer...
 	elseif msg == L.YellPhase2 or msg:find(L.YellPhase2) then -- register Phase 2
 		NextPhase(self)
