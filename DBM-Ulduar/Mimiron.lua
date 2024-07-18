@@ -42,7 +42,7 @@ local warnPlasmaBlast				= mod:NewTargetNoFilterAnnounce(64529, 4, nil, "Tank|He
 local specWarnShockBlast			= mod:NewSpecialWarningRun(63631, "Melee", nil, nil, 4, 2)
 local specWarnPlasmaBlast			= mod:NewSpecialWarningDefensive(64529, nil, nil, nil, 1, 2)
 
-local timerProximityMines			= mod:NewCDTimer(35.0, 63027, nil, nil, nil, 3) -- 25 man NM log review (2022/07/10) + VOD review - 35.0
+local timerProximityMines			= mod:NewCDTimer(25, 63027, nil, nil, nil, 3) -- Sometimes only 25 seconds inbetween?
 local timerShockBlast				= mod:NewCastTimer(4, 63631, nil, nil, nil, 2, nil, DBM_COMMON_L.DEADLY_ICON)
 local timerNextShockBlast			= mod:NewNextTimer(35, 63631, nil, nil, nil, 2, nil, DBM_COMMON_L.DEADLY_ICON) -- REVIEW! variance?? (S2 log || S3 HM log 2022/07/17) - 38 || 44.1, 41.6
 local timerNapalmShell				= mod:NewBuffActiveTimer(6, 63666, nil, "Healer", 2, 5, nil, DBM_COMMON_L.IMPORTANT_ICON..DBM_COMMON_L.HEALER_ICON)
