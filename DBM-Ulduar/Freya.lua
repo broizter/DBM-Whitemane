@@ -145,11 +145,12 @@ function mod:SPELL_CAST_SUCCESS(args)
 		end
 		timerNatureFury:Start(args.destName)
 	elseif args:IsSpellID(64587, 64650) then -- Nature Bomb
-		if self:AntiSpam(5, 64650) and self:IsInCombat() then
+		if self:AntiSpam(1, 3) and self:IsInCombat() then
+			timerNextNatureBombSummon:Start(4.5)
+			timerNatureBombExplosion:Start(9.5)
 			specWarnNatureBombSummon:Cancel()
-			specWarnNatureBombSummon:Schedule(4) -- delay to max possible time to avoid warning before bombs are thrown
-			timerNextNatureBombSummon:Start()
-			timerNatureBombExplosion:Start()
+			specWarnNatureBombSummon:Schedule(4.5) -- delay to max possible time to avoid warning before bombs are thrown
+
 		end
 	elseif spellId == 63601 then -- Strengthened Iron Roots
 		DBM:AddMsg("Strengthened Iron Roots unhidden from combat log. Notify Zidras on Discord or GitHub") -- REVIEW! Strengthened Iron Roots never fired on Warmane. Instead there is only an emote event.
@@ -183,9 +184,9 @@ function mod:SPELL_AURA_REMOVED(args)
 		warnPhase2:Show()
 		warnPhase2:Play("ptwo")
 		self:SetStage(2)
-		timerNextNatureBombSummon:Start(6) --  Confirmed bug (2022/08/01) that Freya uses this ability before phase 2 begins! No log to identify a trigger for it. REVIEW! variance [?] (VODs) - ~8; ~6
-		specWarnNatureBombSummon:Schedule(8) -- delayed to the maximum timer possible
-		timerNatureBombExplosion:Start(13.4) -- REVIEW! variance [?] (S3 HM log 2022/07/22) - 13.4
+		timerNextNatureBombSummon:Start(15) --  Confirmed bug (2022/08/01) that Freya uses this ability before phase 2 begins! No log to identify a trigger for it. REVIEW! variance [?] (VODs) - ~8; ~6
+		specWarnNatureBombSummon:Schedule(15) -- delayed to the maximum timer possible
+		timerNatureBombExplosion:Start(25) -- REVIEW! variance [?] (S3 HM log 2022/07/22) - 13.4
 	elseif args:IsSpellID(62861, 62438) then
 		if self.Options.SetIconOnRoots then
 			self:RemoveIcon(args.destName)
