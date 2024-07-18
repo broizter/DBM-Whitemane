@@ -49,6 +49,9 @@ mod.vb.warned_preP2 = false
 mod.vb.collapsingStartCount = 0
 
 function mod:OnCombatStart(delay)
+end
+
+function mod:startTimers(delay)
 	self:SetStage(1)
 	stars = {}
 	warned_star = {}
@@ -56,11 +59,11 @@ function mod:OnCombatStart(delay)
 	star_num = 1
 	self.vb.warned_preP2 = false
 	self.vb.collapsingStartCount = 0
-	timerNextCollapsingStar:Start(21.9-delay) -- Chose median. 0.3s variance (2022/07/05 || 10 man FM log 2022/08/01 || 25 man Lord log 2022/08/02 || 25 man FM log 2022/08/07 || 10 man FM log 2022/08/09) - 22.0 || 21.9, 22.0 || 22.0 || 22.0, 22.0, 22.0, 22.1, 21.9, 22.0, 22.0, 22.0, 22.0, 22.0 || 22.0, 22.0, 22.0, 22.0, 21.9, 21.9, 21.8, 21.9, 21.9, 22.0, 22.0
-	timerCDCosmicSmash:Start(35-delay) -- Log reviewed (2022/07/05 || 10 man FM log 2022/08/01 || 25 man Lord log 2022/08/02 || 25 man FM log 2022/08/07) - 35 || 35.0, 35.0 || 35.0 || 35.0, 35.0, 34.9, 35.0, 35.0, 35.0, 35.0, 35.0, 35.0, 35.0
-	announcePreBigBang:Schedule(90-delay)
-	timerNextBigBang:Start(100-delay) -- Log reviewed (2022/07/05 || 2022/07/10 || 10 man FM log 2022/08/01 || 25 man Lord log 2022/08/02 || 25 man FM log 2022/08/07 || 10 man FM log 2022/08/09) - 100 || 100 || 100.0, 99.9 || 100 || 99.9, 100.0, 100.0, 100.0, 99.9, 100.0, 100.0, 100.0, 100.0 || 99.9, 100.0, 99.9, 100.0, 100.0, 99.8, 99.9, 100.0, 100.0
-	enrageTimer:Start(360-delay)
+	timerNextCollapsingStar:Start(23.3-delay) -- Chose median. 0.3s variance (2022/07/05 || 10 man FM log 2022/08/01 || 25 man Lord log 2022/08/02 || 25 man FM log 2022/08/07 || 10 man FM log 2022/08/09) - 22.0 || 21.9, 22.0 || 22.0 || 22.0, 22.0, 22.0, 22.1, 21.9, 22.0, 22.0, 22.0, 22.0, 22.0 || 22.0, 22.0, 22.0, 22.0, 21.9, 21.9, 21.8, 21.9, 21.9, 22.0, 22.0
+	timerCDCosmicSmash:Start(31.4-delay) -- Log reviewed (2022/07/05 || 10 man FM log 2022/08/01 || 25 man Lord log 2022/08/02 || 25 man FM log 2022/08/07) - 35 || 35.0, 35.0 || 35.0 || 35.0, 35.0, 34.9, 35.0, 35.0, 35.0, 35.0, 35.0, 35.0, 35.0
+	announcePreBigBang:Schedule(82-delay)
+	timerNextBigBang:Start(92-delay) -- Log reviewed (2022/07/05 || 2022/07/10 || 10 man FM log 2022/08/01 || 25 man Lord log 2022/08/02 || 25 man FM log 2022/08/07 || 10 man FM log 2022/08/09) - 100 || 100 || 100.0, 99.9 || 100 || 99.9, 100.0, 100.0, 100.0, 99.9, 100.0, 100.0, 100.0, 100.0 || 99.9, 100.0, 99.9, 100.0, 100.0, 99.8, 99.9, 100.0, 100.0
+	enrageTimer:Start(356-delay)
 end
 
 function mod:OnCombatEnd()
@@ -144,6 +147,10 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		warnPhase2:Play("ptwo")
 		DBM.BossHealth:Clear()
 		DBM.BossHealth:AddBoss(32871)
+	elseif (msg == L.YellPull or msg:find(L.YellPull)) then
+		warned_preP2 = false
+		warned_star = false
+		self:ScheduleMethod(4, "startTimers")
 	end
 end
 
