@@ -90,7 +90,7 @@ local timerNextFlameSuppressantP1	= mod:NewCDTimer(60, 64570, nil, nil, nil, 3) 
 mod:AddTimerLine(DBM_CORE_L.SCENARIO_STAGE:format(2)..": "..L.MobPhase2)
 local warnFrostBomb					= mod:NewSpellAnnounce(64623, 3)
 
-local timerFrostBombExplosion		= mod:NewCastTimer(15, 65333, nil, nil, nil, 3)
+local timerFrostBombExplosion		= mod:NewCastTimer(12.8, 65333, nil, nil, nil, 3)
 local timerNextFrostBomb			= mod:NewNextTimer(30.4, 64623, nil, nil, nil, 3, nil, DBM_COMMON_L.HEROIC_ICON, true) -- REVIEW! variance? Use PEWPEW to add time? Added "keep" arg (VOD review || S3 HM log 2022/07/17 || 25H Lordaeron 2022/10/09) - either gave 46 or 33s || 44.2, 44.4, 47.1 || Stage 2/44.3, 32.6, Stage 4/88.2, 28.8/116.9/145.5, 47.7, 30.4
 local timerNextFlameSuppressantP2	= mod:NewNextTimer(10, 65192, nil, nil, nil, 3) -- 2s (26.4 outlier??) variance (S2 VOD review) - 12, 12, 11, 10 || 12.3, 12.4, 26.4, 11.3, 12.4
 
