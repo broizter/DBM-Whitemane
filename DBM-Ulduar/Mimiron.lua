@@ -121,9 +121,8 @@ end
 
 local function Flames(self)	-- Flames -- UNIT_SPELLCAST_SUCCEEDED does not show on etrace
 	timerNextFlames:Start()
-	self:Schedule(28, Flames, self)
-	warnFlamesSoon:Schedule(18)
-	warnFlamesSoon:Schedule(23)
+	self:Schedule(30, Flames, self)
+	warnFlamesSoon:Schedule(25)
 end
 
 local function warnNapalmShellTargets(self)
@@ -391,9 +390,9 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerPlasmaBlastCD:Start(26.6) -- REVIEW! variance? (S2 VOD || S3 HM log 2022/07/17) - 29 || 26.6, 26.6
 		timerNextFlameSuppressantP1:Start(75) -- REVIEW! ~5s variance (S2 VOD review || S3 HM log 2022/07/17) - 75 || 80.0 ; 77.3
 		timerProximityMines:Start(11) -- S2 VOD review
-		timerNextFlames:Start(6) -- S2 VOD review
-		self:Schedule(6, Flames, self)
-		warnFlamesSoon:Schedule(1)
+		timerNextFlames:Start(7) -- S2 VOD review
+		self:Schedule(7, Flames, self)
+		warnFlamesSoon:Schedule(2)
 		timerNextShockBlast:Start(35.8) -- REVIEW! variance? (S3 HM log 2022/07/17 || 25H Lordaeron 2022/10/09) - 37.9, 37.7 || 35.8
 		timerEnrage:Start(600) -- REVIEW! 10 or 8 mins? By the yells, it is 10 mins, but wowhead states 8 min enrage timer...
 	elseif msg == L.YellPhase2 or msg:find(L.YellPhase2) then -- register Phase 2
