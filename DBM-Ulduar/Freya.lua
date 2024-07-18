@@ -45,7 +45,7 @@ local yellNatureFury			= mod:NewYell(63571)
 local timerAlliesOfNature		= mod:NewNextTimer(60, 62678, nil, nil, nil, 1, 62947, DBM_COMMON_L.IMPORTANT_ICON..DBM_COMMON_L.DAMAGE_ICON) -- REVIEW! From retail: No longer has CD, they spawn instant last set is dead, and not a second sooner, except first set; 60s log reviewed (25 man HM log 2022/07/17)
 local timerSimulKill			= mod:NewTimer(12, "TimerSimulKill", nil, nil, nil, 5, DBM_COMMON_L.DAMAGE_ICON, nil, nil, nil, nil, nil, nil, 62678)
 local timerNatureFury			= mod:NewTargetTimer(7.9, 63571, nil, nil, nil, 3) -- ~5s variance (25 man HM log 2022/07/17) - 13.6, 7.9, 8.8, 11.7, 11.7, 12.9, 11.4
-local timerLifebinderCD			= mod:NewCDTimer(40, 62584, nil, nil, nil, 1, nil, DBM_COMMON_L.IMPORTANT_ICON) -- 10s variance (S2 VOD review || 25 man HM log 2022/07/17) - 40 || 42.7, 42.0; 46.8, 47.2
+local timerLifebinderCD			= mod:NewCDTimer(30, 62584, nil, nil, nil, 1, nil, DBM_COMMON_L.IMPORTANT_ICON) -- 10s variance (S2 VOD review || 25 man HM log 2022/07/17) - 40 || 42.7, 42.0; 46.8, 47.2
 
 mod:AddRangeFrameOption(8, 63571)
 mod:AddSetIconOption("SetIconOnFury", 63571, false, false, {7, 8})
@@ -90,7 +90,7 @@ function mod:OnCombatStart(delay)
 	timerEnrage:Start(-delay)
 	table.wipe(adds)
 	timerAlliesOfNature:Start(10-delay) -- 9.9
-	timerLifebinderCD:Start(25-delay) -- ~15s variance (could be more, insufficient data). (25 man HM log 2022/07/17) - 26.1, 39.7
+	timerLifebinderCD:Start(30-delay) -- ~15s variance (could be more, insufficient data). (25 man HM log 2022/07/17) - 26.1, 39.7
 end
 
 function mod:OnCombatEnd(wipe)
