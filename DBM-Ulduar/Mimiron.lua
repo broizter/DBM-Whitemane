@@ -388,7 +388,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		self:SetWipeTime(10)
 		timerHardmode:Start()
 		timerPlasmaBlastCD:Start(26.6) -- REVIEW! variance? (S2 VOD || S3 HM log 2022/07/17) - 29 || 26.6, 26.6
-		timerNextFlameSuppressantP1:Start(75) -- REVIEW! ~5s variance (S2 VOD review || S3 HM log 2022/07/17) - 75 || 80.0 ; 77.3
+		timerNextFlameSuppressantP1:Start(73.3) -- REVIEW! ~5s variance (S2 VOD review || S3 HM log 2022/07/17) - 75 || 80.0 ; 77.3
 		timerProximityMines:Start(21) -- S2 VOD review
 		timerNextFlames:Start(7) -- S2 VOD review
 		self:Schedule(7, Flames, self)
