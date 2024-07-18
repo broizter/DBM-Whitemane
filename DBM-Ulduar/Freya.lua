@@ -235,8 +235,8 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		self.vb.isHardMode = true
 		timerGroundTremorCD:Start(11) -- 6s variance (could be more, insufficient data). (2022/07/05 10m Lord transcriptor log || 2021 S2 cleu + VOD review || 25 man FM log) - 16 || 11, 13, 17 || 17.5, 11.3
 		timerIronRootsCD:Start(8.5) -- ~6s variance (could be more, insufficient data). (25 man FM log) - 8.5, 14.9
-		timerUnstableBeamCD:Start(10.7) -- REVIEW! ~7s variance [10.7-17.5] (25 man FM log || 25H Lordaeron 2022/10/30_1 elder up) - 17.5, 15.5 || 10.7
-		warnUnstableBeamSoon:Schedule(7.7)
+		timerUnstableBeamCD:Start(8) -- REVIEW! ~7s variance [10.7-17.5] (25 man FM log || 25H Lordaeron 2022/10/30_1 elder up) - 17.5, 15.5 || 10.7
+		warnUnstableBeamSoon:Schedule(5)
 	elseif msg == L.SpawnYell then
 		timerAlliesOfNature:Start()
 		if self.Options.HealthFrame then
