@@ -8,7 +8,8 @@ mod:SetCreatureID(24850)
 mod:RegisterCombat("combat")
 
 mod:RegisterEvents(
-	"INSTANCE_ENCOUNTER_ENGAGE_UNIT"
+	"INSTANCE_ENCOUNTER_ENGAGE_UNIT",
+  "RAID_ROSTER_UPDATE"
 )
 
 mod:RegisterEventsInCombat(
@@ -63,11 +64,7 @@ function mod:OnCombatStart(delay)
 	if self.Options.RangeFrame then
 		DBM.RangeCheck:Show()
 	end
-	if self.Options.HealthFrame then
-		DBM.BossHealth:Clear()
-		DBM.BossHealth:AddBoss(24850, L.name)
-		DBM.BossHealth:AddBoss(24892, L.Demon)
-	end
+
 	timerNextPortal:Start(20-delay, 1)
 	timerBreathCD:Start(15-delay)
 	timerBuffetCD:Start(6-delay)
