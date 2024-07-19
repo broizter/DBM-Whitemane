@@ -9,7 +9,7 @@ local CREATURE_IDS                  = {
 }
 local SYNC_PREFIXES                 = {
   HP_SENDER = "KalecgosHealthUpdateSender",
-  HP_UPDATE = "KalecgosHealthUpdateUpdate",
+  HP_UPDATE = "KalecgosHealthUpdate",
 }
 local ROSTER_UPDATE_DELAY           = 1.5
 local HP_SENDER_NAMES_SORT_DELAY    = 1.5
