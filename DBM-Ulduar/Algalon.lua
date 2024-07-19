@@ -49,9 +49,6 @@ mod.vb.warned_preP2 = false
 mod.vb.collapsingStartCount = 0
 
 function mod:OnCombatStart(delay)
-end
-
-function mod:startTimers(delay)
 	self:SetStage(1)
 	stars = {}
 	warned_star = {}
@@ -147,10 +144,6 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		warnPhase2:Play("ptwo")
 		DBM.BossHealth:Clear()
 		DBM.BossHealth:AddBoss(32871)
-	elseif (msg == L.YellPull or msg:find(L.YellPull)) then
-		warned_preP2 = false
-		warned_star = false
-		self:ScheduleMethod(4, "startTimers")
 	end
 end
 
