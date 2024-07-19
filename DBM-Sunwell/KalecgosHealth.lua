@@ -11,7 +11,6 @@ local SYNC_PREFIXES                 = {
   HP_SENDER = "KalecgosHealthUpdateSender",
   HP_UPDATE = "KalecgosHealthUpdate",
 }
-local ROSTER_UPDATE_DELAY           = 1.5
 local HP_SENDER_NAMES_SORT_DELAY    = 1.5
 local HEALTH_SYNC_DISPATCH_INTERVAL = 0.5
 
@@ -31,7 +30,6 @@ local function createInitialState()
   }
   state.roster = {}
   state.isSortScheduled = false
-  state.isRosterUpdateScheduled = false
 
   if state.ticker then
     AceTimer:CancelTimer(state.ticker)
@@ -70,7 +68,6 @@ local function sortHealthSenderNames()
 end
 
 local function updateRoster()
-  state.isRosterUpdateScheduled = false
   state.roster = {}
 
   for i = 1, GetNumGroupMembers() do
@@ -167,13 +164,7 @@ function Kal:OnCombatEnd(...)
 end
 
 function Kal:RAID_ROSTER_UPDATE()
-  if state.isRosterUpdateScheduled then
-    return
-  end
-
-  state.isRosterUpdateScheduled = true
-
-  DBM:Schedule(ROSTER_UPDATE_DELAY, updateRoster)
+  updateRoster()
 end
 
 function Kal:OnSync(prefix, message)
