@@ -39,7 +39,7 @@ local timerCDCosmicSmash		= mod:NewCDTimer(25.5, 64596, nil, nil, nil, 3) -- Log
 local timerCastCosmicSmash		= mod:NewCastTimer(4.5, 64596)
 local timerPhasePunch			= mod:NewTargetTimer(45, 64412, nil, "Tank", 2, 5, nil, DBM_COMMON_L.TANK_ICON)
 local timerNextPhasePunch		= mod:NewNextTimer(15.5, 64412, nil, "Tank", 2, 5, nil, DBM_COMMON_L.TANK_ICON)
-local enrageTimer				= mod:NewBerserkTimer(360)
+local enrageTimer				= mod:NewBerserkTimer(350) -- Not sure about this one yet
 
 local warned_star = {}
 local stars = {}
@@ -60,7 +60,7 @@ function mod:OnCombatStart(delay)
 	timerCDCosmicSmash:Start(24.4-delay) -- Log reviewed (2022/07/05 || 10 man FM log 2022/08/01 || 25 man Lord log 2022/08/02 || 25 man FM log 2022/08/07) - 35 || 35.0, 35.0 || 35.0 || 35.0, 35.0, 34.9, 35.0, 35.0, 35.0, 35.0, 35.0, 35.0, 35.0
 	announcePreBigBang:Schedule(79.5-delay)
 	timerNextBigBang:Start(89.5-delay) -- Log reviewed (2022/07/05 || 2022/07/10 || 10 man FM log 2022/08/01 || 25 man Lord log 2022/08/02 || 25 man FM log 2022/08/07 || 10 man FM log 2022/08/09) - 100 || 100 || 100.0, 99.9 || 100 || 99.9, 100.0, 100.0, 100.0, 99.9, 100.0, 100.0, 100.0, 100.0 || 99.9, 100.0, 99.9, 100.0, 100.0, 99.8, 99.9, 100.0, 100.0
-	enrageTimer:Start(350-delay)
+	enrageTimer:Start(350-delay) -- Not sure about this one yet
 end
 
 function mod:OnCombatEnd()
