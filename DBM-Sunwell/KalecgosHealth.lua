@@ -8,29 +8,40 @@ local CREATURE_IDS                  = {
   DEMON = 24892,
 }
 local SYNC_PREFIXES                 = {
-  HP_SENDERS = "KalecgosHealthUpdateSenders",
+  HP_SENDER = "KalecgosHealthUpdateSender",
   HP_UPDATE = "KalecgosHealthUpdateUpdate",
 }
 local ROSTER_UPDATE_DELAY           = 1.5
 local HP_SENDER_NAMES_SORT_DELAY    = 1.5
 local HEALTH_SYNC_DISPATCH_INTERVAL = 0.5
 
-Kal.customState                     = {
-  health = {
+local function createInitialState()
+  Kal.customState = Kal.customState or {}
+  local state = Kal.customState
+
+  state.health = {
     [CREATURE_IDS.DRAGON] = -1,
     [CREATURE_IDS.DEMON] = -1,
-  },
-  healthSenderNames = {
+  }
+  state.healthSenderNames = {
     [PLAYER_NAME] = true,
-  },
-  sortedHealthSenderNames = {
-    [PLAYER_NAME] = true,
-  },
-  roster = {},
-  isSortScheduled = false,
-}
+  }
+  state.sortedHealthSenderNames = {
+    PLAYER_NAME
+  }
+  state.roster = {}
+  state.isSortScheduled = false
+  state.isRosterUpdateScheduled = false
 
-local state                         = Kal.customState
+  if state.ticker then
+    AceTimer:CancelTimer(state.ticker)
+    state.ticker = nil
+  end
+end
+
+createInitialState()
+
+local state = Kal.customState
 
 local function getDragonHealth()
   return state.health[CREATURE_IDS.DRAGON]
@@ -59,6 +70,7 @@ local function sortHealthSenderNames()
 end
 
 local function updateRoster()
+  state.isRosterUpdateScheduled = false
   state.roster = {}
 
   for i = 1, GetNumGroupMembers() do
@@ -72,13 +84,17 @@ local function updateRoster()
   end
 end
 
-local function sendHealthSync(creatureID)
+local function pushHealthSync(creatureID)
   Kal:SendSync(
     SYNC_PREFIXES.HP_UPDATE,
     creatureID,
     UnitHealth("target"),
     UnitHealthMax("target")
   )
+end
+
+local function pushHealthUpdateSenderSync()
+  Kal:SendSync(SYNC_PREFIXES.HP_SENDER, PLAYER_NAME)
 end
 
 local function initHealthSync()
@@ -114,11 +130,11 @@ local function initHealthSync()
   end
 
   if firstPlayerWithDragonTarget == PLAYER_NAME then
-    sendHealthSync(CREATURE_IDS.DRAGON)
+    pushHealthSync(CREATURE_IDS.DRAGON)
   end
 
   if firstPlayerWithDemonTarget == PLAYER_NAME then
-    sendHealthSync(CREATURE_IDS.DEMON)
+    pushHealthSync(CREATURE_IDS.DEMON)
   end
 end
 
@@ -126,11 +142,15 @@ local onCombatStart = Kal.OnCombatStart
 function Kal:OnCombatStart(...)
   onCombatStart(self, ...)
 
-  if self.Options.HealthFrame then
-    BossHealth:Clear()
-    BossHealth:AddBoss(getDragonHealth, L.name)
-    BossHealth:AddBoss(getDemonHealth, L.Demon)
+  if not self.Options.HealthFrame then
+    return
   end
+
+  BossHealth:Clear()
+  BossHealth:AddBoss(getDragonHealth, L.name)
+  BossHealth:AddBoss(getDemonHealth, L.Demon)
+  updateRoster()
+  pushHealthUpdateSenderSync()
 
   if not state.ticker then
     state.ticker = AceTimer:ScheduleRepeatingTimer(
@@ -138,26 +158,26 @@ function Kal:OnCombatStart(...)
       HEALTH_SYNC_DISPATCH_INTERVAL
     )
   end
-
-  updateRoster()
 end
 
 local onCombatEnd = Kal.OnCombatEnd
 function Kal:OnCombatEnd(...)
   onCombatEnd(self, ...)
-
-  if state.ticker then
-    AceTimer:CancelTimer(state.ticker)
-    state.ticker = nil
-  end
+  createInitialState()
 end
 
 function Kal:RAID_ROSTER_UPDATE()
+  if state.isRosterUpdateScheduled then
+    return
+  end
+
+  state.isRosterUpdateScheduled = true
+
   DBM:Schedule(ROSTER_UPDATE_DELAY, updateRoster)
 end
 
 function Kal:OnSync(prefix, message)
-  if prefix == SYNC_PREFIXES.HP_SENDERS then
+  if prefix == SYNC_PREFIXES.HP_SENDER then
     if state.healthSenderNames[message] then
       return
     end
