@@ -53,6 +53,10 @@ local function compareStrings(a, b)
   return a < b
 end
 
+local function stringTrim(str)
+  return (str:gsub("^%s*(.-)%s*$", "%1"))
+end
+
 local function sortHealthSenderNames()
   state.isSortScheduled = false
   state.sortedHealthSenderNames = {}
@@ -84,9 +88,12 @@ end
 local function pushHealthSync(creatureID)
   Kal:SendSync(
     SYNC_PREFIXES.HP_UPDATE,
-    creatureID,
-    UnitHealth("target"),
-    UnitHealthMax("target")
+    string.format(
+      "%s^%s^%s",
+      creatureID,
+      UnitHealth("target"),
+      UnitHealthMax("target")
+    )
   )
 end
 
@@ -168,6 +175,7 @@ function Kal:RAID_ROSTER_UPDATE()
 end
 
 function Kal:OnSync(prefix, message)
+  message = stringTrim(message)
   if prefix == SYNC_PREFIXES.HP_SENDER then
     if state.healthSenderNames[message] then
       return
@@ -185,7 +193,7 @@ function Kal:OnSync(prefix, message)
   end
 
   if prefix == SYNC_PREFIXES.HP_UPDATE then
-    local creatureID, currentHealth, maxHealth = strsplit("\t", message)
+    local creatureID, currentHealth, maxHealth = strsplit("^", message)
     local value
 
     if not creatureID or not currentHealth or not maxHealth then
