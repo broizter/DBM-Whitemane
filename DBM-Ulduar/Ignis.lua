@@ -24,7 +24,7 @@ local timerFlameJetsCast		= mod:NewCastTimer(2.7, 63472, nil, nil, nil, 5, nil, 
 local timerFlameJetsCooldown	= mod:NewCDTimer(45.1, 63472, nil, nil, nil, 2, nil, DBM_COMMON_L.IMPORTANT_ICON, true) -- 10/25 diff. ~3s variance. Transcriptor snippet below. Added "keep" arg
 local timerActivateConstruct	= mod:NewCDCountTimer(30, 62488, nil, nil, nil, 1, nil, nil, true) -- 10/25 diff. ~6s variance. Transcriptor snippet below. Added "keep" arg
 local timerScorchCast			= mod:NewCastTimer(3, 63473)
-local timerScorchCooldown		= mod:NewCDTimer(31, 63473, nil, nil, nil, 5) -- 10/25 diff. ~1s variance. Transcriptor snippet below
+local timerScorchCooldown		= mod:NewCDTimer(20, 63473, nil, nil, nil, 5) -- 10/25 diff. ~1s variance. Transcriptor snippet below
 local timerSlagPot				= mod:NewTargetTimer(10, 63477, nil, nil, nil, 3, nil, DBM_COMMON_L.DEADLY_ICON)
 local timerAchieve				= mod:NewAchievementTimer(240, 2930)
 
@@ -74,7 +74,7 @@ end
 function mod:SPELL_CAST_SUCCESS(args)
 	if args:IsSpellID(62548, 63474) then	-- Scorch
 		timerScorchCast:Start()
-		timerScorchCooldown:Start(self:IsDifficulty("normal10") and 28 or 31) -- 10/25 different. ~1s variance (25 man log review 2022/07/10 || 10m Frostmourne 2022/07/17 || 25m Lordaeron 2022/10/05 || 25m Lordaeron 2022/10/09) - 31.0, 32.0, 31.0 || 28.0, 28.1, 28.1, 28.0, 28.0, 29.0, 28.0 || 31.0, 32.1, 31.1, 31.0, 31.0 || 31.0, 32.0, 31.0, 31.1
+		timerScorchCooldown:Start() -- 10/25 different. ~1s variance (25 man log review 2022/07/10 || 10m Frostmourne 2022/07/17 || 25m Lordaeron 2022/10/05 || 25m Lordaeron 2022/10/09) - 31.0, 32.0, 31.0 || 28.0, 28.1, 28.1, 28.0, 28.0, 29.0, 28.0 || 31.0, 32.1, 31.1, 31.0, 31.0 || 31.0, 32.0, 31.0, 31.1
 	end
 end
 
