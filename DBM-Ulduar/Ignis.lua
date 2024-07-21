@@ -61,7 +61,7 @@ function mod:SPELL_CAST_START(args)
 		else
 			specWarnFlameJetsCast:Play("stopcast")
 		end
-		timerFlameJetsCooldown:Start(self:IsDifficulty("normal10") and 41.5 or 45.1) -- 10/25 different. ~5s variance (25 man log review 2022/07/10 || 10m Frostmourne 2022/07/17 || 25m Lordaeron 2022/10/05 || 25m Lordaeron 2022/10/09) - 45.1, 47.0 || 43.5, 41.5, 45.9, 41.9 || 47.2, 45.8, 47.0 || 48.9, 46.6
+		timerFlameJetsCooldown:Start(40) -- 10/25 different. ~5s variance (25 man log review 2022/07/10 || 10m Frostmourne 2022/07/17 || 25m Lordaeron 2022/10/05 || 25m Lordaeron 2022/10/09) - 45.1, 47.0 || 43.5, 41.5, 45.9, 41.9 || 47.2, 45.8, 47.0 || 48.9, 46.6
 	elseif args.spellId == 62488 then		-- Activate Construct
 		self.vb.ConstructCount = self.vb.ConstructCount + 1
 		warnConstruct:Show(self.vb.ConstructCount)
