@@ -36,8 +36,8 @@ local specWarnBlueOrb	= mod:NewSpecialWarning("SpecWarnBlueOrb", false)
 
 local timerBloomCD		= mod:NewCDTimer(40, 45641, nil, nil, nil, 2)
 local timerDartCD		= mod:NewCDTimer(20, 45740, nil, nil, nil, 2)--Targeted or aoe?
-local timerBomb			= mod:NewCastTimer(9, 46605, nil, nil, nil, 2, nil, DBM_COMMON_L.DEADLY_ICON)
-local timerBombCD		= mod:NewCDTimer(45, 46605, nil, nil, nil, 2, nil, DBM_COMMON_L.DEADLY_ICON)
+local timerBomb			= mod:NewCastTimer(8.7, 46605, nil, nil, nil, 2, nil, DBM_COMMON_L.DEADLY_ICON)
+local timerBombCD		= mod:NewCDTimer(55, 46605, nil, nil, nil, 2, nil, DBM_COMMON_L.DEADLY_ICON)
 local timerSpike		= mod:NewCastTimer(28, 46680, nil, nil, nil, 3)
 local timerBlueOrb		= mod:NewTimer(34.5, "TimerBlueOrb", 45109, nil, nil, 5)
 
@@ -138,7 +138,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 			warnPhase2:Show()
 			timerBlueOrb:Start()
 			timerDartCD:Start(59)
-			timerBombCD:Start(47)
+			timerBombCD:Start(48.1)
 		elseif self.vb.phase == 3 then
 			warnPhase3:Show()
 			timerBlueOrb:Cancel()
@@ -146,15 +146,15 @@ function mod:SPELL_CAST_SUCCESS(args)
 			timerBombCD:Cancel()
 			timerBlueOrb:Start()
 			timerDartCD:Start(48.7)
-			timerBombCD:Start(43)
+			timerBombCD:Start(45)
 		elseif self.vb.phase == 4 then
 			warnPhase4:Show()
 			timerBlueOrb:Cancel()
 			timerDartCD:Cancel()
 			timerBombCD:Cancel()
-			timerBlueOrb:Start(45)
+			timerBlueOrb:Start(34.5)
 			timerDartCD:Start(49)
-			timerBombCD:Start(48.7)
+			timerBombCD:Start(50.3)
 		end
 	elseif args.spellId == 46589 and args.destName ~= nil then
 		if args.destName == UnitName("player") then
