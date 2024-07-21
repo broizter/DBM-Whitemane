@@ -94,7 +94,7 @@ end
 
 function mod:OnCombatStart(delay)
 	enrageTimer:Start(-delay)
-	timerRuneofPowerCD:Start(20-delay) -- One log review (2022/07/05)
+	timerRuneofPowerCD:Start(30-delay) -- One log review (2022/07/05)
 	timerOverloadCD:Start(68) -- REVIEW! Insufficent data to validate if it's correct
 	table.wipe(disruptTargets)
 	self.vb.disruptIcon = 7
