@@ -48,7 +48,7 @@ local star_num = 1
 mod.vb.warned_preP2 = false
 mod.vb.collapsingStartCount = 0
 
-function mod:OnCombatStart(delay)
+local function PullStart(self)
 	self:SetStage(1)
 	stars = {}
 	warned_star = {}
@@ -136,7 +136,16 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(msg)
-	if msg == L.Phase2 or msg:find(L.Phase2) then
+	if msg == L.FirstPull or msg:find(L.FirstPull) then -- Hacky workaround to the first pull since its different
+		timerNextCollapsingStar:Stop()
+		timerCDCosmicSmash:Stop()
+		self:Unschedule(announcePreBigBang)
+		timerNextBigBang:Stop()
+		enrageTimer:Stop()
+		self:Schedule(8, PullStart, self)
+	elseif msg == L.YellPull or msg:find(L.YellPull) then
+		self:Schedule(8, PullStart, self)
+	elseif msg == L.Phase2 or msg:find(L.Phase2) then
 		self:SetStage(2)
 		self.vb.warned_preP2 = true
 		timerNextCollapsingStar:Stop()
