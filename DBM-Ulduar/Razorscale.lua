@@ -141,7 +141,7 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(emote)
 		timerTurret3:Stop()
 		timerTurret4:Stop()
 		timerGrounded:Stop()
-		timerFuseArmorCD:Start(19) -- REVIEW! variance? (25 man log review 2022/07/10) - 19
+		timerFuseArmorCD:Start(15) -- REVIEW! variance? (25 man log review 2022/07/10) - 19
 	end
 end
 
