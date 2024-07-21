@@ -92,6 +92,11 @@ local function ResetRange(self)
 	end
 end
 
+local function RuneCD(self)	-- Workaround since no event is generated on cast
+	timerRuneofPowerCD:Start()
+	self:Schedule(60, RuneCD, self)
+end
+
 function mod:OnCombatStart(delay)
 	enrageTimer:Start(-delay)
 	timerRuneofPowerCD:Start(30-delay) -- One log review (2022/07/05)
@@ -101,6 +106,7 @@ function mod:OnCombatStart(delay)
 	runemasterAlive = true
 	brundirAlive = true
 	steelbreakerAlive = true
+	self:Schedule(30, RuneCD, self)
 end
 
 function mod:OnCombatEnd()
@@ -246,6 +252,7 @@ function mod:UNIT_DIED(args)
 		timerRuneofDeath:Cancel()
 		warnRuneofDeathIn10Sec:Cancel()
 		timerRuneofPowerCD:Cancel()
+		self:Unschedule(RuneCD)
 		timerRuneofPowerCast:Cancel()
 	elseif cid == 32857 then	--Stormcaller Brundir
 		brundirAlive = false
