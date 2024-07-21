@@ -69,7 +69,7 @@ function mod:OnCombatEnd()
 end
 
 function mod:SPELL_AURA_APPLIED(args)
-	if args.spellId == 45230 and not args:IsDestTypePlayer() then
+	if args.spellId == 45230 and not args:IsDestTypePlayer() and not self:UnitClass() == "PALADIN" then
 		specWarnPyro:Show(args.destName)
 		specWarnPyro:Play("dispelboss")
 	elseif args.spellId == 45347 and args:IsPlayer() then
