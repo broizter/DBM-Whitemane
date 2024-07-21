@@ -113,6 +113,7 @@ function mod:OnCombatEnd()
 	if self.Options.RangeFrame then
 		DBM.RangeCheck:Hide()
 	end
+	self:Unschedule(RuneCD)
 end
 
 function mod:RuneTarget(targetname)
