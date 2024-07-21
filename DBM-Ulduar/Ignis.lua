@@ -22,7 +22,7 @@ local specWarnFlameBrittle		= mod:NewSpecialWarningSwitch(62382, "Dps", nil, nil
 
 local timerFlameJetsCast		= mod:NewCastTimer(2.7, 63472, nil, nil, nil, 5, nil, DBM_COMMON_L.IMPORTANT_ICON)
 local timerFlameJetsCooldown	= mod:NewCDTimer(45.1, 63472, nil, nil, nil, 2, nil, DBM_COMMON_L.IMPORTANT_ICON, true) -- 10/25 diff. ~3s variance. Transcriptor snippet below. Added "keep" arg
-local timerActivateConstruct	= mod:NewCDCountTimer(30, 62488, nil, nil, nil, 1, nil, nil, true) -- 10/25 diff. ~6s variance. Transcriptor snippet below. Added "keep" arg
+local timerActivateConstruct	= mod:NewCDCountTimer(40, 62488, nil, nil, nil, 1, nil, nil, true) -- 10/25 diff. ~6s variance. Transcriptor snippet below. Added "keep" arg
 local timerScorchCast			= mod:NewCastTimer(3, 63473)
 local timerScorchCooldown		= mod:NewCDTimer(20, 63473, nil, nil, nil, 5) -- 10/25 diff. ~1s variance. Transcriptor snippet below
 local timerSlagPot				= mod:NewTargetTimer(10, 63477, nil, nil, nil, 3, nil, DBM_COMMON_L.DEADLY_ICON)
@@ -66,7 +66,7 @@ function mod:SPELL_CAST_START(args)
 		self.vb.ConstructCount = self.vb.ConstructCount + 1
 		warnConstruct:Show(self.vb.ConstructCount)
 		if self.vb.ConstructCount < 20 then
-			timerActivateConstruct:Start(self:IsDifficulty("normal10") and 43 or 33, self.vb.ConstructCount+1) -- 10/25 different. ~6s variance (25 man log review 2022/07/10 || 10m Frostmourne 2022/07/17 || 25m Lordaeron 2022/10/05 || 25m Lordaeron 2022/10/09) - 33.5, 38.5, 37.8 || 43.1, 46.0, 43.0, 46.0, 43.0 || 33.0, 39.1, 38.7, 39.0 || 33.0, 39.0, 36.0, 39.0
+			timerActivateConstruct:Start(40) -- 10/25 different. ~6s variance (25 man log review 2022/07/10 || 10m Frostmourne 2022/07/17 || 25m Lordaeron 2022/10/05 || 25m Lordaeron 2022/10/09) - 33.5, 38.5, 37.8 || 43.1, 46.0, 43.0, 46.0, 43.0 || 33.0, 39.1, 38.7, 39.0 || 33.0, 39.0, 36.0, 39.0
 		end
 	end
 end
