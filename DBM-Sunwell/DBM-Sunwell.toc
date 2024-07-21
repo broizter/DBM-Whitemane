@@ -39,7 +39,6 @@ localization.tw.lua
 
 Kalecgos.lua
 KalecgosFrame.lua
-KalecgosHealth.lua
 KalecgosFrame.xml
 Brutallus.lua
 Felmyst.lua
