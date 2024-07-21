@@ -39,7 +39,7 @@ local timerDartCD		= mod:NewCDTimer(20, 45740, nil, nil, nil, 2)--Targeted or ao
 local timerBomb			= mod:NewCastTimer(9, 46605, nil, nil, nil, 2, nil, DBM_COMMON_L.DEADLY_ICON)
 local timerBombCD		= mod:NewCDTimer(45, 46605, nil, nil, nil, 2, nil, DBM_COMMON_L.DEADLY_ICON)
 local timerSpike		= mod:NewCastTimer(28, 46680, nil, nil, nil, 3)
-local timerBlueOrb		= mod:NewTimer(37, "TimerBlueOrb", 45109, nil, nil, 5)
+local timerBlueOrb		= mod:NewTimer(34.5, "TimerBlueOrb", 45109, nil, nil, 5)
 
 local berserkTimer		= mod:NewBerserkTimer(mod:IsTimewalking() and 600 or 900)
 
