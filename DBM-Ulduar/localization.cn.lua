@@ -164,8 +164,8 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
---	Yell_Trigger_arm_left = "不疼不痒！",
---	Yell_Trigger_arm_right = "只是轻伤而已！",
+	Yell_Trigger_arm_left = "不疼不痒！",
+	Yell_Trigger_arm_right = "只是轻伤而已！",
 	Health_Body			= "科隆加恩身体",
 	Health_Right_Arm	= "右臂",
 	Health_Left_Arm		= "左臂",

@@ -164,8 +164,8 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
---	Yell_Trigger_arm_left	= "Das ist nur ein Kratzer!",
---	Yell_Trigger_arm_right	= "Ist nur 'ne Fleischwunde!",
+	Yell_Trigger_arm_left	= "Das ist nur ein Kratzer!",
+	Yell_Trigger_arm_right	= "Ist nur 'ne Fleischwunde!",
 	Health_Body				= "Kologarn",
 	Health_Right_Arm		= "Rechter Arm",
 	Health_Left_Arm			= "Linker Arm",

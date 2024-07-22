@@ -128,7 +128,7 @@ function mod:SPELL_AURA_REMOVED(args)
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(msg)
-	if msg == "Only a flesh wound!" then 		-- right arm
+	if msg == L.Yell_Trigger_arm_right or msg:find(L.Yell_Trigger_arm_right) then 		-- right arm
 		timerRespawnRightArm:Start()
 		timerNextGrip:Cancel()
 		if not self.vb.disarmActive then
@@ -141,7 +141,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 				self:Schedule(10, armReset, self)
 			end
 		end
-	elseif msg == "Just a scratch!" then		-- left arm
+	elseif msg == L.Yell_Trigger_arm_left or msg:find(L.Yell_Trigger_arm_left) then		-- left arm
 		timerRespawnLeftArm:Start()
 		if not self.vb.disarmActive then
 			self.vb.disarmActive = true
@@ -157,7 +157,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 end
 
 function mod:CHAT_MSG_RAID_BOSS_WHISPER(msg, _, _, _, target)
-	if msg == "Kologarn focuses his eyes on you!" then
+	if msg == L.FocusedEyebeam or msg:find(FocusedEyebeam) then
 		specWarnEyebeam:Show()
 		specWarnEyebeam:Play("justrun")
 		specWarnEyebeam:ScheduleVoice(1, "keepmove")

@@ -167,8 +167,8 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
---	Yell_Trigger_arm_left	= "¡No es más que un arañazo!",
---	Yell_Trigger_arm_right	= "¡Una herida superficial!",
+	Yell_Trigger_arm_left	= "¡No es más que un arañazo!",
+	Yell_Trigger_arm_right	= "¡Una herida superficial!",
 	Health_Body				= "Kologarn",
 	Health_Right_Arm		= "Brazo derecho",
 	Health_Left_Arm			= "Brazo izquierdo",

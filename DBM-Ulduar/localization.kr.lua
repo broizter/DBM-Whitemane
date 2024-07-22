@@ -163,8 +163,8 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
---	Yell_Trigger_arm_left	= "얕은 상처야!",
---	Yell_Trigger_arm_right	= "꽉꽉 쥐어짜 주마!",
+	Yell_Trigger_arm_left	= "얕은 상처야!",
+	Yell_Trigger_arm_right	= "꽉꽉 쥐어짜 주마!",
 	Health_Body				= "콜로간 몸통",
 	Health_Right_Arm		= "오른쪽 팔",
 	Health_Left_Arm			= "왼쪽 팔",
