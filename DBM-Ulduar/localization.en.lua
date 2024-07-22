@@ -253,7 +253,7 @@ L:SetOptionLocalization({
 
 L:SetMiscLocalization({
 	YellPhase1			= "Interlopers! You mortals who dare to interfere with my sport will pay... Wait--you...",
-	YellPhase2			= "Impertinent whelps, you dare challenge me atop my pedestal? I will crush you myself!",
+	YellPhase2			= "Impertinent whelps! You dare challenge me atop my pedestal! I will crush you myself!",
 	YellKill			= "Stay your arms! I yield!",
 	YellHardModeActive	= "Impossible!  Lord Thorim, I will bring your foes a frigid death!",
 	YellHardModeFailed	= "These pathetic mortals are harmless, beneath my station. Dispose of them!",
