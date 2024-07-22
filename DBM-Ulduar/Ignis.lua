@@ -21,7 +21,7 @@ local specWarnFlameJetsCast		= mod:NewSpecialWarningCast(63472, "SpellCaster", n
 local specWarnFlameBrittle		= mod:NewSpecialWarningSwitch(62382, "Dps", nil, nil, 1, 2)
 
 local timerFlameJetsCast		= mod:NewCastTimer(2.7, 63472, nil, nil, nil, 5, nil, DBM_COMMON_L.IMPORTANT_ICON)
-local timerFlameJetsCooldown	= mod:NewCDTimer(45.1, 63472, nil, nil, nil, 2, nil, DBM_COMMON_L.IMPORTANT_ICON, true) -- 10/25 diff. ~3s variance. Transcriptor snippet below. Added "keep" arg
+local timerFlameJetsCooldown	= mod:NewCDTimer(25, 63472, nil, nil, nil, 2, nil, DBM_COMMON_L.IMPORTANT_ICON, true) -- 10/25 diff. ~3s variance. Transcriptor snippet below. Added "keep" arg
 local timerActivateConstruct	= mod:NewCDCountTimer(40, 62488, nil, nil, nil, 1, nil, nil, true) -- 10/25 diff. ~6s variance. Transcriptor snippet below. Added "keep" arg
 local timerScorchCast			= mod:NewCastTimer(3, 63473)
 local timerScorchCooldown		= mod:NewCDTimer(20, 63473, nil, nil, nil, 5) -- 10/25 diff. ~1s variance. Transcriptor snippet below
@@ -61,7 +61,7 @@ function mod:SPELL_CAST_START(args)
 		else
 			specWarnFlameJetsCast:Play("stopcast")
 		end
-		timerFlameJetsCooldown:Start(40) -- 10/25 different. ~5s variance (25 man log review 2022/07/10 || 10m Frostmourne 2022/07/17 || 25m Lordaeron 2022/10/05 || 25m Lordaeron 2022/10/09) - 45.1, 47.0 || 43.5, 41.5, 45.9, 41.9 || 47.2, 45.8, 47.0 || 48.9, 46.6
+		timerFlameJetsCooldown:Start()
 	elseif args.spellId == 62488 then		-- Activate Construct
 		self.vb.ConstructCount = self.vb.ConstructCount + 1
 		warnConstruct:Show(self.vb.ConstructCount)
