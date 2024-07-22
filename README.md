@@ -1,7 +1,6 @@
 # DBM-Whitemane (3.3.5a)
 
 Deadly Boss Mods that aims to implement accurate timers for Whitemane's Frostmourne server.  
-Ulduar work is currently being done in the [Ulduar branch.](https://github.com/broizter/DBM-Whitemane/tree/ulduar)
 
 ## Download
 Latest version can always be downloaded with [THIS](https://github.com/broizter/DBM-Whitemane/releases/latest/download/DBM-Whitemane.zip) link.  
