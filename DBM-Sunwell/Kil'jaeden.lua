@@ -39,7 +39,7 @@ local timerDartCD		= mod:NewCDTimer(20, 45740, nil, nil, nil, 2)--Targeted or ao
 local timerBomb			= mod:NewCastTimer(8.7, 46605, nil, nil, nil, 2, nil, DBM_COMMON_L.DEADLY_ICON)
 local timerBombCD		= mod:NewCDTimer(55, 46605, nil, nil, nil, 2, nil, DBM_COMMON_L.DEADLY_ICON)
 local timerSpike		= mod:NewCastTimer(28, 46680, nil, nil, nil, 3)
-local timerBlueOrb		= mod:NewTimer(34.5, "TimerBlueOrb", 45109, nil, nil, 5)
+local timerBlueOrb		= mod:NewTimer(31.8, "TimerBlueOrb", 45109, nil, nil, 5)
 
 local berserkTimer		= mod:NewBerserkTimer(mod:IsTimewalking() and 600 or 900)
 
@@ -136,7 +136,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 		self:SetStage(0)
 		if self.vb.phase == 2 then
 			warnPhase2:Show()
-			timerBlueOrb:Start()
+			timerBlueOrb:Start(31.8)
 			timerDartCD:Start(59)
 			timerBombCD:Start(48.1)
 		elseif self.vb.phase == 3 then
@@ -144,7 +144,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 			timerBlueOrb:Cancel()
 			timerDartCD:Cancel()
 			timerBombCD:Cancel()
-			timerBlueOrb:Start()
+			timerBlueOrb:Start(32)
 			timerDartCD:Start(48.7)
 			timerBombCD:Start(45)
 		elseif self.vb.phase == 4 then
