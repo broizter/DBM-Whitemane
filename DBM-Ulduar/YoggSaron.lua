@@ -118,7 +118,7 @@ function mod:SPELL_CAST_START(args)
 		timerMadness:Start()
 		warnMadness:Show()
 		timerBrainPortal:Schedule(60)
-		warnBrainPortalSoon:Schedule(57)
+		warnBrainPortalSoon:Schedule(50)
 		specWarnBrainPortalSoon:Schedule(57)
 		specWarnMadnessOutNow:Schedule(55)
 	elseif spellId == 64189 then		--Deafening Roar
@@ -218,7 +218,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerMaladyCD:Start(12)--VERIFY ME
 		timerBrainLinkCD:Start(3)--VERIFY ME
 		timerBrainPortal:Start(61)
-		warnBrainPortalSoon:Schedule(58)
+		warnBrainPortalSoon:Schedule(51)
 		specWarnBrainPortalSoon:Schedule(58)
 		warnP2:Show()
 		if self.Options.ShowSaraHealth then
