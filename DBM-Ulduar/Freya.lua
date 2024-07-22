@@ -117,18 +117,7 @@ end
 
 function mod:SPELL_CAST_SUCCESS(args)
 	local spellId = args.spellId
---[[ 	if args:IsSpellID(62678, 62873) then -- REVIEW! Summon Allies of Nature, never fired on Warmane. Instead there are Summon Wave spells: 62688 (confirmed), 62685 and 62686. To be confirmed adequacy via logs
-		DBM:AddMsg("Summon Allies of Nature unhidden from combat log. Notify Zidras on Discord or GitHub")
-		self.vb.waves = self.vb.waves + 1
-		if self.vb.waves < 6 then
-			timerAlliesOfNature:Start()
-		end ]]
-	if args.spellId == 62619 and self:GetUnitCreatureId(args.sourceName) == 33228 then -- Pheromones spell, cast by newly spawned Eonar's Gift second they spawn to allow melee to dps them while protector is up.
-		DBM:AddMsg("Pheromones unhidden from combat log. Notify Zidras on Discord or GitHub") -- REVIEW! Pheromones never fired on Warmane. Instead there is only an emote event.
-		specWarnLifebinder:Show()
-		specWarnLifebinder:Play("targetchange")
-		timerLifebinderCD:Start()
-	elseif args:IsSpellID(63571, 62589) then -- Nature's Fury
+	if args:IsSpellID(63571, 62589) then -- Nature's Fury
 		if self.Options.SetIconOnFury then
 			self.vb.altIcon = not self.vb.altIcon	--Alternates between Skull and X
 			self:SetIcon(args.destName, self.vb.altIcon and 7 or 8, 10)
@@ -152,11 +141,6 @@ function mod:SPELL_CAST_SUCCESS(args)
 			specWarnNatureBombSummon:Schedule(4.5) -- delay to max possible time to avoid warning before bombs are thrown
 
 		end
---[[ 	elseif spellId == 63601 then -- Strengthened Iron Roots
-		DBM:AddMsg("Strengthened Iron Roots unhidden from combat log. Notify Zidras on Discord or GitHub") -- REVIEW! Strengthened Iron Roots never fired on Warmane. Instead there is only an emote event.
-		--if self.vb.phase == 2 then
-			timerIronRootsCD:Start()
-		--end not working ]]
 	elseif args:IsSpellID(62451, 62865) and self:AntiSpam(5, 2) then -- Unstable Energy (Sun Beam)
 		timerUnstableBeamCD:Start()
 		warnUnstableBeamSoon:Schedule(17)
