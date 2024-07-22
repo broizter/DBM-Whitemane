@@ -54,11 +54,7 @@ function mod:OnCombatStart(delay)
 	self:SetStage(1)
 	enrageTimer:Start(-delay)
 	timerAchieve:Start()
-	if self:IsDifficulty("normal10") then -- REVIEW. No log yet to validate this.
-		timerTympanicTantrumCD:Start(35-delay)
-	else
-		timerTympanicTantrumCD:Start(60-delay)
-	end
+	timerTympanicTantrumCD:Start(60-delay)
 	if self.Options.RangeFrame then
 		DBM.RangeCheck:Show(12)
 	end
