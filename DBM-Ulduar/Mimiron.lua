@@ -43,7 +43,6 @@ local timerP2toP3				= mod:NewTimer(17, "TimeToPhase3", nil, nil, nil, 6)
 local timerP3toP4				= mod:NewTimer(27, "TimeToPhase4", nil, nil, nil, 6)
 local timerProximityMines		= mod:NewCDTimer(25, 63027, nil, nil, nil, 3)
 local timerShockBlast			= mod:NewCastTimer(4, 63631, nil, nil, nil, 2)
-local timerShockBlastCD			= mod:NewCDTimer(35, 63631, nil, nil, nil, 2)
 local timerRocketStrikeCD		= mod:NewCDTimer(20, 63631, nil, nil, nil, 3)--20-25
 local timerSpinUp				= mod:NewCastTimer(4, 63414, nil, nil, nil, 3, nil, DBM_CORE_L.DEADLY_ICON)
 local timerDarkGlareCast		= mod:NewCastTimer(10, 63274, nil, nil, nil, 3, nil, DBM_CORE_L.DEADLY_ICON)
@@ -342,38 +341,6 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 end
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(uId, spellName)
-	--[[if spellId == 34098 then--ClearAllDebuffs
-		self:SetStage(0)
-		if self.vb.phase == 2 then
-			timerNextShockblast:Stop()
-			timerProximityMines:Stop()
-			timerFlameSuppressant:Stop()
-			--timerNextFlameSuppressant:Stop()
-			timerPlasmaBlastCD:Stop()
-			timerP1toP2:Start()
-			if self.Options.RangeFrame then
-				DBM.RangeCheck:Hide()
-			end
-			timerRocketStrikeCD:Start(63)
-			timerNextDarkGlare:Start(78)
-			if self.vb.hardmode then
-				timerNextFrostBomb:Start(94)
-			end
-		elseif self.vb.phase == 3 then
-			timerDarkGlareCast:Stop()
-			timerNextDarkGlare:Stop()
-			timerNextFrostBomb:Stop()
-			timerRocketStrikeCD:Stop()
-			timerP2toP3:Start()
-		elseif self.vb.phase == 4 then
-			timerP3toP4:Start()
-			if self.vb.hardmode then
-				timerNextFrostBomb:Start(32)
-			end
-			timerRocketStrikeCD:Start(50)
-			timerNextDarkGlare:Start(59.8)
-			timerNextShockblast:Start(81)
-		end--]]
 	if spellName == GetSpellInfo(64402) or spellName == GetSpellInfo(65034) then--P2, P4 Rocket Strike
 		specWarnRocketStrike:Show()
 		specWarnRocketStrike:Play("watchstep")
