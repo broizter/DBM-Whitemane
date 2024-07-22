@@ -173,8 +173,8 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
---	Yell_Trigger_arm_left	= "Juste une éraflure !",
---	Yell_Trigger_arm_right	= "Une blessure superficielle !",
+	Yell_Trigger_arm_left	= "Juste une éraflure !",
+	Yell_Trigger_arm_right	= "Une blessure superficielle !",
 --	YellEncounterStart		= "On ne passe pas !",
 --	YellLeftArmDies			= "Juste une éraflure !",
 --	YellRightArmDies		= "Une blessure superficielle !",

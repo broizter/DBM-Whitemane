@@ -92,21 +92,28 @@ local function ResetRange(self)
 	end
 end
 
+local function RuneCD(self)	-- Workaround since no event is generated on cast
+	timerRuneofPowerCD:Start()
+	self:Schedule(60, RuneCD, self)
+end
+
 function mod:OnCombatStart(delay)
 	enrageTimer:Start(-delay)
-	timerRuneofPowerCD:Start(20-delay) -- One log review (2022/07/05)
+	timerRuneofPowerCD:Start(30-delay) -- One log review (2022/07/05)
 	timerOverloadCD:Start(68) -- REVIEW! Insufficent data to validate if it's correct
 	table.wipe(disruptTargets)
 	self.vb.disruptIcon = 7
 	runemasterAlive = true
 	brundirAlive = true
 	steelbreakerAlive = true
+	self:Schedule(30, RuneCD, self)
 end
 
 function mod:OnCombatEnd()
 	if self.Options.RangeFrame then
 		DBM.RangeCheck:Hide()
 	end
+	self:Unschedule(RuneCD)
 end
 
 function mod:RuneTarget(targetname)
@@ -231,8 +238,8 @@ function mod:UNIT_DIED(args)
 	if cid == 32867 then		--Steelbreaker
 		steelbreakerAlive = false
 		if runemasterAlive and brundirAlive then
-			timerRuneofDeath:Start()
-			warnRuneofDeathIn10Sec:Schedule(20)
+			timerRuneofDeath:Start(35)
+			warnRuneofDeathIn10Sec:Schedule(25)
 			timerLightningWhirlCD:Start()
 		elseif runemasterAlive then
 			timerRuneofSummoning:Start(25)
@@ -246,12 +253,13 @@ function mod:UNIT_DIED(args)
 		timerRuneofDeath:Cancel()
 		warnRuneofDeathIn10Sec:Cancel()
 		timerRuneofPowerCD:Cancel()
+		self:Unschedule(RuneCD)
 		timerRuneofPowerCast:Cancel()
 	elseif cid == 32857 then	--Stormcaller Brundir
 		brundirAlive = false
 		if runemasterAlive and steelbreakerAlive then
-			timerRuneofDeath:Start()
-			warnRuneofDeathIn10Sec:Schedule(20)
+			timerRuneofDeath:Start(35)
+			warnRuneofDeathIn10Sec:Schedule(25)
 		elseif runemasterAlive then
 			timerRuneofSummoning:Start(25)
 		end

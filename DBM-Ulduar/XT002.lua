@@ -32,7 +32,7 @@ local yellLightBomb					= mod:NewYell(65121)
 local specWarnGravityBomb			= mod:NewSpecialWarningMoveAway(64234, nil, nil, nil, 1, 2)
 local yellGravityBomb				= mod:NewYell(64234)
 
-local timerTympanicTantrumCast		= mod:NewCastTimer(62776)
+local timerTympanicTantrumCast		= mod:NewCastTimer(8, 62776)
 local timerTympanicTantrum			= mod:NewBuffActiveTimer(8, 62776, nil, nil, nil, 5, nil, DBM_COMMON_L.HEALER_ICON)
 local timerTympanicTantrumCD		= mod:NewCDTimer(60, 62776, nil, nil, nil, 2, nil, DBM_COMMON_L.HEALER_ICON, nil, 3) -- S3 FM Log review 2022/07/17 - " Tympanic Tantrum-62776-npc:33293 = pull:60.0/Stage 1/60.0, Stage 2/6.6, Stage 1/29.0, 35.9/64.9/71.5, 60.0, 60.0, 60.0, 60.1, 60.0", -- [1]
 
@@ -54,11 +54,7 @@ function mod:OnCombatStart(delay)
 	self:SetStage(1)
 	enrageTimer:Start(-delay)
 	timerAchieve:Start()
-	if self:IsDifficulty("normal10") then -- REVIEW. No log yet to validate this.
-		timerTympanicTantrumCD:Start(35-delay)
-	else
-		timerTympanicTantrumCD:Start(60-delay)
-	end
+	timerTympanicTantrumCD:Start(60-delay)
 	if self.Options.RangeFrame then
 		DBM.RangeCheck:Show(12)
 	end
@@ -125,7 +121,7 @@ function mod:SPELL_AURA_REMOVED(args)
 	elseif args.spellId == 63849 then	-- Exposed Heart
 		self:SetStage(1)
 		timerHeart:Stop()
-		timerTympanicTantrumCD:Start(35.6) -- REVIEW! Variance? (S3 FM Log review 2022/07/17 || 25m Lordearon 2022/10/10) -- 35.9 || 35.6
+		timerTympanicTantrumCD:Start(64) -- REVIEW! Variance? (S3 FM Log review 2022/07/17 || 25m Lordearon 2022/10/10) -- 35.9 || 35.6
 	end
 end
 

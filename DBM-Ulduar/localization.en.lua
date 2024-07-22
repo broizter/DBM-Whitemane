@@ -144,7 +144,8 @@ L:SetOptionLocalization({
 L:SetMiscLocalization({
 --	HealthInfo				= "Heal for star",
 --	FirstPull				= "See your world through my eyes: A universe so vast as to be immeasurable - incomprehensible even to your greatest minds.",
---	YellPull				= "Your actions are illogical. All possible results for this encounter have been calculated. The Pantheon will receive the Observer's message regardless of outcome.",
+	YellPull				= "Your actions are illogical. All possible results for this encounter have been calculated. The Pantheon will receive the Observer's message regardless of outcome.",
+	FirstPull				= "See your world through my eyes: A universe so vast as to be immeasurable - incomprehensible even to your greatest minds.",
 	YellKill				= "I have seen worlds bathed in the Makers' flames, their denizens fading without as much as a whimper. Entire planetary systems born and razed in the time that it takes your mortal hearts to beat once. Yet all throughout, my own heart devoid of emotion... of empathy. I. Have. Felt. Nothing. A million-million lives wasted. Had they all held within them your tenacity? Had they all loved life as you do?",
 	Emote_CollapsingStar	= "%s begins to Summon Collapsing Stars!",
 	Phase2					= "Behold the tools of creation!",
@@ -173,8 +174,8 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
---	Yell_Trigger_arm_left	= "Just a scratch!",
---	Yell_Trigger_arm_right	= "Only a flesh wound!",
+	Yell_Trigger_arm_left	= "Just a scratch!",
+	Yell_Trigger_arm_right	= "Only a flesh wound!",
 --	YellEncounterStart		= "None shall pass!",
 --	YellLeftArmDies			= "Just a scratch!",
 --	YellRightArmDies		= "Only a flesh wound!",
@@ -293,7 +294,7 @@ L:SetMiscLocalization({
 	EmoteLGift			= "begins to grow!", -- A |cFF00FFFFLifebinder's Gift|r begins to grow!
 	TrashRespawnTimer	= "Freya trash respawn",
 	YellPullNormal		= "The Conservatory must be protected!",
-	YellPullHard		= "Elders grant me your strength!"
+	YellPullHard		= "Elders, grant me your strength!"
 })
 
 ----------------------
@@ -352,7 +353,7 @@ L:SetMiscLocalization({
 	YellPull		= "We haven't much time, friends! You're going to help me test out my latest and greatest creation. Now, before you change your minds, remember that you kind of owe it to me after the mess you made with the XT-002.",
 	YellHardPull	= "Self-destruct sequence initiated.",
 	YellPhase2		= "WONDERFUL! Positively marvelous results! Hull integrity at 98.9 percent! Barely a dent! Moving right along.",
-	YellPhase3		= "Thank you, friends! Your efforts have yielded some fantastic data! Now, where did I put-- oh, there it is.",
+	YellPhase3		= "Thank you, friends! Your efforts have yielded some fantastic data! Now, where did I put-- oh, there it is!",
 	YellPhase4		= "Preliminary testing phase complete. Now comes the true test!",
 	YellKilled		= "It would appear that I've made a slight miscalculation. I allowed my mind to be corrupted by the fiend in the prison, overriding my primary directive. All systems seem to be functional now. Clear.",
 	LootMsg			= "([^%s]+).*Hitem:(%d+)"

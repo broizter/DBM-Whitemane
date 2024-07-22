@@ -173,8 +173,8 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
---	Yell_Trigger_arm_left	= "Царапина...",
---	Yell_Trigger_arm_right	= "Всего лишь плоть!",
+	Yell_Trigger_arm_left	= "Царапина...",
+	Yell_Trigger_arm_right	= "Всего лишь плоть!",
 --	YellEncounterStart		= "Вам не пройти!",
 --	YellLeftArmDies			= "Царапина...",
 --	YellRightArmDies		= "Всего лишь плоть!",

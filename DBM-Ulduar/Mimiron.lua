@@ -21,7 +21,7 @@ mod:RegisterEventsInCombat(
 	"SPELL_AURA_REMOVED 63666 65026",
 	"SPELL_SUMMON 63811",
 	"UNIT_SPELLCAST_CHANNEL_STOP boss1 boss2 boss3",
-	"UNIT_SPELLCAST_START boss1",
+	"UNIT_SPELLCAST_START",
 	"UNIT_SPELLCAST_SUCCEEDED boss1 boss2 boss3",
 	"CHAT_MSG_LOOT"
 )
@@ -42,7 +42,7 @@ local warnPlasmaBlast				= mod:NewTargetNoFilterAnnounce(64529, 4, nil, "Tank|He
 local specWarnShockBlast			= mod:NewSpecialWarningRun(63631, "Melee", nil, nil, 4, 2)
 local specWarnPlasmaBlast			= mod:NewSpecialWarningDefensive(64529, nil, nil, nil, 1, 2)
 
-local timerProximityMines			= mod:NewCDTimer(35.0, 63027, nil, nil, nil, 3) -- 25 man NM log review (2022/07/10) + VOD review - 35.0
+local timerProximityMines			= mod:NewCDTimer(25, 63027, nil, nil, nil, 3) -- Sometimes only 25 seconds inbetween?
 local timerShockBlast				= mod:NewCastTimer(4, 63631, nil, nil, nil, 2, nil, DBM_COMMON_L.DEADLY_ICON)
 local timerNextShockBlast			= mod:NewNextTimer(35, 63631, nil, nil, nil, 2, nil, DBM_COMMON_L.DEADLY_ICON) -- REVIEW! variance?? (S2 log || S3 HM log 2022/07/17) - 38 || 44.1, 41.6
 local timerNapalmShell				= mod:NewBuffActiveTimer(6, 63666, nil, "Healer", 2, 5, nil, DBM_COMMON_L.IMPORTANT_ICON..DBM_COMMON_L.HEALER_ICON)
@@ -90,7 +90,7 @@ local timerNextFlameSuppressantP1	= mod:NewCDTimer(60, 64570, nil, nil, nil, 3) 
 mod:AddTimerLine(DBM_CORE_L.SCENARIO_STAGE:format(2)..": "..L.MobPhase2)
 local warnFrostBomb					= mod:NewSpellAnnounce(64623, 3)
 
-local timerFrostBombExplosion		= mod:NewCastTimer(15, 65333, nil, nil, nil, 3)
+local timerFrostBombExplosion		= mod:NewCastTimer(12.8, 65333, nil, nil, nil, 3)
 local timerNextFrostBomb			= mod:NewNextTimer(30.4, 64623, nil, nil, nil, 3, nil, DBM_COMMON_L.HEROIC_ICON, true) -- REVIEW! variance? Use PEWPEW to add time? Added "keep" arg (VOD review || S3 HM log 2022/07/17 || 25H Lordaeron 2022/10/09) - either gave 46 or 33s || 44.2, 44.4, 47.1 || Stage 2/44.3, 32.6, Stage 4/88.2, 28.8/116.9/145.5, 47.7, 30.4
 local timerNextFlameSuppressantP2	= mod:NewNextTimer(10, 65192, nil, nil, nil, 3) -- 2s (26.4 outlier??) variance (S2 VOD review) - 12, 12, 11, 10 || 12.3, 12.4, 26.4, 11.3, 12.4
 
@@ -161,7 +161,7 @@ local function NextPhase(self)
 			DBM.RangeCheck:Hide()
 		end
 		if self.vb.hardmode then
-			timerNextFrostBomb:Start(44.3) -- (25H Lordaeron 2022/10/09) - 44.3
+			timerNextFrostBomb:Start(43.4) -- (25H Lordaeron 2022/10/09) - 44.3
 		end
 	elseif self.vb.phase == 3 then
 		if self.Options.AutoChangeLootToFFA and DBM:GetRaidRank() == 2 then
@@ -388,12 +388,12 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		self:SetWipeTime(10)
 		timerHardmode:Start()
 		timerPlasmaBlastCD:Start(26.6) -- REVIEW! variance? (S2 VOD || S3 HM log 2022/07/17) - 29 || 26.6, 26.6
-		timerNextFlameSuppressantP1:Start(75) -- REVIEW! ~5s variance (S2 VOD review || S3 HM log 2022/07/17) - 75 || 80.0 ; 77.3
-		timerProximityMines:Start(11) -- S2 VOD review
+		timerNextFlameSuppressantP1:Start(73.3) -- REVIEW! ~5s variance (S2 VOD review || S3 HM log 2022/07/17) - 75 || 80.0 ; 77.3
+		timerProximityMines:Start(21) -- S2 VOD review
 		timerNextFlames:Start(7) -- S2 VOD review
 		self:Schedule(7, Flames, self)
 		warnFlamesSoon:Schedule(2)
-		timerNextShockBlast:Start(35.8) -- REVIEW! variance? (S3 HM log 2022/07/17 || 25H Lordaeron 2022/10/09) - 37.9, 37.7 || 35.8
+		timerNextShockBlast:Start(37.2)
 		timerEnrage:Start(600) -- REVIEW! 10 or 8 mins? By the yells, it is 10 mins, but wowhead states 8 min enrage timer...
 	elseif msg == L.YellPhase2 or msg:find(L.YellPhase2) then -- register Phase 2
 		NextPhase(self)
