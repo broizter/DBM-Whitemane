@@ -48,7 +48,7 @@ function mod:OnCombatStart(delay)
 	self.vb.ConstructCount = 0
 	timerAchieve:Start()
 	timerActivateConstruct:Start(29.9-delay, 1) -- REVIEW! variance? (10m Frostmourne 2022/07/17 || 25m Lordaeron 2022/10/05 || 25m Lordaeron 2022/10/09) - 15.0 || 15.0 || 15.0
-	timerScorchCooldown:Start(13-delay) -- (10m Frostmourne 2022/07/17 || 25m Lordaeron 2022/10/05 || 25m Lordaeron 2022/10/09) - 25.0 || 25.0 || 25.0
+	timerScorchCooldown:Start(12-delay) -- (10m Frostmourne 2022/07/17 || 25m Lordaeron 2022/10/05 || 25m Lordaeron 2022/10/09) - 25.0 || 25.0 || 25.0
 	timerFlameJetsCooldown:Start(31.8-delay) -- 25 man log review (2022/07/10)
 end
 
