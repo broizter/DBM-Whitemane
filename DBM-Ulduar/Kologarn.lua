@@ -48,7 +48,7 @@ mod:AddSetIconOption("SetIconOnEyebeamTarget", 63346, true, false, {8})
 mod:AddTimerLine(L.Health_Right_Arm)
 local warnGrip					= mod:NewTargetNoFilterAnnounce(64292, 2)
 
-local timerNextGrip				= mod:NewNextTimer(25, 62166, nil, nil, nil, 3) -- (2022/07/05 log review || 25m Lordaeron 2022/10/30) - 25.0 || 25.0, 25.1, 25.0
+local timerNextGrip				= mod:NewNextTimer(28, 62166, nil, nil, nil, 3) -- Range is 28 to 29 seconds
 local timerRespawnRightArm		= mod:NewTimer(30, "timerRightArm", nil, nil, nil, 1)
 
 mod:AddSetIconOption("SetIconOnGripTarget", 64292, true, false, {7, 6, 5})
@@ -79,7 +79,7 @@ function mod:OnCombatStart(delay)
 	enrageTimer:Start(-delay)
 	timerNextSmash:Start(5-delay) -- 2s variance (2022/07/05 log review) - [5-7]
 	timerNextShockwave:Start(18-delay) -- (2022/07/05 log review || 25m Lordaeron 2022/10/30) - 19 || 18.2
-	timerNextGrip:Start(24.2-delay) --  (25m Lordaeron 2022/10/30) - 24.2
+	timerNextGrip:Start(16-delay) --  (25m Lordaeron 2022/10/30) - 24.2
 end
 
 function mod:SPELL_CAST_SUCCESS(args)
