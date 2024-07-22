@@ -135,11 +135,10 @@ function mod:SPELL_CAST_SUCCESS(args)
 		timerNatureFury:Start(args.destName)
 	elseif args:IsSpellID(64587, 64650) then -- Nature Bomb
 		if self:AntiSpam(1, 3) and self:IsInCombat() then
-			timerNextNatureBombSummon:Start(4.5)
-			timerNatureBombExplosion:Start(9.5)
+			timerNextNatureBombSummon:Start(2)
+			timerNatureBombExplosion:Start(13.5)
 			specWarnNatureBombSummon:Cancel()
-			specWarnNatureBombSummon:Schedule(4.5) -- delay to max possible time to avoid warning before bombs are thrown
-
+			specWarnNatureBombSummon:Schedule(2) -- delay to max possible time to avoid warning before bombs are thrown
 		end
 	elseif args:IsSpellID(62451, 62865) and self:AntiSpam(5, 2) then -- Unstable Energy (Sun Beam)
 		timerUnstableBeamCD:Start()
