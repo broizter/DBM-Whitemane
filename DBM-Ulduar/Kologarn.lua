@@ -15,7 +15,7 @@ mod:RegisterEventsInCombat(
 	"SPELL_DAMAGE 63783 63982 63346 63976",
 	"SPELL_MISSED 63783 63982 63346 63976",
 	"CHAT_MSG_RAID_BOSS_EMOTE",
-	"UNIT_DIED",
+	"CHAT_MSG_MONSTER_YELL",
 	"UNIT_SPELLCAST_SUCCEEDED boss1"
 )
 
@@ -130,8 +130,8 @@ function mod:SPELL_AURA_REMOVED(args)
 	end
 end
 
-function mod:UNIT_DIED(args)
-	if self:GetCIDFromGUID(args.destGUID) == 32934 then		-- right arm
+function mod:CHAT_MSG_MONSTER_YELL(msg)
+	if msg == "Only a flesh wound!" then 		-- right arm
 		timerRespawnRightArm:Start()
 		timerNextGrip:Cancel()
 		if not self.vb.disarmActive then
@@ -144,7 +144,7 @@ function mod:UNIT_DIED(args)
 				self:Schedule(10, armReset, self)
 			end
 		end
-	elseif self:GetCIDFromGUID(args.destGUID) == 32933 then		-- left arm
+	elseif msg == "Just a scratch!" then		-- left arm
 		timerRespawnLeftArm:Start()
 		if not self.vb.disarmActive then
 			self.vb.disarmActive = true
