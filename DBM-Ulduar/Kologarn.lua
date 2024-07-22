@@ -55,7 +55,7 @@ mod:AddSetIconOption("SetIconOnGripTarget", 64292, true, false, {7, 6, 5})
 
 -- Left Arm
 mod:AddTimerLine(L.Health_Left_Arm)
-local timerNextShockwave		= mod:NewNextTimer(25, 63982, nil, nil, nil, 2) -- (2022/07/05 log review || 25m Lordaeron 2022/10/30) - 25.0 || 25.0, 25.0, 25.0, 25.1
+local timerNextShockwave		= mod:NewNextTimer(18, 63982, nil, nil, nil, 2) -- (2022/07/05 log review || 25m Lordaeron 2022/10/30) - 25.0 || 25.0, 25.0, 25.0, 25.1
 local timerRespawnLeftArm		= mod:NewTimer(30, "timerLeftArm", nil, nil, nil, 1)
 
 -- 5/23 00:33:48.648  SPELL_AURA_APPLIED,0x0000000000000000,nil,0x80000000,0x0480000001860FAC,"Hâzzad",0x4000512,63355,"Crunch Armor",0x1,DEBUFF
@@ -78,7 +78,7 @@ end
 function mod:OnCombatStart(delay)
 	enrageTimer:Start(-delay)
 	timerNextSmash:Start(5-delay) -- 2s variance (2022/07/05 log review) - [5-7]
-	timerNextShockwave:Start(18.2-delay) -- (2022/07/05 log review || 25m Lordaeron 2022/10/30) - 19 || 18.2
+	timerNextShockwave:Start(18-delay) -- (2022/07/05 log review || 25m Lordaeron 2022/10/30) - 19 || 18.2
 	timerNextGrip:Start(24.2-delay) --  (25m Lordaeron 2022/10/30) - 24.2
 end
 
@@ -167,7 +167,7 @@ end
 mod.SPELL_MISSED = mod.SPELL_DAMAGE
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(_, spellName)
-	if spellName == GetSpellInfo(63983) then--Arm Sweep
+	if spellName == GetSpellInfo(63983, 63982) then--Arm Sweep
 		timerNextShockwave:Start()
 	elseif spellName == GetSpellInfo(63726) then -- Pacify Self (End Combat, since there isn't a UNIT_DIED for OnMobKill to run)
 		DBM:EndCombat(self)
