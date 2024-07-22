@@ -238,8 +238,8 @@ function mod:UNIT_DIED(args)
 	if cid == 32867 then		--Steelbreaker
 		steelbreakerAlive = false
 		if runemasterAlive and brundirAlive then
-			timerRuneofDeath:Start()
-			warnRuneofDeathIn10Sec:Schedule(20)
+			timerRuneofDeath:Start(35)
+			warnRuneofDeathIn10Sec:Schedule(25)
 			timerLightningWhirlCD:Start()
 		elseif runemasterAlive then
 			timerRuneofSummoning:Start(25)
@@ -258,8 +258,8 @@ function mod:UNIT_DIED(args)
 	elseif cid == 32857 then	--Stormcaller Brundir
 		brundirAlive = false
 		if runemasterAlive and steelbreakerAlive then
-			timerRuneofDeath:Start()
-			warnRuneofDeathIn10Sec:Schedule(20)
+			timerRuneofDeath:Start(35)
+			warnRuneofDeathIn10Sec:Schedule(25)
 		elseif runemasterAlive then
 			timerRuneofSummoning:Start(25)
 		end
