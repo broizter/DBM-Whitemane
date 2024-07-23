@@ -51,7 +51,7 @@ local timerNextShockblast		= mod:NewNextTimer(30, 63631, nil, nil, nil, 2)
 local timerPlasmaBlastCD		= mod:NewCDTimer(45, 64529, nil, "Tank|Healer", 2, 5)
 local timerShell				= mod:NewBuffActiveTimer(6, 63666, nil, "Healer", 2, 5, nil, DBM_CORE_L.HEALER_ICON)
 local timerNextFlameSuppressant	= mod:NewNextTimer(75, 64570, nil, nil, nil, 3)
-local timerFlameSuppressant		= mod:NewBuffActiveTimer(10, 65192, nil, nil, nil, 3)
+local timerNextFlameSuppressantP2	= mod:NewNextTimer(10, 65192, nil, nil, nil, 3)
 local timerNextFlames			= mod:NewNextTimer(30, 64566)
 local timerNextFrostBomb		= mod:NewNextTimer(30, 64623, nil, nil, nil, 3, nil, DBM_CORE_L.HEROIC_ICON)
 local timerBombExplosion		= mod:NewCastTimer(13, 65333, nil, nil, nil, 3)
@@ -114,7 +114,6 @@ local function NextPhase(self)
 	elseif self.vb.phase == 2 then
 		timerNextShockblast:Stop()
 		timerProximityMines:Stop()
-		timerFlameSuppressant:Stop()
 		timerPlasmaBlastCD:Stop()
 		timerNextFlameSuppressant:Stop()
 		timerP1toP2:Start()
@@ -227,7 +226,6 @@ function mod:SPELL_CAST_START(args)
 		specWarnPlasmaBlast:Show()
 		timerPlasmaBlastCD:Start()
 	elseif spellId == 64570 then	-- Flame Suppressant (phase 1)
-		timerFlameSuppressant:Start()
 		timerNextFlameSuppressant:Start()
 	elseif spellId == 64623 then	-- Frost Bomb
 		warnFrostBomb:Show()
@@ -248,7 +246,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 		DBM:Schedule(0.15, show_warning_for_spinup, self)	-- wait 0.15 and then announce it, otherwise it will sometimes fail
 		lastSpinUp = GetTime()
 	elseif spellId == 65192 then	-- Flame Suppressant CD (phase 2)
-		timerNextFlameSuppressant:Start(10)
+		timerNextFlameSuppressantP2:Start()
 	end
 end
 
