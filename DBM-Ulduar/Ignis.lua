@@ -9,7 +9,7 @@ mod:RegisterCombat("combat")
 
 mod:RegisterEventsInCombat(
 	"SPELL_CAST_START 62680 63472 62488",
---[[ 	"SPELL_CAST_SUCCESS 62548 63474", ]]
+	"SPELL_CAST_SUCCESS 62548 63474",
 	"SPELL_AURA_APPLIED 62717 63477 62382",
 	"SPELL_AURA_REMOVED 62717 63477"
 )
@@ -24,7 +24,7 @@ local timerFlameJetsCast		= mod:NewCastTimer(2.7, 63472, nil, nil, nil, 5, nil, 
 local timerFlameJetsCooldown	= mod:NewCDTimer(25, 63472, nil, nil, nil, 2, nil, DBM_COMMON_L.IMPORTANT_ICON, true) -- 10/25 diff. ~3s variance. Transcriptor snippet below. Added "keep" arg
 local timerActivateConstruct	= mod:NewCDCountTimer(40, 62488, nil, nil, nil, 1, nil, nil, true) -- 10/25 diff. ~6s variance. Transcriptor snippet below. Added "keep" arg
 --[[ local timerScorchCast			= mod:NewCastTimer(3, 63473) ]]
-local timerScorchCooldown		= mod:NewCDTimer(20, 63473, nil, nil, nil, 5) -- 10/25 diff. ~1s variance. Transcriptor snippet below
+local timerScorchCooldown		= mod:NewCDTimer(17, 63473, nil, nil, nil, 5)
 local timerSlagPot				= mod:NewTargetTimer(10, 63477, nil, nil, nil, 3, nil, DBM_COMMON_L.DEADLY_ICON)
 local timerAchieve				= mod:NewAchievementTimer(240, 2930)
 
@@ -75,12 +75,11 @@ function mod:SPELL_CAST_START(args)
 	end
 end
 
---[[ function mod:SPELL_CAST_SUCCESS(args)
+function mod:SPELL_CAST_SUCCESS(args)
 	if args:IsSpellID(62548, 63474) then	-- Scorch
-		timerScorchCast:Start()
 		timerScorchCooldown:Start()
 	end
-end this triggers at the end of the cast so dont even use it ]]
+end
 
 function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(62717, 63477) then		-- Slag Pot
