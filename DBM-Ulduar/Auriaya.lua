@@ -39,12 +39,13 @@ mod.vb.catLives = 9
 function mod:OnCombatStart(delay)
 	self.vb.catLives = 9
 	enrageTimer:Start(-delay)
-	timerFearCD:Start(28.1-delay) -- 18s variance! REVIEW: 25m ~35s, 10m ~50s?? (2022/07/08 10m Lord transcriptor log || 2021 S2 cleu 25m, 10m || VOD review || 10m Frostmourne 2022/08/09 || 25m Lordaeron 2022/10/09 || 25m Lordaeron 2022/10/30) - 53 || 35, 50 || 35, 36 || 34.9 || 34.9 || 35.1
 	timerSonicCD:Start(55-delay) -- 33s variance! (... ||| 10m Frostmourne 2022/08/09 || 25m Frostmourne 2022/09/07 || 25m Lordaeron 2022/10/09 || 25m Lordaeron 2022/10/30) 81, 61, 94... ||| 63.0 || 63.0 || 63.0 || 63.0
 	if self:IsDifficulty("normal10") then
 		timerDefender:Start(48-delay, self.vb.catLives)
+		timerFearCD:Start(30.9-delay)
 	else
 		timerDefender:Start(51-delay, self.vb.catLives) -- Different in 10 and 25?
+		timerFearCD:Start(28.1-delay)
 	end
 end
 
