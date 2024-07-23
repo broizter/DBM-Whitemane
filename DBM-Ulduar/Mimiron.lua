@@ -127,7 +127,7 @@ local function NextPhase(self)
 			DBM.RangeCheck:Hide()
 		end
 		if self.vb.hardmode then
-            timerNextFrostBomb:Start(43)
+            timerNextFrostBomb:Start(43.3)
         end
 	elseif self.vb.phase == 3 then
 		if self.Options.AutoChangeLootToFFA and DBM:GetRaidRank() == 2 then
