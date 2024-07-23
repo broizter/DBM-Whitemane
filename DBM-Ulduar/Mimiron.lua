@@ -174,11 +174,7 @@ function mod:OnCombatStart(delay)
 	self.vb.hardmode = false
 	timerEnrage:Start(-delay)
 	timerP1:Start()
-	if self:IsDifficulty("normal10") then
-		timerNextShockblast:Start(32.3-delay)
-	else
-		timerNextShockblast:Start(34.7-delay)
-	end
+	timerNextShockblast:Start(34.7-delay)
 	self.vb.is_spinningUp = false
 	self.vb.napalmShellIcon = 7
 	table.wipe(napalmShellTargets)
@@ -326,7 +322,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerNextFlameSuppressant:Start()
 		self:Schedule(7, Flames, self)
 		warnFlamesSoon:Schedule(2)
-		timerNextShockblast:Start(37)
+		timerNextShockblast:Start(39.1)
 	elseif msg == L.YellKilled or msg:find(L.YellKilled) then -- register kill
 		timerEnrage:Stop()
 		timerHardmode:Stop()
