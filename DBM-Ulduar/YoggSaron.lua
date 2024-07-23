@@ -42,7 +42,7 @@ local yellSqueeze					= mod:NewYell(64125)
 
 local enrageTimer					= mod:NewBerserkTimer(900)
 local timerFervor					= mod:NewTargetTimer(15, 63138, nil, false, 2)
-local timerMaladyCD					= mod:NewCDTimer(21, 63830, nil, nil, nil, 3)
+local timerMaladyCD					= mod:NewCDTimer(20, 63830, nil, nil, nil, 3)
 local timerBrainLinkCD				= mod:NewCDTimer(32, 63802, nil, nil, nil, 3)
 local timerBrainPortal				= mod:NewTimer(20, "NextPortal", 57687, nil, nil, 5)
 local timerLunaricGaze				= mod:NewCastTimer(4, 64163, nil, nil, nil, 2)
@@ -215,7 +215,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 	elseif spellId == 63894 and self.vb.phase < 2 then	-- Shadowy Barrier of Yogg-Saron (this is happens when p2 starts)
 		self:SetStage(2)
-		timerMaladyCD:Start(12)--VERIFY ME
+		timerMaladyCD:Start(4)--VERIFY ME
 		timerBrainLinkCD:Start(3)--VERIFY ME
 		timerBrainPortal:Start(61)
 		warnBrainPortalSoon:Schedule(51)
