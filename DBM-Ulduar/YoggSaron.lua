@@ -290,7 +290,9 @@ function mod:OnSync(msg)
 		timerEmpower:Start()
 		warnP3:Show()
 		warnEmpowerSoon:Schedule(40)
-		timerNextDeafeningRoar:Start(50)
-		warnDeafeningRoarSoon:Schedule(25)
+		if self:IsDifficulty("normal25") then
+			timerNextDeafeningRoar:Start(50)
+			warnDeafeningRoarSoon:Schedule(25)
+		end
 	end
 end
