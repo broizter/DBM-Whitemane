@@ -73,12 +73,12 @@ function mod:OnCombatStart(delay)
 	enrageTimer:Start(-delay)
 	combattime = GetTime()
 	if self:IsDifficulty("normal10") then -- REVIEW. No log yet to validate this.
-		warnTurretsReadySoon:Schedule(53-delay)
-		warnTurretsReady:Schedule(73-delay)
+		warnTurretsReadySoon:Schedule(66.8-delay)
+		warnTurretsReady:Schedule(71.8-delay)
 		timerTurret1:Start(51.8-delay)
 		timerTurret2:Start(71.8-delay)
 	else
-		warnTurretsReadySoon:Schedule(93-delay)
+		warnTurretsReadySoon:Schedule(108-delay)
 		warnTurretsReady:Schedule(113-delay)
 		timerTurret1:Start(-delay) -- 53
 		timerTurret2:Start(-delay) -- 73
