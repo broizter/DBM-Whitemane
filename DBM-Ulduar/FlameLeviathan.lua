@@ -46,7 +46,7 @@ end
 function mod:OnCombatStart(delay)
 	buildGuidTable(self)
 	timerNextFlameVents:Start()
-	self:Schedule(20, FlameVents, self)
+	self:Schedule(20.1, FlameVents, self)
 end
 
 function mod:OnTimerRecovery()
