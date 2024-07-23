@@ -189,6 +189,7 @@ function mod:OnCombatStart(delay)
 end
 
 function mod:OnCombatEnd()
+	timerNextShockblast:Stop()
 	timerBombBotSpawn:Cancel()
 	self:Unschedule(BombBot)
 	self:Unschedule(Flames)
