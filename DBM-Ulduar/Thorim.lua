@@ -53,7 +53,7 @@ function mod:OnCombatStart(delay)
 	self:SetStage(1)
 	enrageTimer:Start()
 	timerHardmode:Start()
-	timerStormhammerCD:Start()
+	timerStormhammerCD:Start(28)
 	if self.Options.RangeFrame then
 		DBM.RangeCheck:Show(8)
 	end
