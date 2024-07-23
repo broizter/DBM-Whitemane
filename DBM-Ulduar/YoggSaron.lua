@@ -215,7 +215,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 	elseif spellId == 63894 and self.vb.phase < 2 then	-- Shadowy Barrier of Yogg-Saron (this is happens when p2 starts)
 		self:SetStage(2)
-		timerMaladyCD:Start(4)--VERIFY ME
+		timerMaladyCD:Start(8)--VERIFY ME
 		timerBrainLinkCD:Start(3)--VERIFY ME
 		timerBrainPortal:Start(61)
 		warnBrainPortalSoon:Schedule(51)
