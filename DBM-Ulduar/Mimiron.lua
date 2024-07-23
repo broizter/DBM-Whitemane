@@ -320,7 +320,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		self.vb.hardmode = true
 		self:SetWipeTime(35)
 		timerHardmode:Start()
-		timerPlasmaBlastCD:Start(32)
+		timerPlasmaBlastCD:Start(28)
 		timerProximityMines:Start(21)
 		timerNextFlames:Start(7)
 		timerNextFlameSuppressant:Start()
