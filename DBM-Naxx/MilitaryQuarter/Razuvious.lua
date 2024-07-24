@@ -44,7 +44,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 		end
 	elseif spellId == 29060 then -- Taunt
 		timerTaunt:Start(20, args.sourceGUID)
-	elseif spellId == 29061 then -- ShieldWall
+	elseif spellId == 29061 and self:AntiSpam(2, 1) then -- ShieldWall
 		timerShieldWall:Start(20, args.sourceGUID)
 		warnShieldWall:Schedule(15)
 	end
