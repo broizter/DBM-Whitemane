@@ -102,12 +102,12 @@ end
 
 function mod:SPELL_CAST_SUCCESS(args)
 	if args.spellId == 46177 then
-		timerNextDarkness:Cancel()
-		timerHuman:Cancel()
-		timerVoid:Cancel()
-		specWarnVW:Cancel()
+		timerNextDarkness:Stop()
+		timerHuman:Stop()
+		timerVoid:Stop()
+		self:Unschedule(specWarnVW)
 		timerPhase:Start()
-		specWarnDarknessSoon:Cancel()
+		self:Unschedule(specWarnDarknessSoon)
 		self:Schedule(10, phase2, self)
 	end
 end
