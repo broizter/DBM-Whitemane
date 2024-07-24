@@ -120,8 +120,8 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerGasCD:Cancel()
 		timerEncapsCD:Cancel()
 		timerBreath:Start(42, 1)
-		timerPhase:Start(99, L.Ground)
-		self:ScheduleMethod(99, "Groundphase")
+		timerPhase:Start(105, L.Ground)
+		self:ScheduleMethod(105, "Groundphase")
 	end
 end
 
