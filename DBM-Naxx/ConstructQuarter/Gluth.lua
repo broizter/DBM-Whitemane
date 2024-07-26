@@ -61,8 +61,14 @@ end
 
 function mod:SPELL_CAST_SUCCESS(args)
 	if args.spellId == 28375 and self:AntiSpam(20) then
-		warnDecimateNow:Show()
-		timerDecimate:Start()
-		warnDecimateSoon:Schedule(80)
+		if self:IsDifficulty("normal25") then
+			warnDecimateNow:Show()
+			timerDecimate:Start()
+			warnDecimateSoon:Schedule(80)
+		else
+			warnDecimateNow:Show()
+			timerDecimate:Start(105)
+			warnDecimateSoon:Schedule(95)
+		end
 	end
 end
