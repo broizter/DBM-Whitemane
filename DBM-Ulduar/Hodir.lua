@@ -82,7 +82,7 @@ end
 function mod:SPELL_AURA_APPLIED_DOSE(args)
 	if args:IsSpellID(62038, 62188) then
 		local amount = args.amount or 1
-		if amount >= 4 and args:IsPlayer() and self:AntiSpam(5) then
+		if amount >= 4 and args:IsPlayer() and self:AntiSpam(1) then
 			specWarnBitingCold:Show()
 			specWarnBitingCold:Play("keepmove")
 		end
