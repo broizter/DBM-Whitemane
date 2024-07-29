@@ -3,7 +3,7 @@
 Deadly Boss Mods that aims to implement accurate timers for Whitemane's Frostmourne server.  
 
 ## Download
-Latest version can always be downloaded with [THIS](https://github.com/broizter/DBM-Whitemane/releases/latest/download/DBM-Whitemane.zip) link.  Downloading the code directly will give you more recent changes but a higher chance of bugs.  
+Latest version can always be downloaded with [THIS](https://github.com/broizter/DBM-Whitemane/releases/latest/download/DBM-Whitemane.zip) link.  Downloading the code directly will give you more recent changes but a higher risk of bugs.  
 
 ## Bugs and questions  
 When you find timers or other things that are incorrect please create a [bug report](https://github.com/broizter/DBM-Whitemane/issues/new/choose) and attach any video recordings or [Transcriptor](https://github.com/Zidras/Transcriptor-WOTLK) logs so that it's easier for me to fix them.  
