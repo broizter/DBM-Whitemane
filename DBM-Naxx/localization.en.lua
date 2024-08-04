@@ -271,6 +271,7 @@ L:SetTimerLocalization({
 L:SetOptionLocalization({
 	TimerWave			= "Show timer for next wave",
 	TimerPhase2			= "Show timer for Phase 2",
+	TimerTeleport		= "Show timer for first teleport in phase 2",
 	WarningWaveSoon		= "Show pre-warning for wave",
 	WarningWaveSpawned	= "Show warning for wave spawned",
 	WarningRiderDown	= "Show warning when an Unrelenting Rider dies",
