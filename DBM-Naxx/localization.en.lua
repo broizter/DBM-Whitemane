@@ -264,7 +264,8 @@ L:SetWarningLocalization({
 
 L:SetTimerLocalization({
 	TimerWave	= "Wave %d",
-	TimerPhase2	= "Phase 2"
+	TimerPhase2	= "Phase 2",
+	TimerTeleport = "Teleport"
 })
 
 L:SetOptionLocalization({
