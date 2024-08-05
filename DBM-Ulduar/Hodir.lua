@@ -12,7 +12,7 @@ mod:RegisterEventsInCombat(
 	"SPELL_CAST_START 61968",
 	"SPELL_AURA_APPLIED 62478 63512 65123 65133",
 	"SPELL_AURA_REMOVED 65123 65133",
-	"SPELL_AURA_APPLIED_DOSE 62038 62188"
+	"SPELL_DAMAGE 62038 62188"
 )
 
 --TODO, refactor biting cold to track unit aura stacks and start spaming at like 4-5
@@ -79,12 +79,9 @@ function mod:SPELL_AURA_REMOVED(args)
 	end
 end
 
-function mod:SPELL_AURA_APPLIED_DOSE(args)
-	if args:IsSpellID(62038, 62188) then
-		local amount = args.amount or 1
-		if amount >= 4 and args:IsPlayer() and self:AntiSpam(1) then
-			specWarnBitingCold:Show()
-			specWarnBitingCold:Play("keepmove")
-		end
+function mod:SPELL_DAMAGE(_, _, _, destGUID, _, _, spellId)
+	if (spellId == 62038 or spellId == 62188) and destGUID == UnitGUID("player") and self:AntiSpam(4) then
+		specWarnBitingCold:Show()
+		specWarnBitingCold:Play("keepmove")
 	end
 end
