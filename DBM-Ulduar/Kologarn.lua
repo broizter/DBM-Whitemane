@@ -12,8 +12,8 @@ mod:RegisterEventsInCombat(
 	"SPELL_AURA_APPLIED 64290 64292 64002 63355",
 	"SPELL_AURA_APPLIED_DOSE 64002 63355",
 	"SPELL_AURA_REMOVED 64290 64292",
-	"SPELL_DAMAGE 63783 63982 63346 63976",
-	"SPELL_MISSED 63783 63982 63346 63976",
+	"SPELL_DAMAGE 63783 63982",
+	"SPELL_MISSED 63783 63982",
 	"CHAT_MSG_RAID_BOSS_EMOTE",
 	"CHAT_MSG_MONSTER_YELL",
 	"UNIT_SPELLCAST_SUCCEEDED boss1",
@@ -164,12 +164,16 @@ function mod:CHAT_MSG_RAID_BOSS_WHISPER(msg, _, _, _, target)
 		yellBeam:Yell()
 	end
 end
+
 mod.SPELL_MISSED = mod.SPELL_DAMAGE
+function mod:SPELL_DAMAGE(_, _, _, destGUID, destName, _, spellId)
+	if (spellId == 63982 or spellId == 63783) and self:AntiSpam(2, 3) then
+		timerNextShockwave:Start()
+	end
+end
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(_, spellName)
-	if spellName == GetSpellInfo(63983, 63982) then--Arm Sweep
-		timerNextShockwave:Start()
-	elseif spellName == GetSpellInfo(63726) then -- Pacify Self (End Combat, since there isn't a UNIT_DIED for OnMobKill to run)
+	if spellName == GetSpellInfo(63726) then -- Pacify Self (End Combat, since there isn't a UNIT_DIED for OnMobKill to run)
 		DBM:EndCombat(self)
 	end
 end
