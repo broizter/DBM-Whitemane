@@ -45,7 +45,7 @@ local specWarnFuseArmorOther		= mod:NewSpecialWarningTaunt(64771, nil, nil, nil,
 
 local timerDeepBreathCooldown		= mod:NewCDTimer(20.1, 64021, nil, nil, nil, 5) -- ~3s variance (25 man log review 2022/07/10) - 23.0, 20.1
 local timerDeepBreathCast			= mod:NewCastTimer(2.5, 64021)
-local timerGrounded					= mod:NewTimer(45, "timerGrounded", nil, nil, nil, 6)
+local timerGrounded					= mod:NewTimer(37, "timerGrounded", nil, nil, nil, 6)
 local timerFuseArmorCD				= mod:NewCDTimer(10.1, 64771, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON) -- 10s variance (25 man log review 2022/07/10) - 10.1, 20.1
 
 mod:GroupSpells(63236, 64733) -- Devouring Flame (cast and damage)
