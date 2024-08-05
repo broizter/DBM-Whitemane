@@ -28,7 +28,7 @@ local enrageTimer		= mod:NewBerserkTimer(600)
 local timerDefender		= mod:NewNextCountTimer(30, 64447, nil, nil, nil, 1) -- First timer is time for boss spellcast, afterwards is time to revive
 local timerFear			= mod:NewCastTimer(64386, nil, nil, nil, 4)
 local timerFearCD		= mod:NewCDTimer(38, 64386, nil, nil, nil, 4, nil, nil, true) -- REVIEW! ~9s variance [27.7-36.3]. Added "Keep" arg (25m Frostmourne 2022/09/07 || 25m Lordaeron 2022/10/09 || 25m Lordaeron 2022/10/30) - 33.8, 34.3, 32.6 || 34.5, 36.3, 29.1 || 30.4, 28.9, 27.8, 32.4
-local timerSwarmCD		= mod:NewCDTimer(31.8, 64396, nil, nil, nil, 1, nil, nil, true) -- REVIEW! ~4s variance? Added "Keep" arg (25m Frostmourne 2022/09/07 || 25m Lordaeron 2022/10/09) - 34.5, 32.3 || 31.8
+local timerSwarmCD		= mod:NewCDTimer(37.8, 64396, nil, nil, nil, 1, nil, nil, true) -- REVIEW! ~4s variance? Added "Keep" arg (25m Frostmourne 2022/09/07 || 25m Lordaeron 2022/10/09) - 34.5, 32.3 || 31.8
 local timerSonicCD		= mod:NewCDTimer(30, 64688, nil, nil, nil, 2, nil, DBM_COMMON_L.DEADLY_ICON, true) -- REVIEW! ~10s variance [27.2-37.2]. Added "Keep" arg (10m Frostmourne 2022/08/09 || 25m Frostmourne 2022/09/07 || 25m Lordaeron 2022/10/09 || 25m Lordaeron 2022/10/30) - 28.7, 35.4, 37.2 || 30.8, 29.5 || 32.9, 33.4 || 35.1, 27.2, 31.3
 local timerSonic		= mod:NewCastTimer(64688, nil, nil, nil, 2)
 
