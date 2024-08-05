@@ -154,12 +154,12 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 			timerTurret1:Start(23)
 			timerTurret2:Start(43)
 		else
-			warnTurretsReadySoon:Schedule(123)
-			warnTurretsReady:Schedule(133)
-			timerTurret1:Start(70)
-			timerTurret2:Start(91)
-			timerTurret3:Start(112)
-			timerTurret4:Start(133)
+			warnTurretsReadySoon:Schedule(108)
+			warnTurretsReady:Schedule(113)
+			timerTurret1:Start()
+			timerTurret2:Start()
+			timerTurret3:Start()
+			timerTurret4:Start()
 		end
 	elseif msg == L.YellGround then
 		timerGrounded:Start()
