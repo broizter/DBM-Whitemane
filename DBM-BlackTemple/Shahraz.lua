@@ -27,7 +27,7 @@ local specWarnFA		= mod:NewSpecialWarningMoveAway(41001, nil, nil, nil, 1, 2)
 
 local timerFACD			= mod:NewCDTimer(20.7, 41001, nil, nil, nil, 3)--20-28
 local timerAura			= mod:NewTimer(15, "timerAura", 22599)
-local timerShriekCD		= mod:NewCDTimer(15.8, 40823, nil, nil, nil, 2)
+local timerShriekCD		= mod:NewCDTimer(30, 40823, nil, nil, nil, 2)
 
 mod:AddSetIconOption("FAIcons", 41001, true)
 
@@ -47,7 +47,7 @@ local aura = {
 function mod:OnCombatStart(delay)
 	self.vb.prewarn_enrage = false
 	self.vb.enrage = false
-	timerShriekCD:Start(15.8-delay)
+	timerShriekCD:Start(30-delay)
 	timerFACD:Start(24.4-delay)
 	if not self:IsTrivial() then
 		self:RegisterShortTermEvents(
