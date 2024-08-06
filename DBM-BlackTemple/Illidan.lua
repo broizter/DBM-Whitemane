@@ -173,6 +173,7 @@ function mod:SPELL_CAST_START(args)
 		warnPhase2:Show()
 		timerNextBarrage:Start(85)
 		timerEyebeam:Start()
+		timerDrawSoul:Stop()
 	elseif spellId == 41032 then -- Shear
 		warnShearSoon:Schedule(7) -- 3s (+1.5s from cast time) is good enough to plan ahead
 		timerShearCD:Start()
