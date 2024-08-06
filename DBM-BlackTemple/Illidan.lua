@@ -281,7 +281,7 @@ function mod:UNIT_DIED(args)
 			timerNextBarrage:Cancel()
 			timerEyebeam:Cancel()
 			warnPhase3:Show()
-			timerNextDemon:Start(77.6) -- (Timewalking Frostmourne [2023-02-18]@[22:07:38]) - 77.6
+			timerNextDemon:Start(75.4) -- (Timewalking Frostmourne [2023-02-18]@[22:07:38]) - 77.6
 			timerShearCD:Start(27.6)
 			timerFlameCrash:Start(47.5)
 			self:RegisterShortTermEvents(
