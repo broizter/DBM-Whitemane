@@ -64,7 +64,7 @@ function mod:OnCombatStart(delay)
 	self.vb.strikeCount = 0
 	berserkTimer:Start(-delay)
 	warnRageSoon:Schedule(54.6-delay)
-	timerBloodCD:Start(9.5-delay, 1) -- REVIEW! (Timewalking Frostmourne 2023-01-07) - 9.5
+	timerBloodCD:Start(10-delay, 1) -- REVIEW! (Timewalking Frostmourne 2023-01-07) - 9.5
 	timerStrikeCD:Start(9.4-delay, 1) -- REVIEW! (Timewalking Frostmourne 2023-01-07) - 9.4
 	timerRageCD:Start(59.6-delay) -- REVIEW! (Timewalking Frostmourne 2023-01-07) - 59.6
 	if self.Options.InfoFrame then
