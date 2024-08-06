@@ -171,7 +171,7 @@ function mod:SPELL_CAST_START(args)
 		timerShearCD:Cancel()
 		timerFlameCrash:Cancel()
 		warnPhase2:Show()
-		timerNextBarrage:Start(85)
+		timerNextBarrage:Start(56)
 		timerEyebeam:Start()
 		timerDrawSoul:Stop()
 	elseif spellId == 41032 then -- Shear
