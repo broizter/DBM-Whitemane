@@ -41,8 +41,8 @@ local specWarnSpite		= mod:NewSpecialWarningYou(41376, nil, nil, nil, 1, 2)
 
 --Phase 1
 local timerPhaseChange	= mod:NewPhaseTimer(41)
-local timerFrenzy		= mod:NewBuffActiveTimer(8, 41305, nil, "Tank|Healer", 2, 5, nil, DBM_COMMON_L.TANK_ICON)
-local timerNextFrenzy	= mod:NewNextTimer(40, 41305, nil, "Tank|Healer", 2, 5, nil, DBM_COMMON_L.TANK_ICON)
+local timerFrenzy		= mod:NewBuffActiveTimer(15, 41305, nil, "Tank|Healer", 2, 5, nil, DBM_COMMON_L.TANK_ICON)
+local timerNextFrenzy	= mod:NewNextTimer(27, 41305, nil, "Tank|Healer", 2, 5, nil, DBM_COMMON_L.TANK_ICON)
 --Phase 2
 local timerDeaden		= mod:NewTargetTimer(10, 41410, nil, nil, nil, 5, nil, DBM_COMMON_L.DAMAGE_ICON, nil, mod:IsTank() and select(2, UnitClass("player")) == "WARRIOR" and 2, 4)
 local timerNextDeaden	= mod:NewCDTimer(31, 41410, nil, nil, nil, 5)--Roll timer because I don't want to assign it interrupt one when many groups will use prot warrior
@@ -59,8 +59,8 @@ mod.vb.lastFixate = "None"
 
 function mod:OnCombatStart(delay)
 	self.vb.lastFixate = "None"
-	timerNextFrenzy:Start(49-delay)
-	warnFrenzySoon:Schedule(44-delay)
+	timerNextFrenzy:Start(45-delay)
+	warnFrenzySoon:Schedule(40-delay)
 end
 
 function mod:SPELL_AURA_APPLIED(args)
@@ -99,7 +99,7 @@ end
 function mod:SPELL_AURA_REMOVED(args)
 	if args.spellId == 41305 then
 		warnFrenzyEnd:Show()
-		warnFrenzySoon:Schedule(35)
+		warnFrenzySoon:Schedule(22)
 		timerNextFrenzy:Start()
 	end
 end
