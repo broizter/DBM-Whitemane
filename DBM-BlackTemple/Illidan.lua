@@ -318,7 +318,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerNextDemon:Cancel()
 		timerPhase4:Start()
 		warnPhase4:Schedule(30)
-		timerNextDemon:Start(89.1) -- REVIEW! 5s variance? (Timewalking Frostmourne [2023-02-18]@[21:51:02] || Timewalking Frostmourne [2023-02-18]@[22:07:38]) - 89.1 || 93.0
+		timerNextDemon:Start(94.6) -- REVIEW! 5s variance? (Timewalking Frostmourne [2023-02-18]@[21:51:02] || Timewalking Frostmourne [2023-02-18]@[22:07:38]) - 89.1 || 93.0
 
 	end
 end
