@@ -21,7 +21,7 @@ local warnSpine			= mod:NewTargetNoFilterAnnounce(39837, 3)
 local specWarnSpineTank	= mod:NewSpecialWarningTaunt(39837, nil, nil, nil, 1, 2)
 local yellSpine			= mod:NewYell(39837)
 
-local timerShield		= mod:NewCDTimer(56, 39872, nil, nil, nil, 5)
+local timerShield		= mod:NewCDTimer(60, 39872, nil, nil, nil, 5)
 
 local berserkTimer		= mod:NewBerserkTimer(300)
 
@@ -31,8 +31,8 @@ mod:AddRangeFrameOption("8")
 
 function mod:OnCombatStart(delay)
 	berserkTimer:Start(-delay)
-	timerShield:Start(55.5-delay)
-	warnShieldSoon:Schedule(50-delay)
+	timerShield:Start(60-delay)
+	warnShieldSoon:Schedule(55-delay)
 	if self.Options.RangeFrame then
 		DBM.RangeCheck:Show(8)
 	end
@@ -54,7 +54,7 @@ end
 function mod:SPELL_AURA_APPLIED(args)
 	if args.spellId == 39872 then
 		warnShield:Show()
-		warnShieldSoon:Schedule(50)
+		warnShieldSoon:Schedule(55)
 		timerShield:Start()
 	elseif args.spellId == 39837 then
 		warnSpine:Show(args.destName)
