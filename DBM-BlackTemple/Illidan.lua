@@ -42,7 +42,7 @@ local specWarnParasite		= mod:NewSpecialWarningYou(41917, nil, nil, nil, 1, 2)
 local yellParasiteFades		= mod:NewShortFadesYell(41917)
 
 local timerShearCD			= mod:NewCDTimer(10, 41032, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON) -- (Timewalking Frostmourne [2023-02-18]@[22:07:38]) - "Shear-41032-npc:22917-337 = pull:10.0/Stage 1/10.0, 10.1, 11.3, 10.6, 10.1, 10.6, 10.8, 10.5, 11.9, 11.9, 10.5, 10.0, 10.5, Stage 2/13.0, Stage 3/76.5, 27.6/104.1/117.1, 10.0, 11.3, 10.1, 10.7, 88.9, 11.8, 11.3, 10.6, 10.0, Stage 4/81.4, 39.1/120.5, 10.1, 11.7, 10.2, 102.9"
-local timerDrawSoul			= mod:NewCDTimer(35, 40904, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON) -- (Timewalking Frostmourne [2023-02-18]@[22:07:38]) - "Draw Soul-40904-npc:22917-337 = pull:35.0/Stage 1/35.0, 35.0, 35.0, 35.6, Stage 2/11.4, Stage 3/76.5, 52.6/129.1/140.5, 131.0, Stage 4/100.1, 64.1/164.2", -- [3]
+local timerDrawSoul			= mod:NewCDTimer(40, 40904, nil, "Tank", nil, 5, nil, DBM_COMMON_L.TANK_ICON) -- (Timewalking Frostmourne [2023-02-18]@[22:07:38]) - "Draw Soul-40904-npc:22917-337 = pull:35.0/Stage 1/35.0, 35.0, 35.0, 35.6, Stage 2/11.4, Stage 3/76.5, 52.6/129.1/140.5, 131.0, Stage 4/100.1, 64.1/164.2", -- [3]
 local timerFlameCrash		= mod:NewNextTimer(25, 40832, nil, nil ,nil, 3) -- (Timewalking Frostmourne [2023-02-18]@[22:07:38]) - "Flame Crash-40832-npc:22917-337 = pull:30.0/Stage 1/30.0, 30.0, 30.0, 30.0, Stage 2/31.9, Stage 3/76.5, 47.5/124.0/156.0, 131.0, Stage 4/105.1, 59.1/164.2"
 local timerParasite			= mod:NewTargetTimer(10, 41917, nil, false, nil, 1, nil, DBM_COMMON_L.IMPORTANT_ICON)
 
