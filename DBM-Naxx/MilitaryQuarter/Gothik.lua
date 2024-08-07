@@ -21,7 +21,7 @@ local warnPhase2		= mod:NewPhaseAnnounce(2, 3)
 local timerPhase2		= mod:NewTimer(270, "TimerPhase2", 27082, nil, nil, 6)
 local timerWave			= mod:NewTimer(20, "TimerWave", 5502, nil, nil, 1)
 local timerGate			= mod:NewTimer(150, "Gate Opens", 9484)
-local timerTeleport		= mod:NewTimer(20, "TimerTeleport", 31569)
+local timerTeleport		= mod:NewTimer(25, "TimerTeleport", 31569)
 
 mod.vb.wave = 0
 local wavesNormal = {
