@@ -71,7 +71,11 @@ local waves = wavesNormal
 
 local function StartPhase2(self)
 	self:SetStage(2)
-	timerTeleport:Start()
+	if self:IsDifficulty("normal25") then
+		timerTeleport:Start()
+	else
+		timerTeleport:Start(20)
+	end
 end
 
 local function getWaveString(wave)
