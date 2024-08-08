@@ -207,13 +207,12 @@ function mod:OnCombatStart(delay)
   timerBreathCD:Start(15 - delay)
   timerBuffetCD:Start(6 - delay)
 
-  if not self.Options.HealthFrame then
-    return
+  if self.Options.HealthFrame then
+    BossHealth:Clear()
+    BossHealth:AddBoss(getDragonHealth, L.name)
+    BossHealth:AddBoss(getDemonHealth, L.Demon)
   end
 
-  BossHealth:Clear()
-  BossHealth:AddBoss(getDragonHealth, L.name)
-  BossHealth:AddBoss(getDemonHealth, L.Demon)
   updateRoster()
   pushHealthUpdateSenderSync()
 
