@@ -134,7 +134,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 		end
 		timerNatureFury:Start(args.destName)
 	elseif args:IsSpellID(64587, 64650) then -- Nature Bomb
-		if self:AntiSpam(1, 3) and self:IsInCombat() then
+		if self:AntiSpam(3, 1) and self:IsInCombat() then
 			timerNextNatureBombSummon:Start(4)
 			timerNatureBombExplosion:Start(11.5)
 			specWarnNatureBombSummon:Cancel()
