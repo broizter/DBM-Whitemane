@@ -167,8 +167,8 @@ function mod:SPELL_AURA_REMOVED(args)
 		warnPhase2:Show()
 		warnPhase2:Play("ptwo")
 		self:SetStage(2)
-		timerNextNatureBombSummon:Start(15) --  Confirmed bug (2022/08/01) that Freya uses this ability before phase 2 begins! No log to identify a trigger for it. REVIEW! variance [?] (VODs) - ~8; ~6
-		specWarnNatureBombSummon:Schedule(15) -- delayed to the maximum timer possible
+		timerNextNatureBombSummon:Start(15.5) --  Confirmed bug (2022/08/01) that Freya uses this ability before phase 2 begins! No log to identify a trigger for it. REVIEW! variance [?] (VODs) - ~8; ~6
+		specWarnNatureBombSummon:Schedule(15.5) -- delayed to the maximum timer possible
 		timerNatureBombExplosion:Start(25) -- REVIEW! variance [?] (S3 HM log 2022/07/22) - 13.4
 	elseif args:IsSpellID(62861, 62438) then
 		if self.Options.SetIconOnRoots then
