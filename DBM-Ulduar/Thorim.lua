@@ -177,6 +177,7 @@ function mod:OnSync(event, arg)
 		enrageTimer:Stop()
 		timerHardmode:Stop()
 		enrageTimer:Start(300)
+		timerUnbalancingStrike:Start(8)
 		timerStormhammerCD:Stop()
 	end
 end
