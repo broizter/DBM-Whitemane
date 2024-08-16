@@ -135,10 +135,10 @@ function mod:SPELL_CAST_SUCCESS(args)
 		timerNatureFury:Start(args.destName)
 	elseif args:IsSpellID(64587, 64650) then -- Nature Bomb
 		if self:AntiSpam(3, 1) and self:IsInCombat() then
-			timerNextNatureBombSummon:Start(4)
-			timerNatureBombExplosion:Start(11.5)
+			timerNextNatureBombSummon:Start(10)
+			timerNatureBombExplosion:Start(20)
 			specWarnNatureBombSummon:Cancel()
-			specWarnNatureBombSummon:Schedule(4) -- delay to max possible time to avoid warning before bombs are thrown
+			specWarnNatureBombSummon:Schedule(10) -- delay to max possible time to avoid warning before bombs are thrown
 		end
 	elseif args:IsSpellID(62451, 62865) and self:AntiSpam(5, 2) then -- Unstable Energy (Sun Beam)
 		timerUnstableBeamCD:Start()
@@ -167,9 +167,9 @@ function mod:SPELL_AURA_REMOVED(args)
 		warnPhase2:Show()
 		warnPhase2:Play("ptwo")
 		self:SetStage(2)
-		timerNextNatureBombSummon:Start(15.5) --  Confirmed bug (2022/08/01) that Freya uses this ability before phase 2 begins! No log to identify a trigger for it. REVIEW! variance [?] (VODs) - ~8; ~6
-		specWarnNatureBombSummon:Schedule(15.5) -- delayed to the maximum timer possible
-		timerNatureBombExplosion:Start(25) -- REVIEW! variance [?] (S3 HM log 2022/07/22) - 13.4
+		timerNextNatureBombSummon:Start(15.7) --  Confirmed bug (2022/08/01) that Freya uses this ability before phase 2 begins! No log to identify a trigger for it. REVIEW! variance [?] (VODs) - ~8; ~6
+		specWarnNatureBombSummon:Schedule(15.7) -- delayed to the maximum timer possible
+		timerNatureBombExplosion:Start(25.5) -- REVIEW! variance [?] (S3 HM log 2022/07/22) - 13.4
 	elseif args:IsSpellID(62861, 62438) then
 		if self.Options.SetIconOnRoots then
 			self:RemoveIcon(args.destName)
