@@ -218,7 +218,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 	elseif msg == L.YellPullHard then
 		self.vb.isHardMode = true
 		timerGroundTremorCD:Start(30) -- 6s variance (could be more, insufficient data). (2022/07/05 10m Lord transcriptor log || 2021 S2 cleu + VOD review || 25 man FM log) - 16 || 11, 13, 17 || 17.5, 11.3
-		timerIronRootsCD:Start(20) -- ~6s variance (could be more, insufficient data). (25 man FM log) - 8.5, 14.9
+		timerIronRootsCD:Start(15) -- ~6s variance (could be more, insufficient data). (25 man FM log) - 8.5, 14.9
 		timerUnstableBeamCD:Start(45) -- REVIEW! ~7s variance [10.7-17.5] (25 man FM log || 25H Lordaeron 2022/10/30_1 elder up) - 17.5, 15.5 || 10.7
 		warnUnstableBeamSoon:Schedule(42)
 --[[ 	elseif msg == L.SpawnYell then
