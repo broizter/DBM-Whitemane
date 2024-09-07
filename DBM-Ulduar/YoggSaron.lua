@@ -4,7 +4,7 @@ local L		= mod:GetLocalizedStrings()
 mod:SetRevision(("$Revision: 4338 $"):sub(12, -3))
 mod:SetCreatureID(33288)
 mod:RegisterCombat("yell", L.YellPull)
-mod:SetUsedIcons(8, 7, 6, 2, 1)
+mod:SetUsedIcons(8, 7, 6, 5, 4, 2, 1)
 
 mod:RegisterEventsInCombat(
 	"SPELL_CAST_START 64059 64189 63138 63830 63881",
@@ -59,7 +59,7 @@ mod:AddBoolOption("MaladyArrow")
 mod:AddSetIconOption("SetIconOnFearTarget", 63802, true, false, {6})
 mod:AddSetIconOption("SetIconOnFervorTarget", 63802, false, false, {7})
 mod:AddSetIconOption("SetIconOnBrainLinkTarget", 63802, true, false, {1, 2})
-mod:AddSetIconOption("SetIconOnBeacon", 64465, true, true, {1, 2, 3, 4, 5, 6, 7, 8})
+mod:AddSetIconOption("SetIconOnBeacon", 64465, true, true, {4, 5, 6, 7, 8})
 mod:AddInfoFrameOption(63050)
 
 local targetWarningsShown = {}
@@ -234,8 +234,14 @@ function mod:SPELL_AURA_APPLIED(args)
 			self:ScanForMobs(args.destGUID, 2, self.vb.beaconIcon, 1, 0.2, 10, "SetIconOnBeacon")
 		end
 		self.vb.beaconIcon = self.vb.beaconIcon - 1
-		if self.vb.beaconIcon == 0 then
-			self.vb.beaconIcon = 8
+		if self:IsHeroic() then
+			if self.vb.beaconIcon == 3 then
+				self.vb.beaconIcon = 8
+			end
+		else
+			if self.vb.beaconIcon == 5 then
+				self.vb.beaconIcon = 8
+			end
 		end
 		timerEmpower:Start()
 		timerEmpowerDuration:Start()
