@@ -36,7 +36,7 @@ end
 
 function mod:OnCombatStart(delay)
 	timerOvercharge:Start(-delay)
-	timerNovaCD:Start(20-delay)
+	timerNovaCD:Start(40-delay)
 	timerEmalonEnrage:Start(-delay)
 	if self.Options.RangeFrame then
 		DBM.RangeCheck:Show(10)
