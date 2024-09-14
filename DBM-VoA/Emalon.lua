@@ -54,6 +54,7 @@ function mod:SPELL_CAST_START(args)
 		timerNova:Start()
 		timerNovaCD:Start()
 		specWarnNova:Show()
+		specWarnNova:Play("runaway")
 		if self.Options.RangeFrame then
 			-- On 10m you receive no damage outside 20 yards,
 			-- on 25m you receive damage either way but 20 yards from hitbox should be safe
