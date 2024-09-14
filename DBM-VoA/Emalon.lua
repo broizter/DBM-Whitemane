@@ -44,9 +44,7 @@ function mod:OnCombatStart(delay)
 end
 
 function mod:OnCombatEnd()
-	if self.Options.RangeFrame then
-		DBM.RangeCheck:Hide()
-	end
+	DBM.RangeCheck:Hide()
 end
 
 function mod:SPELL_CAST_START(args)
