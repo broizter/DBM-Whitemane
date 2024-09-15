@@ -110,9 +110,7 @@ function mod:OnCombatStart(delay)
 end
 
 function mod:OnCombatEnd()
-	if self.Options.RangeFrame then
-		DBM.RangeCheck:Hide()
-	end
+	DBM.RangeCheck:Hide()
 	self:Unschedule(RuneCD)
 end
 
