@@ -138,10 +138,12 @@ function mod:SPELL_CAST_SUCCESS(args)
 			if self:IsDifficulty("normal10") then
 				timerNextNatureBombSummon:Start(7)
 				timerNatureBombExplosion:Start(16)
+				specWarnNatureBombSummon:Cancel()
 				specWarnNatureBombSummon:Schedule(7)
 			else
 				timerNextNatureBombSummon:Start(10)
 				timerNatureBombExplosion:Start(20)
+				specWarnNatureBombSummon:Cancel()
 				specWarnNatureBombSummon:Schedule(10)
 			end
 		end
