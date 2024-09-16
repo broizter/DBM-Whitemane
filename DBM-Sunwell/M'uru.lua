@@ -105,9 +105,9 @@ function mod:SPELL_CAST_SUCCESS(args)
 		timerNextDarkness:Stop()
 		timerHuman:Stop()
 		timerVoid:Stop()
-		self:Unschedule(specWarnVW)
+		specWarnVW:Cancel()
 		timerPhase:Start()
-		self:Unschedule(specWarnDarknessSoon)
+		specWarnDarknessSoon:Cancel()
 		self:Schedule(10, phase2, self)
 	end
 end
