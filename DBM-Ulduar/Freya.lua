@@ -136,15 +136,9 @@ function mod:SPELL_CAST_SUCCESS(args)
 	elseif args:IsSpellID(64587, 64650) then -- Nature Bomb
 		if self:AntiSpam(3, 1) and self:IsInCombat() then
 			specWarnNatureBombSummon:Cancel()
-			if self:IsDifficulty("normal10") then
-				timerNextNatureBombSummon:Start(7)
-				timerNatureBombExplosion:Start(16)
-				specWarnNatureBombSummon:Schedule(7)
-			else
-				timerNextNatureBombSummon:Start(10)
-				timerNatureBombExplosion:Start(20)
-				specWarnNatureBombSummon:Schedule(10)
-			end
+			timerNextNatureBombSummon:Start(7)
+			timerNatureBombExplosion:Start(16)
+			specWarnNatureBombSummon:Schedule(7)
 		end
 	elseif args:IsSpellID(62451, 62865) and self:AntiSpam(5, 2) then -- Unstable Energy (Sun Beam)
 		timerUnstableBeamCD:Start()
