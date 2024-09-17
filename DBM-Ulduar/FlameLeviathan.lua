@@ -38,7 +38,8 @@ end
 
 function mod:OnCombatStart(delay)
 	buildGuidTable(self)
-	timerFlameVentsCD:Start(20-delay) -- 25 man log review (2022/07/10 || 25m Lordaeron 2022/10/30) - 20.0 || 20.0
+	timerFlameVentsCD:Start(20-delay)
+	timerNextWardOfLife:Start(35-delay)
 end
 
 function mod:OnTimerRecovery()
