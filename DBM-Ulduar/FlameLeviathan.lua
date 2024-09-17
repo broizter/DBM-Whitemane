@@ -22,9 +22,7 @@ local pursueSpecWarn		= mod:NewSpecialWarning("SpecialPursueWarnYou", nil, nil, 
 local warnWardofLife		= mod:NewSpecialWarning("warnWardofLife")
 
 local timerSystemOverload	= mod:NewBuffActiveTimer(20, 62475, nil, nil, nil, 6)
-local timerFlameVents		= mod:NewCastTimer(10, 62396, nil, nil, nil, 2)
-local timerNextFlameVents	= mod:NewNextTimer(20, 62396)
-local timerPursued			= mod:NewNextTimer(30, 62374)
+local timerFlameVentsCD		= mod:NewCDTimer(20, 62396, nil, nil, nil, 2) -- ~0.5s variance (S3 FM Log review 2022/07/17 || 25m Lordaeron 2022/10/30) - 0.1, 20.0, 20.0, 20.1, 20.0, 20.3 || 20.3, 19.7, 20.0, 20.1local timerPursued			= mod:NewNextTimer(30, 62374)
 local timerNextWardOfLife	= mod:NewNextTimer(29, 62907, nil, nil, nil, 1)
 
 local guids = {}
@@ -37,16 +35,9 @@ local function buildGuidTable(self)
 	end
 end
 
-local function FlameVents(self)	-- Flames
-	timerFlameVents:Start()
-	timerNextFlameVents:Start()
-	self:Schedule(20, FlameVents, self)
-end
-
 function mod:OnCombatStart(delay)
 	buildGuidTable(self)
-	timerNextFlameVents:Start()
-	self:Schedule(20.1, FlameVents, self)
+	timertFlameVentsCD:Start(20-delay) -- 25 man log review (2022/07/10 || 25m Lordaeron 2022/10/30) - 20.0 || 20.0
 end
 
 function mod:OnTimerRecovery()
@@ -55,12 +46,12 @@ end
 
 function mod:SPELL_AURA_APPLIED(args)
 	local spellId = args.spellId
-	if spellId == 62475 then	-- Systems Shutdown / Overload
+	if spellId == 62396 then		-- Flame Vents
+		timerFlameVentsCD:Start()
+	elseif spellId == 62475 then	-- Systems Shutdown / Overload
 		timerSystemOverload:Start()
-		timerNextFlameVents:Cancel()
-		self:Unschedule(FlameVents)
-		self:Schedule(20, FlameVents, self)
-		timerFlameVents:Cancel()
+		timerFlameVentsCD:Stop()
+		timerFlameVentsCD:Start(40)
 		timerPursued:Cancel()
 		warnNextPursueSoon:Cancel()
 		timerPursued:Start(20)
@@ -84,19 +75,9 @@ function mod:SPELL_AURA_APPLIED(args)
 	end
 end
 
-function mod:SPELL_AURA_REMOVED(args)
-	if args.spellId == 62396 then
-		timerFlameVents:Stop()
-	end
-end
-
 function mod:SPELL_SUMMON(args)
 	if args.spellId == 62907 and self:AntiSpam(3, 1) then		-- Ward of Life spawned (Creature id: 34275)
 		warnWardofLife:Show()
 		timerNextWardOfLife:Start()
 	end
-end
-
-function mod:OnCombatEnd()
-	self:Unschedule(FlameVents)
 end
