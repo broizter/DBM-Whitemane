@@ -22,6 +22,7 @@ local pursueSpecWarn		= mod:NewSpecialWarning("SpecialPursueWarnYou", nil, nil, 
 local warnWardofLife		= mod:NewSpecialWarning("warnWardofLife")
 
 local timerSystemOverload	= mod:NewBuffActiveTimer(20, 62475, nil, nil, nil, 6)
+local timerPursued			= mod:NewNextTimer(30, 62374)
 local timerFlameVentsCD		= mod:NewCDTimer(20, 62396, nil, nil, nil, 2)
 local timerNextWardOfLife	= mod:NewNextTimer(29, 62907, nil, nil, nil, 1)
 
