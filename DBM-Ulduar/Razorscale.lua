@@ -154,7 +154,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 			timerTurret1:Start(23)
 			timerTurret2:Start(43)
 		else
-			warnTurretsReadySoon:Schedule(108)
+			warnTurretsReadySoon:Schedule(93)
 			warnTurretsReady:Schedule(113)
 			timerTurret1:Start()
 			timerTurret2:Start()
