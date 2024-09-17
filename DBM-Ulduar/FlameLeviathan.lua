@@ -22,7 +22,7 @@ local pursueSpecWarn		= mod:NewSpecialWarning("SpecialPursueWarnYou", nil, nil, 
 local warnWardofLife		= mod:NewSpecialWarning("warnWardofLife")
 
 local timerSystemOverload	= mod:NewBuffActiveTimer(20, 62475, nil, nil, nil, 6)
-local timerFlameVentsCD		= mod:NewCDTimer(20, 62396, nil, nil, nil, 2) -- ~0.5s variance (S3 FM Log review 2022/07/17 || 25m Lordaeron 2022/10/30) - 0.1, 20.0, 20.0, 20.1, 20.0, 20.3 || 20.3, 19.7, 20.0, 20.1local timerPursued			= mod:NewNextTimer(30, 62374)
+local timerFlameVentsCD		= mod:NewCDTimer(20, 62396, nil, nil, nil, 2)
 local timerNextWardOfLife	= mod:NewNextTimer(29, 62907, nil, nil, nil, 1)
 
 local guids = {}
