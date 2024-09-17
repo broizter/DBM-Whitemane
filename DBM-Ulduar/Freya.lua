@@ -137,7 +137,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 		if self:AntiSpam(3, 1) and self:IsInCombat() then
 			specWarnNatureBombSummon:Cancel()
 			timerNextNatureBombSummon:Start(7)
-			timerNatureBombExplosion:Start(16)
+			timerNatureBombExplosion:Start(17.5)
 			specWarnNatureBombSummon:Schedule(7)
 		end
 	elseif args:IsSpellID(62451, 62865) and self:AntiSpam(5, 2) then -- Unstable Energy (Sun Beam)
