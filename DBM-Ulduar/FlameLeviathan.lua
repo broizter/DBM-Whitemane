@@ -39,7 +39,6 @@ end
 function mod:OnCombatStart(delay)
 	buildGuidTable(self)
 	timerFlameVentsCD:Start(20-delay)
-	timerNextWardOfLife:Start(35-delay)
 end
 
 function mod:OnTimerRecovery()
