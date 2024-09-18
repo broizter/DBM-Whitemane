@@ -11,14 +11,19 @@ mod:RegisterEvents(
 	"SPELL_CAST_START 62344 62325 62932",
 	"SPELL_AURA_APPLIED 62310 62928",
 	"SPELL_AURA_REMOVED 62310 62928",
-	"UNIT_DIED"
+	"SPELL_CAST_SUCCESS 62451 62865",
+	"UNIT_DIED",
+	"CHAT_MSG_MONSTER_YELL"
 )
 
 local specWarnImpale			= mod:NewSpecialWarningTaunt(62928, nil, nil, nil, 1, 2)
 local specWarnFistofStone		= mod:NewSpecialWarningRun(62344, "Tank", nil, nil, 4, 2)
 local specWarnGroundTremor		= mod:NewSpecialWarningCast(62932, "SpellCaster", nil, nil, 1, 2)
 
+local warnUnstableBeamSoon		= mod:NewSoonAnnounce(62865, 3)
+
 local timerImpale				= mod:NewTargetTimer(5, 62928, nil, "Healer|Tank", nil, 5)
+local timerUnstableBeamCD		= mod:NewCDTimer(30, 62865, nil, nil, nil, 2, nil, nil, true)
 
 mod:AddBoolOption("TrashRespawnTimer", true, "timer")
 
@@ -57,6 +62,24 @@ end
 function mod:SPELL_AURA_REMOVED(args)
 	if args:IsSpellID(62310, 62928) then			-- Impale
 		timerImpale:Stop(args.destName)
+	end
+end
+
+function mod:SPELL_CAST_SUCCESS(args)
+	local spellId = args.spellId
+	if args:IsSpellID(62451, 62865) and self:AntiSpam(5, 2) then -- Unstable Energy (Sun Beam)
+		timerUnstableBeamCD:Start(20)
+		warnUnstableBeamSoon:Schedule(17)
+	end
+end
+
+function mod:CHAT_MSG_MONSTER_YELL(msg)
+	if msg == L.YellBrightleafPull or msg:find(L.YellBrightleafPull) then
+		timerUnstableBeamCD:Start(8)
+		warnUnstableBeamSoon:Schedule(5)
+	elseif msg == L.YellBrightleafKill or msg:find(L.YellBrightleafKill) then
+		timerUnstableBeamCD:Stop()
+		warnUnstableBeamSoon:Cancel()
 	end
 end
 

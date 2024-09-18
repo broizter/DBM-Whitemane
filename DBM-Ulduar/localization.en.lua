@@ -311,7 +311,9 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	TrashRespawnTimer	= "Freya trash respawn"
+	TrashRespawnTimer	= "Freya trash respawn",
+	YellBrightleafPull  = "Matron, the Conservatory has been breached!",
+	YellBrightleafKill	= "Matron, one has fallen!"
 })
 
 ---------------
