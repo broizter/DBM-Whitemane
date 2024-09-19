@@ -266,7 +266,7 @@ L:SetGeneralLocalization({
 })
 
 L:SetWarningLocalization({
-	WarnSimulKill	= "Первый помощник погиб - воскрешение через ~12 сек."
+	WarnSimulKill	= "Первый помощник погиб - воскрешение через ~10 сек."
 })
 
 L:SetTimerLocalization({

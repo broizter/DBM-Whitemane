@@ -260,7 +260,7 @@ L:SetGeneralLocalization({
 })
 
 L:SetWarningLocalization({
-	WarnSimulKill	= "Primer esbirro muerto - Resurrección en ~12 segundos"
+	WarnSimulKill	= "Primer esbirro muerto - Resurrección en ~10 segundos"
 })
 
 L:SetTimerLocalization({

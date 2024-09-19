@@ -254,7 +254,7 @@ L:SetGeneralLocalization({
 })
 
 L:SetWarningLocalization({
-	WarnSimulKill	= "Erster Elementar tot - Wiederbelebung in ~12 Sekunden"
+	WarnSimulKill	= "Erster Elementar tot - Wiederbelebung in ~10 Sekunden"
 })
 
 L:SetTimerLocalization({
