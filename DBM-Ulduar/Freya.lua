@@ -197,7 +197,7 @@ function mod:UNIT_DIED(args)
 		end
 		adds[cid] = nil
 		local counter = 0
-		for _, _ in pairs(adds) do
+		for i, v in pairs(adds) do
 			counter = counter + 1
 		end
 		if counter == 0 then
@@ -221,20 +221,10 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerIronRootsCD:Start(15) -- ~6s variance (could be more, insufficient data). (25 man FM log) - 8.5, 14.9
 		timerUnstableBeamCD:Start(45) -- REVIEW! ~7s variance [10.7-17.5] (25 man FM log || 25H Lordaeron 2022/10/30_1 elder up) - 17.5, 15.5 || 10.7
 		warnUnstableBeamSoon:Schedule(42)
---[[ 	elseif msg == L.SpawnYell then
-		timerAlliesOfNature:Start()
-		if self.Options.HealthFrame then
-			if not adds[33202] then DBM.BossHealth:AddBoss(33202, L.WaterSpirit) end -- ancient water spirit
-			if not adds[32916] then DBM.BossHealth:AddBoss(32916, L.Snaplasher) end  -- snaplasher
-			if not adds[32919] then DBM.BossHealth:AddBoss(32919, L.StormLasher) end -- storm lasher
-		end
+ 	elseif msg == L.SpawnYell then
 		adds[33202] = true
 		adds[32916] = true
 		adds[32919] = true
-	elseif msg == L.YellAdds1 then
-		timerAlliesOfNature:Start()
-	elseif msg == L.YellAdds2 then
-		timerAlliesOfNature:Start() ]]
 	end
 end
 
