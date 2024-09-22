@@ -36,6 +36,11 @@ mod.vb.stormCloudIcon = 8
 function mod:OnCombatStart(delay)
 	self.vb.stormCloudIcon = 8
 	enrageTimer:Start(-delay)
+	if self:IsHeroic() then
+		timerAchieve:Start(119)
+	else
+		timerAchieve:Start()
+	end
 	timerAchieve:Start()
 	timerFlashFrCD:Start(-delay) -- REVIEW! Need more logs to validate variance (25 man log review (2022/07/10) || S2 VOD review) - 66.7 || 63, 65
 end
