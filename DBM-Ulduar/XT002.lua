@@ -78,7 +78,11 @@ end
 function mod:SPELL_AURA_APPLIED(args)
 	local spellId = args.spellId
 	if spellId == 62775 and args.auraType == "DEBUFF" then	-- Tympanic Tantrum
-		timerTympanicTantrum:Start()
+		if self:IsHeroic() then
+			timerTympanicTantrum:Start(11)
+		else
+			timerTympanicTantrum:Start()
+		end
 	elseif args:IsSpellID(63018, 65121) then	-- Light Bomb
 		if args:IsPlayer() then
 			specWarnLightBomb:Show()
