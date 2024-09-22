@@ -158,7 +158,11 @@ function mod:SPELL_CAST_SUCCESS(args)
 			specwarnOverload:Play("justrun")
 		end
 		if self.Options.RangeFrame then
-			DBM.RangeCheck:SetBossRange(20, self:GetBossUnitByCreatureId(32857))
+			if self:IsHeroic() then
+				DBM.RangeCheck:SetBossRange(30, self:GetBossUnitByCreatureId(32857))
+			else
+				DBM.RangeCheck:SetBossRange(20, self:GetBossUnitByCreatureId(32857))
+			end
 			self:Schedule(6.5, ResetRange, self)
 		end
 	end
