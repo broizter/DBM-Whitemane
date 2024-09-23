@@ -245,9 +245,6 @@ function mod:SPELL_AURA_APPLIED(args)
 				self.vb.beaconIcon = 8
 			end
 		end
-		timerEmpower:Start()
-		timerEmpowerDuration:Start()
-		warnEmpowerSoon:Schedule(40)
 	end
 end
 
