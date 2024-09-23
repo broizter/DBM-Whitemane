@@ -23,6 +23,7 @@ local warnWardofLife		= mod:NewSpecialWarning("warnWardofLife")
 
 local timerSystemOverload	= mod:NewBuffActiveTimer(20, 62475, nil, nil, nil, 6)
 local timerPursued			= mod:NewNextTimer(30, 62374)
+local timerFlameVents		= mod:NewCastTimer(10, 62396, nil, nil, nil, 2, nil, DBM_COMMON_L.INTERRUPT_ICON)
 local timerFlameVentsCD		= mod:NewCDTimer(20, 62396, nil, nil, nil, 2)
 local timerNextWardOfLife	= mod:NewNextTimer(29, 62907, nil, nil, nil, 1)
 
@@ -48,6 +49,7 @@ end
 function mod:SPELL_AURA_APPLIED(args)
 	local spellId = args.spellId
 	if spellId == 62396 then		-- Flame Vents
+		timerFlameVents:Start()
 		timerFlameVentsCD:Start()
 	elseif spellId == 62475 then	-- Systems Shutdown / Overload
 		timerSystemOverload:Start()
@@ -73,6 +75,16 @@ function mod:SPELL_AURA_APPLIED(args)
 		if target then
 			warnHodirsFury:Show(target)
 		end
+	end
+end
+
+function mod:SPELL_AURA_REMOVED(args)
+	local spellId = args.spellId
+	if spellId == 62396 then
+		timerFlameVents:Stop()
+	elseif spellId == 62374 then	-- Pursued
+		local target = guids[args.destGUID]
+		timerPursued:Stop(target)
 	end
 end
 
