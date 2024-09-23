@@ -54,6 +54,8 @@ local timerCastDeafeningRoar		= mod:NewCastTimer(2.3, 64189, nil, nil, nil, 2)
 local timerNextDeafeningRoar		= mod:NewNextTimer(50, 64189, nil, nil, nil, 2)
 local timerAchieve					= mod:NewAchievementTimer(420, 3012)
 
+mod:GroupSpells(64486, 64465) -- Empowering Shadows, Shadow Beacon
+
 mod:AddBoolOption("ShowSaraHealth", false)
 mod:AddBoolOption("MaladyArrow")
 mod:AddSetIconOption("SetIconOnFearTarget", 63802, true, false, {6})
