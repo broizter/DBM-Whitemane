@@ -85,7 +85,11 @@ function mod:OnCombatStart(delay)
 	timerLifeLeechCD:Start(20-delay)
 	timerSaroniteVapors:Start(30-delay, 1)
 	timerEnrage:Start(-delay)
-	timerHardmode:Start(-delay)
+	if self:IsHeroic() then
+		timerHardmode:Start(-delay)
+	else
+		timerHardmode:Schedule(188-delay)
+	end
 	timerNextSurgeofDarkness:Start(-delay)
 end
 
