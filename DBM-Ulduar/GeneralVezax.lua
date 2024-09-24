@@ -88,7 +88,7 @@ function mod:OnCombatStart(delay)
 	if self:IsHeroic() then
 		timerHardmode:Start(-delay)
 	else
-		timerHardmode:Schedule(188-delay)
+		timerHardmode:Start(188-delay)
 	end
 	timerNextSurgeofDarkness:Start(-delay)
 end
