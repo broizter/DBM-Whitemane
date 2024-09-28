@@ -137,9 +137,9 @@ function mod:SPELL_CAST_SUCCESS(args)
 		if self:AntiSpam(3, 1) and self:IsInCombat() then
 			specWarnNatureBombSummon:Cancel()
  			if self:IsHeroic() then
-				timerNextNatureBombSummon:Start(4)
-				timerNatureBombExplosion:Start(14.5)
-				specWarnNatureBombSummon:Schedule(4)
+				timerNextNatureBombSummon:Start(2.3)
+				timerNatureBombExplosion:Start(12.3)
+				specWarnNatureBombSummon:Schedule(2.3)
 			else
 				timerNextNatureBombSummon:Start(7)
 				timerNatureBombExplosion:Start(17.5)
