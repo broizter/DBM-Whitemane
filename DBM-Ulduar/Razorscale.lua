@@ -72,7 +72,7 @@ function mod:OnCombatStart(delay)
 	isGrounded = false
 	enrageTimer:Start(-delay)
 	combattime = GetTime()
-	if self:IsDifficulty("normal10") then -- REVIEW. No log yet to validate this.
+	if self:IsDifficulty("normal10", "heroic10") then
 		warnTurretsReadySoon:Schedule(51.8-delay)
 		warnTurretsReady:Schedule(71.8-delay)
 		timerTurret1:Start(51.8-delay)
@@ -148,7 +148,7 @@ end
 function mod:CHAT_MSG_MONSTER_YELL(msg)
 	if isGrounded and (msg == L.YellAir or msg == L.YellAir2) and GetTime() - combattime > 30 then
 		isGrounded = false -- warmane resets the timers idk why
-		if self:IsDifficulty("normal10") then -- not sure?
+		if self:IsDifficulty("normal10", "heroic10") then
 			warnTurretsReadySoon:Schedule(23)
 			warnTurretsReady:Schedule(43)
 			timerTurret1:Start(23)
