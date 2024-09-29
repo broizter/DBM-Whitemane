@@ -41,7 +41,6 @@ function mod:OnCombatStart(delay)
 	else
 		timerAchieve:Start()
 	end
-	timerAchieve:Start()
 	timerFlashFrCD:Start(-delay) -- REVIEW! Need more logs to validate variance (25 man log review (2022/07/10) || S2 VOD review) - 66.7 || 63, 65
 end
 
