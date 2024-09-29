@@ -47,7 +47,7 @@ end
 function mod:OnCombatStart(delay)
 	self.vb.ConstructCount = 0
 	timerAchieve:Start()
-	if self:IsDifficulty("normal10") then
+	if self:IsDifficulty("normal10", "heroic10") then
 		timerActivateConstruct:Start(39.9-delay, 1)
 	else
 		timerActivateConstruct:Start(29.9-delay, 1)

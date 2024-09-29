@@ -187,13 +187,13 @@ function mod:SPELL_AURA_APPLIED(args)
 				DBM.RangeCheck:Show(20)
 			end
 		end
-		if self:IsDifficulty("normal10") then
+		if self:IsDifficulty("normal10", "heroic10") then
 			timerOverwhelmingPower:Start(60, args.destName)
 		else
 			timerOverwhelmingPower:Start(35, args.destName)
 		end
 		if self.Options.SetIconOnOverwhelmingPower then
-			if self:IsDifficulty("normal10") then
+			if self:IsDifficulty("normal10", "heroic10") then
 				self:SetIcon(args.destName, 8, 60) -- skull for 60 seconds (until meltdown)
 			else
 				self:SetIcon(args.destName, 8, 35) -- skull for 35 seconds (until meltdown)

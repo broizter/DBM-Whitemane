@@ -114,7 +114,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		else
 			warnCrunchArmor:Show(args.destName, amount)
 		end
-		if self:IsDifficulty("normal10") then
+		if self:IsDifficulty("normal10", "heroic10") then
 			timerCrunch10:Start(args.destName)  -- We track duration timer only in 10-man since it's only 6sec and tanks don't switch.
 		end
 	end
@@ -133,7 +133,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerNextGrip:Cancel()
 		if not self.vb.disarmActive then
 			self.vb.disarmActive = true
-			if self:IsDifficulty("normal10") then
+			if self:IsDifficulty("normal10", "heroic10") then
 				timerTimeForDisarmed:Start(12)
 				self:Schedule(12, armReset, self)
 			else
@@ -145,7 +145,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerRespawnLeftArm:Start()
 		if not self.vb.disarmActive then
 			self.vb.disarmActive = true
-			if self:IsDifficulty("normal10") then
+			if self:IsDifficulty("normal10", "heroic10") then
 				timerTimeForDisarmed:Start(12)
 				self:Schedule(12, armReset, self)
 			else

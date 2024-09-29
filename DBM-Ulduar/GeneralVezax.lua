@@ -104,7 +104,7 @@ function mod:SPELL_CAST_START(args)
 		specWarnSearingFlames:Show(args.sourceName, kickCount)
 		specWarnSearingFlames:Play("kick"..kickCount.."r")
 		timerSearingFlamesCast:Start()
-		if self:IsDifficulty("normal10") then
+		if self:IsDifficulty("normal10", "heroic10") then
 			timerSearingFlamesCD:Start(15)
 		else
 			timerSearingFlamesCD:Start()

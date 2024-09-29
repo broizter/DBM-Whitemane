@@ -40,7 +40,7 @@ function mod:OnCombatStart(delay)
 	self.vb.catLives = 9
 	enrageTimer:Start(-delay)
 	timerSonicCD:Start(55-delay) -- 33s variance! (... ||| 10m Frostmourne 2022/08/09 || 25m Frostmourne 2022/09/07 || 25m Lordaeron 2022/10/09 || 25m Lordaeron 2022/10/30) 81, 61, 94... ||| 63.0 || 63.0 || 63.0 || 63.0
-	if self:IsDifficulty("normal10") then
+	if self:IsDifficulty("normal10", "heroic10") then
 		timerDefender:Start(48-delay, self.vb.catLives)
 		timerFearCD:Start(30.9-delay)
 	else
