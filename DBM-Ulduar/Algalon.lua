@@ -70,8 +70,8 @@ end
 function mod:SPELL_CAST_START(args)
 	if args:IsSpellID(64584, 64443) then	-- Big Bang
 		timerBigBangCast:Start()
-		timerNextBigBang:Start()
-		announcePreBigBang:Schedule(80)
+		timerNextBigBang:Start(90.5)
+		announcePreBigBang:Schedule(80.5)
 		specWarnBigBang:Show()
 		if self:IsTank() then
 			specWarnBigBang:Play("defensive")
