@@ -35,7 +35,7 @@ local specWarnDarkGlare			= mod:NewSpecialWarningDodge(63293, nil, nil, nil, 3, 
 local specWarnPlasmaBlast		= mod:NewSpecialWarningDefensive(64529, nil, nil, nil, 1, 2)
 local specWarnFrostBomb			= mod:NewSpecialWarningDodge(64623, nil, nil, nil, 1, 2)
 
-local timerEnrage 				= mod:NewBerserkTimer(480)
+local timerEnrage 				= mod:NewBerserkTimer(600)
 local timerHardmode				= mod:NewTimer(610, "TimerHardmode", 64582)
 local timerP1					= mod:NewTimer(8, "TimeToPhase1", nil, nil, nil, 6)
 local timerP1toP2				= mod:NewTimer(40, "TimeToPhase2", nil, nil, nil, 6)
@@ -171,7 +171,11 @@ end
 function mod:OnCombatStart(delay)
 	self.vb.phase = 0
 	self.vb.hardmode = false
-	timerEnrage:Start(-delay)
+	if self:IsDifficulty("heroic10", "heroic25") then
+		timerEnrage:Start(480-delay)
+	else
+		timerEnrage:Start(-delay)
+	end
 	timerP1:Start()
 	timerNextShockblast:Start(34.7-delay)
 	self.vb.is_spinningUp = false
