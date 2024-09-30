@@ -13,7 +13,7 @@ mod:RegisterEvents(
 )
 
 mod:RegisterEventsInCombat(
-	"SPELL_CAST_START 63631 64529 62997 64570 64623",
+	"SPELL_CAST_START 63631 64529 62997 64570 64623 64383",
 	"SPELL_CAST_SUCCESS 63027 63414 65192",
 	"SPELL_AURA_APPLIED 63666 65026 64529 62997",
 	"SPELL_AURA_REMOVED 63666 65026",
@@ -56,6 +56,7 @@ local timerNextFlames			= mod:NewNextTimer(30, 64566)
 local timerNextFrostBomb		= mod:NewNextTimer(30, 64623, nil, nil, nil, 3, nil, DBM_CORE_L.HEROIC_ICON)
 local timerBombExplosion		= mod:NewCastTimer(15, 65333, nil, nil, nil, 3)
 local timerBombBotSpawn			= mod:NewCDTimer(15, 63811)
+local timerSelfRepair			= mod:NewCastSourceTimer(15, 64383, nil, nil, nil, 7, nil, DBM_COMMON_L.IMPORTANT_ICON)
 
 mod:AddBoolOption("AutoChangeLootToFFA", true)
 mod:AddSetIconOption("SetIconOnNapalm", 65026, false, false, {1, 2, 3, 4, 5, 6, 7})
@@ -237,6 +238,12 @@ function mod:SPELL_CAST_START(args)
 		specWarnFrostBomb:Play("bombsoon")
 		timerBombExplosion:Start()
 		timerNextFrostBomb:Start()
+	elseif spellId == 64383 then -- Self Repair (phase 4)
+		if self:IsDifficulty("heroic10", "heroic25") then
+			timerSelfRepair:Start(10, args.sourceName)
+		else
+			timerSelfRepair:Start(args.sourceName)
+		end
 	end
 end
 
