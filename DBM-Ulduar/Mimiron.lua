@@ -33,7 +33,7 @@ local specWarnShockBlast		= mod:NewSpecialWarningRun(63631, nil, nil, nil, 4, 2)
 local specWarnRocketStrike		= mod:NewSpecialWarningDodge(64402, nil, nil, nil, 2, 2)
 local specWarnDarkGlare			= mod:NewSpecialWarningDodge(63293, nil, nil, nil, 3, 2)
 local specWarnPlasmaBlast		= mod:NewSpecialWarningDefensive(64529, nil, nil, nil, 1, 2)
-local specWarnFrostBomb			= mod:NewSpecialWarningDodge(64623, nil, nil, nil, 1, nil)
+local specWarnFrostBomb			= mod:NewSpecialWarningDodge(64623, nil, nil, nil, 1, 2)
 
 local timerEnrage 				= mod:NewBerserkTimer(480)
 local timerHardmode				= mod:NewTimer(610, "TimerHardmode", 64582)
@@ -230,7 +230,7 @@ function mod:SPELL_CAST_START(args)
 		timerNextFlameSuppressant:Start()
 	elseif spellId == 64623 then	-- Frost Bomb
 		specWarnFrostBomb:Show()
-		specWarnFrostBomb:Play("aesoon")
+		specWarnFrostBomb:Play("bombsoon")
 		timerBombExplosion:Start()
 		timerNextFrostBomb:Start()
 	end
