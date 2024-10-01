@@ -73,11 +73,7 @@ function mod:SPELL_CAST_START(args)
 		timerNextBigBang:Start(90.5)
 		announcePreBigBang:Schedule(80.5)
 		specWarnBigBang:Show()
-		if self:IsTank() then
-			specWarnBigBang:Play("defensive")
-		else
-			specWarnBigBang:Play("findshelter")
-		end
+		specWarnBigBang:Play("findshelter")
 	end
 end
 
