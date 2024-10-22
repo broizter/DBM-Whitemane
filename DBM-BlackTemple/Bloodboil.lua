@@ -37,7 +37,8 @@ local warnStrike		= mod:NewTargetNoFilterAnnounce(40491, 3, nil, "Tank", 2)
 
 local specWarnBlood		= mod:NewSpecialWarningStack(42005, nil, 1, nil, nil, 1, 2)
 
-local timerBloodCD		= mod:NewCDCountTimer(10, 42005, nil, nil, nil, 5, nil, DBM_COMMON_L.IMPORTANT_ICON) -- (Timewalking Frostmourne 2023-01-07) "Bloodboil-42005-npc:22948-406 = pull:9.5, 10.0, 10.0, 10.0, 10.0, 40.0, 10.0, 10.0, 10.0, 10.0, 10.0, 40.0, 10.0, 10.0, 10.0, 10.0, 10.0, 40.0, 10.0, 10.0, 10.0, 10.0, 10.0, 40.0"
+--[[ local timerBloodCD		= mod:NewCDCountTimer(10, 42005, nil, nil, nil, 5, nil, DBM_COMMON_L.IMPORTANT_ICON) ]]
+local timerBloodCD		= mod:NewCDTimer(10, 42005)
 local timerStrikeCD		= mod:NewCDCountTimer(20, 40491, nil, "Tank", 2, 5, nil, DBM_COMMON_L.TANK_ICON) -- (Timewalking Frostmourne 2023-01-07) "Bewildering Strike-40491-npc:22948-406 = pull:9.4, 20.0, 20.0, 50.0, 20.0, 20.0, 50.0, 20.0, 20.0, 50.0, 20.0, 20.0
 
 -- Stage Two: Fel Rage
@@ -55,12 +56,12 @@ local timerRageEnd		= mod:NewBuffActiveTimer(30, 40604, nil, nil, nil, 5, nil, D
 
 mod:AddInfoFrameOption(42005)
 
-mod.vb.bloodCount = 0
+--[[ mod.vb.bloodCount = 0 ]]
 mod.vb.strikeCount = 0
 
 function mod:OnCombatStart(delay)
 	self:SetStage(1)
-	self.vb.bloodCount = 0
+--[[ 	self.vb.bloodCount = 0 ]]
 	self.vb.strikeCount = 0
 	berserkTimer:Start(-delay)
 	warnRageSoon:Schedule(54.6-delay)
@@ -88,12 +89,13 @@ end
 function mod:SPELL_CAST_SUCCESS(args)
 	local spellId = args.spellId
 	if spellId == 42005 then
-		self.vb.bloodCount = self.vb.bloodCount + 1
+		timerBloodCD:Start(10)
+--[[ 		self.vb.bloodCount = self.vb.bloodCount + 1
 		if self.vb.bloodCount == 5 then
 			timerBloodCD:Start(40, 1)
 		else
-			timerBloodCD:Start(self.vb.bloodCount+1)
-		end
+			timerBloodCD:Start(10, self.vb.bloodCount+1)
+		end ]]
 	elseif spellId == 40491 then
 		self.vb.strikeCount = self.vb.strikeCount + 1
 		if self.vb.strikeCount == 3 then
@@ -107,13 +109,13 @@ end
 
 function mod:SPELL_AURA_APPLIED(args)
 	local spellId = args.spellId
-	if spellId == 42005 then
+--[[ 	if spellId == 42005 then
 		warnBlood:CombinedShow(0.8, args.destName)
 		if args:IsPlayer() then
 			specWarnBlood:Show(args.amount)
 			specWarnBlood:Play("targetyou")
 		end
-	elseif spellId == 40481 then
+else ]]if spellId == 40481 then
 		local amount = args.amount or 1
 		if (amount % 5 == 0) then
 			warnWound:Show(args.destName, amount)
