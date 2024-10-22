@@ -59,6 +59,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		self:Schedule(0.5, showCrushedTargets, self)
 	elseif args.spellId == 40251 then
 		timerDeath:Start(args.destName)
+		timerDeathCD:Start()
 		if args:IsPlayer() then
 			specWarnDeath:Show()
 			specWarnDeath:Play("targetyou")
@@ -88,7 +89,5 @@ end
 function mod:SPELL_CAST_SUCCESS(args)
 	if args.spellId == 40239 then
 		warnIncinerate:Show()
-	elseif args.spellId == 40251 then
-		timerDeathCD:Start()
 	end
 end
