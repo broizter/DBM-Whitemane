@@ -11,7 +11,7 @@ mod:SetMinSyncRevision(20230108000000)
 mod:RegisterCombat("combat")
 
 mod:RegisterEventsInCombat(
-	"CHAT_MSG_RAID_BOSS_WHISPER"
+	"CHAT_MSG_RAID_BOSS_EMOTE"
 )
 
 --TODO, see if CLEU method is reliable enough to scrap scan method. scan method may still have been faster.
@@ -88,7 +88,7 @@ function mod:SPELL_DAMAGE(_, _, _, destGUID, _, _, spellId)
 end
 mod.SPELL_MISSED = mod.SPELL_DAMAGE
 
-function mod:CHAT_MSG_RAID_BOSS_WHISPER(msg)
+function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
 	if msg == L.PhaseKite or msg:find(L.PhaseKite) then
 		self:SetStage(2)
 		warnPhase:Show(L.Kite)
