@@ -23,7 +23,7 @@ local warnSorc			= mod:NewAnnounce("warnAshtongueSorcerer", 2, 40520)
 
 local specWarnAdds		= mod:NewSpecialWarningAddsCustom(42035, "-Healer", nil, nil, 1, 2)
 
-local timerCombatStart	= mod:NewCombatTimer(12)
+local timerCombatStart	= mod:NewCombatTimer(11)
 local timerAddsCD		= mod:NewAddsCustomTimer(25, 42035)--NewAddsCustomTimer
 local timerDefenderCD	= mod:NewTimer(25, "timerAshtongueDefender", 41180, nil, nil, 1)
 local timerSorcCD		= mod:NewTimer(25, "timerAshtongueSorcerer", 40520, nil, nil, 1)
@@ -64,19 +64,19 @@ local function defenderLoop(self)
 	timerDefenderCD:Start(30)
 end
 
-function mod:OnCombatStart()
+local function combatStart(self)
 	self:SetStage(1)
-	self.vb.AddsWestCount = 0
+--[[ 	self.vb.AddsWestCount = 0 ]]
 	self:RegisterShortTermEvents(
 		"SWING_DAMAGE",
 		"SWING_MISSED",
 		"UNIT_SPELLCAST_SUCCEEDED"
 	)
-	self:Schedule(1, defenderLoop, self)
+--[[ 	self:Schedule(1, defenderLoop, self)
 	self:Schedule(1, sorcLoop, self)
 	self:Schedule(1, addsWestLoop, self)
 	self:Schedule(18, addsEastLoop, self)
-	timerAddsCD:Start(18, DBM_COMMON_L.EAST or "East")
+	timerAddsCD:Start(18, DBM_COMMON_L.EAST or "East") ]]
 end
 
 function mod:OnCombatEnd()
@@ -88,6 +88,7 @@ function mod:SPELL_AURA_REMOVED(args)
 	local spellId = args.spellId
 	if spellId == 34189 and args:GetDestCreatureID() == 23191 then--Coming out of stealth (he's been activated)
 		timerCombatStart:Start()
+		self:Schedule(15, combatStart, self)
 	end
 end
 
