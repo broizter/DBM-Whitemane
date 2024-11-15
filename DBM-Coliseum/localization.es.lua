@@ -16,19 +16,18 @@ L:SetWarningLocalization({
 })
 
 L:SetTimerLocalization({
-	TimerNextBoss		= "Siguiente jefe"
---	TimerEmerge			= "Emersión",
---	TimerSubmerge		= "Sumersión"
+	TimerNextBoss		= "Siguiente jefe",
+	TimerEmerge			= "Emersión",
+	TimerSubmerge		= "Sumersión"
 })
 
 L:SetOptionLocalization({
-	soundConcAuraMastery= "Reproducir el sonido de $spell:31821 para anular los efectos de $spelll:66330 (sólo para el |cFFF48CBAPaladín|r que es el propietario de $spell:19746)",
 	WarningSnobold		= "Mostrar aviso cuando aparezca un Vasallo snóbold",
 	PingCharge			= "Pulsar en el Minimapa si Aullahielo va a por Ti",
 	ClearIconsOnIceHowl	= "Quitar todos los iconos antes de cada carga",
 	TimerNextBoss		= "Mostrar temporizador para el siguiente jefe",
---	TimerEmerge			= "Mostrar temporizador para cuando Fauceácida y Aterraescama regresen a la superficie",
---	TimerSubmerge		= "Mostrar temporizador para cuando Fauceácida y Aterraescama se sumerjan en la tierra",
+	TimerEmerge			= "Mostrar temporizador para cuando Fauceácida y Aterraescama regresen a la superficie",
+	TimerSubmerge		= "Mostrar temporizador para cuando Fauceácida y Aterraescama se sumerjan en la tierra",
 	IcehowlArrow		= "Mostrar flecha cuando Aullahielo vaya a cargar hacia ti"
 })
 
@@ -97,7 +96,7 @@ L:SetMiscLocalization({
 	Tyrius				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:32:64:64:96|t Tyrius Hoja Umbría",			-- 34461
 	Kavina				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:95:126.5:0:32|t Kavina Canto Arboleda",	-- 34460
 	Melador				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:95:126.5:0:32|t Melador Caminavalles",		-- 34469
-	Alyssia				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:32:64|t Alyssia Acechalunas",			-- 34467
+	Alyssia             = "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:32:64|t Alyssia Acechalunas",			-- 34467
 	Noozle				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:32:63.5:0:32|t Noozle Varapalo",			-- 34468
 	Baelnor				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:64:96|t Baelnor Portador de la Luz",	-- 34471
 	Velanaa				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:64:96|t Velanaa",						-- 34465
@@ -130,6 +129,11 @@ L:SetGeneralLocalization({
 	name = "Gemelas Val'kyr"
 })
 
+L:SetTimerLocalization({
+	TimerSpecialSpell	= "Siguiente facultad especial",
+	TimerAnubRoleplay	= "El piso se rompe en"
+})
+
 L:SetWarningLocalization({
 	WarnSpecialSpellSoon		= "Facultad especial en breve",
 	SpecWarnSpecial				= "Cambia de color",
@@ -139,9 +143,14 @@ L:SetWarningLocalization({
 	WarningPoweroftheTwins2		= "Poder de las Gemelas - ¡más sanación en >%s<!"
 })
 
-L:SetTimerLocalization({
-	TimerSpecialSpell			= "Siguiente facultad especial",
-	TimerAnubRoleplay			= "El piso se rompe en"
+L:SetMiscLocalization({
+--	YellPull 	= "En el nombre de nuestro oscuro maestro. Por el Rey Exánime. Morirás.",
+--	CombatStart	= "Solo superaréis el reto final si trabajáis juntos. Desde las profundidades de Corona de Hielo, llegan dos de los tenientes más poderosos de la Plaga: las temibles Val'kyr, presagistas aladas del Rey Exánime.",	-- esES
+--	CombatStart	= "Sólo trabajando juntos superarán el desafío final. De las profundidades de Corona de Hielo llegan estos poderosos tenientes de la Plaga: ¡los val'kyres, heraldos alados del Rey Exánime!",	-- esMX
+	Fjola		= "Fjola Penívea",
+	Eydis		= "Eydis Penaumbra",
+	AnubRP		= "¡Se ha asestado un gran golpe al Rey Exánime! Habéis demostrado ser diestros campeones de la Cruzada Argenta. ¡Juntos atacaremos la Ciudadela de la Corona de Hielo y acabaremos con lo que queda de la Plaga! ¡No hay ningún reto al que no podamos enfrentarnos si estamos unidos!" -- esES
+--	AnubRP		= "¡El Rey Exánime ha sufrido un poderoso revés! Han demostrado ser campeones dignos de la Cruzada Argenta. ¡Juntos atacaremos la Ciudadela Corona de Hielo y destruiremos lo que queda de la Plaga! ¡No existe el desafío que no podamos enfrentar unidos!"	-- esMX
 })
 
 L:SetOptionLocalization({
@@ -157,31 +166,20 @@ L:SetOptionLocalization({
 	WarningPoweroftheTwins2		= "Anunciar la gemela afectada por $spell:65916"
 })
 
-L:SetMiscLocalization({
---	YellPull	= "En el nombre de nuestro oscuro maestro. Por el Rey Exánime. Morirás.",
---	CombatStart	= "Solo superaréis el reto final si trabajáis juntos. Desde las profundidades de Corona de Hielo, llegan dos de los tenientes más poderosos de la Plaga: las temibles Val'kyr, presagistas aladas del Rey Exánime.",	-- esES
---	CombatStart	= "Sólo trabajando juntos superarán el desafío final. De las profundidades de Corona de Hielo llegan estos poderosos tenientes de la Plaga: ¡los val'kyres, heraldos alados del Rey Exánime!",	-- esMX
-	Fjola		= "Fjola Penívea",
-	Eydis		= "Eydis Penaumbra",
-	ValksRP		= "¡Que comiencen los juegos!", -- 35709
-	AnubRP		= "¡Se ha asestado un gran golpe al Rey Exánime! Habéis demostrado ser diestros campeones de la Cruzada Argenta. ¡Juntos atacaremos la Ciudadela de la Corona de Hielo y acabaremos con lo que queda de la Plaga! ¡No hay ningún reto al que no podamos enfrentarnos si estamos unidos!" -- esES
---	AnubRP		= "¡El Rey Exánime ha sufrido un poderoso revés! Han demostrado ser campeones dignos de la Cruzada Argenta. ¡Juntos atacaremos la Ciudadela Corona de Hielo y destruiremos lo que queda de la Plaga! ¡No existe el desafío que no podamos enfrentar unidos!"	-- esMX
-})
-
 ---------------
 -- Anub'arak --
 ---------------
 L = DBM:GetModLocalization("Anub'arak_Coliseum")
 
 L:SetGeneralLocalization({
-	name					= "Anub'arak"
+	name 					= "Anub'arak"
 })
 
---L:SetTimerLocalization({
---	TimerEmerge				= "Emersión",
---	TimerSubmerge			= "Sumersión",
---	timerAdds				= "Siguientes esbirros"
---})
+L:SetTimerLocalization({
+	TimerEmerge				= "Emersión",
+	TimerSubmerge			= "Sumersión",
+	timerAdds				= "Siguientes esbirros"
+})
 
 L:SetWarningLocalization({
 	WarnEmerge				= "Anub'arak regresa a la superficie",
@@ -207,9 +205,9 @@ L:SetOptionLocalization({
 	WarnSubmerge			= "Mostrar aviso cuando Anub'arak se entierre en el suelo",
 	WarnSubmergeSoon		= "Mostrar aviso previo para cuando Anub'arak se entierre en el suelo",
 	warnAdds				= "Anunciar cuando aparezcan esbirros",
---	timerAdds				= "Mostrar temporizador para los siguientes esbirros",
---	TimerEmerge				= "Mostrar temporizador para cuando Anub'arak regrese a la superficie",
---	TimerSubmerge			= "Mostrar temporizador para cuando Anub'arak se entierre en el suelo",
+	timerAdds				= "Mostrar temporizador para los siguientes esbirros",
+	TimerEmerge				= "Mostrar temporizador para cuando Anub'arak regrese a la superficie",
+	TimerSubmerge			= "Mostrar temporizador para cuando Anub'arak se entierre en el suelo",
 	AnnouncePColdIcons		= "Anunciar iconos de los objetivos de $spell:66013 en el chat de banda (requiere líder o ayudante)",
 	AnnouncePColdIconsRemoved	= "Anunciar iconos quitados de los objetivos de $spell:66013 (requiere que la opción anterior esté habilitada)",
 	RemoveHealthBuffsInP3	= "Quitar bufos de vida al inicio de la fase 3"

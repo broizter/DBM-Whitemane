@@ -16,19 +16,18 @@ L:SetWarningLocalization({
 })
 
 L:SetTimerLocalization({
-	TimerNextBoss		= "Прибытие следующего босса"
---	TimerEmerge			= "Появление",
---	TimerSubmerge		= "Зарывание"
+	TimerNextBoss		= "Прибытие следующего босса",
+	TimerEmerge			= "Появление",
+	TimerSubmerge		= "Зарывание"
 })
 
 L:SetOptionLocalization({
-	soundConcAuraMastery= "Воспроизвести звук $spell:31821, чтобы отменить эффекты $spell:66330 (только для |cFFF48CBAПаладин|r, который является владельцем $spell:19746)",
 	WarningSnobold		= "Предупреждение о призыве Снобольда-вассала",
 	PingCharge			= "Показать на миникарте место, куда попадает Ледяной Рев, если он избрал вас целью",
 	ClearIconsOnIceHowl	= "Снимать все иконки перед Топотом",
 	TimerNextBoss		= "Отсчет времени до появления следующего противника",
---	TimerEmerge			= "Отсчет времени до появления",
---	TimerSubmerge		= "Отсчет времени до зарывания",
+	TimerEmerge			= "Отсчет времени до появления",
+	TimerSubmerge		= "Отсчет времени до зарывания",
 	IcehowlArrow		= "Показывать стрелку, когда Ледяной Рев готовится сделать рывок на цель рядом с вами"
 })
 
@@ -90,7 +89,7 @@ L:SetMiscLocalization({
 	Tyrius				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:32:64:64:96|t Тирий Клинок Сумерек",			-- 34461
 	Kavina				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:95:126.5:0:32|t Кавина Песня Рощи",			-- 34460
 	Melador				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:95:126.5:0:32|t Меладор Дальний Гонец",		-- 34469
-	Alyssia				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:32:64|t Алисса Лунопард",					-- 34467
+	Alyssia             = "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:32:64|t Алисса Лунопард",					-- 34467
 	Noozle				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:32:63.5:0:32|t Нуззл Чудодей",					-- 34468
 	Baelnor				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:64:96|t Бельнор Светоносный",				-- 34471
 	Velanaa				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:64:96|t Веланаа",							-- 34465
@@ -116,6 +115,11 @@ L:SetGeneralLocalization({
 	name = "Валь'киры-близнецы"
 })
 
+L:SetTimerLocalization({
+	TimerSpecialSpell	= "Следующая спец-способность",
+	TimerAnubRoleplay	= "Представление перед падением"
+})
+
 L:SetWarningLocalization({
 	WarnSpecialSpellSoon		= "Скоро спец-способность",
 	SpecWarnSpecial				= "Смена цвета",
@@ -125,9 +129,12 @@ L:SetWarningLocalization({
 	WarningPoweroftheTwins2		= "Сила близнецов - больше исцеления на |3-3(>%s<)",
 })
 
-L:SetTimerLocalization({
-	TimerSpecialSpell			= "Следующая спец-способность",
-	TimerAnubRoleplay			= "Представление перед падением"
+L:SetMiscLocalization({
+--	YellPull	= "Во имя темного повелителя. Во имя Короля-лича. Вы. Умрете.",
+--	CombatStart	= "Лишь сплотившись, вы сможете пройти последнее испытание. Из глубин Ледяной Короны навстречу вам подымаются две могучие воительницы Плети: жуткие валь'киры, крылатые вестницы Короля-лича!",
+	Fjola		= "Фьола Погибель Света",
+	Eydis		= "Эйдис Погибель Тьмы",
+	AnubRP		= "Король-лич понес тяжелую потерю! Вы проявили себя как бесстрашные герои Серебряного Авангарда! Мы вместе нанесем удар по Цитадели Ледяной Короны и разнесем в клочья остатки Плети! Нет такого испытания, которое мы бы не могли пройти сообща!"
 })
 
 L:SetOptionLocalization({
@@ -143,15 +150,6 @@ L:SetOptionLocalization({
 	WarningPoweroftheTwins2		= "Объявлять цель под воздействем Силы близнецов",
 })
 
-L:SetMiscLocalization({
---	YellPull	= "Во имя темного повелителя. Во имя Короля-лича. Вы. Умрете.",
---	CombatStart	= "Лишь сплотившись, вы сможете пройти последнее испытание. Из глубин Ледяной Короны навстречу вам подымаются две могучие воительницы Плети: жуткие валь'киры, крылатые вестницы Короля-лича!",
-	Fjola		= "Фьола Погибель Света",
-	Eydis		= "Эйдис Погибель Тьмы",
-	ValksRP		= "Пусть состязания начнутся!", -- 35709
-	AnubRP		= "Король-лич понес тяжелую потерю! Вы проявили себя как бесстрашные герои Серебряного Авангарда! Мы вместе нанесем удар по Цитадели Ледяной Короны и разнесем в клочья остатки Плети! Нет такого испытания, которое мы бы не могли пройти сообща!"
-})
-
 -----------------
 --  Anub'arak  --
 -----------------
@@ -161,11 +159,11 @@ L:SetGeneralLocalization({
 	name					= "Ануб'арак"
 })
 
---L:SetTimerLocalization({
---	TimerEmerge				= "Появление через",
---	TimerSubmerge			= "Зарывание через",
---	timerAdds				= "Призыв помощников через"
---})
+L:SetTimerLocalization({
+	TimerEmerge				= "Появление через",
+	TimerSubmerge			= "Зарывание через",
+	timerAdds				= "Призыв помощников через"
+})
 
 L:SetWarningLocalization({
 	WarnEmerge				= "Ануб'арак появляется",
@@ -190,10 +188,10 @@ L:SetOptionLocalization({
 	WarnSubmerge			= "Предупреждение о зарывании",
 	WarnSubmergeSoon		= "Предупреждать заранее о зарывании",
 	warnAdds				= "Предупреждение о призыве помощников",
---	timerAdds				= "Отсчет времени до призыва помощников",
---	TimerEmerge				= "Отсчет времени до появления",
---	TimerSubmerge			= "Отсчет времени до зарывания",
-	AnnouncePColdIcons		= "Объявлять метки целей заклинания $spell:68510 в рейд-чат (требуются права лидера или помощника)",
-	AnnouncePColdIconsRemoved	= "Объявлять также о снятии меток с целей заклинания $spell:68510 (требуется предыдущая опция)",
+	timerAdds				= "Отсчет времени до призыва помощников",
+	TimerEmerge				= "Отсчет времени до появления",
+	TimerSubmerge			= "Отсчет времени до зарывания",
+	AnnouncePColdIcons		= "Объявлять метки целей заклинания $spell:68510 в рейд-чат<br/>(требуются права лидера или помощника)",
+	AnnouncePColdIconsRemoved	= "Объявлять также о снятии меток с целей заклинания $spell:68510<br/>(требуется предыдущая опция)",
 	RemoveHealthBuffsInP3	= "Удалять усиления здоровья в начале фазы 3"
 })

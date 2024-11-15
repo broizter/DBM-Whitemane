@@ -16,19 +16,18 @@ L:SetWarningLocalization({
 })
 
 L:SetTimerLocalization({
-	TimerNextBoss		= "Nächster Boss"
---	TimerEmerge			= "Auftauchen",
---	TimerSubmerge		= "Abtauchen"
+	TimerNextBoss		= "Nächster Boss",
+	TimerEmerge			= "Auftauchen",
+	TimerSubmerge		= "Abtauchen"
 })
 
 L:SetOptionLocalization({
-	soundConcAuraMastery= "Spielt den Sound von $spell:31821, um die Effekte von $spell:66330 zu negieren (nur für den |cFFF48CBAPaladin|r, der der Besitzer von $spell:19746 ist)",
 	WarningSnobold		= "Zeige Warnung, wenn ein Schneeboldvasall erscheint",
 	PingCharge			= "Ping die Minimap wenn Eisheuler dich niedertrampeln will",
 	ClearIconsOnIceHowl	= "Entferne alle Zeichen vor dem Trampeln",
 	TimerNextBoss		= "Zeige Zeit bis zum Erscheinen des nächsten Bosses",
---	TimerEmerge			= "Zeige Zeit bis Auftauchen",
---	TimerSubmerge		= "Zeige Zeit bis Abtauchen",
+	TimerEmerge			= "Zeige Zeit bis Auftauchen",
+	TimerSubmerge		= "Zeige Zeit bis Abtauchen",
 	IcehowlArrow		= "Zeige DBM-Pfeil, wenn Eisheuler jemand in deiner Nähe niedertrampeln will"
 })
 
@@ -90,7 +89,7 @@ L:SetMiscLocalization({
 	Tyrius				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:32:64:64:96|t Tyrius Dämmerklinge",		-- 34461
 	Kavina				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:95:126.5:0:32|t Kavina Haineslied",		-- 34460
 	Melador				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:95:126.5:0:32|t Melador Talwanderer",		-- 34469
-	Alyssia				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:32:64|t Alyssia Mondpirscher",		-- 34467
+	Alyssia             = "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:32:64|t Alyssia Mondpirscher",		-- 34467
 	Noozle				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:32:63.5:0:32|t Noozle Zischelstock",		-- 34468
 	Baelnor				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:64:96|t Baelnor Lichtträger",			-- 34471
 	Velanaa				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:64:96|t Velanaa",						-- 34465
@@ -102,9 +101,9 @@ L:SetMiscLocalization({
 	Serissa				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:95:126.5:32:64|t Serissa Düsterhauch",		-- 34474
 	Shocuul				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:0:32|t Shocuul",						-- 34475
 
-	AllianceVictory		= "EHRE DER ALLIANZ!",
-	HordeVictory		= "Das ist nur ein Vorgeschmack auf die Zukunft. FÜR DIE HORDE!"
-	--YellKill			= "Ein tragischer Sieg. Wir wurden schwächer durch die heutigen Verluste. Wer außer dem Lichkönig profitiert von solchen Torheiten? Große Krieger gaben ihr Leben. Und wofür? Die wahre Bedrohung erwartet uns noch - der Lichkönig erwartet uns alle im Tod."
+	AllianceVictory    = "EHRE DER ALLIANZ!",
+	HordeVictory       = "Das ist nur ein Vorgeschmack auf die Zukunft. FÜR DIE HORDE!"
+	--YellKill           = "Ein tragischer Sieg. Wir wurden schwächer durch die heutigen Verluste. Wer außer dem Lichkönig profitiert von solchen Torheiten? Große Krieger gaben ihr Leben. Und wofür? Die wahre Bedrohung erwartet uns noch - der Lichkönig erwartet uns alle im Tod."
 })
 
 ---------------------
@@ -116,6 +115,11 @@ L:SetGeneralLocalization({
 	name = "Zwillingsval'kyr"
 })
 
+L:SetTimerLocalization({
+	TimerSpecialSpell	= "Nächste Spezialfähigkeit",
+	TimerAnubRoleplay	= "Bodeneinbrüche in"
+})
+
 L:SetWarningLocalization({
 	WarnSpecialSpellSoon		= "Spezialfähigkeit bald",
 	SpecWarnSpecial				= "Farbe wechseln",
@@ -125,9 +129,12 @@ L:SetWarningLocalization({
 	WarningPoweroftheTwins2		= "Macht der Zwillinge - Mehr Heilung auf >%s<"
 })
 
-L:SetTimerLocalization({
-	TimerSpecialSpell	= "Nächste Spezialfähigkeit",
-	TimerAnubRoleplay	= "Bodeneinbrüche in"
+L:SetMiscLocalization({
+--	YellPull	= "Im Namen unseres dunklen Meisters. Für den Lichkönig. Ihr. Werdet. Sterben.",
+--	CombatStart	= "Nur gemeinsam werdet Ihr den letzten Kampf meistern. Aus den Tiefen Eiskrones stammen diese zwei der mächtigsten Kommandanten der Geißel: schreckliche Val'kyr, geflügelte Boten des Lichkönigs!",
+	Fjola		= "Fjola Lichtbann",
+	Eydis		= "Eydis Nachtbann",
+	AnubRP		= "Dem Lichkönig wurde ein schwerer Schlag versetzt! Ihr habt Euch als würdige Champions erwiesen. Gemeinsam werden wir den Angriff auf die Eiskronenzitadelle durchführen und den Rest der Geißel zerstören! Gemeinsam meistern wir alles!"
 })
 
 L:SetOptionLocalization({
@@ -143,29 +150,20 @@ L:SetOptionLocalization({
 	WarningPoweroftheTwins2		= "Verkünde Ziele von Macht der Zwillinge"
 })
 
-L:SetMiscLocalization({
---	YellPull	= "Im Namen unseres dunklen Meisters. Für den Lichkönig. Ihr. Werdet. Sterben.",
---	CombatStart	= "Nur gemeinsam werdet Ihr den letzten Kampf meistern. Aus den Tiefen Eiskrones stammen diese zwei der mächtigsten Kommandanten der Geißel: schreckliche Val'kyr, geflügelte Boten des Lichkönigs!",
-	Fjola		= "Fjola Lichtbann",
-	Eydis		= "Eydis Nachtbann",
-	ValksRP		= "Lasst die Spiele beginnen!", -- 35709
-	AnubRP		= "Dem Lichkönig wurde ein schwerer Schlag versetzt! Ihr habt Euch als würdige Champions erwiesen. Gemeinsam werden wir den Angriff auf die Eiskronenzitadelle durchführen und den Rest der Geißel zerstören! Gemeinsam meistern wir alles!"
-})
-
 -----------------
 --  Anub'arak  --
 -----------------
 L = DBM:GetModLocalization("Anub'arak_Coliseum")
 
 L:SetGeneralLocalization({
-	name					= "Anub'arak"
+	name 					= "Anub'arak"
 })
 
---L:SetTimerLocalization({
---	TimerEmerge				= "Auftauchen",
---	TimerSubmerge			= "Abtauchen",
---	timerAdds				= "Neue Adds"
---})
+L:SetTimerLocalization({
+	TimerEmerge				= "Auftauchen",
+	TimerSubmerge			= "Abtauchen",
+	timerAdds				= "Neue Adds"
+})
 
 L:SetWarningLocalization({
 	WarnEmerge				= "Auftauchen",
@@ -190,9 +188,9 @@ L:SetOptionLocalization({
 	WarnSubmerge			= "Zeige Warnung für Abtauchen",
 	WarnSubmergeSoon		= "Zeige Vorwarnung für Abtauchen",
 	warnAdds				= "Verkünde neue Adds",
---	timerAdds				= "Zeige Zeit bis neue Adds erscheinen",
---	TimerEmerge				= "Zeige Zeit bis Auftauchen",
---	TimerSubmerge			= "Zeige Zeit bis Abtauchen",
+	timerAdds				= "Zeige Zeit bis neue Adds erscheinen",
+	TimerEmerge				= "Zeige Zeit bis Auftauchen",
+	TimerSubmerge			= "Zeige Zeit bis Abtauchen",
 	AnnouncePColdIcons		= "Verkünde Zeichen für Ziele von $spell:66013 im Schlachtzugchat (nur als Leiter)",
 	AnnouncePColdIconsRemoved	= "Verkünde auch das Entfernen von Zeichen für $spell:66013 (benötigt obige Einstellung)",
 	RemoveHealthBuffsInP3	= "Entferne lebenspunktesteigernde Buffs in Phase 3"

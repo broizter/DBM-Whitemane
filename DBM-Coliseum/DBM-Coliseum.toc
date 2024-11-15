@@ -13,7 +13,6 @@
 ## SavedVariablesPerCharacter: DBMColiseum_SavedStats
 ## X-DBM-Mod: 1
 ## X-DBM-Mod-Category: WOTLK
-## X-DBM-StatTypes: normal,normal25,heroic,heroic25
 ## X-DBM-Mod-Name: Crusader's Coliseum
 ## X-DBM-Mod-Name-koKR: 십자군의 시험장
 ## X-DBM-Mod-Name-deDE: Kolosseum der Kreuzfahrer
@@ -24,7 +23,6 @@
 ## X-DBM-Mod-Name-esES: Coliseo de los Cruzados
 ## X-DBM-Mod-Name-esMX: Coliseo de los Cruzados
 ## X-DBM-Mod-Sort: 2
-## X-DBM-Mod-MapID: 544
 ## X-DBM-Mod-LoadZone: Trial of the Crusader
 ## X-DBM-Mod-LoadZone-koKR: 십자군의 시험장
 ## X-DBM-Mod-LoadZone-deDE: Prüfung des Kreuzfahrers

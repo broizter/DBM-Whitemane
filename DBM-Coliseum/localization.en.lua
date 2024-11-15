@@ -9,31 +9,45 @@ L:SetGeneralLocalization({
 	name = "Northrend Beasts"
 })
 
-L:SetWarningLocalization({
-	WarningSnobold		= "Snobold Vassal spawned on >%s<"
+L:SetTimerLocalization({
+	TimerIcehowlSpawn	= "Icehowl spawns",
+	TimerPrePot		= "Prepot",
+	TimerCombatStart	= "Boss activates",
+	TimerNextBoss		= "Next boss",
+	TimerEmerge			= "Emerge",
+	TimerSubmerge		= "Submerge"
 })
 
-L:SetTimerLocalization({
-	TimerNextBoss		= "Next boss"
---	TimerEmerge			= "Emerge",
---	TimerSubmerge		= "Submerge"
-})
+L:SetWarningLocalization{
+	SpecialWarningAnger3		= "Rising Anger >%d<",
+	WarningSnobold				= "Snobold Vassal spawned"
+}
 
 L:SetOptionLocalization({
-	soundConcAuraMastery= "Play $spell:31821 sound to negate the effects of $spell:66330 (only for the |cFFF48CBAPaladin|r that is the owner of $spell:19746)",
-	WarningSnobold		= "Show warning for Snobold Vassal spawns",
+	TimerPrePot				= "Show prepot timer on first pull",
+	TimerCombatStart			= "Show a timer for when the next boss becomes active",
+	TimerIcehowlSpawn			= "Show timer for when Icehowl spawns",
+	WarningSnobold				= "Show warning for Snobold Vassal spawns",
 	PingCharge			= "Ping the minimap when Icehowl is about to charge you",
 	ClearIconsOnIceHowl	= "Clear all icons before charge",
 	TimerNextBoss		= "Show timer for next boss spawn",
---	TimerEmerge			= "Show timer for emerge",
---	TimerSubmerge		= "Show timer for submerge",
+	TimerEmerge			= "Show timer for emerge",
+	TimerSubmerge		= "Show timer for submerge",
+	SpecialWarningAnger3		= "Show special warning for Rising Anger (>=3 stacks)",
+	YellOnCharge				= "Yell on Icehowl charge",
+	SetIconOnChargeTarget		= "Set icons on charge targets (skull)",
+	SetIconOnBileTarget			= "Set icons on Burning Bile targets",
+	RangeFrame                  = "Show range frame in Phase 2",
 	IcehowlArrow		= "Show DBM arrow when Icehowl is about to charge near you"
 })
 
 L:SetMiscLocalization({
+	PrePot				= "Welcome, champions! You have heard the call of the Argent Crusade and you have boldly answered! It is here, in the Crusaders' Coliseum, that you will face your greatest challenges. Those of you who survive the rigors of the coliseum will join the Argent Crusade on its march to Icecrown Citadel.",
 	Charge				= "^%%s glares at (%S+) and lets out",
 	CombatStart			= "Hailing from the deepest, darkest caverns of the Storm Peaks, Gormok the Impaler! Battle on, heroes!",
 	Phase2				= "Steel yourselves, heroes, for the twin terrors, Acidmaw and Dreadscale, enter the arena!",
+	Submerge			= "^%%s buries itself in the earth!",
+	Emerge 				= "^%%s getting out of the ground!",
 	Phase3				= "The air itself freezes with the introduction of our next combatant, Icehowl! Kill or be killed, champions!",
 	Gormok				= "Gormok the Impaler",
 	Acidmaw				= "Acidmaw",
@@ -46,18 +60,48 @@ L:SetMiscLocalization({
 ---------------------
 L = DBM:GetModLocalization("Jaraxxus")
 
-L:SetGeneralLocalization({
+L:SetGeneralLocalization{
 	name = "Lord Jaraxxus"
-})
+}
 
-L:SetOptionLocalization({
-	IncinerateShieldFrame	= "Show boss health with a health bar for Incinerate Flesh"
-})
+L:SetWarningLocalization{
+	WarnNetherPower				= "Nether Power on Lord Jaraxxus - Dispel now",
+	SpecWarnTouch				= "Touch of Jaraxxus on you",
+	SpecWarnTouchNear			= "Touch of Jaraxxus on %s near you",
+	SpecWarnNetherPower			= "Dispel now",
+	SpecWarnFelFireball			= "Fel Fireball - Interrupt now"
+}
 
-L:SetMiscLocalization({
-	IncinerateTarget		= "Incinerate Flesh: %s",
-	FirstPull				= "Grand Warlock Wilfred Fizzlebang will summon forth your next challenge. Stand by for his entry."
-})
+L:SetTimerLocalization{
+	TimerCombatStart		= "Combat starts"
+}
+
+L:SetMiscLocalization{
+	WhisperFlame		= "Legion Flame on you",
+	IncinerateTarget	= "Incinerate Flesh: %s"
+}
+
+L:SetOptionLocalization{
+	TimerCombatStart			= "Show time for start of combat",
+	WarnNetherPower				= "Show warning when Lord Jaraxxus gains Nether Power (to dispel/steal)",
+	SpecWarnTouch				= "Show special warning when you are affected by Touch of Jaraxxus",
+	SpecWarnTouchNear			= "Show special warning for Touch of Jaraxxus near you",
+	SpecWarnNetherPower			= "Show special warning for Nether Power (to dispel/steal)",
+	SpecWarnFelFireball			= "Show special warning for Fel Fireball (to interrupt)",
+	TouchJaraxxusIcon			= "Set icons on Touch of Jaraxxus targets",
+	IncinerateFleshIcon			= "Set icons on Incinerate Flesh targets",
+	LegionFlameIcon				= "Set icons on Legion Flame targets",
+	LegionFlameWhisper			= "Send whisper to Legion Flame targets",
+	YellOnTouch				= "Yell on Touch of Jaraxxus",
+	IncinerateShieldFrame		= "Show boss health with a health bar for Incinerate Flesh"
+}
+
+L:SetMiscLocalization{
+	FirstPull	= "Grand Warlock Wilfred Fizzlebang will summon forth your next challenge. Stand by for his entry.",
+	Aggro = "You face Jaraxxus, Eredar Lord of the Burning Legion!",
+	PortalSpawn = "Come forth, sister! Your master calls!",
+	VolcanoSpawn = "IN-FER-NO!"
+}
 
 -------------------------
 --  Faction Champions  --
@@ -73,6 +117,14 @@ end
 
 L:SetGeneralLocalization({
 	name = champions
+})
+
+L:SetTimerLocalization({
+	TimerSpawnTimer	= "Champions spawn"
+})
+
+L:SetOptionLocalization({
+	TimerSpawnTimer			= "Show timer until champions spawn"
 })
 
 L:SetMiscLocalization({
@@ -95,7 +147,7 @@ L:SetMiscLocalization({
 	Tyrius				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:32:64:64:96|t Tyrius Duskblade",			-- 34461
 	Kavina				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:95:126.5:0:32|t Kavina Grovesong",			-- 34460
 	Melador				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:95:126.5:0:32|t Melador Valestrider",		-- 34469
-	Alyssia				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:32:64|t Alyssia Moonstalker",			-- 34467
+	Alyssia             = "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:32:64|t Alyssia Moonstalker",			-- 34467
 	Noozle				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:32:63.5:0:32|t Noozle Whizzlestick",		-- 34468
 	Baelnor				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:64:96|t Baelnor Lightbearer",			-- 34471
 	Velanaa				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:64:96|t Velanaa",						-- 34465
@@ -107,9 +159,10 @@ L:SetMiscLocalization({
 	Serissa				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:95:126.5:32:64|t Serissa Grimdabbler",		-- 34474
 	Shocuul				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:0:32|t Shocuul",						-- 34475
 
-	AllianceVictory		= "GLORY TO THE ALLIANCE!",
-	HordeVictory		= "That was just a taste of what the future brings. FOR THE HORDE!"
-	--YellKill			= "A shallow and tragic victory. We are weaker as a whole from the losses suffered today. Who but the Lich King could benefit from such foolishness? Great warriors have lost their lives. And for what? The true threat looms ahead - the Lich King awaits us all in death."
+	SpawnTimer	   = "The next battle will be against the Argent Crusade's most powerful knights! Only by defeating them will you be deemed worthy...",
+	AllianceVictory    = "GLORY TO THE ALLIANCE!",
+	HordeVictory       = "That was just a taste of what the future brings. FOR THE HORDE!",
+	YellKill           = "A shallow and tragic victory. We are weaker as a whole from the losses suffered today. Who but the Lich King could benefit from such foolishness? Great warriors have lost their lives. And for what? The true threat looms ahead - the Lich King awaits us all in death."
 })
 
 ---------------------
@@ -121,6 +174,11 @@ L:SetGeneralLocalization({
 	name = "Val'kyr Twins"
 })
 
+L:SetTimerLocalization({
+	TimerSpecialSpell	= "Next special ability",
+	TimerAnubRoleplay	= "Floor breaks in"
+})
+
 L:SetWarningLocalization({
 	WarnSpecialSpellSoon		= "Special ability soon",
 	SpecWarnSpecial				= "Change color",
@@ -130,12 +188,16 @@ L:SetWarningLocalization({
 	WarningPoweroftheTwins2		= "Power of the Twins - More healing on >%s<"
 })
 
-L:SetTimerLocalization({
-	TimerSpecialSpell			= "Next special ability",
-	TimerAnubRoleplay			= "Floor breaks in"
+L:SetMiscLocalization({
+--	YellPull	= "In the name of our dark master. For the Lich King. You. Will. Die.",
+--	CombatStart	= "Only by working together will you overcome the final challenge. From the depths of Icecrown come two of the Scourge's most powerful lieutenants: fearsome val'kyr, winged harbingers of the Lich King!",
+	Fjola		= "Fjola Lightbane",
+	Eydis		= "Eydis Darkbane",
+	AnubRP		= "A mighty blow has been dealt to the Lich King! You have proven yourselves as able bodied champions of the Argent Crusade. Together we will strike against Icecrown Citadel and destroy what remains of the Scourge! There is no challenge that we cannot face united!"
 })
 
 L:SetOptionLocalization({
+	RangeFrame                  = "Show range frame for easier stacking",
 	TimerSpecialSpell			= "Show timer for next special ability",
 	TimerAnubRoleplay			= "Show roleplay timer for Lich King breaking the floor",
 	WarnSpecialSpellSoon		= "Show pre-warning for next special ability",
@@ -148,28 +210,19 @@ L:SetOptionLocalization({
 	WarningPoweroftheTwins2		= "Announce Power of the Twins targets"
 })
 
-L:SetMiscLocalization({
---	YellPull	= "In the name of our dark master. For the Lich King. You. Will. Die.",
---	CombatStart	= "Only by working together will you overcome the final challenge. From the depths of Icecrown come two of the Scourge's most powerful lieutenants: fearsome val'kyr, winged harbingers of the Lich King!",
-	Fjola		= "Fjola Lightbane",
-	Eydis		= "Eydis Darkbane",
-	ValksRP		= "Let the games begin!", -- 35709
-	AnubRP		= "A mighty blow has been dealt to the Lich King! You have proven yourselves as able bodied champions of the Argent Crusade. Together we will strike against Icecrown Citadel and destroy what remains of the Scourge! There is no challenge that we cannot face united!"
-})
-
 -----------------
 --  Anub'arak  --
 -----------------
 L = DBM:GetModLocalization("Anub'arak_Coliseum")
 
 L:SetGeneralLocalization({
-	name					= "Anub'arak"
+	name 					= "Anub'arak"
 })
 
 L:SetTimerLocalization({
---	TimerEmerge				= "Emerge",
---	TimerSubmerge			= "Submerge",
---	timerAdds				= "New adds"
+	TimerEmerge				= "Emerge",
+	TimerSubmerge			= "Submerge",
+	timerAdds				= "New adds"
 })
 
 L:SetWarningLocalization({
@@ -195,10 +248,10 @@ L:SetOptionLocalization({
 	WarnSubmerge				= "Show warning for submerge",
 	WarnSubmergeSoon			= "Show pre-warning for submerge",
 	warnAdds					= "Announce new adds",
---	timerAdds					= "Show timer for new adds",
---	TimerEmerge					= "Show timer for emerge",
---	TimerSubmerge				= "Show timer for submerge",
-	AnnouncePColdIcons			= "Announce icons for $spell:66013 targets to raid chat (requires raid leader)",
-	AnnouncePColdIconsRemoved	= "Announce when icons are removed for $spell:66013 (requires raid leader)",
+	timerAdds					= "Show timer for new adds",
+	TimerEmerge					= "Show timer for emerge",
+	TimerSubmerge				= "Show timer for submerge",
+	AnnouncePColdIcons			= "Announce icons for $spell:66013 targets to raid chat<br/>(requires raid leader)",
+	AnnouncePColdIconsRemoved	= "Also announce when icons are removed for $spell:66013<br/>(requires above option)",
 	RemoveHealthBuffsInP3		= "Remove HP buffs at start of Phase 3"
 })

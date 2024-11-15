@@ -16,19 +16,18 @@ L:SetWarningLocalization({
 })
 
 L:SetTimerLocalization({
-	TimerNextBoss		= "下一隻王到來"
---	TimerEmerge			= "持續鑽地",
---	TimerSubmerge		= "下一次鑽地"
+	TimerNextBoss		= "下一隻王到來",
+	TimerEmerge			= "持續鑽地",
+	TimerSubmerge		= "下一次鑽地"
 })
 
 L:SetOptionLocalization({
-	soundConcAuraMastery= "播放 $spell:31821 聲音以抵消 $spell:66330 的效果（僅適用於 $spell:19746 的所有者 |cFFF48CBA聖騎士|r）",
 	WarningSnobold		= "為極地狗頭人奴僕出現顯示警告",
 	PingCharge			= "當冰嚎即將衝鋒你時自動點擊小地圖",
 	ClearIconsOnIceHowl	= "衝鋒前消除所有標記",
 	TimerNextBoss		= "為下一隻王到來顯示計時器",
---	TimerEmerge			= "為持續鑽地顯示計時器",
---	TimerSubmerge		= "為下一次鑽地顯示計時器",
+	TimerEmerge			= "為持續鑽地顯示計時器",
+	TimerSubmerge		= "為下一次鑽地顯示計時器",
 	IcehowlArrow		= "當冰嚎即將衝鋒在你附近時顯示DBM箭頭"
 })
 
@@ -90,7 +89,7 @@ L:SetMiscLocalization({
 	Tyrius				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:36:36:0:0:128:128:32:64:64:96|t 提瑞斯·暮刃",		-- 34461
 	Kavina				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:36:36:0:0:128:128:95:126.5:0:32|t 卡薇娜·林地之歌",	-- 34460
 	Melador				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:36:36:0:0:128:128:95:126.5:0:32|t 梅拉朵·谷行者",	-- 34469
-	Alyssia				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:36:36:0:0:128:128:0:32:32:64|t 愛莉希雅·月巡者",		-- 34467
+	Alyssia             = "|TInterface\\WorldStateFrame\\Icons-Classes.blp:36:36:0:0:128:128:0:32:32:64|t 愛莉希雅·月巡者",		-- 34467
 	Noozle				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:36:36:0:0:128:128:32:63.5:0:32|t 諾佐·嘯棍",			-- 34468
 	Baelnor				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:36:36:0:0:128:128:0:32:64:96|t 貝爾諾·攜光者",		-- 34471
 	Velanaa				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:36:36:0:0:128:128:0:32:64:96|t 維蘭娜",				-- 34465
@@ -116,6 +115,11 @@ L:SetGeneralLocalization({
 	name = "華爾琪雙子"
 })
 
+L:SetTimerLocalization({
+	TimerSpecialSpell		= "下一次特別技能",
+	TimerAnubRoleplay		= "樓斷裂處"
+})
+
 L:SetWarningLocalization({
 	WarnSpecialSpellSoon	= "特別技能即將到來",
 	SpecWarnSpecial			= "快變換顏色",
@@ -125,9 +129,12 @@ L:SetWarningLocalization({
 	WarningPoweroftheTwins2	= "雙子威能 - 對>%s<加大治療"
 })
 
-L:SetTimerLocalization({
-	TimerSpecialSpell		= "下一次特別技能",
-	TimerAnubRoleplay		= "樓斷裂處"
+L:SetMiscLocalization({
+--	YellPull				= "以我們的黑暗君王之名。為了巫妖王。你‧得‧死。",
+--	CombatStart				= "唯有同心協力，你們才能克服最後的難關。來自寒冰皇冠的深處，兩名天譴軍團最強大的副官:令人生畏的華爾琪，披著羽翼的巫妖王先驅。",
+	Fjola					= "菲歐拉·光寂",
+	Eydis					= "艾狄絲·暗寂",
+	AnubRP					= "巫妖王遭受了迎頭痛擊!你們已經證明了你們是銀白十字軍的精銳勇士。我們將聯手攻陷冰冠城塞，並且把天譴軍團消滅殆盡!團結一心，我們將可破除所有難關。"
 })
 
 L:SetOptionLocalization({
@@ -143,29 +150,20 @@ L:SetOptionLocalization({
 	WarningPoweroftheTwins2	= "提示雙子威能的目標"
 })
 
-L:SetMiscLocalization({
---	YellPull				= "以我們的黑暗君王之名。為了巫妖王。你‧得‧死。",
---	CombatStart				= "唯有同心協力，你們才能克服最後的難關。來自寒冰皇冠的深處，兩名天譴軍團最強大的副官:令人生畏的華爾琪，披著羽翼的巫妖王先驅。",
-	Fjola					= "菲歐拉·光寂",
-	Eydis					= "艾狄絲·暗寂",
-	ValksRP					= "讓賽事開始吧!", -- 35709
-	AnubRP					= "巫妖王遭受了迎頭痛擊!你們已經證明了你們是銀白十字軍的精銳勇士。我們將聯手攻陷冰冠城塞，並且把天譴軍團消滅殆盡!團結一心，我們將可破除所有難關。"
-})
-
 -----------------
 --  Anub'arak  --
 -----------------
 L = DBM:GetModLocalization("Anub'arak_Coliseum")
 
 L:SetGeneralLocalization({
-	name				= "阿努巴拉克"
+	name 				= "阿努巴拉克"
 })
 
---L:SetTimerLocalization({
---	TimerEmerge			= "下一次現身",
---	TimerSubmerge		= "下一次鑽地",
---	timerAdds			= "下一次中蟲出現"
---})
+L:SetTimerLocalization({
+	TimerEmerge			= "下一次現身",
+	TimerSubmerge		= "下一次鑽地",
+	timerAdds			= "下一次中蟲出現"
+})
 
 L:SetWarningLocalization({
 	WarnEmerge				= "阿努巴拉克現身了",
@@ -190,10 +188,10 @@ L:SetOptionLocalization({
 	WarnSubmerge			= "為鑽進地裡顯示警告",
 	WarnSubmergeSoon		= "為鑽進地裡顯示預先警告",
 	warnAdds				= "提示奈幽掘洞者出現",
---	timerAdds				= "為下一次 奈幽掘洞者出現顯示計時器",
---	TimerEmerge				= "為持續鑽地顯示計時器",
---	TimerSubmerge			= "為下一次 鑽地顯示計時器",
-	AnnouncePColdIcons		= "公佈$spell:68510目標設置的標記到團隊頻道 (需要團隊隊長或助理權限)",
-	AnnouncePColdIconsRemoved	= "當移除$spell:68510的標記時也提示 (需要上述選項)",
+	timerAdds				= "為下一次 奈幽掘洞者出現顯示計時器",
+	TimerEmerge				= "為持續鑽地顯示計時器",
+	TimerSubmerge			= "為下一次 鑽地顯示計時器",
+	AnnouncePColdIcons		= "公佈$spell:68510目標設置的標記到團隊頻道<br/>(需要團隊隊長或助理權限)",
+	AnnouncePColdIconsRemoved	= "當移除$spell:68510的標記時也提示<br/>(需要上述選項)",
 	RemoveHealthBuffsInP3	= "當進入第3階段時移除耐力的增益"
 })

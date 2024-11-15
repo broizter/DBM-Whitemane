@@ -16,19 +16,18 @@ L:SetWarningLocalization({
 })
 
 L:SetTimerLocalization({
-	TimerNextBoss			= "곧 다음 우두머리"
---	TimerEmerge				= "출현",
---	TimerSubmerge			= "숨기"
+	TimerNextBoss			= "곧 다음 우두머리",
+	TimerEmerge				= "출현",
+	TimerSubmerge			= "숨기"
 })
 
 L:SetOptionLocalization({
-	soundConcAuraMastery	= "$spell:31821 사운드를 재생하여 $spell:66330의 효과를 무효화합니다($spell:19746의 소유자인 |cFFF48CBA성기사|r만 해당)",
 	WarningSnobold			= "스노볼트 부하 생성 알림 보기",
 	PingCharge				= "얼음울음에게 사나운 돌진의 대상이 될 경우 미니맵에 핑 표시하기",
 	ClearIconsOnIceHowl		= "사나운 돌진 전에 모든 전술 목표 아이콘 지움",
 	TimerNextBoss			= "다음 우두머리 등장 바 보기",
---	TimerEmerge				= "출현 바 보기",
---	TimerSubmerge			= "숨기 바 보기",
+	TimerEmerge				= "출현 바 보기",
+	TimerSubmerge			= "숨기 바 보기",
 	IcehowlArrow			= "사나운 돌진 대상이 가까이 있을 경우 DBM 화살표 보기"
 })
 
@@ -90,7 +89,7 @@ L:SetMiscLocalization({
 	Tyrius				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:32:64:64:96|t 티리우스 더스크블레이드",	-- 34461
 	Kavina				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:95:126.5:0:32|t 카비나 그로브송",			-- 34460
 	Melador				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:95:126.5:0:32|t 멜라도르 베일스트라이더",	-- 34469
-	Alyssia				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:32:64|t 알리시아 문스토커",			-- 34467
+	Alyssia             = "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:32:64|t 알리시아 문스토커",			-- 34467
 	Noozle				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:32:63.5:0:32|t 누즐 위즐스틱",				-- 34468
 	Baelnor				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:64:96|t 밸노르 라이트베어러",			-- 34471
 	Velanaa				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:64:96|t 벨라나",						-- 34465
@@ -102,7 +101,7 @@ L:SetMiscLocalization({
 	Serissa				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:95:126.5:32:64|t 세리사 그림대블러",		-- 34474
 	Shocuul				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:0:32:0:32|t 쇼쿨",							-- 34475
 
-	AllianceVictory	= "얼라이언스에 영광을!",
+	AllianceVictory 	= "얼라이언스에 영광을!",
 	HordeVictory		= "앞으로 일어날 일의 맛보기일 뿐이다. 호드를 위하여!"
 	--YellKill			= "상처뿐인 승리로군. 오늘 받은 손해로 우리 전력은 약해졌네. 이런 어리석은 짓으로 리치 왕 말고 또 누가 이득을 보겠나? 위대한 용사들이 목숨을 잃었네. 무엇을 위해서였나? 진짜 위협은 저 앞에 있네. 리치 왕이 우리 모두를 죽음 안에서 기다린다네.",
 })
@@ -116,6 +115,11 @@ L:SetGeneralLocalization({
 	name = "발키르 쌍둥이"
 })
 
+L:SetTimerLocalization({
+	TimerSpecialSpell	= "다음 소용돌이/서약",
+	TimerAnubRoleplay	= "바닥 파손"
+})
+
 L:SetWarningLocalization({
 	WarnSpecialSpellSoon		= "곧 소용돌이 또는 서약",
 	SpecWarnSpecial				= "차원문 클릭하여 반대 속성으로 변경!",
@@ -125,9 +129,12 @@ L:SetWarningLocalization({
 	WarningPoweroftheTwins2		= "쌍둥이의 힘 : %s",
 })
 
-L:SetTimerLocalization({
-	TimerSpecialSpell			= "다음 소용돌이/서약",
-	TimerAnubRoleplay			= "바닥 파손"
+L:SetMiscLocalization({
+--	YellPull 	= "어둠의 주인님을 받들어. 리치 왕을 위하여. 너희에게. 죽음을. 안기리라.",
+--	CombatStart	= "함께 힘을 모아야만 마지막 도전을 이겨낼 수 있네. 얼음왕관 심연에서 가장 강력한 스컬지 대리인 둘이 왔네. 무시무시한 발키르, 날개를 단 리치 왕의 전령일세!",
+	Fjola		= "피욜라 라이트베인",
+	Eydis		= "아이디스 다크베인",
+	AnubRP		= "리치 왕에게 큰 타격을 주었군! 그대들은 은빛십자군의 강건한 용사임을 입증했네. 우리는 함께 얼음왕관 성채를 공격하고 남은 스컬지를 물리칠 걸세! 힘을 합친 우리가 이겨내지 못할 도전은 없네!"
 })
 
 L:SetOptionLocalization({
@@ -143,29 +150,20 @@ L:SetOptionLocalization({
 	WarningPoweroftheTwins2		= "쌍둥이의 힘 대상 알림 보기",
 })
 
-L:SetMiscLocalization({
---	YellPull	= "어둠의 주인님을 받들어. 리치 왕을 위하여. 너희에게. 죽음을. 안기리라.",
---	CombatStart	= "함께 힘을 모아야만 마지막 도전을 이겨낼 수 있네. 얼음왕관 심연에서 가장 강력한 스컬지 대리인 둘이 왔네. 무시무시한 발키르, 날개를 단 리치 왕의 전령일세!",
-	Fjola		= "피욜라 라이트베인",
-	Eydis		= "아이디스 다크베인",
-	ValksRP		= "경기를 시작하게!", -- 35709
-	AnubRP		= "리치 왕에게 큰 타격을 주었군! 그대들은 은빛십자군의 강건한 용사임을 입증했네. 우리는 함께 얼음왕관 성채를 공격하고 남은 스컬지를 물리칠 걸세! 힘을 합친 우리가 이겨내지 못할 도전은 없네!"
-})
-
 ------------------
 -- Anub'arak --
 ------------------
 L = DBM:GetModLocalization("Anub'arak_Coliseum")
 
 L:SetGeneralLocalization({
-	name				= "아눕아락"
+	name 				= "아눕아락"
 })
 
---L:SetTimerLocalization({
---	TimerEmerge			= "다음 출현",
---	TimerSubmerge		= "다음 잠수",
---	timerAdds			= "다음 네루비안 땅무지"
---})
+L:SetTimerLocalization({
+	TimerEmerge			= "다음 출현",
+	TimerSubmerge		= "다음 잠수",
+	timerAdds			= "다음 네루비안 땅무지"
+})
 
 L:SetWarningLocalization({
 	WarnEmerge				= "아눕아락 출현",
@@ -191,9 +189,9 @@ L:SetOptionLocalization({
 	WarnSubmerge				= "잠수 알림 보기",
 	WarnSubmergeSoon			= "잠수 이전에 알림 보기",
 	warnAdds					= "네루비안 땅무지 알림 보기",
---	timerAdds					= "다음 네루비안 땅무지 바 보기",
---	TimerEmerge					= "다음 출현 바 보기",
---	TimerSubmerge				= "다음 잠수 바 보기",
+	timerAdds					= "다음 네루비안 땅무지 바 보기",
+	TimerEmerge					= "다음 출현 바 보기",
+	TimerSubmerge				= "다음 잠수 바 보기",
 	AnnouncePColdIcons			= "$spell:66013 전술 목표 아이콘 설정시 공격대 대화로 알리기(공격대장 권한 필요)",
 	AnnouncePColdIconsRemoved	= "$spell:66013 전술 목표 아이콘 제거시 공격대 대화로 알리기(위 설정 필요)",
 	RemoveHealthBuffsInP3		= "3 페이즈를 시작할 때 HP 버프 지우기"
