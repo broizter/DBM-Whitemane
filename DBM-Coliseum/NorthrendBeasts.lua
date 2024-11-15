@@ -63,7 +63,7 @@ local timerIcehowlSpawn		= mod:NewTimer(329, "TimerIcehowlSpawn", 3130, nil, nil
 
 -- Global
 local timerPrePot		= mod:NewTimer(36.4, "TimerPrePot", 53909, nil, nil, 1)
-local timerCombatStart		= mod:NewCombatTimer(11, "TimerCombatStart", 11578, nil, nil, 1)
+local timerCombatStart		= mod:NewTimer(11, "TimerCombatStart", 11578, nil, nil, 1)
 local timerNextBoss		= mod:NewTimer(139, "TimerNextBoss", 2457, nil, nil, 1)
 local specWarnGTFO		= mod:NewSpecialWarningGTFO(66317, nil, nil, nil, 1, 2)
 
