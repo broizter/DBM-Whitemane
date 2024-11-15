@@ -25,7 +25,6 @@ local warnImpaleOn		= mod:NewStackAnnounce(66331, 2, nil, "Tank|Healer")
 local warnFireBomb		= mod:NewSpellAnnounce(66317, 3, nil, false)
 local WarningSnobold		= mod:NewAnnounce("WarningSnobold", 4)
 local specWarnImpale5		= mod:NewSpecialWarningStack(66331, nil, 5, nil, nil, 1, 6)
-local specWarnAnger3		= mod:NewSpecialWarning("SpecialWarningAnger3", "Tank|Healer", nil, nil, 1, 2)
 local specWarnSilence		= mod:NewSpecialWarningSpell(66330, "SpellCaster", nil, nil, 1, 2)
 local timerNextStompCD		= mod:NewCDTimer(23, 66330, nil, nil, nil, 2, nil, DBM_CORE_L.INTERRUPT_ICON, nil, mod:IsSpellCaster() and 3 or nil, 3)
 local timerNextImpale		= mod:NewNextTimer(9.5, 66331, nil, "Tank|Healer", nil, 5, nil, DBM_CORE_L.TANK_ICON)
@@ -258,10 +257,6 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 	elseif args:IsSpellID(66636) then						-- Rising Anger
 		WarningSnobold:Show()
 		timerRisingAngerCD:Start()
-		if args.amount >= 3 then
-			specWarnAnger3:Show(args.amount)
-			specWarnAnger3:Play("stackhigh")
-		end
 	end
 end
 
