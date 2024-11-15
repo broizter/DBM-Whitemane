@@ -63,7 +63,7 @@ local timerIcehowlSpawn		= mod:NewTimer(329, "TimerIcehowlSpawn", 3130, nil, nil
 -- Global
 local timerPrePot		= mod:NewTimer(36.4, "TimerPrePot", 53909, nil, nil, 1)
 local timerCombatStart		= mod:NewTimer(11, "TimerCombatStart", 11578, nil, nil, 1)
-local timerNextBoss		= mod:NewTimer(139, "TimerNextBoss", 2457, nil, nil, 1)
+local timerWormSpawn		= mod:NewTimer(139, "TimerWormSpawn", 35387, nil, nil, 1)
 local specWarnGTFO		= mod:NewSpecialWarningGTFO(66317, nil, nil, nil, 1, 2)
 
 mod:AddBoolOption("PingCharge")
@@ -133,7 +133,7 @@ end
 
 function mod:GromokStartTimers()
 	if self:IsDifficulty("heroic10", "heroic25") then
-		timerNextBoss:Start()
+		timerWormSpawn:Start()
 		timerIcehowlSpawn:Start()
 	end
 	timerNextStompCD:Start(5)
@@ -364,7 +364,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerPrePot:Start()
 	elseif msg == L.Phase2 or msg:find(L.Phase2) then -- Acidmaw & Dreadscale
 		timerCombatStart:Start(15.3)
-		timerNextBoss:Stop()
+		timerWormSpawn:Stop()
 		updateHealthFrame(2)
 		self:ScheduleMethod(15.3, "WormsEmerge")
 		if self.Options.RangeFrame then
