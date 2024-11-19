@@ -61,7 +61,7 @@ function mod:OnCombatStart(delay)
 	warnSubmergeSoon:Schedule(70-delay)
 	timerSubmerge:Start(-delay)
 	enrageTimer:Start(-delay)
-	timerFreezingSlash:Start(8.1-delay)
+	timerFreezingSlash:Start(8.54-delay)
 	table.wipe(PColdTargets)
 	if self:IsHeroic() then
 		timerShadowStrike:Start()
