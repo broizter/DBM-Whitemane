@@ -32,7 +32,7 @@ local specWarnAnimus			= mod:NewSpecialWarningSwitch(63145, nil, nil, nil, 1, 2)
 
 local timerEnrage				= mod:NewBerserkTimer(600)
 local timerSearingFlamesCast	= mod:NewCastTimer(2, 62661)
-local timerSearingFlamesCD		= mod:NewCDTimer(8, 62661, nil, "HasInterrupt", nil, 2)
+local timerSearingFlamesCD		= mod:NewCDTimer(6, 62661, nil, "HasInterrupt", nil, 2)
 local timerSurgeofDarkness		= mod:NewBuffActiveTimer(10, 62662, nil, "Tank", nil, 5, nil, DBM_CORE_L.TANK_ICON)
 local timerNextSurgeofDarkness	= mod:NewCDTimer(63, 62662, nil, "Tank", nil, 5, nil, DBM_CORE_L.TANK_ICON)
 local timerSaroniteVapors		= mod:NewNextCountTimer(30, 63322, nil, nil, nil, 5)
