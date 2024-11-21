@@ -47,14 +47,11 @@ local timerBrainLinkCD				= mod:NewCDTimer(32, 63802, nil, nil, nil, 3)
 local timerBrainPortal				= mod:NewTimer(22, "NextPortal", 57687, nil, nil, 5)
 local timerLunaricGaze				= mod:NewCastTimer(4, 64163, nil, nil, nil, 2)
 local timerNextLunaricGaze			= mod:NewCDTimer(8, 64163, nil, nil, nil, 2)
-local timerEmpower					= mod:NewCDTimer(46, 64486, nil, nil, nil, 3)
-local timerEmpowerDuration			= mod:NewBuffActiveTimer(10, 64486, nil, nil, nil, 3)
+local timerEmpower					= mod:NewCDTimer(45, 64486, nil, nil, nil, 3)
 local timerMadness 					= mod:NewCastTimer(60, 64059, nil, nil, nil, 5, nil, DBM_CORE_L.DEADLY_ICON, nil, 3)
 local timerCastDeafeningRoar		= mod:NewCastTimer(2.3, 64189, nil, nil, nil, 2)
 local timerNextDeafeningRoar		= mod:NewNextTimer(50, 64189, nil, nil, nil, 2)
 local timerAchieve					= mod:NewAchievementTimer(420, 3012)
-
-mod:GroupSpells(64486, 64465) -- Empowering Shadows, Shadow Beacon
 
 mod:AddBoolOption("ShowSaraHealth", false)
 mod:AddBoolOption("MaladyArrow")
@@ -142,7 +139,6 @@ function mod:SPELL_CAST_SUCCESS(args)
 		warnCrusherTentacleSpawned:Show()
 	elseif spellId == 64465 then -- Shadow Beacon
 		timerEmpower:Start()
-		timerEmpowerDuration:Start()
 		warnEmpowerSoon:Schedule(40)
 	elseif args:IsSpellID(64167, 64163) and self:AntiSpam(3, 3) then	-- Lunatic Gaze
 		timerLunaricGaze:Start()
@@ -295,7 +291,7 @@ function mod:OnSync(msg)
 		timerMaladyCD:Stop()
 		timerBrainLinkCD:Stop()
 		timerMadness:Stop()
-		timerEmpower:Start()
+		timerEmpower:Start(52.5)
 		warnP3:Show()
 		warnEmpowerSoon:Schedule(40)
 		if self:IsDifficulty("normal25", "heroic25") then
