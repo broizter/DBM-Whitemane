@@ -228,7 +228,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		warnRage:Show()
 		timerWhirlCD:Start(22)
 		timerArcticBreathCD:Start(5)
-		timerNextCrashCD:Start(34)
+		timerNextCrashCD:Start(49)
 		if not self:IsDifficulty("heroic10", "heroic25") then
 			specWarnTranq:Show()
 			specWarnTranq:Play("trannow")
