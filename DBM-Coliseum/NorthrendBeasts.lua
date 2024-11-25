@@ -227,7 +227,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif args:IsSpellID(67657, 66759, 67658, 67659) then	-- Frothing Rage
 		warnRage:Show()
 		timerWhirlCD:Start(22)
-		timerArcticBreathCD:Start(7)
+		timerArcticBreathCD:Start(5)
 		timerNextCrashCD:Start(34)
 		if not self:IsDifficulty("heroic10", "heroic25") then
 			specWarnTranq:Show()
