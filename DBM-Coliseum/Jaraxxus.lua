@@ -17,8 +17,6 @@ mod:RegisterEvents(
 	"SPELL_CAST_SUCCESS 66197 68123 68124 68125 66528 67029 67030 67031 66209 66228 67107 67106 67108",
 	"SPELL_DAMAGE 66877 67070 67071 67072 66496 68716 68717 68718",
 	"SPELL_MISSED 66877 67070 67071 67072 66496 68716 68717 68718",
-	"SPELL_HEAL",
-	"SPELL_PERIODIC_HEAL",
 	"CHAT_MSG_MONSTER_YELL"
 )
 
@@ -56,8 +54,6 @@ mod:AddBoolOption("IncinerateFleshIcon", true)
 mod:AddBoolOption("YellOnTouch", true, "announce")
 
 mod:RemoveOption("HealthFrame")
-mod:AddBoolOption("IncinerateShieldFrame", true, "misc")
-
 
 function mod:OnCombatStart(delay)
 	if self.Options.IncinerateShieldFrame then
@@ -93,56 +89,6 @@ function mod:SPELL_DAMAGE(_, _, _, destGUID, _, _, spellId)
 end
 mod.SPELL_MISSED = mod.SPELL_DAMAGE
 
-local setIncinerateTarget, clearIncinerateTarget, updateInfoFrame
-local diffMaxAbsorb = {heroic25 = 85000, heroic10 = 40000, normal25 = 60000, normal10 = 30000}
-do
-	local incinerateTarget
-	local healed = 0
-	local maxAbsorb = diffMaxAbsorb[DBM:GetCurrentInstanceDifficulty()] or 0
-
-	local twipe = table.wipe
-	local lines, sortedLines = {}, {}
-	local function addLine(key, value)
-		-- sort by insertion order
-		lines[key] = value
-		sortedLines[#sortedLines + 1] = key
-	end
-
-	local function getShieldHP()
-		return math.max(1, math.floor(healed / maxAbsorb * 100))
-	end
-
-	function mod:SPELL_HEAL(_, _, _, destGUID, _, _, _, _, _, _, _, absorbed)
-		if destGUID == incinerateTarget then
-			healed = healed + (absorbed or 0)
-		end
-	end
-	mod.SPELL_PERIODIC_HEAL = mod.SPELL_HEAL
-
-	function setIncinerateTarget(mod, target, name)
-		incinerateTarget = target
-		healed = 0
-		DBM.BossHealth:RemoveBoss(getShieldHP)
-		DBM.BossHealth:AddBoss(getShieldHP, L.IncinerateTarget:format(name))
-	end
-
-	function clearIncinerateTarget(self, name)
-		DBM.BossHealth:RemoveBoss(getShieldHP)
-		healed = 0
-		if self.Options.IncinerateFleshIcon then
-			self:RemoveIcon(name)
-		end
-	end
-	updateInfoFrame = function()
-		twipe(lines)
-		twipe(sortedLines)
-		if incinerateFleshTargetName then
-			addLine(incinerateFleshTargetName, getShieldHP().."%")
-		end
-		return lines, sortedLines
-	end
-end
-
 function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(67051, 67050, 67049, 66237) then	-- Incinerate Flesh
 		warnFlesh:Show(args.destName)
@@ -154,7 +100,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		if args:IsPlayer() then
 			specWarnFlesh:Show()
 		end
-		setIncinerateTarget(self, args.destGUID, args.destName)
 		self:Schedule(15, clearIncinerateTarget, self, args.destName)
 	elseif args:IsSpellID(66197, 68123, 68124, 68125) then	-- Legion Flame ids 66199, 68126, 68127, 68128 (second debuff) do the actual damage. First 2 seconds are trigger debuff only.
 		local targetname = args.destName
@@ -188,7 +133,7 @@ end
 function mod:SPELL_AURA_REMOVED(args)
 	if args:IsSpellID(67051, 67050, 67049, 66237) then	-- Incinerate Flesh
 		timerFlesh:Stop()
-		clearIncinerateTarget(self, args.destName)
+		self:RemoveIcon(args.destName)
 	end
 end
 
