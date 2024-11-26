@@ -240,7 +240,11 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerStaggeredDaze:Start()
 		timerWhirlCD:Start(17.8)--todo 17
 		timerArcticBreathCD:Start(32.1) --todo  20
-		timerNextCrashCD:Start(36.4) --todo 45
+		if self:IsDifficulty("heroic10", "heroic25") then
+			timerNextCrashCD:Start(35.4)
+		else
+			timerNextCrashCD:Start(36.4) --todo 45
+		end
 	elseif args:IsSpellID(66689, 67650, 67651, 67652) and self:AntiSpam(2, 1) then	-- Arctic Breath
 		timerArcticBreathCD:Start()
 		timerBreath:Start()
