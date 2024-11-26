@@ -9,11 +9,10 @@ mod:RegisterKill("yell", L.YellKill)
 
 
 mod:RegisterEvents(
-	"SPELL_AURA_APPLIED",
-	"SPELL_CAST_SUCCESS",
-	"SPELL_CAST_START",
-	"SPELL_DAMAGE",
-	"SPELL_MISSED",
+	"SPELL_AURA_APPLIED 66010 65802 65801 65809 65927 65929 66054 65859 65857 65871 65878 65877",								-- Psychic Horror
+	"SPELL_CAST_SUCCESS 66017 68753 65545 68754 68755 66020 68758 68757 68756 66115 66009 66008 66613 66007 66011 65793 65790 65816 68145 68146 68147 65820 68141 68139 68140 65947 65931 66063 65983 65980 65544 65543 65542 65860 66086 67974 67975 67976 66178 68759 68760 68761 65960 65961 66207 65880 65869",
+	"SPELL_DAMAGE 65817 68142 68143 68144",
+	"SPELL_MISSED 65817 68142 68143 68144",
 	"CHAT_MSG_MONSTER_YELL",
 	"UNIT_DIED"
 )
@@ -277,7 +276,7 @@ function mod:SPELL_AURA_APPLIED(args)
 end
 
 function mod:SPELL_DAMAGE(_, sourceName, _, destGUID, _, _, spellId)
-	if (spellId == 65817 or spellId ==  68142 or spellId == 68143 or spellId == 68144) and destGUID == UnitGUID("player") and self:AntiSpam() then
+	if (spellId == 65817 or spellId == 68142 or spellId == 68143 or spellId == 68144) and destGUID == UnitGUID("player") and self:AntiSpam() then
 		specWarnHellfire:Show(sourceName)
 		specWarnHellfire:Play("runaway")
 	end
