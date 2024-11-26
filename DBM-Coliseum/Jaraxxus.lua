@@ -209,7 +209,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 		warnFlame:Show(args.destName)
 	elseif args:IsSpellID(66528, 67029, 67030, 67031) then 	-- Fel Lightning
 		timerFelLightningCD:Start()
-	elseif args:IsSpellID(66209) then		-- Touch of Jaraxxus
+	elseif args:IsSpellID(66209) and self:AntiSpam(2, 1) then -- Touch of Jaraxxus
 		timerTouchCD:Start()
 	elseif args:IsSpellID(66228, 67107, 67106, 67108) then	-- Nether Power
 		timerNetherPowerCD:Start()
