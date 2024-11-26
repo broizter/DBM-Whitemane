@@ -118,7 +118,7 @@ elseif UnitFactionGroup("player") == "Horde" then
 end
 
 L:SetWarningLocalization({
-	WarningEyebeam		= "Eyebeam incoming!"
+	SpecWarnEyebeamSoon			= "Eyebeam incoming!"
 })
 
 L:SetGeneralLocalization({
@@ -134,6 +134,7 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
+	FocusedEyebeam			= "Demonic Eyebeam is focusing on you!",
 	--Horde NPCs
 	Gorgrim				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:32:64:64:96|t Gorgrim Shadowcleave",		-- 34458
 	Birana				= "|TInterface\\WorldStateFrame\\Icons-Classes.blp:24:24:0:0:128:128:95:126.5:0:32|t Birana Stormhoof",			-- 34451

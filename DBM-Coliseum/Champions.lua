@@ -18,7 +18,6 @@ mod:RegisterEvents(
 	"UNIT_DIED"
 )
 
-
 --[[if UnitFactionGroup("player") == "Alliance" then
 	--mod:RegisterKill("yell", L.AllianceVictory)--]]
 	mod:SetBossHealthInfo(
@@ -114,11 +113,11 @@ local warnWyvernSting		= mod:NewTargetAnnounce(65878, 1) 				-- 65878, 65877
 local warnFrostTrap			= mod:NewSpellAnnounce(65880, 3) 				-- 65880
 local warnDisengage			= mod:NewSpellAnnounce(65869, 3) 				-- 65869
 -- Demon hunter
-mod:AddSetIconOption("SetIconOnEyebeamTarget", 126, true, false, {8})
-local yellBeam			= mod:NewYell(126)
-local warnEyebeam		= mod:NewAnnounce("WarningEyebeam", 3)
-local specWarnEyebeam 		= mod:NewSpecialWarningRun(126, nil, nil, nil, 4, 2)
-local timerEyebeam		= mod:NewCDTimer(40, 126)
+mod:AddSetIconOption("SetIconOnEyebeamTarget", 40018, true, false, {8})
+local yellBeam			= mod:NewYell(40018)
+local specWarnEyebeamSoon 	= mod:NewSpecialWarning("SpecWarnEyebeamSoon", true)
+local specWarnEyebeam 		= mod:NewSpecialWarningRun(40018, nil, nil, nil, 4, 2)
+local timerEyebeam		= mod:NewCDTimer(40, 40018)
 
 local specWarnHellfire		= mod:NewSpecialWarningMove(65816, nil, nil, nil, 1, 2)
 local specWarnHandofProt	= mod:NewSpecialWarningDispel(66009, "RemoveInvulnerabilities", nil, nil, 1, 2)
@@ -147,6 +146,10 @@ local timerSilenceCD		= mod:NewCDTimer(45, 65542)
 local timerHeroismCD		= mod:NewCDTimer(300, 65983)
 local timerBloodlustCD		= mod:NewCDTimer(300, 65980)
 local timerSpawnTimer		= mod:NewTimer(33, "TimerSpawnTimer", 47436, nil, nil, 6)
+
+function mod:OnCombatStart(delay)
+	timerEyebeam:Start(25-delay)
+end
 
 function mod:SPELL_CAST_SUCCESS(args)
 	-- Death Knight
@@ -275,8 +278,8 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif args.spellId == 65857 then								-- Entangling Roots
 		warnEntanglingRoots:Show(args.destName)
 	-- Demon hunter
-	elseif args.spellId == 44464 then -- Eyebeam
-		warnEyebeam:Show()
+	elseif args.spellId == 47241 then -- Eyebeam
+		specWarnEyebeamSoon:Show()
 		timerEyebeam:Start()
 	-- Hunter
 	elseif args.spellId == 65871 then								-- Deterrence
