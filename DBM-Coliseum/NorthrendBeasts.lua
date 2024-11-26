@@ -136,12 +136,14 @@ function mod:GromokStartTimers()
 	if self:IsDifficulty("heroic10", "heroic25") then
 		timerWormSpawn:Start()
 		timerIcehowlSpawn:Start()
+		timerRisingAngerCD:Start(12.2)
+	else
+		timerRisingAngerCD:Start(16.7)
 	end
 	timerNextStompCD:Start(5)
 	timerNextImpale:Start(8.7)
 	specWarnSilence:Schedule(2) 
-	specWarnSilence:ScheduleVoice(2, "silencesoon")
-	timerRisingAngerCD:Start(16.7)
+	specWarnSilence:ScheduleVoice(2, "silencesoon")	
 end
 
 function mod:WormsEmerge()
