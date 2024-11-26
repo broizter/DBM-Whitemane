@@ -10,7 +10,7 @@ mod:RegisterKill("yell", L.YellKill)
 
 mod:RegisterEvents(
 	"SPELL_AURA_APPLIED 66010 65802 65801 65809 65927 65929 66054 65859 65857 65871 65878 65877 47241",								-- Psychic Horror
-	"SPELL_CAST_SUCCESS 66017 68753 65545 68754 68755 66020 68758 68757 68756 66115 66009 66008 66613 66007 66011 65793 65790 65816 68145 68146 68147 65820 68141 68139 68140 65947 65931 66063 65983 65980 65544 65543 65542 65860 66086 67974 67975 67976 66178 68759 68760 68761 65960 65961 66207 65880 65869",
+	"SPELL_CAST_SUCCESS 66017 68753 65545 68754 68755 66020 68758 68757 68756 66115 66009 66008 66613 66007 66011 65793 65790 65816 68145 68146 68147 65820 68141 68139 68140 65947 65931 66063 65983 65980 65544 65543 65542 65860 66086 67974 67975 67976 66178 68759 68760 68761 65960 65961 66207 65880 65869 71264",
 	"SPELL_DAMAGE 65817 68142 68143 68144",
 	"SPELL_MISSED 65817 68142 68143 68144",
 	"CHAT_MSG_MONSTER_YELL",
@@ -118,6 +118,10 @@ local yellBeam			= mod:NewYell(40018)
 local specWarnEyebeamSoon 	= mod:NewSpecialWarning("SpecWarnEyebeamSoon", true)
 local specWarnEyebeam 		= mod:NewSpecialWarningRun(40018, nil, nil, nil, 4, 2)
 local timerEyebeam		= mod:NewCDTimer(40, 40018)
+local timerFlame 		= mod:NewTargetTimer(8, 71265, nil, nil, nil, 3)
+local timerFlameCD		= mod:NewCDTimer(30, 71265, nil, nil, nil, 3)
+local warnFlame			= mod:NewTargetAnnounce(71265, 4)
+local specWarnFlame		= mod:NewSpecialWarningRun(71265, nil, nil, 2, 4, 2)
 
 local specWarnHellfire		= mod:NewSpecialWarningMove(65816, nil, nil, nil, 1, 2)
 local specWarnHandofProt	= mod:NewSpecialWarningDispel(66009, "RemoveInvulnerabilities", nil, nil, 1, 2)
@@ -237,6 +241,16 @@ function mod:SPELL_CAST_SUCCESS(args)
 		timerBlindCD:Start()
 	elseif args.spellId == 65961 then								-- Cloak of Shadows
 		warnCloakOfShadows:Show()
+	-- Demon hunter
+	elseif args.spellId == 71264 then -- Swarming Shadows
+		timerFlame:Start(args.destName)
+		timerFlameCD:Start()		
+		if args:IsPlayer() then
+			specWarnFlame:Show()
+			specWarnFlame:Play("firerun")
+		else
+			warnFlame:Show(args.destName)
+		end	
 	-- Hunter
 	elseif args.spellId == 66207 then								-- Wing Clip
 		warnWingClip:Show(args.destName)
