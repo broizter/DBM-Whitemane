@@ -231,10 +231,12 @@ function mod:SPELL_AURA_APPLIED(args)
 		warnRage:Show()
 		timerWhirlCD:Start(22)
 		timerArcticBreathCD:Start(5)
-		timerNextCrashCD:Start(49)
-		if not self:IsDifficulty("heroic10", "heroic25") then
+		if self:IsDifficulty("heroic10", "heroic25") then
+			timerNextCrashCD:Start(38)
+		else
 			specWarnTranq:Show()
 			specWarnTranq:Play("trannow")
+			timerNextCrashCD:Start(49)			
 		end
 	elseif args:IsSpellID(66758) then						-- Staggered Daze
 		timerStaggeredDaze:Start()
