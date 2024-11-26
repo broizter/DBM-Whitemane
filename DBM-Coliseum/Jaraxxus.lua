@@ -38,7 +38,6 @@ local SpecWarnFelFireball		= mod:NewSpecialWarningInterrupt(66532, "HasInterrupt
 local SpecWarnFelFireballDispel		= mod:NewSpecialWarningDispel(66532, "RemoveMagic", nil, 2, 1, 2)
 
 local timerCombatStart			= mod:NewCombatTimer(71.2)
-local enrageTimer			= mod:NewBerserkTimer(600)
 local timerFlame 			= mod:NewTargetTimer(8, 66197, nil, nil, nil, 3) -- There are 8 debuff Ids. Since we detect first to warn, use an 8sec timer to cover duration of trigger spell and damage debuff.
 local timerFlameCD			= mod:NewCDTimer(30, 66197, nil, nil, nil, 3) 		-- Every 30 sec
 local timerTouchCD			= mod:NewCDTimer(10, 66209, nil, nil, nil, 3)
@@ -74,7 +73,6 @@ function mod:OnCombatStart(delay)
 	timerNetherPowerCD:Start(34-delay)
 	timerFelFireballCD:Start(5.1-delay)
 	timerFelLightningCD:Start(11.9-delay)
-	enrageTimer:Start(-delay)
 	if mod:IsDifficulty("heroic25") then
 		timerTouchCD:Start()
 	end
