@@ -117,6 +117,10 @@ elseif UnitFactionGroup("player") == "Horde" then
 	champions = "Alliance Champions"
 end
 
+L:SetWarningLocalization({
+	WarningEyebeam		= "Eyebeam incoming!"
+})
+
 L:SetGeneralLocalization({
 	name = champions
 })

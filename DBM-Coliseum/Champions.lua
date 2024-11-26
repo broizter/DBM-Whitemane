@@ -9,11 +9,12 @@ mod:RegisterKill("yell", L.YellKill)
 
 
 mod:RegisterEvents(
-	"SPELL_AURA_APPLIED 66010 65802 65801 65809 65927 65929 66054 65859 65857 65871 65878 65877",								-- Psychic Horror
+	"SPELL_AURA_APPLIED 66010 65802 65801 65809 65927 65929 66054 65859 65857 65871 65878 65877 47241",								-- Psychic Horror
 	"SPELL_CAST_SUCCESS 66017 68753 65545 68754 68755 66020 68758 68757 68756 66115 66009 66008 66613 66007 66011 65793 65790 65816 68145 68146 68147 65820 68141 68139 68140 65947 65931 66063 65983 65980 65544 65543 65542 65860 66086 67974 67975 67976 66178 68759 68760 68761 65960 65961 66207 65880 65869",
 	"SPELL_DAMAGE 65817 68142 68143 68144",
 	"SPELL_MISSED 65817 68142 68143 68144",
 	"CHAT_MSG_MONSTER_YELL",
+	"CHAT_MSG_RAID_BOSS_WHISPER",
 	"UNIT_DIED"
 )
 
@@ -112,6 +113,12 @@ local warnWingClip			= mod:NewTargetAnnounce(66207, 1) 				-- 66207
 local warnWyvernSting		= mod:NewTargetAnnounce(65878, 1) 				-- 65878, 65877
 local warnFrostTrap			= mod:NewSpellAnnounce(65880, 3) 				-- 65880
 local warnDisengage			= mod:NewSpellAnnounce(65869, 3) 				-- 65869
+-- Demon hunter
+mod:AddSetIconOption("SetIconOnEyebeamTarget", 126, true, false, {8})
+local yellBeam			= mod:NewYell(126)
+local warnEyebeam		= mod:NewAnnounce("WarningEyebeam", 3)
+local specWarnEyebeam 		= mod:NewSpecialWarningRun(126, nil, nil, nil, 4, 2)
+local timerEyebeam		= mod:NewCDTimer(40, 126)
 
 local specWarnHellfire		= mod:NewSpecialWarningMove(65816, nil, nil, nil, 1, 2)
 local specWarnHandofProt	= mod:NewSpecialWarningDispel(66009, "RemoveInvulnerabilities", nil, nil, 1, 2)
@@ -267,7 +274,10 @@ function mod:SPELL_AURA_APPLIED(args)
 		warnCyclone:Show(args.destName)
 	elseif args.spellId == 65857 then								-- Entangling Roots
 		warnEntanglingRoots:Show(args.destName)
-	-- Rogue
+	-- Demon hunter
+	elseif args.spellId == 44464 then -- Eyebeam
+		warnEyebeam:Show()
+		timerEyebeam:Start()
 	-- Hunter
 	elseif args.spellId == 65871 then								-- Deterrence
 		warnDeterrence:Show()
@@ -354,6 +364,15 @@ function mod:UNIT_DIED(args)
 	elseif cid == 34474 or cid == 34450 then -- Warlock
 		DBM.BossHealth:RemoveBoss(34474)
 		DBM.BossHealth:RemoveBoss(34450)
+	end
+end
+
+function mod:CHAT_MSG_RAID_BOSS_WHISPER(msg, _, _, _, target)
+	if msg == L.FocusedEyebeam or msg:find(FocusedEyebeam) then
+		specWarnEyebeam:Show()
+		specWarnEyebeam:Play("justrun")
+		specWarnEyebeam:ScheduleVoice(1, "keepmove")
+		yellBeam:Yell()
 	end
 end
 
