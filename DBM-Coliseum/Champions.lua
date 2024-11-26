@@ -35,7 +35,8 @@ mod:RegisterEvents(
 		34444, L.Thrakgar,
 		34455, L.Broln,
 		34450, L.Harkzog,
-		34453, L.Narrhok
+		34453, L.Narrhok,
+		110000, L.Monroth
 	)
 --[[else
 	--mod:RegisterKill("yell", L.HordeVictory)
