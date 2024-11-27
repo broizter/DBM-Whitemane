@@ -12,23 +12,23 @@ mod:RegisterEventsInCombat(
 	"SPELL_AURA_APPLIED_DOSE 66721"
 )
 
-local warnBreath			= mod:NewSpellAnnounce(66665, 3)
-local warnMeteor			= mod:NewSpellAnnounce(66725, 3)
+local warnBreath		= mod:NewSpellAnnounce(66665, 3)
+local warnMeteor		= mod:NewSpellAnnounce(66725, 3)
 local warnMeteorSoon		= mod:NewPreWarnAnnounce(66725, 5, 2)
 local warnBurningFury		= mod:NewStackAnnounce(66721, 2, nil, "Tank|Healer")
 
 local specWarnCinder		= mod:NewSpecialWarningMove(66684, nil, nil, nil, 1, 2)
 
-local timerNextMeteor		= mod:NewNextTimer(45, 66725, nil, nil, nil, 5, nil, DBM_COMMON_L.TANK_ICON) -- REVIEW! variance? (10N Lordaeron 2022/09/23) - 47.0
-local timerNextBurningFury	= mod:NewNextTimer(20, 66721, nil, nil, nil, 5, nil, DBM_COMMON_L.TANK_ICON..DBM_COMMON_L.HEALER_ICON) -- (10N Lordaeron 2022/09/23) - 20.0, 22.0, 20.0, 20.0
-local timerBreath			= mod:NewBuffActiveTimer(4.5, 66665, nil, nil, nil, 2)
-local timerBreathCD			= mod:NewCDTimer(45, 66665, nil, nil, nil, 2) -- (10N Lordaeron 2022/09/23) - 45.0, 45.0
+local timerNextMeteor		= mod:NewNextTimer(45, 66725, nil, nil, nil, 5, nil, DBM_COMMON_L.TANK_ICON)
+local timerNextBurningFury	= mod:NewNextTimer(20, 66721, nil, nil, nil, 5, nil, DBM_COMMON_L.TANK_ICON..DBM_COMMON_L.HEALER_ICON)
+local timerBreath		= mod:NewBuffActiveTimer(4.5, 66665, nil, nil, nil, 2)
+local timerBreathCD		= mod:NewCDTimer(45, 66665, nil, nil, nil, 2)
 
 local timerKoralonEnrage	= mod:NewBerserkTimer(300, nil, "KoralonEnrage")
 
 function mod:OnCombatStart(delay)
 	timerKoralonEnrage:Start(-delay)
-	timerNextMeteor:Start(30-delay) -- REVIEW! variance? (10N Lordaeron 2022/09/23) - pull:44.9
+	timerNextMeteor:Start(30-delay)
 	warnMeteorSoon:Schedule(44.9-5-delay)
 	timerBreathCD:Start(9-delay)
 	timerNextBurningFury:Start(19-delay)
