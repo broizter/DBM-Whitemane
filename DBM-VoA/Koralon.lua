@@ -31,7 +31,7 @@ function mod:OnCombatStart(delay)
 	timerNextMeteor:Start(44.9-delay) -- REVIEW! variance? (10N Lordaeron 2022/09/23) - pull:44.9
 	warnMeteorSoon:Schedule(44.9-5-delay)
 	timerBreathCD:Start(9-delay)
-	timerNextBurningFury:Start() -- (10N Lordaeron 2022/09/23) - pull:19.9
+	timerNextBurningFury:Start(19-delay)
 end
 
 function mod:SPELL_CAST_START(args)
