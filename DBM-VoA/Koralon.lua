@@ -30,7 +30,7 @@ function mod:OnCombatStart(delay)
 	timerKoralonEnrage:Start(-delay)
 	timerNextMeteor:Start(44.9-delay) -- REVIEW! variance? (10N Lordaeron 2022/09/23) - pull:44.9
 	warnMeteorSoon:Schedule(44.9-5-delay)
-	timerBreathCD:Start(12.4-delay) -- REVIEW! variance? (10N Lordaeron 2022/09/23) - pull:12.4
+	timerBreathCD:Start(9-delay)
 	timerNextBurningFury:Start() -- (10N Lordaeron 2022/09/23) - pull:19.9
 end
 
