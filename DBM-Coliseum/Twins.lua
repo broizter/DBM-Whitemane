@@ -184,7 +184,7 @@ do
 		DBM.BossHealth:RemoveBoss(getShieldHP)
 	end
 
-	updateInfoFrame = function()
+	function updateInfoFrame()
 		twipe(lines)
 		twipe(sortedLines)
 		if shieldedBoss then
