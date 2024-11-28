@@ -82,7 +82,7 @@ function mod:SPELL_DAMAGE(_, _, _, destGUID, _, _, spellId)
 	if (spellId == 66877 or spellId == 67070 or spellId == 67071 or spellId == 67072) and destGUID == UnitGUID("player") and self:AntiSpam(3, 1) then		-- Legion Flame
 		specWarnFlameGTFO:Show()
 		specWarnFlameGTFO:Play("runaway")
-	elseif (spellId == 66496 or spellId == 68716 or spellId == 68717 or spellId == 68718) and destGUID == UnitGUID("player") and self:AntiSpam(3, 1) then	-- Fel Inferno
+	elseif (spellId == 66496 or spellId == 68716 or spellId == 68717 or spellId == 68718) and destGUID == UnitGUID("player") and self:AntiSpam(3, 2) then	-- Fel Inferno
 		specWarnFelInferno:Show()
 		specWarnFelInferno:Play("runaway")
 	end
@@ -153,7 +153,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 		warnFlame:Show(args.destName)
 	elseif args:IsSpellID(66528, 67029, 67030, 67031) then 	-- Fel Lightning
 		timerFelLightningCD:Start()
-	elseif args:IsSpellID(66209) and self:AntiSpam(2, 1) then -- Touch of Jaraxxus
+	elseif args:IsSpellID(66209) and self:AntiSpam(2, 3) then -- Touch of Jaraxxus
 		timerTouchCD:Start()
 	elseif args:IsSpellID(66228, 67107, 67106, 67108) then	-- Nether Power
 		timerNetherPowerCD:Start()
