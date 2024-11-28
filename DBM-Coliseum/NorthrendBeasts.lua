@@ -236,7 +236,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		else
 			specWarnTranq:Show()
 			specWarnTranq:Play("trannow")
-			timerNextCrashCD:Start(49)			
+			timerNextCrashCD:Start(47.7)			
 		end
 	elseif args:IsSpellID(66758) then						-- Staggered Daze
 		timerStaggeredDaze:Start()
@@ -245,7 +245,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		if self:IsDifficulty("heroic10", "heroic25") then
 			timerNextCrashCD:Start(35.4)
 		else
-			timerNextCrashCD:Start(36.4) --todo 45
+			timerNextCrashCD:Start(55.7) --todo 45
 		end
 	elseif args:IsSpellID(66689, 67650, 67651, 67652) and self:AntiSpam(2, 1) then	-- Arctic Breath
 		timerArcticBreathCD:Start()
