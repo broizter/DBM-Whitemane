@@ -52,7 +52,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif args:IsSpellID(66725, 68161) then -- Meteor first
 		warnMeteor:Show()
 		timerNextMeteor:Start()
-		warnMeteorSoon:Schedule(42)
+		warnMeteorSoon:Schedule(40)
 	end
 end
 mod.SPELL_AURA_APPLIED_DOSE = mod.SPELL_AURA_APPLIED
