@@ -21,7 +21,7 @@ local specWarnCinder		= mod:NewSpecialWarningMove(66684, nil, nil, nil, 1, 2)
 
 local timerNextMeteor		= mod:NewNextTimer(45, 66725, nil, nil, nil, 5, nil, DBM_COMMON_L.TANK_ICON)
 local timerNextBurningFury	= mod:NewNextTimer(20, 66721, nil, nil, nil, 5, nil, DBM_COMMON_L.TANK_ICON..DBM_COMMON_L.HEALER_ICON)
-local timerBreath		= mod:NewBuffActiveTimer(4.5, 66665, nil, nil, nil, 2)
+local timerBreath		= mod:NewBuffActiveTimer(5, 66665, nil, nil, nil, 2)
 local timerBreathCD		= mod:NewCDTimer(45, 66665, nil, nil, nil, 2)
 
 local timerKoralonEnrage	= mod:NewBerserkTimer(300, nil, "KoralonEnrage")
