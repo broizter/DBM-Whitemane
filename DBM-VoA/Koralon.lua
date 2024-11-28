@@ -28,8 +28,8 @@ local timerKoralonEnrage	= mod:NewBerserkTimer(300, nil, "KoralonEnrage")
 
 function mod:OnCombatStart(delay)
 	timerKoralonEnrage:Start(-delay)
-	timerNextMeteor:Start(30-delay)
-	warnMeteorSoon:Schedule(44.9-5-delay)
+	timerNextMeteor:Start(29-delay)
+	warnMeteorSoon:Schedule(29-5-delay)
 	timerBreathCD:Start(9-delay)
 	timerNextBurningFury:Start(19-delay)
 end
