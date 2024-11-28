@@ -20,8 +20,6 @@ local specwarnRadiance			= mod:NewSpecialWarningLookAway(66935, nil, nil, nil, 2
 local specwarnHammerofJustice	= mod:NewSpecialWarningDispel(66940, "Healer", nil, nil, 1, 2)
 local specwarnHammerofRighteous	= mod:NewSpecialWarningYou(66905, nil, nil, nil, 1, 2)
 
-local timerVengeance			= mod:NewBuffActiveTimer(6, 66889)
-
 mod:AddSetIconOption("SetIconOnHammerTarget", 66940, true, true, {8})
 
 function mod:SPELL_CAST_START(args)
@@ -44,7 +42,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 	elseif args.spellId == 66889 then							-- Vengeance
 		warnVengeance:Show(args.destName)
-		timerVengeance:Start(args.destName)
 	elseif args.spellId == 66905 and args:IsPlayer() then
 		specwarnHammerofRighteous:Show()
 		specwarnHammerofRighteous:Play("useitem")
