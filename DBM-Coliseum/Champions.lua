@@ -115,7 +115,7 @@ local warnDisengage			= mod:NewSpellAnnounce(65869, 3) 				-- 65869
 -- Demon hunter
 mod:AddSetIconOption("SetIconOnEyebeamTarget", 40018, true, false, {8})
 local yellBeam			= mod:NewYell(40018)
-local specWarnEyebeamSoon 	= mod:NewSpecialWarning("SpecWarnEyebeamSoon", true)
+local specWarnEyebeamSoon 	= mod:NewSpecialWarning("SpecWarnEyebeamSoon")
 local specWarnEyebeam 		= mod:NewSpecialWarningRun(40018, nil, nil, nil, 4, 2)
 local timerEyebeam		= mod:NewCDTimer(40, 40018)
 local timerFlame 		= mod:NewTargetTimer(8, 71265, nil, nil, nil, 3)
