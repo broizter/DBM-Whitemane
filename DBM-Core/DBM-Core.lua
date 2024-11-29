@@ -381,6 +381,11 @@ DBM.DefaultOptions = {
 	EnableBB = true,
 	PlayBBLoot = true,
 	PlayBBSound = false,
+	OverrideBBFont = false,
+	BBFont = "standardFont",
+	BBFontStyle = "OUTLINE",
+	BBFontShadow = true,
+	BBFontSize = 0,
 	LatencyThreshold = 250,
 	BigBrotherAnnounceToRaid = false,
 	SettingsMessageShown = false,
@@ -2865,6 +2870,9 @@ do
 		-- load special warning options
 		self:UpdateWarningOptions()
 		self:UpdateSpecialWarningOptions()
+		if BossBanner then
+			BossBanner:UpdateStyle()
+		end
 		self.Options.CoreSavedRevision = self.Revision
 		--Fix fonts if they are nil
 		if not self.Options.WarningFont then
