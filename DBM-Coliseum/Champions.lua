@@ -294,7 +294,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif args.spellId == 65857 then								-- Entangling Roots
 		warnEntanglingRoots:Show(args.destName)
 	-- Demon hunter
-	elseif args.spellId == 47241 then -- Eyebeam
+	elseif args.spellId == 47241 and not args:IsDestTypePlayer() then -- Eyebeam
 		specWarnEyebeamSoon:Show()
 		timerEyebeam:Start()
 	-- Hunter
