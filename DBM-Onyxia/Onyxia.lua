@@ -6,9 +6,9 @@ mod:SetCreatureID(10184)
 
 mod:RegisterCombat("combat")
 
---[[mod:RegisterEvents(
+mod:RegisterEvents(
 	"CHAT_MSG_MONSTER_YELL"
-)]]
+)
 
 mod:RegisterEventsInCombat(
 	"SPELL_CAST_START 68958 17086 18351 18564 18576 18584 18596 18609 18617 18435 68970 18431 18500 18392 68926",
@@ -127,9 +127,9 @@ function mod:SPELL_DAMAGE(_, _, _, destGUID, _, _, spellId)
 end
 
 function mod:CHAT_MSG_MONSTER_YELL(msg)
---	if msg == L.YellPull and not self:IsInCombat() then
---		DBM:StartCombat(self, 0)
-	if msg == L.YellP2 or msg:find(L.YellP2) then
+	if msg == L.YellPull and not self:IsInCombat() then
+		DBM:StartCombat(self, 0)
+	elseif msg == L.YellP2 or msg:find(L.YellP2) then
 		self:SendSync("Phase2")
 	elseif msg == L.YellP3 or msg:find(L.YellP3) then
 		self:SendSync("Phase3")
