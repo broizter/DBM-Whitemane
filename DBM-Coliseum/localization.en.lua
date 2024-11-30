@@ -130,7 +130,8 @@ L:SetTimerLocalization({
 })
 
 L:SetOptionLocalization({
-	TimerSpawnTimer			= "Show timer until champions spawn"
+	TimerSpawnTimer			= "Show timer until champions spawn",
+	SpecWarnEyebeamSoon		= "Show special warning when Demon Hunter is about to use Eye Beam"
 })
 
 L:SetMiscLocalization({
