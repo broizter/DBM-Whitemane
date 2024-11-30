@@ -12,6 +12,7 @@ mod:RegisterCombat("yell", L.Aggro)
 
 mod:RegisterEvents(
 	"SPELL_AURA_APPLIED 67051 67050 67049 66237 66197 68123 68124 68125 66334 67905 67906 67907 66532 66963 66964 66965 66209 66228 67107 67106 67108",
+	"SPELL_AURA_APPLIED_DOSE 66228 67107 67106 67108",
 	"SPELL_AURA_REMOVED 67051 67050 67049 66237 66197 68123 68124 68125",
 	"SPELL_CAST_START 66532 66963 66964 66965",
 	"SPELL_CAST_SUCCESS 66197 68123 68124 68125 66528 67029 67030 67031 66209",
@@ -127,6 +128,35 @@ function mod:SPELL_AURA_APPLIED(args)
 			SendChatMessage("Touch on me!","SAY")
 		end
 	elseif args:IsSpellID(66228, 67107, 67106, 67108) and not args:IsDestTypePlayer() then	-- Nether Power
+		timerNetherPowerCD:Start()
+		specWarnNetherPower:Show(args.sourceName)
+		specWarnNetherPower:Play("dispelboss")
+		if timerPortalCD:GetRemaining() > 0 then
+			timerPortalCD:AddTime(5)
+		end
+		if timerVolcanoCD:GetRemaining() > 0 then
+			timerVolcanoCD:AddTime(5)
+		end
+		if timerFlameCD:GetRemaining() > 0 then
+			timerFlameCD:AddTime(5)
+		end
+		if timerFleshCD:GetRemaining() > 0 then
+			timerFleshCD:AddTime(5)
+		end
+		if timerFelFireballCD:GetRemaining() > 0 then
+			timerFelFireballCD:AddTime(5)
+		end
+		if timerFelLightningCD:GetRemaining() > 0 then
+			timerFelLightningCD:AddTime(5)
+		end
+		if timerTouchCD:GetRemaining() > 0 then
+			timerTouchCD:AddTime(5)
+		end
+	end
+end
+
+function mod:SPELL_AURA_APPLIED_DOSE(args)
+	if args:IsSpellID(66228, 67107, 67106, 67108) and not args:IsDestTypePlayer() then	-- Nether Power
 		timerNetherPowerCD:Start()
 		specWarnNetherPower:Show(args.sourceName)
 		specWarnNetherPower:Play("dispelboss")
