@@ -2,7 +2,7 @@ local mod	= DBM:NewMod("Champions", "DBM-Coliseum")
 local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 3726 $"):sub(12, -3))
-mod:SetCreatureID(34458, 34451, 34459, 34448, 34449, 34445, 34456, 34447, 34441, 34454, 34444, 34455, 34450, 34453, 34461, 34460, 34469, 34467, 34468, 34471, 34465, 34466, 34473, 34472, 34470, 34463, 34474, 34475)
+mod:SetCreatureID(34458, 34451, 34459, 34448, 34449, 34445, 34456, 34447, 34441, 34454, 34444, 34455, 34450, 34453, 34461, 34460, 34469, 34467, 34468, 34471, 34465, 34466, 34473, 34472, 34470, 34463, 34474, 34475, 110000, 110004, 110010)
 
 mod:RegisterCombat("combat")
 mod:RegisterKill("yell", L.YellKill)
@@ -36,7 +36,8 @@ mod:RegisterEvents(
 		34455, L.Broln,
 		34450, L.Harkzog,
 		34453, L.Narrhok,
-		110000, L.Monroth
+		110000, L.Monroth,
+		110004, L.Gorgaz
 	)
 --[[else
 	--mod:RegisterKill("yell", L.HordeVictory)
@@ -294,7 +295,8 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif args.spellId == 65857 then								-- Entangling Roots
 		warnEntanglingRoots:Show(args.destName)
 	-- Demon hunter
-	elseif args.spellId == 47241 and not args:IsDestTypePlayer() then -- Eyebeam
+	-- and not args:IsDestTypePlayer()
+	elseif args.spellId == 47241 and args.destName == L.Monroth then -- Eyebeam
 		specWarnEyebeamSoon:Show()
 		timerEyebeam:Start()
 	-- Hunter
