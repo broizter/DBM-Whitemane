@@ -236,7 +236,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		else
 			specWarnTranq:Show()
 			specWarnTranq:Play("trannow")
-			timerNextCrashCD:Start(47.7)			
+			timerNextCrashCD:Start(37.7)			
 		end
 	elseif args:IsSpellID(66758) then						-- Staggered Daze
 		timerStaggeredDaze:Start()
