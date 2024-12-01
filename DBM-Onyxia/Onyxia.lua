@@ -33,26 +33,26 @@ local timerNextFlameBreath	= mod:NewCDTimer(13.3, 18435, nil, "Tank", 2, 5, nil,
 
 -- Stage Two (65% – 40%)
 mod:AddTimerLine(DBM_CORE_L.SCENARIO_STAGE:format(2)..": 65% – 40%")
-local warnPhase2			= mod:NewPhaseAnnounce(2)
+local warnPhase2		= mod:NewPhaseAnnounce(2)
 local warnPhase3Soon		= mod:NewPrePhaseAnnounce(3)
-local warnFireball			= mod:NewTargetNoFilterAnnounce(18392, 2, nil, false)
+local warnFireball		= mod:NewTargetNoFilterAnnounce(18392, 2, nil, false)
 local warnWhelpsSoon		= mod:NewSoonAnnounce(17646, 1, 69004)
 --local preWarnDeepBreath	 = mod:NewSoonAnnounce(17086, 2)--Experimental, if it is off please let me know.
 
-local yellFireball			= mod:NewYell(18392)
+local yellFireball		= mod:NewYell(18392)
 local specWarnBreath		= mod:NewSpecialWarningSpell(18584, nil, nil, nil, 2, 2)
-local specWarnAdds			= mod:NewSpecialWarningAdds(68959, "-Healer", nil, nil, 1, 2)
+local specWarnAdds		= mod:NewSpecialWarningAdds(68959, "-Healer", nil, nil, 1, 2)
 local specWarnBlastNova		= mod:NewSpecialWarningRun(68958, "Melee", nil, nil, 4, 2) -- from Onyxian Lair Guard
 
 local timerBreathCast		= mod:NewCastTimer(8, 18584, nil, nil, nil, 3)
 local timerNextDeepBreath	= mod:NewCDTimer(35, 18584, nil, nil, nil, 3)--Range from 35-60seconds in between based on where she moves to.
-local timerWhelps			= mod:NewNextTimer(105, 17646, nil, nil, nil, 1, 69004)
+local timerWhelps		= mod:NewNextTimer(105, 17646, nil, nil, nil, 1, 69004)
 local timerAchieveWhelps	= mod:NewAchievementTimer(10, 4406)
-local timerBigAddCD			= mod:NewNextTimer(44.9, 68959, nil, "-Healer", nil, 1, 10697) -- Ignite Weapon for Onyxian Lair Guard
+local timerBigAddCD		= mod:NewNextTimer(44.9, 68959, nil, "-Healer", nil, 1, 10697) -- Ignite Weapon for Onyxian Lair Guard
 
 -- Stage Three (40% – 0%)
 mod:AddTimerLine(DBM_CORE_L.SCENARIO_STAGE:format(3)..": 40% – 0%")
-local warnPhase3			= mod:NewPhaseAnnounce(3)
+local warnPhase3		= mod:NewPhaseAnnounce(3)
 
 local specWarnBellowingRoar	= mod:NewSpecialWarningSpell(18431, nil, nil, nil, 2, 2)
 
@@ -82,7 +82,7 @@ function mod:OnCombatStart(delay)
 	self.vb.whelpsCount = 0
 	self.vb.warned_preP2 = false
 	self.vb.warned_preP3 = false
-	timerNextFlameBreath:Start(12.1-delay) -- REVIEW! variance? (25N Lordaeron 2022/10/13) - 12.1
+	timerNextFlameBreath:Start(12.1-delay)
 	timerAchieve:Start(-delay)
 	if self.Options.SoundWTF3 then
 		DBM:PlaySoundFile("Interface\\AddOns\\DBM-Onyxia\\sounds\\dps-very-very-slowly.ogg")
@@ -161,9 +161,9 @@ function mod:OnSync(msg)
 		self:SetStage(2)
 		self.vb.whelpsCount = 0
 		warnPhase2:Show()
-		timerBigAddCD:Start(20) -- (25N Lordaeron 2022/10/13) - Stage 2/20.0
+		timerBigAddCD:Start(20)
 --		preWarnDeepBreath:Schedule(72)	-- Pre-Warn Deep Breath
-		timerNextDeepBreath:Start(75.5) -- Breath-17086. REVIEW! variance? (25N Lordaeron 2022/10/13) - 75.5
+		timerNextDeepBreath:Start(75.5)
 		timerAchieveWhelps:Start()
 		timerNextFlameBreath:Cancel()
 		self:Schedule(5, Whelps, self)
