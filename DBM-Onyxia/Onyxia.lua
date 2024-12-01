@@ -98,7 +98,7 @@ function mod:SPELL_CAST_START(args)
 	elseif args:IsSpellID(17086, 18351, 18564, 18576) or args:IsSpellID(18584, 18596, 18609, 18617) then	-- 1 ID for each direction
 		specWarnBreath:Show()
 		timerBreathCast:Start()
-		timerNextDeepBreath:Start()
+--		timerNextDeepBreath:Start()
 --		preWarnDeepBreath:Schedule(35)			  -- Pre-Warn Deep Breath
 	elseif args:IsSpellID(18435, 68970) then		-- Flame Breath (Ground phases)
 		timerNextFlameBreath:Start()
