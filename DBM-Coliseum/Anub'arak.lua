@@ -102,6 +102,7 @@ function mod:EmergeFix()
 	warnEmerge:Show()
 	warnSubmergeSoon:Schedule(70)
 	timerSubmerge:Start()
+	timerFreezingSlash:Start(12)
 	if self:IsHeroic() then
 		self:ShadowStrike()
 	end
@@ -248,6 +249,7 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
 		warnEmerge:Show()
 		warnSubmergeSoon:Schedule(70)
 		timerSubmerge:Start()
+		timerFreezingSlash:Start(12)
 		if self:IsHeroic() then
 			self:ShadowStrike()
 		end
