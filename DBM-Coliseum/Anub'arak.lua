@@ -61,7 +61,11 @@ function mod:OnCombatStart(delay)
 	warnSubmergeSoon:Schedule(70-delay)
 	timerSubmerge:Start(-delay)
 	enrageTimer:Start(-delay)
-	timerFreezingSlash:Start(8.54-delay)
+	if self:IsDifficulty("normal10", "heroic10") then
+		timerFreezingSlash:Start(7.34-delay)
+	else
+		timerFreezingSlash:Start(8.54-delay)
+	end
 	table.wipe(PColdTargets)
 	if self:IsHeroic() then
 		timerShadowStrike:Start()
