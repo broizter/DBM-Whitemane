@@ -163,7 +163,7 @@ function mod:OnSync(msg)
 		warnPhase2:Show()
 		timerBigAddCD:Start(20)
 --		preWarnDeepBreath:Schedule(72)	-- Pre-Warn Deep Breath
-		timerNextDeepBreath:Start(75.5)
+--		timerNextDeepBreath:Start(75.5)
 		timerAchieveWhelps:Start()
 		timerNextFlameBreath:Cancel()
 		self:Schedule(5, Whelps, self)
