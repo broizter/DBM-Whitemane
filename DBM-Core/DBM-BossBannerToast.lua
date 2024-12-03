@@ -247,7 +247,7 @@ local function BossBanner_FetchAndSyncLootItems(self)
 				end
 
 				DBM:Debug("BossBanner: Sending sync (v3) with the following args: "..locale..", "..faction..", "..encounterId..", "..encounterName..", "..lootSourceName..", "..tostring(lootSourceGUID)..", "..itemID..", "..itemLink..", "..tostring(quantity)..", "..tostring(slot)..", "..texture..", "..finalItem, 3)
-				private.sendSync("DBMv4-L", ("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s"):format(--[[version:]]"3", locale, faction, encounterId, encounterName, lootSourceName, tostring(lootSourceGUID), itemID, itemLink, tostring(quantity), tostring(slot), texture, finalItem)) -- needs to be less than 255 characters, otherwise it won't be sent
+				private.sendSync("DBMv4-L", ("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s"):format(--[[version:]]"4", locale, faction, encounterId, encounterName, lootSourceName, tostring(lootSourceGUID), itemID, itemLink, tostring(quantity), tostring(slot), texture, finalItem)) -- needs to be less than 255 characters, otherwise it won't be sent
 			end
 		end
 	end
