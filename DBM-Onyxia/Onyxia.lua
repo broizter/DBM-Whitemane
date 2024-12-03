@@ -97,6 +97,7 @@ function mod:SPELL_CAST_START(args)
 		specWarnBlastNova:Show()
 	elseif args:IsSpellID(17086, 18351, 18564, 18576) or args:IsSpellID(18584, 18596, 18609, 18617) then	-- 1 ID for each direction
 		specWarnBreath:Show()
+		specWarnBreath:Play("breathsoon")
 		timerBreathCast:Start()
 --		timerNextDeepBreath:Start()
 --		preWarnDeepBreath:Schedule(35)			  -- Pre-Warn Deep Breath
