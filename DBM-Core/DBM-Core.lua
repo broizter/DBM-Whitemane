@@ -3544,13 +3544,14 @@ do
 			end
 		end
 
-		syncHandlers["DBMv4-L"] = function(sender, version, locale, encounterId, _, lootSourceName, lootSourceGUID, itemID, itemLink, quantity, slot, texture, finalItem) -- version, locale, encounterId, encounterName, lootSourceName, lootSourceGUID, itemID, itemLink, tostring(quantity), tostring(slot), texture, finalItem
+		syncHandlers["DBMv4-L"] = function(sender, version, locale, faction, encounterId, _, lootSourceName, lootSourceGUID, itemID, itemLink, quantity, slot, texture, finalItem) -- version, locale, encounterId, encounterName, lootSourceName, lootSourceGUID, itemID, itemLink, tostring(quantity), tostring(slot), texture, finalItem
 			if not BossBanner then return end
-			DBM:Debug("Receiving BossBanner loot sync from "..sender..", with args --> version: "..tostring(version)..", locale: "..tostring(locale)..", encounterId: "..tostring(encounterId)..", lootSourceName: "..tostring(lootSourceName)..", lootSourceGUID: "..tostring(lootSourceGUID)..", itemID: "..tostring(itemID)..", itemLink: "..tostring(itemLink)..", quantity: "..tostring(quantity)..", slot: "..tostring(slot)..", texture: "..tostring(texture)..", finalItem: "..tostring(finalItem), 3)
+			DBM:Debug("Receiving BossBanner loot sync from "..sender..", with args --> version: "..tostring(version)..", locale: "..tostring(locale)..", faction: "..tostring(faction)..", encounterId: "..tostring(encounterId)..", lootSourceName: "..tostring(lootSourceName)..", lootSourceGUID: "..tostring(lootSourceGUID)..", itemID: "..tostring(itemID)..", itemLink: "..tostring(itemLink)..", quantity: "..tostring(quantity)..", slot: "..tostring(slot)..", texture: "..tostring(texture)..", finalItem: "..tostring(finalItem), 3)
 			if not version or version ~= "3" then return end -- ignore old versions (previous sync had no version and antispam string changed during development)
 			-- check BossBanner encounterLootCache for the looted item
 			local isNPC = lootSourceGUID ~= "nil"
 			local lootSourceID = isNPC and lootSourceGUID or lootSourceName
+			if faction ~= UnitFactionGroup("player") then return end -- don't accept data from other factions since it causes duplicate items if an item has a version for each faction
 			if not isNPC and locale ~= GetLocale() then
 				DBM:Debug("BossBanner: ignored loot from ("..lootSourceID..") with different locale ("..locale..").", 3)
 				return

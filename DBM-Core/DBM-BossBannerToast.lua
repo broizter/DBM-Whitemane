@@ -25,6 +25,7 @@ local UnitIsDead = UnitIsDead
 local UnitIsFriend = UnitIsFriend
 local UnitGUID = UnitGUID
 local UnitName = UnitName
+local UnitFactionGroup = UnitFactionGroup
 
 local ITEM_QUALITY_COLORS = ITEM_QUALITY_COLORS
 --local ITEM_SET_NAME = ITEM_SET_NAME
@@ -158,6 +159,7 @@ local function BossBanner_FetchAndSyncLootItems(self)
 	local lootSourceName = lootSourceMobName or lootSourceTTName -- Prefer target unit rather than mouseover (chances of this being wrong are lower than the inverse)
 	local lootSourceGUID = targetNpcDead and UnitGUID("target")
 	local lootSourceID = lootSourceGUID or lootSourceName
+	local faction = UnitFactionGroup("player")
 
 	-- build encounter loot cache
 	encounterLootCache[encounterId] = encounterLootCache[encounterId] or {}
@@ -244,8 +246,8 @@ local function BossBanner_FetchAndSyncLootItems(self)
 					wipe(tempLootItemCounter)
 				end
 
-				DBM:Debug("BossBanner: Sending sync (v3) with the following args: "..locale..", "..encounterId..", "..encounterName..", "..lootSourceName..", "..tostring(lootSourceGUID)..", "..itemID..", "..itemLink..", "..tostring(quantity)..", "..tostring(slot)..", "..texture..", "..finalItem, 3)
-				private.sendSync("DBMv4-L", ("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s"):format(--[[version:]]"3", locale, encounterId, encounterName, lootSourceName, tostring(lootSourceGUID), itemID, itemLink, tostring(quantity), tostring(slot), texture, finalItem)) -- needs to be less than 255 characters, otherwise it won't be sent
+				DBM:Debug("BossBanner: Sending sync (v3) with the following args: "..locale..", "..faction..", "..encounterId..", "..encounterName..", "..lootSourceName..", "..tostring(lootSourceGUID)..", "..itemID..", "..itemLink..", "..tostring(quantity)..", "..tostring(slot)..", "..texture..", "..finalItem, 3)
+				private.sendSync("DBMv4-L", ("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s"):format(--[[version:]]"3", locale, faction, encounterId, encounterName, lootSourceName, tostring(lootSourceGUID), itemID, itemLink, tostring(quantity), tostring(slot), texture, finalItem)) -- needs to be less than 255 characters, otherwise it won't be sent
 			end
 		end
 	end
