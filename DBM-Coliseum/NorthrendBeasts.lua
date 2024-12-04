@@ -259,7 +259,7 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 	if args:IsSpellID(67477, 66331, 67478, 67479) then		-- Impale
 		timerNextImpale:Start()
 		warnImpaleOn:Show(args.destName, args.amount)
-		if (args.amount >= 5 and not self:IsDifficulty("heroic10", "heroic25") ) or ( args.amount >= 5 and self:IsDifficulty("heroic10", "heroic25") ) then 
+		if (args.amount >= 5 and not self:IsDifficulty("heroic10", "heroic25") ) or ( args.amount >= 4 and self:IsDifficulty("heroic10", "heroic25") ) then 
 			if args:IsPlayer() then
 				specWarnImpale5:Show(args.amount)
 				specWarnImpale5:Play("stackhigh")
