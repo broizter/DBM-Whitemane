@@ -147,8 +147,8 @@ function mod:GromokStartTimers()
 end
 
 function mod:WormsEmerge()
-	timerSubmergeCD:Start()
 	if not AcidmawDead then
+		timerSubmergeCD:Start()
 		if DreadscaleActive then	-- Dreadscale active & Acidmaw stationary
 			timerSweepCD:Start(24.8)
 			timerParalyticSpray:Start(20)			
@@ -159,6 +159,7 @@ function mod:WormsEmerge()
 		end
 	end
 	if not DreadscaleDead then
+		timerSubmergeCD:Start()
 		if DreadscaleActive then	-- Dreadscale active & Acidmaw stationary
 			timerSlimePoolCD:Start(15)
 			timerMoltenSpewCD:Start(18.2)
