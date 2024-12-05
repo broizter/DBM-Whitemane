@@ -25,7 +25,7 @@ mod:RegisterEventsInCombat(
 --TODO, phase 4 log where I don't overkill boss too fast.
 
 -- General
-local timerCombatStart		= mod:NewCombatTimer(36)
+local timerCombatStart		= mod:NewCombatTimer(42)
 local berserkTimer			= mod:NewBerserkTimer(1500)
 
 -- Stage One: You Are Not Prepared
