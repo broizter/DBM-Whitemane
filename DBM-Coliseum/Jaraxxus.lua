@@ -43,8 +43,8 @@ local timerTouchCD			= mod:NewCDTimer(10.2, 66209, nil, nil, nil, 3)
 local timerNetherPowerCD		= mod:NewCDTimer(26, 67009, nil, "MagicDispeller", nil, 5, nil, DBM_CORE_L.MAGIC_ICON) 		-- Every 25-45 sec
 local timerFlesh			= mod:NewTargetTimer(14, 66237, nil, "Healer", 2, 5, nil, DBM_CORE_L.HEALER_ICON)
 local timerFleshCD			= mod:NewCDTimer(23, 66237, nil, "Healer", 2, 5, nil, DBM_CORE_L.HEALER_ICON) 		-- Every 20-25 sec
-local timerPortalCD			= mod:NewCDTimer(120, 66269, nil, nil, nil, 1) 		-- Every 120 sec
-local timerVolcanoCD			= mod:NewCDTimer(120, 66258, nil, nil, nil, 1)	-- Every 120 sec
+local timerPortalCD			= mod:NewCDTimer(140, 66269, nil, nil, nil, 1) 		-- Every 120 sec
+local timerVolcanoCD			= mod:NewCDTimer(140, 66258, nil, nil, nil, 1)	-- Every 120 sec
 local timerFelFireballCD		= mod:NewCDTimer(10, 66532, nil, nil, nil, 1) 	-- Every 10-15 sec
 local timerFelLightningCD		= mod:NewCDTimer(11, 66528, nil, nil, nil, 1) 	-- Every 10-15 sec
 
@@ -63,8 +63,8 @@ function mod:OnCombatStart(delay)
 	end
 	warnPortalSoon:Schedule(15-delay)	
 	timerPortalCD:Start(20-delay)		-- Nether Portal 20 sec. after pull, next every 120 sec.
-	warnVolcanoSoon:Schedule(80-delay)	-- 5 sec. longer (hack-fix for delay caused by Nether Power)
-	timerVolcanoCD:Start(80.4-delay)		-- Volcano 80 sec. after pull, next every 120 sec.
+	warnVolcanoSoon:Schedule(85-delay)	-- 5 sec. longer (hack-fix for delay caused by Nether Power)
+	timerVolcanoCD:Start(90-delay)		-- Volcano 80 sec. after pull, next every 120 sec.
 	timerFleshCD:Start(25-delay) 		-- Incinerate Flesh 24-26 sec. after pull, next every 20-25 sec.
 	timerFlameCD:Start(-delay)
 	timerNetherPowerCD:Start(34-delay)
@@ -131,12 +131,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerNetherPowerCD:Start()
 		specWarnNetherPower:Show(args.sourceName)
 		specWarnNetherPower:Play("dispelboss")
-		if timerPortalCD:GetRemaining() > 0 then
-			timerPortalCD:AddTime(5)
-		end
-		if timerVolcanoCD:GetRemaining() > 0 then
-			timerVolcanoCD:AddTime(5)
-		end
 		if timerFlameCD:GetRemaining() > 0 then
 			timerFlameCD:AddTime(5)
 		end
@@ -160,12 +154,6 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 		timerNetherPowerCD:Start()
 		specWarnNetherPower:Show(args.sourceName)
 		specWarnNetherPower:Play("dispelboss")
-		if timerPortalCD:GetRemaining() > 0 then
-			timerPortalCD:AddTime(5)
-		end
-		if timerVolcanoCD:GetRemaining() > 0 then
-			timerVolcanoCD:AddTime(5)
-		end
 		if timerFlameCD:GetRemaining() > 0 then
 			timerFlameCD:AddTime(5)
 		end
@@ -218,9 +206,9 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerCombatStart:Start()
 	elseif msg == L.PortalSpawn or msg:find(L.PortalSpawn) then 	-- Nether Portal
 		timerPortalCD:Start()
-		warnPortalSoon:Schedule(130) -- 20 sec. longer (hack-fix for delay caused by Nether Power)
+		warnPortalSoon:Schedule(135) -- 20 sec. longer (hack-fix for delay caused by Nether Power)
 	elseif msg == L.VolcanoSpawn or msg:find(L.VolcanoSpawn) then 	-- Infernal Volcano
 		timerVolcanoCD:Start()
-		warnVolcanoSoon:Schedule(130) -- 20 sec. longer (hack-fix for delay caused by Nether Power)
+		warnVolcanoSoon:Schedule(135) -- 20 sec. longer (hack-fix for delay caused by Nether Power)
 	end
 end
