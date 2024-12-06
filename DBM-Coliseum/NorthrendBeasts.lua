@@ -56,7 +56,7 @@ local specWarnTranq		= mod:NewSpecialWarningDispel(66759, "RemoveEnrage", nil, n
 local enrageTimer		= mod:NewBerserkTimer(150)
 local timerBreath		= mod:NewCastTimer(4, 66689, nil, nil, nil, 3)--3 or 5? is it random target or tank?
 local timerStaggeredDaze	= mod:NewBuffActiveTimer(15, 66758, nil, nil, nil, 5, nil, DBM_CORE_L.DAMAGE_ICON)
-local timerNextCrashCD		= mod:NewCDTimer(30, 66683, nil, nil, nil, 2, nil, DBM_CORE_L.MYTHIC_ICON)
+local timerNextCrashCD		= mod:NewCDTimer(55, 66683, nil, nil, nil, 2, nil, DBM_CORE_L.MYTHIC_ICON)
 local timerArcticBreathCD	= mod:NewCDTimer(20, 66689) -- 14 sec. after pull, 20-30 sec. every next
 local timerWhirlCD		= mod:NewCDTimer(18.2, 67665) -- 10-12 sec. after pull, 15-20 sec. every next
 local timerIcehowlSpawn		= mod:NewTimer(329, "TimerIcehowlSpawn", 3130, nil, nil, 1)
@@ -232,22 +232,14 @@ function mod:SPELL_AURA_APPLIED(args)
 		warnRage:Show()
 		timerWhirlCD:Start(22)
 		timerArcticBreathCD:Start(5)
-		if self:IsDifficulty("heroic10", "heroic25") then
-			timerNextCrashCD:Start(38)
-		else
+		if self:IsDifficulty("normal10", "normal25") then
 			specWarnTranq:Show()
 			specWarnTranq:Play("trannow")
-			timerNextCrashCD:Start(37.7)			
 		end
 	elseif args:IsSpellID(66758) then						-- Staggered Daze
 		timerStaggeredDaze:Start()
 		timerWhirlCD:Start(17.8)--todo 17
 		timerArcticBreathCD:Start(32.1) --todo  20
-		if self:IsDifficulty("heroic10", "heroic25") then
-			timerNextCrashCD:Start(35.4)
-		else
-			timerNextCrashCD:Start(47)
-		end
 	elseif args:IsSpellID(66689, 67650, 67651, 67652) and self:AntiSpam(2, 1) then	-- Arctic Breath
 		timerArcticBreathCD:Start()
 		timerBreath:Start()
