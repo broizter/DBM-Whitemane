@@ -83,7 +83,7 @@ function mod:SPELL_DAMAGE(_, _, _, destGUID, _, _, spellId)
 	if (spellId == 66877 or spellId == 67070 or spellId == 67071 or spellId == 67072) and destGUID == UnitGUID("player") and self:AntiSpam(3, 1) then		-- Legion Flame
 		specWarnFlameGTFO:Show()
 		specWarnFlameGTFO:Play("runaway")
-	elseif (spellId == 66496 or spellId == 68716 or spellId == 68717 or spellId == 68718) and destGUID == UnitGUID("player") and self:AntiSpam(3, 2) then	-- Fel Inferno
+	elseif (spellId == 66496 or spellId == 68716 or spellId == 68717 or spellId == 68718) and destGUID == UnitGUID("player") and not self:IsMelee() and self:AntiSpam(3, 2) then	-- Fel Inferno
 		specWarnFelInferno:Show()
 		specWarnFelInferno:Play("runaway")
 	end
