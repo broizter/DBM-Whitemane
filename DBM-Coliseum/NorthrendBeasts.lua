@@ -239,7 +239,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif args:IsSpellID(66758) then						-- Staggered Daze
 		timerStaggeredDaze:Start()
 		timerWhirlCD:Start(17.8)--todo 17
-		timerArcticBreathCD:Start(32.1) --todo  20
+		timerArcticBreathCD:Start(21.4) --todo  20
 	elseif args:IsSpellID(66689, 67650, 67651, 67652) and self:AntiSpam(2, 1) then	-- Arctic Breath
 		timerArcticBreathCD:Start()
 		timerBreath:Start()
