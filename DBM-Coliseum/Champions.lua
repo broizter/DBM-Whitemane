@@ -114,7 +114,6 @@ local warnWyvernSting		= mod:NewTargetAnnounce(65878, 1) 				-- 65878, 65877
 local warnFrostTrap			= mod:NewSpellAnnounce(65880, 3) 				-- 65880
 local warnDisengage			= mod:NewSpellAnnounce(65869, 3) 				-- 65869
 -- Demon hunter
-mod:AddSetIconOption("SetIconOnEyebeamTarget", 40018, true, false, {8})
 local yellBeam			= mod:NewYell(40018)
 local specWarnEyebeamSoon 	= mod:NewSpecialWarning("SpecWarnEyebeamSoon")
 local specWarnEyebeam 		= mod:NewSpecialWarningRun(40018, nil, nil, nil, 4, 2)
