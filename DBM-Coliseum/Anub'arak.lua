@@ -106,7 +106,7 @@ function mod:EmergeFix()
 	warnEmerge:Show()
 	warnSubmergeSoon:Schedule(70)
 	timerSubmerge:Start()
-	timerFreezingSlash:Start(12)
+	timerFreezingSlash:Start(11.85)
 	if self:IsHeroic() then
 		self:ShadowStrike()
 	end
