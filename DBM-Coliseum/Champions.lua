@@ -115,6 +115,7 @@ local warnFrostTrap			= mod:NewSpellAnnounce(65880, 3) 				-- 65880
 local warnDisengage			= mod:NewSpellAnnounce(65869, 3) 				-- 65869
 -- Demon hunter
 local yellBeam			= mod:NewYell(40018)
+local yellFire			= mod:NewYell(71265)
 local specWarnEyebeamSoon 	= mod:NewSpecialWarning("SpecWarnEyebeamSoon")
 local specWarnEyebeam 		= mod:NewSpecialWarningRun(40018, nil, nil, nil, 4, 2)
 local timerEyebeam		= mod:NewCDTimer(40, 40018)
@@ -248,6 +249,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 		timerFlame:Start(args.destName)
 		timerFlameCD:Start()		
 		if args:IsPlayer() then
+			yellFire:Yell()
 			specWarnFlame:Show()
 			specWarnFlame:Play("firerun")
 		else
