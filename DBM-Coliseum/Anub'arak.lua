@@ -62,9 +62,9 @@ function mod:OnCombatStart(delay)
 	timerSubmerge:Start(-delay)
 	enrageTimer:Start(-delay)
 	if self:IsDifficulty("normal10", "heroic10") then
-		timerFreezingSlash:Start(7.34-delay)
+		timerFreezingSlash:Start(7.21-delay)
 	else
-		timerFreezingSlash:Start(8.54-delay)
+		timerFreezingSlash:Start(8.09-delay)
 	end
 	table.wipe(PColdTargets)
 	if self:IsHeroic() then
