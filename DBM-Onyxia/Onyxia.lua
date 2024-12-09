@@ -46,7 +46,7 @@ local specWarnBlastNova		= mod:NewSpecialWarningRun(68958, "Melee", nil, nil, 4,
 
 local timerBreathCast		= mod:NewCastTimer(8, 18584, nil, nil, nil, 3)
 local timerNextDeepBreath	= mod:NewCDTimer(35, 18584, nil, nil, nil, 3)--Range from 35-60seconds in between based on where she moves to.
-local timerWhelps		= mod:NewNextTimer(105, 17646, nil, nil, nil, 1, 69004)
+local timerWhelps		= mod:NewNextTimer(95, 17646, nil, nil, nil, 1, 69004)
 local timerAchieveWhelps	= mod:NewAchievementTimer(10, 4406)
 local timerBigAddCD		= mod:NewNextTimer(44.9, 68959, nil, "-Healer", nil, 1, 10697) -- Ignite Weapon for Onyxian Lair Guard
 
@@ -64,7 +64,7 @@ local function Whelps(self)
 	if self:IsInCombat() then
 		self.vb.whelpsCount = self.vb.whelpsCount + 1
 		timerWhelps:Start()
-		warnWhelpsSoon:Schedule(95)
+		warnWhelpsSoon:Schedule(85)
 		self:Schedule(105, Whelps, self)
 	end
 end
