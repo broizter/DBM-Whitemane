@@ -1,6 +1,8 @@
 local mod	= DBM:NewMod("NorthrendBeasts", "DBM-Coliseum")
 local L		= mod:GetLocalizedStrings()
 
+local GetPlayerMapPosition, SetMapToCurrentZone = GetPlayerMapPosition, SetMapToCurrentZone
+
 mod:SetRevision(("$Revision: 7007 $"):sub(12, -3))
 mod:SetMinSyncRevision(7007)
 mod:SetCreatureID(34797)
@@ -48,6 +50,7 @@ local timerBurningSpray		= mod:NewCDTimer(20, 66902, nil, nil, nil, 3)
 local timerParalyticBite	= mod:NewCDTimer(20, 66824, nil, "Melee", nil, 3)
 local timerBurningBite		= mod:NewCDTimer(20, 66879, nil, "Melee", nil, 3)
 -- Icehowl
+local warnCharge		= mod:NewTargetNoFilterAnnounce(52311, 4)
 local warnBreath		= mod:NewSpellAnnounce(66689, 2)
 local warnRage			= mod:NewSpellAnnounce(67657, 3)
 local specWarnCharge		= mod:NewSpecialWarningRun(52311, nil, nil, nil, 4, 2)
@@ -312,8 +315,10 @@ end
 mod.SPELL_MISSED = mod.SPELL_DAMAGE
 
 function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target)
-	if msg:match(L.Charge) or msg:find(L.Charge) then
+	if (msg:match(L.Charge) or msg:find(L.Charge)) and target then
 		timerNextCrashCD:Start()
+		target = DBM:GetUnitFullName(target)
+		warnCharge:Show(target)
 		if self.Options.ClearIconsOnIceHowl then
 			self:ClearIcons()
 		end
@@ -326,23 +331,18 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg, _, _, _, target)
 			if self.Options.PingCharge then
 				Minimap:PingLocation()
 			end
-		else
+		elseif self:CheckNearby(11, target) then
+			specWarnChargeNear:Show(target)
+			specWarnChargeNear:Play("runaway")
+		end
+		if self.Options.IcehowlArrow then
 			local uId = DBM:GetRaidUnitId(target)
-			if uId then
-				local inRange = CheckInteractDistance(uId, 2)
-				local x, y = GetPlayerMapPosition(uId)
-				if x == 0 and y == 0 then
-					SetMapToCurrentZone()
-					x, y = GetPlayerMapPosition(uId)
-				end
-				if inRange then
-					specWarnChargeNear:Show(target)
-					specWarnChargeNear:Play("runaway")
-					if self.Options.IcehowlArrow then
-						DBM.Arrow:ShowRunAway(x, y, 12, 5)
-					end
-				end
+			local x, y = GetPlayerMapPosition(uId)
+			if x == 0 and y == 0 then
+				SetMapToCurrentZone()
+				x, y = GetPlayerMapPosition(uId)
 			end
+			DBM.Arrow:ShowRunAway(x, y, 12, 5)
 		end
 		if self.Options.SetIconOnChargeTarget then
 			self:SetIcon(target, 8, 5)
