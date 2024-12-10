@@ -43,7 +43,7 @@ local timerTouchCD			= mod:NewCDTimer(10.2, 66209, nil, nil, nil, 3)
 local timerNetherPowerCD		= mod:NewCDTimer(26, 67009, nil, "MagicDispeller", nil, 5, nil, DBM_CORE_L.MAGIC_ICON) 		-- Every 25-45 sec
 local timerFlesh			= mod:NewTargetTimer(14, 66237, nil, "Healer", 2, 5, nil, DBM_CORE_L.HEALER_ICON)
 local timerFleshCD			= mod:NewCDTimer(23, 66237, nil, "Healer", 2, 5, nil, DBM_CORE_L.HEALER_ICON) 		-- Every 20-25 sec
-local timerPortalCD			= mod:NewCDTimer(120, 66269, nil, nil, nil, 1) 		-- Every 120 sec
+local timerPortalCD			= mod:NewCDTimer(120, 66269, nil, nil, nil, 1) 	-- Every 120 sec
 local timerVolcanoCD			= mod:NewCDTimer(120, 66258, nil, nil, nil, 1)	-- Every 120 sec
 local timerFelFireballCD		= mod:NewCDTimer(10, 66532, nil, nil, nil, 1) 	-- Every 10-15 sec
 local timerFelLightningCD		= mod:NewCDTimer(11, 66528, nil, nil, nil, 1) 	-- Every 10-15 sec
@@ -64,7 +64,7 @@ function mod:OnCombatStart(delay)
 	warnPortalSoon:Schedule(15-delay)	
 	timerPortalCD:Start(20-delay)		-- Nether Portal 20 sec. after pull, next every 120 sec.
 	warnVolcanoSoon:Schedule(75-delay)	-- 5 sec. longer (hack-fix for delay caused by Nether Power)
-	timerVolcanoCD:Start(80-delay)		-- Volcano 90-95 seconds after pull
+	timerVolcanoCD:Start(80-delay)		-- Volcano 80 seconds after pull, next every 120 sec.
 	timerFleshCD:Start(25-delay) 		-- Incinerate Flesh 24-26 sec. after pull, next every 20-25 sec.
 	timerFlameCD:Start(-delay)
 	timerNetherPowerCD:Start(34-delay)
