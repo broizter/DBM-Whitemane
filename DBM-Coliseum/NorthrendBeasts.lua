@@ -59,7 +59,7 @@ local specWarnTranq		= mod:NewSpecialWarningDispel(66759, "RemoveEnrage", nil, n
 local enrageTimer		= mod:NewBerserkTimer(150)
 local timerBreath		= mod:NewCastTimer(4, 66689, nil, nil, nil, 3)--3 or 5? is it random target or tank?
 local timerStaggeredDaze	= mod:NewBuffActiveTimer(15, 66758, nil, nil, nil, 5, nil, DBM_CORE_L.DAMAGE_ICON)
-local timerNextCrashCD		= mod:NewCDTimer(56, 66683, nil, nil, nil, 2, nil, DBM_CORE_L.MYTHIC_ICON)
+local timerNextCrashCD		= mod:NewCDTimer(57, 66683, nil, nil, nil, 2, nil, DBM_CORE_L.MYTHIC_ICON)
 local timerArcticBreathCD	= mod:NewCDTimer(20, 66689) -- 14 sec. after pull, 20-30 sec. every next
 local timerWhirlCD		= mod:NewCDTimer(18.2, 67665) -- 10-12 sec. after pull, 15-20 sec. every next
 local timerIcehowlSpawn		= mod:NewTimer(329, "TimerIcehowlSpawn", 3130, nil, nil, 1)
@@ -188,9 +188,9 @@ function mod:WormsSubmerge()
 end
 
 function mod:IcehowlStartTimers()
-	timerNextCrashCD:Start(30)
-	timerArcticBreathCD:Start(14)
-	timerWhirlCD:Start(11.3)
+	timerNextCrashCD:Start(30.2)
+	timerArcticBreathCD:Start(14.5)
+	timerWhirlCD:Start(12)
 	if self:IsDifficulty("heroic25") then
 		enrageTimer:Start()
 	end
