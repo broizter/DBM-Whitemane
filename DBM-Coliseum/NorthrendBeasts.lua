@@ -272,8 +272,8 @@ function mod:SPELL_CAST_START(args)
 		warnFireBomb:Show()
 	elseif args:IsSpellID(66330, 67647, 67648, 67649) then	-- Staggering Stomp - Can be as little as 20 seconds, but its rare
 		timerNextStompCD:Start()
-		specWarnSilence:Schedule(19)
-		specWarnSilence:ScheduleVoice(19, "silencesoon")
+		specWarnSilence:Schedule(18)
+		specWarnSilence:ScheduleVoice(18, "silencesoon")
 	-- Acidmaw & Dreadscale
 	elseif args:IsSpellID(66794, 67644, 67645, 67646) then	-- Sweep stationary worm
 		timerSweepCD:Start()
