@@ -29,7 +29,7 @@ local warnFireBomb		= mod:NewSpellAnnounce(66317, 3, nil, false)
 local WarningSnobold		= mod:NewAnnounce("WarningSnobold", 4)
 local specWarnImpale5		= mod:NewSpecialWarningStack(66331, nil, 5, nil, nil, 1, 6)
 local specWarnSilence		= mod:NewSpecialWarningSpell(66330, "SpellCaster", nil, nil, 1, 2)
-local timerNextStompCD		= mod:NewCDTimer(22, 66330, nil, nil, nil, 2, nil, DBM_CORE_L.INTERRUPT_ICON, nil, mod:IsSpellCaster() and 3 or nil, 3)
+local timerNextStompCD		= mod:NewCDTimer(20.4, 66330, nil, nil, nil, 2, nil, DBM_CORE_L.INTERRUPT_ICON, nil, mod:IsSpellCaster() and 3 or nil, 3)
 local timerNextImpale		= mod:NewNextTimer(9.5, 66331, nil, "Tank|Healer", nil, 5, nil, DBM_CORE_L.TANK_ICON)
 local timerRisingAngerCD    	= mod:NewCDTimer(21.4, 66636, nil, nil, nil, 1)
 -- Acidmaw & Dreadscale
