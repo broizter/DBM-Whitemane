@@ -154,7 +154,7 @@ local timerSpawnTimer		= mod:NewTimer(33, "TimerSpawnTimer", 47436, nil, nil, 6)
 
 function mod:OnCombatStart(delay)
 	if self:IsDifficulty("heroic10", "heroic25") then
-		timerEyebeam:Start(25-delay)
+		timerEyebeam:Start(23.4-delay)
 	end
 end
 
