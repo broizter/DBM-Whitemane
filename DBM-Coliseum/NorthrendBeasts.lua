@@ -88,6 +88,14 @@ local DreadscaleDead	= false
 local AcidmawDead	= false
 local messageCounter 	= 0
 
+local function countDown(self)
+	DBM:PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\5.mp3")
+	self:Schedule(1, DBM.PlaySoundFile, DBM, "Interface\\AddOns\\DBM-Core\\sounds\\4.mp3")
+	self:Schedule(2, DBM.PlaySoundFile, DBM, "Interface\\AddOns\\DBM-Core\\sounds\\3.mp3")
+	self:Schedule(3, DBM.PlaySoundFile, DBM, "Interface\\AddOns\\DBM-Core\\sounds\\2.mp3")
+	self:Schedule(4, DBM.PlaySoundFile, DBM, "Interface\\AddOns\\DBM-Core\\sounds\\1.mp3")
+end
+
 local function updateHealthFrame(phase)
 	if phases[phase] then
 		return
@@ -113,6 +121,7 @@ function mod:OnCombatStart()
 	DreadscaleActive = true
 	DreadscaleDead = false
 	AcidmawDead = false
+	self:Schedule(6, countDown, self)
 	mod:ScheduleMethod(11, "GromokStartTimers")
 	timerCombatStart:Start(11)
 	updateHealthFrame(1)
@@ -367,6 +376,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerPrePot:Start()
 	elseif msg == L.Phase2 or msg:find(L.Phase2) then -- Acidmaw & Dreadscale
 		timerCombatStart:Start(15.3)
+		self:Schedule(10.3, countDown, self)
 		timerWormSpawn:Stop()
 		updateHealthFrame(2)
 		self:ScheduleMethod(15.3, "WormsEmerge")
@@ -377,6 +387,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerIcehowlSpawn:Cancel()
 		timerSubmergeCD:Cancel()
 		timerCombatStart:Start(13)
+		self:Schedule(8, countDown, self)
 		mod:ScheduleMethod(13, "IcehowlStartTimers")
 		updateHealthFrame(3)
 		self:UnscheduleMethod("WormsSubmerge")
