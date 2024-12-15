@@ -118,6 +118,7 @@ elseif UnitFactionGroup("player") == "Horde" then
 end
 
 L:SetWarningLocalization({
+	SpecWarnTotem		= "Kill healing stream totem!",
 	SpecWarnEyebeamSoon			= "Eyebeam incoming!"
 })
 

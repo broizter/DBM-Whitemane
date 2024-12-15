@@ -3,6 +3,7 @@ local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 3726 $"):sub(12, -3))
 mod:SetCreatureID(34458, 34451, 34459, 34448, 34449, 34445, 34456, 34447, 34441, 34454, 34444, 34455, 34450, 34453, 34461, 34460, 34469, 34467, 34468, 34471, 34465, 34466, 34473, 34472, 34470, 34463, 34474, 34475, 110000, 110004, 110010)
+mod:SetUsedIcons(4)
 
 mod:RegisterCombat("combat")
 mod:RegisterKill("yell", L.YellKill)
@@ -15,6 +16,7 @@ mod:RegisterEvents(
 	"SPELL_MISSED 65817 68142 68143 68144",
 	"CHAT_MSG_MONSTER_YELL",
 	"CHAT_MSG_RAID_BOSS_WHISPER",
+	"SPELL_SUMMON 65995",
 	"UNIT_DIED"
 )
 
@@ -93,6 +95,7 @@ local warnHeroism			= mod:NewSpellAnnounce(65983, 3)
 local warnBloodlust			= mod:NewSpellAnnounce(65980, 3)
 local warnEarthShield		= mod:NewTargetAnnounce(66063, 3) 				-- 66063
 local warnHex				= mod:NewTargetAnnounce(66054, 1) 				-- 66054
+local specWarnTotem		= mod:NewSpecialWarning("SpecWarnTotem", nil, nil, nil, 1, 2)
 -- Priest
 local warnDispersion		= mod:NewSpellAnnounce(65544, 3) 				-- 65544
 local warnPsychicScream		= mod:NewSpellAnnounce(65543, 1) 				-- 65543
@@ -380,6 +383,13 @@ function mod:UNIT_DIED(args)
 	elseif cid == 34474 or cid == 34450 then -- Warlock
 		DBM.BossHealth:RemoveBoss(34474)
 		DBM.BossHealth:RemoveBoss(34450)
+	end
+end
+
+function mod:SPELL_SUMMON(args)
+	if args.spellId == 65995 then
+		specWarnTotem:Show()
+		specWarnTotem:Play("attacktotem")
 	end
 end
 
