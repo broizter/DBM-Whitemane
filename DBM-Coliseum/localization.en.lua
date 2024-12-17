@@ -132,6 +132,7 @@ L:SetTimerLocalization({
 
 L:SetOptionLocalization({
 	TimerSpawnTimer			= "Show timer until champions spawn",
+	SpecWarnTotem			= "Show special warning to kill Healing Stream Totem",
 	SpecWarnEyebeamSoon		= "Show special warning when Demon Hunter is about to use Eye Beam"
 })
 
