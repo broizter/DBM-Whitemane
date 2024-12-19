@@ -184,7 +184,7 @@ do
 		DBM.BossHealth:RemoveBoss(getShieldHP)
 	end
 
-	function updateInfoFrame()
+	function UpdateInfoFrame()
 		twipe(lines)
 		twipe(sortedLines)
 		if shieldedBoss then
@@ -229,7 +229,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		shieldedBoss = args.destName
 		showShieldHealthBar(self, args.destGUID, args.spellName, shieldValues[args.spellId] or 0)
 		DBM.InfoFrame:SetHeader(args.spellName)
-		DBM.InfoFrame:Show(2, "function", updateInfoFrame, false, true)
+		DBM.InfoFrame:Show(2, "function", UpdateInfoFrame, false, true)
 	end
 end
 
