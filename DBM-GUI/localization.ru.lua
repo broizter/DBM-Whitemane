@@ -85,7 +85,7 @@ L.Lowest							= "Наименьший таймер наверху"
 
 L.TranslationByPrefix		= "Retail backport by "
 L.TranslationBy				= "Barsoom, Bunny67, Zidras"
-L.Website					= "Discord для обсуждения: |cFF73C2FBhttps://discord.gg/CyVWDWS|r"
+L.Website					= "Discord для обсуждения: |cFF73C2FBhttps://github.com/broizter/DBM-Whitemane|r"
 L.WebsiteButton				= "Форумы"
 
 L.OTabBosses				= "Боссы"
