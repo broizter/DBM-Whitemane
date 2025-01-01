@@ -2305,7 +2305,7 @@ function DBM:GetUnitCreatureId(uId)
 end
 
 function DBM:GetCIDFromGUID(guid)
-	return guid and tonumber(guid:sub(9, 12), 16) or 0
+	return guid and tonumber(guid:sub(8, 12), 16) or 0
 end
 
 function DBM:IsNonPlayableGUID(guid)
