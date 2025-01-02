@@ -11484,6 +11484,18 @@ function bossModPrototype:EnableWBEngageSync()
 	end
 end
 
+---Used when a bosses death condition should be ignored (maybe they die repeatedly for example)
+function bossModPrototype:DisableBossDeathKill()
+	self.noBossDeathKill = true
+	if self.combatInfo then
+		self.combatInfo.noBossDeathKill = true
+	end
+end
+---Used when a boss is scripted in a hacky way that their creature Id changes mid fight, and we want to treat multiple IDs as a single boss
+function bossModPrototype:SetMultiIDSingleBoss()
+	self.multiIDSingleBoss = true
+end
+
 --used for knowing if a specific mod is engaged
 function bossModPrototype:IsInCombat()
 	return self.inCombat
