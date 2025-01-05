@@ -30,14 +30,14 @@ local specWarnAspectOfThekal	= mod:NewSpecialWarningDispel(24689, "RemoveEnrage"
 
 local timerSiphon				= mod:NewNextTimer(90, 24324, nil, nil, nil, 2)
 local timerAspectOfMarli		= mod:NewTargetTimer(6, 24686, nil, nil, nil, 5)
-local timerAspectOfMarliCD		= mod:NewCDTimer(16, 24686, nil, nil, nil, 2)--16-20
+local timerAspectOfMarliCD		= mod:NewCDTimer(10, 24686, nil, nil, nil, 2)--16-20
 local timerAspectOfJeklik		= mod:NewTargetTimer(5, 24687, nil, false, 2, 5)--Could be spammy so off by default. Users can turn it on who want to see this
-local timerAspectOfJeklikCD		= mod:NewCDTimer(23, 24687, nil, nil, nil, 2)--23-24
-local timerAspectOfVenoxisCD	= mod:NewCDTimer(16.2, 24688, nil, nil, nil, 2)--16.2-18.3
+local timerAspectOfJeklikCD		= mod:NewCDTimer(10, 24687, nil, nil, nil, 2)--23-24
+local timerAspectOfVenoxisCD		= mod:NewCDTimer(8, 24688, nil, nil, nil, 2)--16.2-18.3
 local timerAspectOfThekal		= mod:NewBuffActiveTimer(8, 24689, nil, "Tank|RemoveEnrage|Healer", 3, 5, nil, DBM_COMMON_L.TANK_ICON..DBM_COMMON_L.ENRAGE_ICON)
-local timerAspectOfThekalCD		= mod:NewCDTimer(15.8, 24689, nil, nil, nil, 2)
+local timerAspectOfThekalCD		= mod:NewCDTimer(15, 24689, nil, nil, nil, 2)
 local timerAspectOfArlokk		= mod:NewTargetTimer(2, 24690, nil, nil, nil, 2)
-local timerAspectOfArlokkCD		= mod:NewNextTimer(30, 24690, nil, nil, nil, 2)--Needs more data to verify it's a next timer, rest aren't
+local timerAspectOfArlokkCD		= mod:NewNextTimer(11, 24690, nil, nil, nil, 2)--Needs more data to verify it's a next timer, rest aren't
 local timerInsanity				= mod:NewTargetTimer(10, 24327, nil, nil, nil, 5)
 local timerInsanityCD			= mod:NewCDTimer(20, 24327, nil, nil, nil, 3)
 
@@ -94,11 +94,11 @@ function mod:OnCombatStart(delay)
 	--This just checks if Hakkar has 1079325 health
 	--Can't just start these on all normal mode pulls
 	if IsHardMode(self) then
-		timerAspectOfMarliCD:Start(10-delay)
-		timerAspectOfThekalCD:Start(10-delay)
-		timerAspectOfVenoxisCD:Start(14-delay)
-		timerAspectOfJeklikCD:Start(21-delay)
-		timerAspectOfArlokkCD:Start(30-delay)
+		timerAspectOfMarliCD:Start(11.98-delay)
+		timerAspectOfThekalCD:Start(7.87-delay)
+		timerAspectOfVenoxisCD:Start(6.87-delay)
+		timerAspectOfJeklikCD:Start(3.87-delay)
+		timerAspectOfArlokkCD:Start(17.96-delay)
 	end
 end
 
