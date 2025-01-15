@@ -1,6 +1,9 @@
 local mod	= DBM:NewMod("Anub'arak_Coliseum", "DBM-Coliseum")
 local L		= mod:GetLocalizedStrings()
 
+local CancelUnitBuff = CancelUnitBuff
+local GetSpellInfo = GetSpellInfo
+
 mod:SetRevision(("$Revision: 7007 $"):sub(12, -3))
 mod:SetMinSyncRevision(7007)
 mod:SetCreatureID(34564)
@@ -48,9 +51,24 @@ mod:AddSetIconOption("SetIconsOnPCold", 66013, false)
 mod:AddBoolOption("AnnouncePColdIcons", false)
 mod:AddBoolOption("AnnouncePColdIconsRemoved", false)
 mod:AddBoolOption("RemoveHealthBuffsInP3", false)
+mod:AddBoolOption("RemoveHotsBuffsInP3", "Healer|Dps", nil, nil, nil, nil, 66118)
 
 local PColdTargets = {}
 mod.vb.Burrowed = false
+
+function mod:RemoveHots() -- Remove Hots for p3 after Penetrating Cold ends
+	CancelUnitBuff("player", (GetSpellInfo(774)))		-- Rejuv
+	CancelUnitBuff("player", (GetSpellInfo(8936)))		-- Regrowth
+	CancelUnitBuff("player", (GetSpellInfo(33763)))		-- Lifebloom
+	CancelUnitBuff("player", (GetSpellInfo(48438)))		-- Wild Growth
+
+	CancelUnitBuff("player", (GetSpellInfo(48068)))		-- Renew
+
+	CancelUnitBuff("player", (GetSpellInfo(61301)))		-- Riptide
+	CancelUnitBuff("player", (GetSpellInfo(52000)))		-- Earthliving
+
+	CancelUnitBuff("player", (GetSpellInfo(64891)))		-- Holy Mending, Holy Paladin T8 set bonus
+end
 
 function mod:OnCombatStart(delay)
 	self:SetStage(1)
@@ -178,6 +196,11 @@ function mod:SPELL_AURA_REMOVED(args)
 			self:SetIcon(args.destName, 0)
 			if self.Options.AnnouncePColdIconsRemoved and DBM:GetRaidRank() > 1 then
 				SendChatMessage(L.PcoldIconRemoved:format(args.destName), "RAID")
+			end
+		end
+		if args:IsPlayer() and self.Options.RemoveHotsBuffsInP3 and self:GetStage() == 3 then
+			if not UnitDebuff("player", GetSpellInfo(67862)) then -- do not remove HoTs if affected by Acid-Drenched Mandibles
+				mod:ScheduleMethod(0.1, "RemoveHots")
 			end
 		end
 	elseif args.spellId == 10278 and self:IsInCombat() then		-- Hand of Protection

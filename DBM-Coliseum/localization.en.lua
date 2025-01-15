@@ -265,5 +265,6 @@ L:SetOptionLocalization({
 	TimerSubmerge				= "Show timer for submerge",
 	AnnouncePColdIcons			= "Announce icons for $spell:66013 targets to raid chat<br/>(requires raid leader)",
 	AnnouncePColdIconsRemoved	= "Also announce when icons are removed for $spell:66013<br/>(requires above option)",
-	RemoveHealthBuffsInP3		= "Remove HP buffs at start of Phase 3"
+	RemoveHealthBuffsInP3		= "Remove HP buffs at start of Phase 3",
+	RemoveHotsBuffsInP3			= "Remove Hots after Penetrating Cold ends in Phase 3"
 })
