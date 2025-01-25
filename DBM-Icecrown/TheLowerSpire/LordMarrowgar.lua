@@ -90,7 +90,7 @@ function mod:SPELL_CAST_START(args)
 	elseif args.spellId == 69076 then
 		preWarnWhirlwind:Schedule(85)
 		timerWhirlwindCD:Start() -- As of 16/11/2022, Warmane fixed this timer (Transcriptor snippets above) || On Jul 3, 2021 I changed this to only trigger on Bone Storm finish, although looking at TC script this might be slightly innacurate since it reschedules on EVENT_WARN_BONE_STORM... Keep a close eye on this with more log data and also VOD review (25H Lordaeron 2022/09/14) - [-36s cf] 33.4, 32.7 || [no cf] 69.1, 69.0
-		timerWhirlwindStart:Start()
+		timerWhirlwindStart:Start(3)
 		soundBoneStorm:Play("Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\Bone_Storm_cast.mp3")
 	end
 end
