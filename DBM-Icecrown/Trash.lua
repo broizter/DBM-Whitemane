@@ -3,7 +3,7 @@ local L		= mod:GetLocalizedStrings()
 
 local UnitGUID = UnitGUID
 
-mod:SetRevision("20230827102611")
+mod:SetRevision("20250106224658")
 mod:SetModelID(37007)
 mod:SetUsedIcons(1, 2, 3, 4, 5, 6, 7, 8)
 mod.isTrashMod = true
@@ -57,7 +57,7 @@ local timerDisruptingShout		= mod:NewCastTimer(3, 71022, nil, nil, nil, 2)
 local timerDarkReckoning		= mod:NewTargetTimer(8, 69483, nil, nil, nil, 5)
 local timerDeathPlague			= mod:NewTargetTimer(15, 72865, nil, nil, nil, 3)
 --Plagueworks
-local timerSeveredEssence		= mod:NewNextTimer(35.5, 71942, nil, nil, nil, 1, nil, nil, true) -- REVIEW! 5s variance [35.5-40.5]. Added "keep" arg, but could be a bad idea!  (25H Lordaeron [2023-08-19]@[11:49:20] || 25H Lordaeron [2023-08-27]@[10:41:16]) - 36.0 || 40.49; 35.51
+local timerSeveredEssence		= mod:NewNextTimer(35.5, 71942, nil, nil, nil, 1--[[, nil, nil, true]]) -- REVIEW! 5s variance [35.5-40.5]. Removed "keep" arg, due to several edge cases where timer kept ticking to infinity. Until variance is implemented on DBT, this will never be accurate (25H Lordaeron [2023-08-19]@[11:49:20] || 25H Lordaeron [2023-08-27]@[10:41:16]) - 36.0 || 40.49; 35.51
 local timerZombies				= mod:NewNextTimer(20, 71159, nil, nil, nil, 1)
 local timerMortalWound			= mod:NewTargetTimer(15, 71127, nil, nil, nil, 5)
 local timerDecimate				= mod:NewNextTimer(33, 71123, nil, nil, nil, 2)
@@ -70,6 +70,7 @@ local timerChainsofShadow		= mod:NewTargetTimer(10, 70645, nil, false, nil, 3)
 --Frostwing Hall
 local timerConflag				= mod:NewTargetTimer(10, 71785, nil, false, nil, 3)
 local timerBanish				= mod:NewTargetTimer(6, 71298, nil, false, nil, 3)
+local timerFrostblade			= mod:NewNextTimer(26, 70305, nil, nil, nil, 2)
 
 mod:RemoveOption("HealthFrame")
 --Lower Spire
@@ -80,6 +81,8 @@ mod:AddSetIconOption("BloodMirrorIcon", 70451, false, 0, {2})
 
 local valkyrHeraldGUID = {}
 local eventProfessorStarted = false
+mod.vb.nerubarAlive = 16 -- 8 each wave
+mod.vb.frostwardenAlive = 6
 
 function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
@@ -201,6 +204,20 @@ function mod:UNIT_DIED(args)
 		timerBlightBomb:Cancel(destGUID)
 	elseif cid == 37098 then -- Val'kyr Herald
 		self:SendSync("ValkyrDeaggro", destGUID) -- would work with just timer cancel method, but switched to sync too since valk table is heavily dependant on syncing, and CLEU has a history of breaking
+	elseif (cid == 37501 or cid == 37502) and self.vb.nerubarAlive > 0 then -- 4 Nerub'ar Champion / 4 Nerub'ar Webweaver (first and third gauntlet wave)
+		self.vb.nerubarAlive = self.vb.nerubarAlive - 1
+		if self.vb.nerubarAlive == 8 then
+			DBM:AddSpecialEventToTranscriptorLog("Sindra Gauntlet 2nd wave")
+			self.vb.frostwardenAlive = 6
+			timerFrostblade:Start() -- REVIEW! ~26s after last nerubar dies
+		elseif self.vb.nerubarAlive == 0 then
+			DBM:AddSpecialEventToTranscriptorLog("Sindra Gauntlet ended")
+		end
+	elseif (cid == 37228 or cid == 37229) and self.vb.frostwardenAlive > 0 then -- 4 Frostwarden Warrior / 2 Frostwarden Sorceress
+		self.vb.frostwardenAlive = self.vb.frostwardenAlive - 1
+		if self.vb.frostwardenAlive == 0 then
+			DBM:AddSpecialEventToTranscriptorLog("Sindra Gauntlet 3rd wave")
+		end
 	end
 end
 
@@ -263,7 +280,9 @@ function mod:OnSync(msg, guid)
 	elseif msg == "FleshTrap" then
 		specWarnTrapP:Show()
 	elseif msg == "GauntletStart" then
+		DBM:AddSpecialEventToTranscriptorLog("Sindra Gauntlet started")
 		specWarnGosaEvent:Show()
+		self.vb.nerubarAlive = 8
 	elseif msg == "ValkyrAggro" and guid then
 		valkyrHeraldGUID[guid] = true
 		timerSeveredEssence:Start(8, guid) -- REVIEW! variance [8-10]? On Warmane, based on aggro, touchdown or swing?
