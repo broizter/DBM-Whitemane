@@ -245,7 +245,7 @@ end
 
 function mod:CHAT_MSG_MONSTER_YELL(msg)
 	if msg:find(L.PullAlliance, 1, true) then
-		timerCombatStart:Start()
+		timerCombatStart:Start(100)
 		if self.Options.RangeFrame then
 			DBM.RangeCheck:Show(12)
 		end
