@@ -483,9 +483,16 @@ end
 
 function mod:SPELL_SUMMON(args)
 	if args.spellId == 71426 and self:AntiSpam(5, 1) then -- Summon Vengeful Shade
-		warnSummonSpirit:Show()
-		timerSummonSpiritCD:Start()
-		soundWarnSpirit:Play("Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\spirits.mp3")
+ 		playerHadTarget = UnitGUID("target") and true
+ 		warnSummonSpirit:Show()
+ 		timerSummonSpiritCD:Start()
+ 		soundWarnSpirit:Play("Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\spirits.mp3")
+ 		if not playerHadTarget then
+ 			self:RegisterShortTermEvents(
+ 				"PLAYER_TARGET_CHANGED"
+ 			)
+ 			self:Schedule(0.1, unregisterShortTermEvents, self)
+ 		end
 	end
 end
 
