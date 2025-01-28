@@ -36,7 +36,7 @@ local warnTargetSwitch			= mod:NewAnnounce("WarnTargetSwitch", 3, 70952)
 local warnTargetSwitchSoon		= mod:NewAnnounce("WarnTargetSwitchSoon", 2, 70952)
 
 local timerCombatStart			= mod:NewCombatTimer(29) -- Roleplay for first pull
-local timerTargetSwitch			= mod:NewTimer(46.5, "TimerTargetSwitch", 70952) -- REVIEW! ~0.2s variance [46.42-46.60], with 46.0/46.2 outliers. Since these outliers are very rare, I prefer keeping this timer as the most probable cd seen in the logs
+local timerTargetSwitch			= mod:NewTimer(45.5, "TimerTargetSwitch", 70952) -- REVIEW! ~0.2s variance [46.42-46.60], with 46.0/46.2 outliers. Since these outliers are very rare, I prefer keeping this timer as the most probable cd seen in the logs
 local berserkTimer				= mod:NewBerserkTimer((myRealm == "Lordaeron" or myRealm == "Frostmourne") and 360 or 600)
 
 mod:AddSetIconOption("ActivePrinceIcon", nil, false, 5, {8})
@@ -110,8 +110,8 @@ function mod:OnCombatStart(delay)
 	self.vb.kineticCount = 0
 	personalNucleusCount = 0
 	berserkTimer:Start(-delay)
-	warnTargetSwitchSoon:Schedule(42-delay)
-	warnTargetSwitchSoon:ScheduleVoice(42-delay, "swapsoon")
+	warnTargetSwitchSoon:Schedule(41-delay)
+	warnTargetSwitchSoon:ScheduleVoice(41-delay, "swapsoon")
 	timerTargetSwitch:Start(-delay)
 	timerEmpoweredShockVortex:Start(15-delay) -- REVIEW! 5s variance [15-20] (25H Lordaeron 2022/09/07 || 10N Frostmourne 2023-01-22) - 15.9 || 15.6
 	timerKineticBombCD:Start(19.8-delay, 1) -- (25H Lordaeron 2022/07/09 || 25H Lordaeron 2022/07/30 || 10N Icecrown 2022/08/22 || 10N Icecrown 2022/08/25 || 25H Lordaeron 2022/09/07 || 25H Lordaeron 2022/12/07 || 10N Frostmourne 2023-01-22 || 25H Lordaeron [2023-08-23]@[21:05:58]) - 24 || 24 || 27 || 24.9 || 23.1 || 22.1 || 21.6 || 19.8
@@ -188,8 +188,8 @@ function mod:SPELL_AURA_APPLIED(args)
 	if spellId == 70952 then
 		if self:IsInCombat() then
 			warnTargetSwitch:Show(L.Valanar)
-			warnTargetSwitchSoon:Schedule(42)
-			warnTargetSwitchSoon:ScheduleVoice(42, "swapsoon")
+			warnTargetSwitchSoon:Schedule(41)
+			warnTargetSwitchSoon:ScheduleVoice(41, "swapsoon")
 			timerTargetSwitch:Start()
 			if not timerEmpoweredShockVortex:IsStarted() then -- avoid overwriting first vortex
 				if timerShockVortex:IsStarted() then
@@ -208,8 +208,8 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 	elseif spellId == 70981 then
 		warnTargetSwitch:Show(L.Keleseth)
-		warnTargetSwitchSoon:Schedule(42)
-		warnTargetSwitchSoon:ScheduleVoice(42, "swapsoon")
+		warnTargetSwitchSoon:Schedule(41)
+		warnTargetSwitchSoon:ScheduleVoice(41, "swapsoon")
 		timerTargetSwitch:Start()
 		if not timerShockVortex:IsStarted() then
 			if timerEmpoweredShockVortex:IsStarted() then
@@ -227,8 +227,8 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 	elseif spellId == 70982 and self:IsInCombat() then
 		warnTargetSwitch:Show(L.Taldaram)
-		warnTargetSwitchSoon:Schedule(42)
-		warnTargetSwitchSoon:ScheduleVoice(42, "swapsoon")
+		warnTargetSwitchSoon:Schedule(41)
+		warnTargetSwitchSoon:ScheduleVoice(41, "swapsoon")
 		timerTargetSwitch:Start()
 		if not timerShockVortex:IsStarted() then
 			if timerEmpoweredShockVortex:IsStarted() then
