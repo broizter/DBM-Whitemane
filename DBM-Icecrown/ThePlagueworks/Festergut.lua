@@ -37,7 +37,7 @@ local timerGasSporeCD		= mod:NewCDTimer(40.6, 69279, nil, nil, nil, 3, nil, nil,
 local timerPungentBlight	= mod:NewCDTimer(33.5, 69195, nil, nil, nil, 2)		-- Edited. ~34 seconds after 3rd stack of inhaled. REVIEW! (25H Lordaeron 2022/09/25) - pull:131.4 [33.5]
 local timerInhaledBlight	= mod:NewCDTimer(34, 69166, nil, nil, nil, 6, nil, nil, true)	-- Timer is based on Aura. ~9s variance on pull, 1.5s variance [33.5-35.0]. Added "keep" arg (25H Lordaeron 2022/09/04 || 25H Lordaeron 2022/09/25) - 34.2, 34.7, *, 34.2 || 34.3, 33.8, 67.5 [33.5-pungent, 34.0], 34.2
 local timerGastricBloat		= mod:NewTargetTimer(100, 72219, nil, "Tank|Healer", nil, 5, nil, DBM_COMMON_L.TANK_ICON)	-- 100 Seconds until expired
-local timerGastricBloatCD	= mod:NewCDTimer(13.1, 72219, nil, "Tank|Healer", nil, 5, nil, DBM_COMMON_L.TANK_ICON) -- REVIEW! ~3s variance [13.1 - 16.2]. (25H Lordaeron [2023-04-07]@[19:29:03] || 25H Icecrown [2023-05-28]@[16:21:49]) - "Gastric Bloat-72553-npc:36626-1098 = pull:13.8, 13.1, 13.5, 13.1, 13.2, 14.0, 13.8, 13.4, 13.2, 13.9, 13.4, 13.8 || "Gastric Bloat-72553-npc:36626-752 = pull:13.6, 16.2, 13.4, 13.1, 13.4, 13.3, 14.3, 13.4, 13.1, 14.1, 13.1, 14.8, 13.1
+local timerGastricBloatCD	= mod:NewCDTimer(14, 72219, nil, "Tank|Healer", nil, 5, nil, DBM_COMMON_L.TANK_ICON) -- REVIEW! ~3s variance [13.1 - 16.2]. (25H Lordaeron [2023-04-07]@[19:29:03] || 25H Icecrown [2023-05-28]@[16:21:49]) - "Gastric Bloat-72553-npc:36626-1098 = pull:13.8, 13.1, 13.5, 13.1, 13.2, 14.0, 13.8, 13.4, 13.2, 13.9, 13.4, 13.8 || "Gastric Bloat-72553-npc:36626-752 = pull:13.6, 16.2, 13.4, 13.1, 13.4, 13.3, 14.3, 13.4, 13.1, 14.1, 13.1, 14.8, 13.1
 local timerGooCD			= mod:NewCDTimer(10, 72297, nil, nil, nil, 3)
 
 local berserkTimer			= mod:NewBerserkTimer(300)
