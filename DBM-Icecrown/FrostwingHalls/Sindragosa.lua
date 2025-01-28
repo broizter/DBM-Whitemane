@@ -443,7 +443,7 @@ function mod:OnSync(msg)
 		self:Unschedule(landingPhaseWorkaround)
 		self:SetStage(1)
 		timerUnchainedMagic:Start(10) -- (10H Lordaeron 2022/10/02 || 25H Lordaeron 2022/10/02) - 10.0; 10.0 || 10.0; 10.0, 10.0; 10.0
-		timerTailSmash:Start(19) -- ~5s variance [19-23.8]? (10N Icecrown 2022/08/25 || 10H Lordaeron 2022/10/02 || 25H Lordaeron 2022/10/02) - 19.0 || 21.4; 21.9 || 21.4; 23.8, 22.6; 22.2
+		timerTailSmash:Start(44.5) -- ~5s variance [19-23.8]? (10N Icecrown 2022/08/25 || 10H Lordaeron 2022/10/02 || 25H Lordaeron 2022/10/02) - 19.0 || 21.4; 21.9 || 21.4; 23.8, 22.6; 22.2
 		timerNextBlisteringCold:Start(34) -- 6s variance [34-40]? (10H Lordaeron 2022/10/02 || 25H Lordaeron 2022/10/02) - 34.0; 34.0 || 34.0; 34.0; 34.0
 		self:UnregisterShortTermEvents()
 	end
