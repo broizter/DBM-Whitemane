@@ -55,7 +55,7 @@ mod.vb.InfectionIcon = 1
 end ]]
 
 function mod:OnCombatStart(delay)
-	timerWallSlime:Start(9-delay) -- Adjust from 25 to 9 to have a correct timer from the start
+	timerWallSlime:Start(7.95-delay) -- Adjust from 25 to 9 to have a correct timer from the start
 	timerSlimeSpray:Start(20-delay) -- Custom add for the first Slime Spray. Log reviewed (25H Lordaeron 2022/07/09) - 20.0
 	if self:IsHeroic() then
 		timerVileGasCD:Start(28.9-delay) -- Edited. REVIEW! variance? (25H Lordaeron 2022/07/09 || 25H Lordaeron 2022/09/23) - 28.9 || 29.1
