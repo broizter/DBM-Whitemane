@@ -113,7 +113,7 @@ L:SetOptionLocalization({
 
 L:SetMiscLocalization({
 	RunePower			= "Blood Power",
-	PullAlliance		= "Let's get a move on then! Move out...",
+	PullAlliance		= "For every Horde soldier that you killed -- for every Alliance dog that fell, the Lich King's armies grew. Even now the val'kyr work to raise your fallen as Scourge.",
 	PullHorde			= "Kor'kron, move out! Champions, watch your backs. The Scourge have been..."
 })
 
