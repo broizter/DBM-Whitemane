@@ -446,7 +446,9 @@ function mod:SPELL_AURA_REMOVED(args)
 		self:SetStage(2)
 		warnPhase2:Show()
 		warnPhase2:Play("ptwo")
-		timerDominateMindCD:Restart(30)
+		if not self:IsDifficulty("normal10") then
+			timerDominateMindCD:Restart(30)
+		end
 		timerSummonSpiritCD:Start(14.9) -- (25H Lordaeron 2022/10/21) - Stage 2/11.0
 		timerTouchInsignificanceCD:Start(7.4) -- 3.4s variance [6.0-9.4] (25H Lordaeron [2022-09-23]@[20:40:18] || 25H Lordaeron [2022-10-05]@[20:21:27]) - Stage 2/6.0 || Stage 2/9.4
 		timerAdds:Cancel()
