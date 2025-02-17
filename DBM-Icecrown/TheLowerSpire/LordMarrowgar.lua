@@ -42,9 +42,9 @@ mod:AddSetIconOption("SetIconOnImpale", 72669, true, 0, {8, 7, 6, 5, 4, 3, 2, 1}
 mod.vb.impaleIcon = 8
 
 function mod:OnCombatStart(delay)
-	preWarnWhirlwind:Schedule(40-delay)
-	timerWhirlwindCD:Start(47-delay) -- After 16/11/2022, Warmane fixed this timer. (10N Icecrown 2022/08/25 || 25H Lordaeron 2022/09/08 || 25H Lordaeron 2022/09/14 || 25H Lordaeron 2022/09/23 || 25H Lordaeron 2022/11/16 || 25H Lordaeron 2022/11/17 || 25N Lordaeron 2023-02-10 || 25H Lordaeron [2023-02-14]@[19:45:48] || 25H Lordaeron [2023-02-14]@[19:53:17] || 25N Lordaeron [2023-02-14]@[20:08:16] || 25N Icecrown 2023-02-19) - pull:52.2 || pull:48.3 || pull:45.2 || pull:46.9 || 45.0 || 45.0 || 45.1 || 45.0 || 45.0
-	timerBoneSpike:Start(15-delay) -- Fixed timer - 15.0
+	preWarnWhirlwind:Schedule(40.75-delay)
+	timerWhirlwindCD:Start(47.75-delay) -- After 16/11/2022, Warmane fixed this timer. (10N Icecrown 2022/08/25 || 25H Lordaeron 2022/09/08 || 25H Lordaeron 2022/09/14 || 25H Lordaeron 2022/09/23 || 25H Lordaeron 2022/11/16 || 25H Lordaeron 2022/11/17 || 25N Lordaeron 2023-02-10 || 25H Lordaeron [2023-02-14]@[19:45:48] || 25H Lordaeron [2023-02-14]@[19:53:17] || 25N Lordaeron [2023-02-14]@[20:08:16] || 25N Icecrown 2023-02-19) - pull:52.2 || pull:48.3 || pull:45.2 || pull:46.9 || 45.0 || 45.0 || 45.1 || 45.0 || 45.0
+	timerBoneSpike:Start(21.52-delay) -- Fixed timer - 15.0
 	berserkTimer:Start(-delay)
 	self:RegisterShortTermEvents(
 		"SPELL_PERIODIC_DAMAGE 69146 70823 70824 70825",
