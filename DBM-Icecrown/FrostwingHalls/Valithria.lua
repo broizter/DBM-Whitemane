@@ -31,7 +31,7 @@ local warnPortalOpen		= mod:NewAnnounce("WarnPortalOpen", 4, 72483, nil, nil, ni
 local specWarnGutSpray		= mod:NewSpecialWarningDefensive(70633, nil, nil, nil, 1, 2)
 local specWarnLayWaste		= mod:NewSpecialWarningSpell(69325, nil, nil, nil, 2, 2)
 local specWarnGTFO			= mod:NewSpecialWarningGTFO(71179, nil, nil, nil, 1, 8)
-local specWarnSuppressers	= mod:NewSpecialWarningSpell(70935)
+--local specWarnSuppressers	= mod:NewSpecialWarningSpell(70935)
 
 local timerLayWaste			= mod:NewBuffActiveTimer(12, 69325, nil, nil, nil, 2)
 local timerNextPortal		= mod:NewCDCountTimer(45, 72483, nil, nil, nil, 5, nil, DBM_COMMON_L.HEALER_ICON) -- ~3s variance. (25H Lordearon 2022/10/06 || 25H Lordearon 2022/10/09) - pull:45.0, 45.6, 47.9, 46.6 || pull:45.4, 45.4, 45.1, 46.5
@@ -40,25 +40,25 @@ local timerPortalsClose		= mod:NewTimer(10, "TimerPortalsClose", 72483, nil, nil
 local timerHealerBuff		= mod:NewBuffFadesTimer(40, 70873, nil, nil, nil, 5, nil, DBM_COMMON_L.HEALER_ICON)
 local timerGutSpray			= mod:NewBuffFadesTimer(12, 70633, nil, "Tank|Healer", nil, 5)
 local timerCorrosion		= mod:NewBuffFadesTimer(6, 70751, nil, false, nil, 3)
-local timerBlazingSkeleton	= mod:NewNextTimer(50, 70933, "TimerBlazingSkeleton", nil, nil, 1, 17204)
+--[[ local timerBlazingSkeleton	= mod:NewNextTimer(50, 70933, "TimerBlazingSkeleton", nil, nil, 1, 17204)
 local timerAbom				= mod:NewNextCountTimer(50, 70922, "TimerAbom", nil, nil, 1)
 local timerSuppressers		= mod:NewNextCountTimer(60, 70935, nil, nil, nil, 1)
 
-local soundSpecWarnSuppressers	= mod:NewSound(70935)
+local soundSpecWarnSuppressers	= mod:NewSound(70935) ]]
 
 local berserkTimer			= mod:NewBerserkTimer(420)
 
 mod:AddSetIconOption("SetIconOnBlazingSkeleton", 70933, true, 5, {8})
 
-mod.vb.BlazingSkeletonTimer = 60
+--[[ mod.vb.BlazingSkeletonTimer = 60
 mod.vb.AbomSpawn = 0
 mod.vb.AbomTimer = 60
-mod.vb.SuppressersWave = 0
+mod.vb.SuppressersWave = 0 ]]
 mod.vb.portalCount = 0
 local portalNameN = GetSpellInfo(71305)
 local portalNameH = GetSpellInfo(71987)
 
-local function Suppressers(self)
+--[[ local function Suppressers(self)
 	self.vb.SuppressersWave = self.vb.SuppressersWave + 1
 	if self.vb.SuppressersWave == 2 then
 		timerSuppressers:Stop()
@@ -93,17 +93,17 @@ local function Suppressers(self)
 		self:Unschedule(Suppressers)
 		self:Schedule(50, Suppressers, self)
 	end
-end
+end ]]
 
-local function StartBlazingSkeletonTimer(self)
+--[[ local function StartBlazingSkeletonTimer(self)
 	timerBlazingSkeleton:Start(self.vb.BlazingSkeletonTimer)
 	self:Schedule(self.vb.BlazingSkeletonTimer, StartBlazingSkeletonTimer, self)
 	if self.vb.BlazingSkeletonTimer >= 10 then--Keep it from dropping below 5
 		self.vb.BlazingSkeletonTimer = self.vb.BlazingSkeletonTimer - 5
 	end
-end
+end ]]
 
-local function StartAbomTimer(self)
+--[[ local function StartAbomTimer(self)
 	self.vb.AbomSpawn = self.vb.AbomSpawn + 1
 	if self.vb.AbomSpawn == 1 then
 		timerAbom:Start(self.vb.AbomTimer, self.vb.AbomSpawn + 1)--Timer is 60 seconds after first early abom, it's set to 60 on combat start.
@@ -119,7 +119,7 @@ local function StartAbomTimer(self)
 			self.vb.AbomTimer = self.vb.AbomTimer - 5--Rest of timers after 3rd 55 second timer will be 5 less than previous until they come every 5 seconds.
 		end
 	end
-end
+end ]]
 
 local function Portals(self)
 	self.vb.portalCount = self.vb.portalCount + 1
@@ -146,7 +146,7 @@ function mod:OnCombatStart(delay)
 	timerNextPortal:Start(nil, 1) -- Hardcode 1 on combatStart, there's no need to calculate self.vb.portalCount+1
 	warnPortalSoon:Schedule(40)
 --	self:Schedule(45.4, Portals, self)--This will never be perfect, since it's never same. 45-48sec variations
-	self.vb.BlazingSkeletonTimer = 60
+--[[ 	self.vb.BlazingSkeletonTimer = 60
 	self.vb.AbomTimer = 60
 	self.vb.AbomSpawn = 0
 	timerBlazingSkeleton:Start(53-delay)
@@ -157,7 +157,7 @@ function mod:OnCombatStart(delay)
 	timerSuppressers:Start(28-delay, self.vb.SuppressersWave)
 	specWarnSuppressers:Schedule(28)
 	soundSpecWarnSuppressers:Schedule(28, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\suppressersSpawned.mp3")
-	self:Schedule(28, Suppressers, self)
+	self:Schedule(28, Suppressers, self) ]]
 end
 
 function mod:SPELL_CAST_START(args)
