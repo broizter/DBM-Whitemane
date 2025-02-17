@@ -78,7 +78,7 @@ function mod:SPELL_AURA_REMOVED(args)
 	elseif spellId == 69076 then
 		timerWhirlwind:Cancel()
 		if self:IsNormal() then
-			timerBoneSpike:Start(15)					-- He will do Bone Spike Graveyard 15 seconds after whirlwind ends on normal
+			timerBoneSpike:Start(19.7)
 		end
 	end
 end
