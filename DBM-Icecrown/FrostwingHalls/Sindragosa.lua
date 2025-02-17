@@ -185,7 +185,7 @@ local function landingPhaseWorkaround(self, timeOffset)
 	self:SetStage(1)
 	timerUnchainedMagic:Start(10-timeOffset)
 	timerTailSmash:Start(19-timeOffset)
-	timerNextBlisteringCold:Start(34-timeOffset)
+	timerNextBlisteringCold:Start(34.8-timeOffset)
 	self:UnregisterShortTermEvents()
 end
 
@@ -205,7 +205,7 @@ function mod:OnCombatStart(delay)
 	self:SetStage(1)
 	berserkTimer:Start(-delay)
 	timerNextAirphase:Start(50-delay)
-	timerNextBlisteringCold:Start(31.6-delay) -- ~10s variance [31.6-40] (10H Lordaeron 2022/10/02 || 25H Lordaeron 2022/10/02) - 37.5; 34.9 || 31.6; 36.4; 34.9; 34.9
+	timerNextBlisteringCold:Start(33.4-delay) -- ~10s variance [31.6-40] (10H Lordaeron 2022/10/02 || 25H Lordaeron 2022/10/02) - 37.5; 34.9 || 31.6; 36.4; 34.9; 34.9
 	timerTailSmash:Start(26.65-delay) -- (25H Lordaeron 2022/07/09 || 10N Icecrown 2022/08/22 || 10N Icecrown 2022/08/25 || 10H Lordaeron 2022/10/02 || 25H Lordaeron 2022/10/02) - 20.0 || 20.0 || 20.0 || 20.0; 20.0 || 20.0; 19.9; 20.0; 20.0
 	timerUnchainedMagic:Start(10-delay) -- (25H Lordaeron 2022/07/09 || 10N Icecrown 2022/08/22 || 10N Icecrown 2022/08/25) - 10.1 || 10.1 || 10.0
 	self.vb.warned_P2 = false
@@ -429,7 +429,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerNextAirphase:Cancel()
 		timerNextGroundphase:Cancel()
 		warnGroundphaseSoon:Cancel()
-		timerNextBlisteringCold:Restart(35) -- Fixed timer: 35s (25H Lordaeron 2024/11/28) - 35.03
+		timerNextBlisteringCold:Restart(38.3) -- Fixed timer: 35s (25H Lordaeron 2024/11/28) - 35.03
 		timerNextMysticBuffet:Start(6)
 		self:Schedule(6, cycleMysticBuffet, self)
 		self:Unschedule(landingPhaseWorkaround)
@@ -444,7 +444,7 @@ function mod:OnSync(msg)
 		self:SetStage(1)
 		timerUnchainedMagic:Start(10) -- (10H Lordaeron 2022/10/02 || 25H Lordaeron 2022/10/02) - 10.0; 10.0 || 10.0; 10.0, 10.0; 10.0
 		timerTailSmash:Start(44.5) -- ~5s variance [19-23.8]? (10N Icecrown 2022/08/25 || 10H Lordaeron 2022/10/02 || 25H Lordaeron 2022/10/02) - 19.0 || 21.4; 21.9 || 21.4; 23.8, 22.6; 22.2
-		timerNextBlisteringCold:Start(34) -- 6s variance [34-40]? (10H Lordaeron 2022/10/02 || 25H Lordaeron 2022/10/02) - 34.0; 34.0 || 34.0; 34.0; 34.0
+		timerNextBlisteringCold:Start(34.8) -- 6s variance [34-40]? (10H Lordaeron 2022/10/02 || 25H Lordaeron 2022/10/02) - 34.0; 34.0 || 34.0; 34.0; 34.0
 		self:UnregisterShortTermEvents()
 	end
 end
