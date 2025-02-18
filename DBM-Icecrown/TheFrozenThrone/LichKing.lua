@@ -273,7 +273,7 @@ local function NextPhase(self, delay)
 	if self.vb.phase == 1 then
 		berserkTimer:Start(-delay)
 		warnShamblingSoon:Schedule(15-delay)
-		timerShamblingHorror:Start(20-delay)
+		timerShamblingHorror:Start(16-delay)
 		timerDrudgeGhouls:Start(10-delay)
 		if self:IsHeroic() then
 			timerTrapCD:Start(-delay)
