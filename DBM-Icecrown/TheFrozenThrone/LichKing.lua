@@ -319,13 +319,13 @@ end
 local function leftFrostmourne(self)
 	DBM:Debug("Left Frostmourne")
 	DBM:AddSpecialEventToTranscriptorLog("Left Frostmourne")
-	timerHarvestSoulCD:Start(58.72) -- Subtract [58.72]s from Exit FM to next CAST_SUCCESS diff. Timestamps: Harvest cast success > Enter Frostmourne (SAA 73655) > Exit FM (SAR 73655) > Harvest cast. (25H Lordaeron [2023-08-23]@[22:14:48]) - "Harvest Souls-74297-npc:36597-3706 = pull:452.4/Stage 3/14.0, 107.3, 107.2" => '107.3 calculation as follows': 452.42 > 458.44 [6.02] > 500.97 [42.53/48.55] > 559.69 [58.72/101.25/107.27]
-	timerDefileCD:Start(1.5, self.vb.defileCount+1) -- As soon as the group leaves FM
+	timerHarvestSoulCD:Start(59.4) -- Subtract [58.72]s from Exit FM to next CAST_SUCCESS diff. Timestamps: Harvest cast success > Enter Frostmourne (SAA 73655) > Exit FM (SAR 73655) > Harvest cast. (25H Lordaeron [2023-08-23]@[22:14:48]) - "Harvest Souls-74297-npc:36597-3706 = pull:452.4/Stage 3/14.0, 107.3, 107.2" => '107.3 calculation as follows': 452.42 > 458.44 [6.02] > 500.97 [42.53/48.55] > 559.69 [58.72/101.25/107.27]
+	timerDefileCD:Start(1, self.vb.defileCount+1) -- As soon as the group leaves FM
 	warnDefileSoon:Show(self.vb.defileCount+1)
 	warnDefileSoon:Play("scatter") -- Voice Pack - Scatter.ogg: "Spread!"
-	timerSoulreaperCD:Start(3.5, self.vb.soulReaperCount+1) -- After Defile cast (+2s)
-	soundSoulReaperSoon:Schedule(3.5-2.5, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\soulreaperSoon.mp3")
-	timerVileSpirit:Start(7.81) -- (25H Lordaeron [2023-09-13]@[22:13:36]) - "Vile Spirits-70498-npc:36597-4244 = pull:518.95/Left Frostmourne/7.81, 40.11, Left Frostmourne/59.17, 7.81/66.98, 39.97, Left Frostmourne/59.45"
+	timerSoulreaperCD:Start(8.8, self.vb.soulReaperCount+1) -- After Defile cast (+2s)
+	soundSoulReaperSoon:Schedule(8.8-2.5, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\soulreaperSoon.mp3")
+	timerVileSpirit:Start(8.1) -- (25H Lordaeron [2023-09-13]@[22:13:36]) - "Vile Spirits-70498-npc:36597-4244 = pull:518.95/Left Frostmourne/7.81, 40.11, Left Frostmourne/59.17, 7.81/66.98, 39.97, Left Frostmourne/59.45"
 end
 
 local function RestoreWipeTime(self)
