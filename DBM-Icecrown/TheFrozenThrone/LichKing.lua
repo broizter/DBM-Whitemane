@@ -301,7 +301,7 @@ local function NextPhase(self, delay)
 	elseif self.vb.phase == 3 then
 		warnPhase3:Show()
 		warnPhase3:Play("pthree")
-		timerVileSpirit:Start(17)
+		--timerVileSpirit:Start(17) No vile spirit before harvest
 		timerSoulreaperCD:Start(37.5, self.vb.soulReaperCount+1)
 		soundSoulReaperSoon:Schedule(37.5-2.5, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\soulreaperSoon.mp3")
 		timerDefileCD:Start(nil, self.vb.defileCount+1)
