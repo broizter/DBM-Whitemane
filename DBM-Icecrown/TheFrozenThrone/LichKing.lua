@@ -307,7 +307,7 @@ local function NextPhase(self, delay)
 		timerDefileCD:Start(nil, self.vb.defileCount+1)
 		warnDefileSoon:Schedule(32-5, self.vb.defileCount+1)
 		warnDefileSoon:ScheduleVoice(32-5, "scatter")
-		timerHarvestSoulCD:Start(13.6) -- REVIEW! variance? (25H Lordaeron 2022/10/21 || 25H Lordaeron 2022/11/16) - 13.6 || 14.0
+		timerHarvestSoulCD:Start(14) -- REVIEW! variance? (25H Lordaeron 2022/10/21 || 25H Lordaeron 2022/11/16) - 13.6 || 14.0
 --		if self:IsHeroic() then
 --			self:RegisterShortTermEvents(
 --				"ZONE_CHANGED"
