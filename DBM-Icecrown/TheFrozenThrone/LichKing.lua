@@ -290,8 +290,8 @@ local function NextPhase(self, delay)
 		timerSoulreaperCD:Start(40, self.vb.soulReaperCount+1)
 		soundSoulReaperSoon:Schedule(40-2.5, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\soulreaperSoon.mp3")
 		timerDefileCD:Start(37.5, self.vb.defileCount+1)
-		timerInfestCD:Start(12.2, self.vb.infestCount+1) -- 0.3s variance [12.2-12.5] (10N Icecrown 2022/08/25 || 25H Lordaeron 2022/09/03) - 12.4 || 12.5; 12.5; 12.5; 12.2; 12.5; 12.5; 12.5
-		soundInfestSoon:Schedule(12.2-2, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\infestSoon.mp3")
+		timerInfestCD:Start(14.1, self.vb.infestCount+1) -- 0.3s variance [12.2-12.5] (10N Icecrown 2022/08/25 || 25H Lordaeron 2022/09/03) - 12.4 || 12.5; 12.5; 12.5; 12.2; 12.5; 12.5; 12.5
+		soundInfestSoon:Schedule(14.1-2, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\infestSoon.mp3")
 		warnDefileSoon:Schedule(33, self.vb.defileCount+1)
 		warnDefileSoon:ScheduleVoice(33, "scatter") -- Voice Pack - Scatter.ogg: "Spread!"
 		self:RegisterShortTermEvents(
@@ -808,7 +808,7 @@ function mod:UNIT_SPELLCAST_START(_, spellName)
 		specWarnInfest:Show(self.vb.infestCount)
 		timerInfestCD:Start(nil, self.vb.infestCount+1)
 		soundInfestSoon:Cancel()
-		soundInfestSoon:Schedule(22.5-2, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\infestSoon.mp3")
+		soundInfestSoon:Schedule(22.6-2, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\infestSoon.mp3")
 	elseif spellName == GetSpellInfo(72762) then -- Defile
 		self.vb.defileCount = self.vb.defileCount + 1
 		self:BossTargetScanner(36597, "DefileTarget", 0.02, 15)
