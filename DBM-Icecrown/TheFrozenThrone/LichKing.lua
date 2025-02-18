@@ -105,7 +105,7 @@ local timerNecroticPlagueCD			= mod:NewCDTimer(30, 70337, nil, nil, nil, 3, nil,
 local timerEnrageCD					= mod:NewCDCountTimer("d20", 72143, nil, "Tank|RemoveEnrage", nil, 5, nil, DBM_COMMON_L.ENRAGE_ICON--[[, true]]) -- String timer starting with "d" means "allowDouble". 5s variance [20.1-24.7]. Disabled "keep" arg since cast can be stun-skipped. (25H Lordaeron 2022/09/03) - 20.5, 24.7
 local timerShamblingHorror			= mod:NewNextTimer(60, 70372, nil, nil, nil, 1)
 local timerDrudgeGhouls				= mod:NewNextTimer(30, 70358, nil, nil, nil, 1)
-local timerTrapCD					= mod:NewNextTimer(15.5, 73539, nil, nil, nil, 3, nil, DBM_COMMON_L.DEADLY_ICON, nil, 1, 4) -- Fixed timer, confirmed on log review 2022/09/03
+local timerTrapCD					= mod:NewNextTimer(15.08, 73539, nil, nil, nil, 3, nil, DBM_COMMON_L.DEADLY_ICON, nil, 1, 4) -- Fixed timer, confirmed on log review 2022/09/03
 
 local soundInfestSoon				= mod:NewSoundSoon(70541, nil, "Healer|RaidCooldown")
 local soundNecroticOnYou			= mod:NewSoundYou(70337)
