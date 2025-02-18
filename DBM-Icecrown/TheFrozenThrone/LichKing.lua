@@ -286,7 +286,7 @@ local function NextPhase(self, delay)
 		if self.Options.ShowFrame then
 			self:CreateFrame()
 		end
-		timerSummonValkyr:Start(17, self.vb.valkyrWaveCount+1) -- (25H Lordaeron 2022/09/21_wipe1 || 25H Lordaeron 2022/09/21_wipe2 || 25H Lordaeron 2022/09/21_kill || 25H Lordaeron 2022/09/26_wipe3 || 25H Lordaeron 2022/09/26_wipe6) - 17.5 || 17.5 || 17.4 || 17.3 || 17.0
+		timerSummonValkyr:Start(20, self.vb.valkyrWaveCount+1) -- (25H Lordaeron 2022/09/21_wipe1 || 25H Lordaeron 2022/09/21_wipe2 || 25H Lordaeron 2022/09/21_kill || 25H Lordaeron 2022/09/26_wipe3 || 25H Lordaeron 2022/09/26_wipe6) - 17.5 || 17.5 || 17.4 || 17.3 || 17.0
 		timerSoulreaperCD:Start(40, self.vb.soulReaperCount+1)
 		soundSoulReaperSoon:Schedule(40-2.5, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\soulreaperSoon.mp3")
 		timerDefileCD:Start(37.5, self.vb.defileCount+1)
