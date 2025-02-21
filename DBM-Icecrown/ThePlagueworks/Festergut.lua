@@ -60,7 +60,7 @@ local gasSporeTargets = {}
 local vileGasTargets = {}
 mod.vb.gasSporeCast = 0
 mod.vb.warnedfailed = false
-local localizedGooNames = {
+local localizedSpellNames = {
   [72550] = GetSpellInfo(72550)
 }
 
@@ -129,10 +129,10 @@ function mod:SPELL_CAST_SUCCESS(args)
   end
 
   -- TODO: Stop using spell name instead of spell IDs after getting all the Malleable Goo spell IDs from all the difficulties
-  local localizedSpellName = localizedGooNames[args.spellId] or GetSpellInfo(args.spellId)
+  local localizedSpellName = localizedSpellNames[args.spellId] or GetSpellInfo(args.spellId)
 
-  if localizedSpellName == localizedGooNames[72550] then
-    localizedGooNames[args.spellId] = localizedSpellName
+  if localizedSpellName == localizedSpellNames[72550] then
+    localizedSpellNames[args.spellId] = localizedSpellName
 
     timerGooCD:Start()
     -- TODO: test if special announcements scheduled below actually work
