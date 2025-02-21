@@ -21,11 +21,6 @@ mod:RegisterEventsInCombat(
 local isGooSummonHidden     = true
 local gooCastFrequency    = 10
 
--- TODO: change the timer for different difficulties
--- if not self:IsDifficulty("heroic25") then
---   gooCastFrequency = 15
--- end
-
 local warnInhaledBlight		= mod:NewStackAnnounce(69166, 3)
 local warnGastricBloat		= mod:NewStackAnnounce(72219, 2, nil, "Tank|Healer")
 local warnGasSpore			= mod:NewTargetNoFilterAnnounce(69279, 4)
@@ -83,6 +78,10 @@ local function warnVileGasTargets()
 end
 
 function mod:OnCombatStart(delay)
+-- TODO: change the timer for different difficulties
+-- if not self:IsDifficulty("heroic25") then
+--   gooCastFrequency = 15
+-- end
 	berserkTimer:Start(-delay)
 	timerInhaledBlight:Start(28.5-delay) -- ~5s variance [28.9-34.0] (25H Lordaeron 2022/09/04 || 25H Lordaeron 2022/09/25 || 25H Lordaeron [2022-11-16]@[22:30:46] || 10H Lordearon [2023-04-05]@[22:46:14] || 25H Lordaeron [2023-06-27]@[20:34:49] || 25H Lordaeron [2023-08-23]@[20:39:56]) - pull:32.0 || pull:32.9 || pull:28.9 || pull:30.6 || pull:34.0 || pull:30.7
 	timerGasSporeCD:Start(20-delay) -- ~5s variance [20.1 - 24.9]. Added "keep" arg. (25H Lordaeron [2022-09-14]@[20:34:44] || 25H Lordaeron [2022-09-23]@[21:13:34] || 25N Lordaeron [2023-02-10]@[19:23:53] || 25N Lordaeron [2023-02-14]@[20:56:07] || 10H Icecrown [2023-04-05]@[22:46:14] || 25H Lordaeron [2023-04-07]@[19:35:55) - pull:24.1 || pull:24.9 || pull:21.5 || pull:21.1|| pull:20.1|| pull:20.3
@@ -134,7 +133,7 @@ function mod:SPELL_CAST_SUCCESS(args)
   if localizedSpellName == localizedSpellNames[72550] then
     localizedSpellNames[args.spellId] = localizedSpellName
 
-    timerGooCD:Start()
+    timerGooCD:Start(gooCastFrequency)
     -- TODO: test if special announcements scheduled below actually work
     specWarnGoo:DelayedShow(gooCastFrequency)
     specWarnGoo:ScheduleVoice(gooCastFrequency, "watchstep")
@@ -216,7 +215,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, spellName)
 		specWarnGoo:Play("watchstep")
     -- TODO: Change the frequency value before constructing the timer instead of calculating it here
 		if self:IsDifficulty("heroic25") then
-			timerGooCD:Start()
+			timerGooCD:Start(gooCastFrequency)
 		else
 			timerGooCD:Start(15)--30 seconds in between goos on 10 man heroic
 		end
