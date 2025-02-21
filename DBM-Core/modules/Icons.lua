@@ -381,6 +381,12 @@ do
 		"mouseover", "target", "focus", "targettarget", "mouseovertarget"
 	}
 
+  if C_NamePlate then
+    for i = 1, 40 do
+      table.insert(mobUids, "nameplate" .. i)
+    end
+  end
+
 	function module:ScanForMobs(mod, scanId, iconSetMethod, mobIcon, maxIcon, scanTable, scanningTime, optionName, allowFriendly, skipMarked, allAllowed, wipeGUID)
 		if not optionName then optionName = mod.findFastestComputer[1] end
 		if private.canSetIcons[optionName] or (allAllowed and not DBM.Options.DontSetIcons) then
@@ -421,7 +427,12 @@ do
 			--But if not, we Register listeners to watch for the units we seek to appear
 			if not eventsRegistered and scansActive > 0 then
 				eventsRegistered = true
-				self:RegisterShortTermEvents("UPDATE_MOUSEOVER_UNIT", "UNIT_TARGET_UNFILTERED", "INSTANCE_ENCOUNTER_ENGAGE_UNIT")
+        self:RegisterShortTermEvents(
+          "UPDATE_MOUSEOVER_UNIT",
+          "UNIT_TARGET_UNFILTERED",
+          "INSTANCE_ENCOUNTER_ENGAGE_UNIT",
+          C_NamePlate and "NAME_PLATE_UNIT_ADDED"
+        )
 				DBM:Debug("Target events Registered", 2)
 			end
 		else
