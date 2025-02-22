@@ -28,7 +28,7 @@ local timerNextOrb			= mod:NewNextTimer(38, 72091, nil, nil, nil, 1) -- (10N Lor
 
 function mod:OnCombatStart(delay)
 	timerNextOrb:Start(11.8-delay) -- (10N Lordaeron 2022/09/23 wipe1 || 10N Lordaeron 2022/09/23 wipe2 || 10N Lordaeron 2022/09/23 kill) - pull:10.8 || pull:10.8 || pull:10.8
-	timerWhiteout:Start(12.8-delay) -- (10N Lordaeron 2022/09/23 wipe1 || 10N Lordaeron 2022/09/23 wipe2 || 10N Lordaeron 2022/09/23 kill) - pull:12.8 || pull:12.9 || pull:12.9
+	timerWhiteout:Start(24.96-delay) -- (10N Lordaeron 2022/09/23 wipe1 || 10N Lordaeron 2022/09/23 wipe2 || 10N Lordaeron 2022/09/23 kill) - pull:12.8 || pull:12.9 || pull:12.9
 	timerFrostbiteCD:Start(0.4-delay) -- REVIEW! ~3s variance? (10N Lordaeron 2022/09/23 wipe1 || 10N Lordaeron 2022/09/23 wipe2 || 10N Lordaeron 2022/09/23 kill) - pull:0.4 || pull:2.8 || pull:0.7
 --	timerToravonEnrage:Start(-delay)
 end
