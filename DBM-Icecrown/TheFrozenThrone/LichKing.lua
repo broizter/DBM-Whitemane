@@ -278,7 +278,7 @@ local function NextPhase(self, delay)
 		if self:IsHeroic() then
 			timerTrapCD:Start(-delay)
 		end
-		timerNecroticPlagueCD:Start(-delay) -- no difference between N and H. (10N Icecrown 2022/08/20 || 10N Icecrown 2022/08/25 || 25H Lordaeron 2022/09/03) - 31.1; 32.6 || 31.6 || 30.7; 32.1; 31.0; 32.7; 30.4; 31.7; 31.5; 32.8; 30.8
+		timerNecroticPlagueCD:Start(30.6-delay) -- no difference between N and H. (10N Icecrown 2022/08/20 || 10N Icecrown 2022/08/25 || 25H Lordaeron 2022/09/03) - 31.1; 32.6 || 31.6 || 30.7; 32.1; 31.0; 32.7; 30.4; 31.7; 31.5; 32.8; 30.8
 		timerInfestCD:Start(5.0-delay, self.vb.infestCount+1) -- Fixed timer, confirmed on log review 2022/09/03
 	elseif self.vb.phase == 2 then
 		warnPhase2:Show()
