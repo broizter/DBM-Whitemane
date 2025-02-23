@@ -185,7 +185,7 @@ local function landingPhaseWorkaround(self, timeOffset)
 	self:SetStage(1)
 	timerUnchainedMagic:Start(10-timeOffset)
 	timerTailSmash:Start(19-timeOffset)
-	timerNextBlisteringCold:Start(34.8-timeOffset)
+	timerNextBlisteringCold:Start(32.5-timeOffset)
 	self:UnregisterShortTermEvents()
 end
 
@@ -444,7 +444,7 @@ function mod:OnSync(msg)
 		self:SetStage(1)
 		timerUnchainedMagic:Start(10) -- (10H Lordaeron 2022/10/02 || 25H Lordaeron 2022/10/02) - 10.0; 10.0 || 10.0; 10.0, 10.0; 10.0
 		timerTailSmash:Start(44.5) -- ~5s variance [19-23.8]? (10N Icecrown 2022/08/25 || 10H Lordaeron 2022/10/02 || 25H Lordaeron 2022/10/02) - 19.0 || 21.4; 21.9 || 21.4; 23.8, 22.6; 22.2
-		timerNextBlisteringCold:Start(34.8) -- 6s variance [34-40]? (10H Lordaeron 2022/10/02 || 25H Lordaeron 2022/10/02) - 34.0; 34.0 || 34.0; 34.0; 34.0
+		timerNextBlisteringCold:Start(32.5) -- 6s variance [34-40]? (10H Lordaeron 2022/10/02 || 25H Lordaeron 2022/10/02) - 34.0; 34.0 || 34.0; 34.0; 34.0
 		self:UnregisterShortTermEvents()
 	end
 end
