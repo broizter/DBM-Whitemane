@@ -429,7 +429,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerNextAirphase:Cancel()
 		timerNextGroundphase:Cancel()
 		warnGroundphaseSoon:Cancel()
-		timerNextBlisteringCold:Restart(38.3) -- Fixed timer: 35s (25H Lordaeron 2024/11/28) - 35.03
+		timerNextBlisteringCold:Restart(37.7) -- Fixed timer: 35s (25H Lordaeron 2024/11/28) - 35.03
 		timerNextMysticBuffet:Start(6)
 		self:Schedule(6, cycleMysticBuffet, self)
 		self:Unschedule(landingPhaseWorkaround)
