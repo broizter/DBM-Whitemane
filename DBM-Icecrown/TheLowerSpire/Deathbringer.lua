@@ -250,7 +250,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 			DBM.RangeCheck:Show(12)
 		end
 	elseif msg:find(L.PullHorde, 1, true) then
-		timerCombatStart:Start(99)
+		timerCombatStart:Start(97.46)
 		if self.Options.RangeFrame then
 			DBM.RangeCheck:Show(12)
 		end
