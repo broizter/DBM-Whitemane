@@ -203,7 +203,8 @@ L:SetWarningLocalization({
 })
 
 L:SetTimerLocalization({
-	TimerTargetSwitch		= "Target switch"
+	TimerTargetSwitch		= "Target switch",
+	TimerSpawnTimer			= "Bosses activate"
 })
 
 L:SetOptionLocalization({

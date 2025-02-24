@@ -35,7 +35,8 @@ local myRealm = select(3, DBM:GetMyPlayerInfo())
 local warnTargetSwitch			= mod:NewAnnounce("WarnTargetSwitch", 3, 70952)
 local warnTargetSwitchSoon		= mod:NewAnnounce("WarnTargetSwitchSoon", 2, 70952)
 
-local timerCombatStart			= mod:NewCombatTimer(29) -- Roleplay for first pull
+-- local timerCombatStart			= mod:NewCombatTimer(13.9) -- Roleplay for first pull
+local timerSpawnTimer		= mod:NewTimer(13.9, "TimerSpawnTimer", 47436, nil, nil, 6)
 local timerTargetSwitch			= mod:NewTimer(45.5, "TimerTargetSwitch", 70952) -- REVIEW! ~0.2s variance [46.42-46.60], with 46.0/46.2 outliers. Since these outliers are very rare, I prefer keeping this timer as the most probable cd seen in the logs
 local berserkTimer				= mod:NewBerserkTimer((myRealm == "Lordaeron" or myRealm == "Frostmourne") and 360 or 600)
 
@@ -328,6 +329,6 @@ end
 
 function mod:CHAT_MSG_MONSTER_YELL(msg)
 	if msg == L.FirstPull or msg:find(L.FirstPull) then
-		timerCombatStart:Start()
+		timerSpawnTimer:Start()
 	end
 end
