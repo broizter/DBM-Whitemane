@@ -287,8 +287,8 @@ local function NextPhase(self, delay)
 			self:CreateFrame()
 		end
 		timerSummonValkyr:Start(20, self.vb.valkyrWaveCount+1) -- (25H Lordaeron 2022/09/21_wipe1 || 25H Lordaeron 2022/09/21_wipe2 || 25H Lordaeron 2022/09/21_kill || 25H Lordaeron 2022/09/26_wipe3 || 25H Lordaeron 2022/09/26_wipe6) - 17.5 || 17.5 || 17.4 || 17.3 || 17.0
-		timerSoulreaperCD:Start(40, self.vb.soulReaperCount+1)
-		soundSoulReaperSoon:Schedule(40-2.5, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\soulreaperSoon.mp3")
+		timerSoulreaperCD:Start(20.46, self.vb.soulReaperCount+1)
+		soundSoulReaperSoon:Schedule(20.46-2.5, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\soulreaperSoon.mp3")
 		timerDefileCD:Start(37.5, self.vb.defileCount+1)
 		timerInfestCD:Start(14.1, self.vb.infestCount+1) -- 0.3s variance [12.2-12.5] (10N Icecrown 2022/08/25 || 25H Lordaeron 2022/09/03) - 12.4 || 12.5; 12.5; 12.5; 12.2; 12.5; 12.5; 12.5
 		soundInfestSoon:Schedule(14.1-2, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\infestSoon.mp3")
@@ -302,8 +302,8 @@ local function NextPhase(self, delay)
 		warnPhase3:Show()
 		warnPhase3:Play("pthree")
 		--timerVileSpirit:Start(17) No vile spirit before harvest
-		timerSoulreaperCD:Start(37.5, self.vb.soulReaperCount+1)
-		soundSoulReaperSoon:Schedule(37.5-2.5, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\soulreaperSoon.mp3")
+		timerSoulreaperCD:Start(25.75, self.vb.soulReaperCount+1)
+		soundSoulReaperSoon:Schedule(25.75-2.5, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\soulreaperSoon.mp3")
 		timerDefileCD:Start(nil, self.vb.defileCount+1)
 		warnDefileSoon:Schedule(32-5, self.vb.defileCount+1)
 		warnDefileSoon:ScheduleVoice(32-5, "scatter")
