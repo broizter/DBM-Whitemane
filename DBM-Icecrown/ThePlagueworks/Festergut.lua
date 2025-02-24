@@ -82,9 +82,9 @@ function mod:OnCombatStart(delay)
 	if self.Options.RangeFrame then
 		DBM.RangeCheck:Show(10) -- 9.6y is the shortest distance that it doesn't spread (TC test 12/03/2023); set to 10 for safety
 	end
-	if self:IsHeroic() then
+--[[ 	if self:IsHeroic() then
 		timerGooCD:Start(13-delay)
-	end
+	end ]]
 end
 
 function mod:OnCombatEnd()
