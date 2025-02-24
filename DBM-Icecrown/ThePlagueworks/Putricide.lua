@@ -124,8 +124,8 @@ local function NextPhase(self)
 		timerUnstableExperimentCD:Start(33) -- 19/04/2024: (Heroic) Unstable Experiement scheduled 30 seconds after Create Concoction finishes. https://www.warmane.com/bugtracker/report/121798#comment-114099
 		warnUnstableExperimentSoon:Schedule(25+7)
 		-- EVENT_PHASE_TRANSITION - scheduled for Create Concoction cast + 100 ms (will fire [CHAT_MSG_MONSTER_YELL] Hrm, I don't feel a thing. Wha?! Where'd those come from?)
-		timerMalleableGooCD:Start(15) -- Fixed timer after phase 2: 15s
-		soundMalleableGooSoon:Schedule(15-3, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\malleable_soon.mp3")
+		timerMalleableGooCD:Start(16.9) -- Fixed timer after phase 2: 15s
+		soundMalleableGooSoon:Schedule(16.9-3, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\malleable_soon.mp3")
 		timerChokingGasBombCD:Start(25) -- timer after phasing: 5s variance [25-30s]
 		soundChokingGasSoon:Schedule(25-3, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\choking_soon.mp3")
 		warnChokingGasBombSoon:Schedule(25-5)
