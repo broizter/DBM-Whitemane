@@ -126,9 +126,9 @@ local function NextPhase(self)
 		-- EVENT_PHASE_TRANSITION - scheduled for Create Concoction cast + 100 ms (will fire [CHAT_MSG_MONSTER_YELL] Hrm, I don't feel a thing. Wha?! Where'd those come from?)
 		timerMalleableGooCD:Start(16.9) -- Fixed timer after phase 2: 15s
 		soundMalleableGooSoon:Schedule(16.9-3, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\malleable_soon.mp3")
-		timerChokingGasBombCD:Start(25) -- timer after phasing: 5s variance [25-30s]
-		soundChokingGasSoon:Schedule(25-3, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\choking_soon.mp3")
-		warnChokingGasBombSoon:Schedule(25-5)
+		timerChokingGasBombCD:Start(22.81) -- timer after phasing: 5s variance [25-30s]
+		soundChokingGasSoon:Schedule(22.81-3, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\choking_soon.mp3")
+		warnChokingGasBombSoon:Schedule(22.81-5)
 	--	self:UnregisterShortTermEvents() -- UnregisterShortTermEvents moved here to ensure UNIT_TARGET is unregistered (previously was running on sync, which is not always used)
 	elseif self.vb.phase == 3 then
 		warnPhase3:Show()
