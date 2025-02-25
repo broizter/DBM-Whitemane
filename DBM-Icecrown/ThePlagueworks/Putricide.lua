@@ -187,9 +187,9 @@ function mod:OnCombatStart(delay)
 	end
 end
 
---[[function mod:OnCombatEnd()
+function mod:OnCombatEnd()
 	self:UnregisterShortTermEvents()
-end]]
+end
 
 function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
