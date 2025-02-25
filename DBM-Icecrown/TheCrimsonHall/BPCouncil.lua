@@ -314,7 +314,11 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, spellName)
 		warnKineticBomb:Show()
 		specWarnKineticBomb:Show(self.vb.kineticCount)
 		soundKineticBomb:Play("Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\KineticSpawn.mp3")
-		timerKineticBombCD:Start(nil, self.vb.kineticCount+1)
+		if self:IsDifficulty("normal10", "heroic10") then
+			timerKineticBombCD:Start(nil, self.vb.kineticCount+1)
+		else
+			timerKineticBombCD:Start(20.5, self.vb.kineticCount+1)
+		end
 		if self.Options.SetIconOnKineticBomb then
 			self:ScanForMobs(38454, 2, self.vb.kineticIcon, 5, nil, 12, "SetIconOnKineticBomb", false, nil, true)
 			self.vb.kineticIcon = self.vb.kineticIcon - 1
