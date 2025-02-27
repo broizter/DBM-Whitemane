@@ -69,9 +69,9 @@ function mod:OnCombatStart(delay)
 --	self:Schedule(12-delay, Adds, self)
 	self.vb.firstMage = false
 	if UnitFactionGroup("player") == "Alliance" then
-		timerBelowZeroCD:Start(39-delay) --Approximate, since it depends on cannon damage. Corrected on yell later
+		timerBelowZeroCD:Start(25.24-delay) --Approximate, since it depends on cannon damage. Corrected on yell later
 	else
-		timerBelowZeroCD:Start(37-delay) --Approximate, since it depends on cannon damage. Corrected on yell later
+		timerBelowZeroCD:Start(21.68-delay) --Approximate, since it depends on cannon damage. Corrected on yell later
 	end
 end
 
