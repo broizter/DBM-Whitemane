@@ -171,7 +171,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 			specwarnRuneofBloodYou:Show()
 		end
 		timerRuneofBlood:Start()
-	elseif spellId == 72769 then
+	elseif spellId == 72769 and self:AntiSpam(3, 2) then
 		specWarnScentofBlood:Show()
 	elseif args:IsSpellID(72385, 72441, 72442, 72443) then -- Boiling Blood
 		self.vb.boilingBloodIcon = 1
