@@ -111,6 +111,7 @@ function mod:OnCombatStart(delay)
 	self.vb.kineticCount = 0
 	personalNucleusCount = 0
 	berserkTimer:Start(-delay)
+	timerConjureFlamesCD:Start(20-delay)
 	warnTargetSwitchSoon:Schedule(41-delay)
 	warnTargetSwitchSoon:ScheduleVoice(41-delay, "swapsoon")
 	timerTargetSwitch:Start(-delay)
