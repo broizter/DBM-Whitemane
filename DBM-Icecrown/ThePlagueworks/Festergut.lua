@@ -168,7 +168,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		vileGasTargets[#vileGasTargets + 1] = args.destName
 		if args:IsPlayer() then
 			specWarnVileGas:Show()
-			specWarnVileGas:Play("scatter")
+			-- specWarnVileGas:Play("scatter") -- Makes no sense to say spread to a stunned player
 			yellVileGas:Yell()
 		end
 		self:Unschedule(warnVileGasTargets)
