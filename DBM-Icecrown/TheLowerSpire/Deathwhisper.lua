@@ -323,6 +323,13 @@ local function isAggroOnUntargetedUnit()
 	local numRaidMembers = GetNumRaidMembers()
 	if numRaidMembers > 0 then
 	    for i = 1, numRaidMembers do
+		-- Add raid member's GUID
+		local raidMemberGUID = UnitGUID("raid"..i)
+		if raidMemberGUID then
+		knownUnits[raidMemberGUID] = true
+		end
+
+		-- Add raid member's target's GUID
 		local unitID = "raid"..i.."target"
 		if UnitExists(unitID) then
 		    local guid = UnitGUID(unitID)
