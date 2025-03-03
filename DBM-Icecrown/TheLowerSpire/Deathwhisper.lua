@@ -501,7 +501,7 @@ end
 function mod:SWING_DAMAGE(sourceGUID, _, _, destGUID)
 	if destGUID == UnitGUID("player") and self:GetCIDFromGUID(sourceGUID) == 38222 then
 		specWarnVengefulShade:Show()
-		specWarnVengefulShade:Play("targetyou")
+--		specWarnVengefulShade:Play("targetyou")
 	end
 end
 
