@@ -74,7 +74,6 @@ local warnTouchInsignificance		= mod:NewStackAnnounce(71204, 2, nil, "Tank|Heale
 local specWarnCurseTorpor			= mod:NewSpecialWarningYou(71237, nil, nil, nil, 1, 2)
 local specWarnTouchInsignificance	= mod:NewSpecialWarningStack(71204, nil, 3, nil, nil, 1, 6)
 local specWarnFrostbolt				= mod:NewSpecialWarningInterrupt(72007, "HasInterrupt", nil, 2, 1, 2)
-local specWarnVengefulShade			= mod:NewSpecialWarning("SpecWarnVengefulShade", true, nil, nil, nil, 1, 2, nil, 71426, 71426)
 local specWarnVengefulShadeOnYou	= mod:NewSpecialWarningRun(71426, nil, nil, nil, 4, 2)
 local yellVengefulShadeOnMe			= mod:NewYellMe(71426)
 
@@ -89,8 +88,6 @@ local soundWarnSpirit				= mod:NewSound(71426)
 local dominateMindTargets = {}
 mod.vb.dominateMindIcon = 1
 local shieldName = DBM:GetSpellInfo(70842)
-local summonSpiritName = DBM:GetSpellInfo(71426)
-local playerHadTarget = false
 
 local playerClass = select(2, UnitClass("player"))
 local isHunter = playerClass == "HUNTER"
@@ -307,8 +304,48 @@ do	-- add the additional Shield Bar
 	end
 end
 
-local function unregisterShortTermEvents(self) -- only used for the scheduling below
-	self:UnregisterShortTermEvents()
+local function isAggroOnUntargetedUnit()
+	local knownUnits = {}
+	local playerThreatStatus = UnitThreatSituation("player")
+
+	-- Only continue if player has high threat
+	if not playerThreatStatus or playerThreatStatus < 2 then 
+	    return
+	end
+
+	-- Check player's target
+	if UnitExists("target") then
+	    local guid = UnitGUID("target")
+	    if guid then knownUnits[guid] = true end
+	end
+
+	-- Check all raid members' targets
+	local numRaidMembers = GetNumRaidMembers()
+	if numRaidMembers > 0 then
+	    for i = 1, numRaidMembers do
+		local unitID = "raid"..i.."target"
+		if UnitExists(unitID) then
+		    local guid = UnitGUID(unitID)
+		    if guid then knownUnits[guid] = true end
+		end
+	    end
+	end
+
+	-- Check if player has threat on any known unit
+	for guid in pairs(knownUnits) do
+	    local unitID = DBM:GetUnitIdFromGUID(guid)
+	    if unitID then
+		local threatStatus = UnitThreatSituation("player", unitID)
+		if threatStatus and threatStatus >= 2 then
+		    return -- Found a known unit we have threat on
+		end
+	    end
+	end
+
+	-- If we have high threat but not on any known unit, we must have threat from an untargeted shade
+	specWarnVengefulShadeOnYou:Show()
+	specWarnVengefulShadeOnYou:Play("runaway")
+	yellVengefulShadeOnMe:Yell()
 end
 
 function mod:OnCombatStart(delay)
@@ -331,7 +368,6 @@ function mod:OnCombatStart(delay)
 	end
 	table.wipe(dominateMindTargets)
 	self.vb.dominateMindIcon = 6
-	playerHadTarget = false
 	if self.Options.InfoFrame then
 		DBM.InfoFrame:SetHeader(shieldName)
 		DBM.InfoFrame:Show(1, "enemypower", 2)
@@ -481,16 +517,10 @@ end
 
 function mod:SPELL_SUMMON(args)
 	if args.spellId == 71426 and self:AntiSpam(5, 1) then -- Summon Vengeful Shade
- 		playerHadTarget = UnitGUID("target") and true
  		warnSummonSpirit:Show()
  		timerSummonSpiritCD:Start()
  		soundWarnSpirit:Play("Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\spirits.mp3")
- 		if not playerHadTarget then
- 			self:RegisterShortTermEvents(
- 				"PLAYER_TARGET_CHANGED"
- 			)
- 			self:Schedule(0.1, unregisterShortTermEvents, self)
- 		end
+		self:Schedule(2, isAggroOnUntargetedUnit)
 	end
 end
 
@@ -499,37 +529,3 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		warnReanimating:Show()
 	end
 end
-
--- "<235.53 ...> [UNIT_SPELLCAST_SUCCEEDED] Lady Deathwhisper(54.8%-0.0%){Target:...} -Summon Spirit- [[boss1:Summon Spirit::0:]]", -- [20525]
--- "<235.53 ...> [DBM_Announce] Summon Spirit:Interface\\Icons\\Spell_Holy_SenseUndead:spell:71426:Deathwhisper:false:", -- [20526]
--- "<235.53 ...> [DBM_Debug] PlaySoundFile playing with media Sound\\Doodad\\BellTollNightElf.wav:3:", -- [20527]
--- "<235.53 ...> [DBM_Debug] Timer Summon Spirit CD(Timer71426cd) (Stage 2) refreshed after zero. Remaining time is : -0.92:2:", -- [20528]
--- "<235.53 ...> [DBM_TimerStart] Timer71426cd:Summon Spirit CD:11:Interface\\Icons\\Spell_Holy_SenseUndead:cd:71426:3:Deathwhisper:true:nil:Summon Spirit:nil:", -- [20529]
--- "<235.53 ...> [UNIT_SPELLCAST_SUCCEEDED] Lady Deathwhisper(54.8%-0.0%){Target:...} -Summon Spirit- [[boss1:Summon Spirit::0:]]", -- [20530]
--- "<235.53 ...> [PLAYER_TARGET_CHANGED] -1 Hostile (elite Undead) - Lady Deathwhisper # 0xF130008FF7000026", -- [20531]
--- "<235.53 ...> [UNIT_SPELLCAST_SUCCEEDED] Lady Deathwhisper(54.8%-0.0%){Target:...} -Summon Spirit- [[boss1:Summon Spirit::0:]]", -- [20532]
-function mod:PLAYER_TARGET_CHANGED()
-	if not playerHadTarget and self:GetCIDFromGUID(UnitGUID("target")) == 36855 then
-		specWarnVengefulShadeOnYou:Show()
-		specWarnVengefulShadeOnYou:Play("runaway")
-		yellVengefulShadeOnMe:Yell() -- disabled since live run proved to be ineffective to catch target without false positives
-		DBM:AddMsg("Experimental feature with spirit targeting. If you received a Special Announcement saying Summon Spirit - run away, but were NOT the real player targeted by the spirits, please share VOD/Transcriptor log with Zidras on Github or Discord.")
-	end
-	self:Unschedule(unregisterShortTermEvents)
-	self:UnregisterShortTermEvents() -- outside the if check, since I only care about the first event, whether or not it targeted boss
-end
-
--- function mod:UNIT_SPELLCAST_SUCCEEDED(_, spellName)
--- 	if spellName == summonSpiritName and self:AntiSpam(5, 1) then -- Summon Spirit
--- 		playerHadTarget = UnitGUID("target") and true
--- 		warnSummonSpirit:Show()
--- 		timerSummonSpiritCD:Start()
--- 		soundWarnSpirit:Play("Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\spirits.mp3")
--- 		if not playerHadTarget then
--- 			self:RegisterShortTermEvents(
--- 				"PLAYER_TARGET_CHANGED"
--- 			)
--- 			self:Schedule(0.1, unregisterShortTermEvents, self)
--- 		end
--- 	end
--- end
