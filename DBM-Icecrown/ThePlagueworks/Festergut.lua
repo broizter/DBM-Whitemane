@@ -17,8 +17,8 @@ mod:RegisterEventsInCombat(
 	"UNIT_SPELLCAST_SUCCEEDED boss1"
 )
 
-local isGooSummonHidden     = true
-local gooCastFrequency      = 10
+-- local isGooSummonHidden     = true
+-- local gooCastFrequency      = 10
 
 local warnInhaledBlight		= mod:NewStackAnnounce(69166, 3)
 local warnGastricBloat		= mod:NewStackAnnounce(72219, 2, nil, "Tank|Healer")
@@ -32,7 +32,7 @@ local specWarnVileGas		= mod:NewSpecialWarningYou(69240, nil, nil, nil, 1, 2)
 local yellVileGas			= mod:NewYellMe(69240)
 local specWarnGastricBloat	= mod:NewSpecialWarningStack(72219, nil, 9, nil, nil, 1, 6)
 local specWarnInhaled3		= mod:NewSpecialWarningStack(69166, "Tank", 3, nil, nil, 1, 2)
-local specWarnMalleableGoo	= mod:NewSpecialWarningDodge(72297, false, nil, nil, 1, 2) -- Retail has default true for melee but it's more sensible to show for everyone.
+-- local specWarnMalleableGoo	= mod:NewSpecialWarningDodge(72297, false, nil, nil, 1, 2) -- Retail has default true for melee but it's more sensible to show for everyone.
 
 local timerGasSpore			= mod:NewBuffFadesTimer(12, 69279, nil, nil, nil, 3)
 local timerVileGas			= mod:NewBuffFadesTimer(5.2, 69240, nil, "Ranged", nil, 3)
@@ -41,7 +41,7 @@ local timerPungentBlight	= mod:NewCDTimer(33.5, 69195, nil, nil, nil, 2)		-- Edi
 local timerInhaledBlight	= mod:NewCDTimer(34, 69166, nil, nil, nil, 6, nil, nil, true)	-- Timer is based on Aura. ~9s variance on pull, 1.5s variance [33.5-35.0]. Added "keep" arg (25H Lordaeron 2022/09/04 || 25H Lordaeron 2022/09/25) - 34.2, 34.7, *, 34.2 || 34.3, 33.8, 67.5 [33.5-pungent, 34.0], 34.2
 local timerGastricBloat		= mod:NewTargetTimer(100, 72219, nil, "Tank|Healer", nil, 5, nil, DBM_COMMON_L.TANK_ICON)	-- 100 Seconds until expired
 local timerGastricBloatCD	= mod:NewCDTimer(10, 72219, nil, "Tank|Healer", nil, 5, nil, DBM_COMMON_L.TANK_ICON) -- REVIEW! ~3s variance [13.1 - 16.2]. (25H Lordaeron [2023-04-07]@[19:29:03] || 25H Icecrown [2023-05-28]@[16:21:49]) - "Gastric Bloat-72553-npc:36626-1098 = pull:13.8, 13.1, 13.5, 13.1, 13.2, 14.0, 13.8, 13.4, 13.2, 13.9, 13.4, 13.8 || "Gastric Bloat-72553-npc:36626-752 = pull:13.6, 16.2, 13.4, 13.1, 13.4, 13.3, 14.3, 13.4, 13.1, 14.1, 13.1, 14.8, 13.1
-local timerMalleableGooCD	= mod:NewCDTimer(gooCastFrequency, 72297, nil, false, nil, 3) -- Variance of up to 3 seconds
+-- local timerMalleableGooCD	= mod:NewCDTimer(gooCastFrequency, 72297, nil, false, nil, 3) -- Variance of up to 3 seconds
 
 local berserkTimer			= mod:NewBerserkTimer(300)
 
@@ -55,11 +55,11 @@ local vileGasTargets = {}
 mod.vb.gasSporeCast = 0
 mod.vb.warnedfailed = false
 
-local function scheduleGooEvents(timer)
+--[[ local function scheduleGooEvents(timer)
 	timerMalleableGooCD:Start(timer)
 	specWarnMalleableGoo:DelayedShow(timer)
 	specWarnMalleableGoo:ScheduleVoice(timer, "watchstep")
-end
+end ]]
 
 function mod:AnnounceSporeIcons(uId, icon)
 	if self.Options.AnnounceSporeIcons and DBM:IsInGroup() and DBM:GetRaidRank() > 1 then
@@ -91,9 +91,9 @@ function mod:OnCombatStart(delay)
 	if self.Options.RangeFrame then
 		DBM.RangeCheck:Show(10) -- 9.6y is the shortest distance that it doesn't spread (TC test 12/03/2023); set to 10 for safety
 	end
-	if self:IsHeroic() then
+--[[ 	if self:IsHeroic() then
 		scheduleGooEvents(19-delay)
-	end
+	end ]]
 end
 
 function mod:OnCombatEnd()
@@ -118,11 +118,11 @@ function mod:SPELL_CAST_SUCCESS(args)
 		else
 			timerGasSporeCD:Start()
 		end
-	elseif args:IsSpellID(72549, 72550) then -- Malleable goo explosion
+--[[ 	elseif args:IsSpellID(72549, 72550) then -- Malleable goo explosion
 		if not isGooSummonHidden then
 			return
 		end
-		scheduleGooEvents(gooCastFrequency)
+		scheduleGooEvents(gooCastFrequency) ]]
 	end
 end
 
