@@ -132,7 +132,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif args:IsSpellID(72272, 72273) and args:IsDestTypePlayer() then	-- Vile Gas (Heroic Rotface only)
 		if args:IsPlayer() then
 			specWarnVileGas:Show()
-			specWarnVileGas:Play("scatter")
+			-- specWarnVileGas:Play("scatter")
 		end
 		warnVileGas:CombinedShow(2.5, args.destName) -- Yes it does take this long to travel to all 3 targets sometimes, qq.
 		if self:AntiSpam(5, 3) then
