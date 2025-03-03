@@ -19,7 +19,6 @@ mod:RegisterEventsInCombat(
 	"SPELL_AURA_REMOVED 70842 71289",
 	"SPELL_INTERRUPT",
 	"SPELL_SUMMON 71426",
-	"SWING_DAMAGE",
 	"CHAT_MSG_MONSTER_YELL",
 	"UNIT_SPELLCAST_SUCCEEDED boss1"
 )
@@ -492,13 +491,6 @@ function mod:SPELL_SUMMON(args)
  			)
  			self:Schedule(0.1, unregisterShortTermEvents, self)
  		end
-	end
-end
-
-function mod:SWING_DAMAGE(sourceGUID, _, _, destGUID)
-	if destGUID == UnitGUID("player") and self:GetCIDFromGUID(sourceGUID) == 38222 then
-		specWarnVengefulShade:Show()
---		specWarnVengefulShade:Play("targetyou")
 	end
 end
 
