@@ -24,7 +24,6 @@ mod:RegisterEventsInCombat(
 	"UNIT_SPELLCAST_SUCCEEDED boss1"
 )
 
-local canShadowmeld = select(2, UnitRace("player")) == "NightElf"
 local canVanish = select(2, UnitClass("player")) == "ROGUE"
 local myRealm = select(3, DBM:GetMyPlayerInfo())
 
@@ -59,7 +58,7 @@ local specWarnDeathDecay			= mod:NewSpecialWarningGTFO(71001, nil, nil, nil, 1, 
 local timerDominateMind				= mod:NewBuffActiveTimer(12, 71289, nil, nil, nil, 5)
 local timerDominateMindCD			= mod:NewCDTimer(40, 71289, nil, nil, nil, 3, nil, nil, true) -- ~7s variance [40-46.7]. Added "keep" arg (10H Lordaeron 2022/09/02 || 25H Lordaeron 2022/09/04 || 25H Lordaeron [2023-07-05]@[19:41:47]) - 42.9, 43.5, Stage 2/17.3, 27.1/44.4, 43.6, 43.9, 43.7, 42.2 || 42.1, 40.1, Stage 2/31.9, 10.0/41.9 || 46.7, Stage 2/21.3, 20.6/42.0
 
-local soundSpecWarnDominateMind		= mod:NewSound(71289, nil, canShadowmeld or canVanish)
+local soundSpecWarnDominateMind		= mod:NewSound(71289, nil, canVanish)
 
 mod:AddInfoFrameOption(70842, false)
 mod:AddSetIconOption("SetIconOnDeformedFanatic", 70900, true, 5, {8})
@@ -383,9 +382,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 			if self.Options.RemoveBuffsOnMC ~= "Never" then
 				RemoveBuffs(self.Options.RemoveBuffsOnMC)
 			end
-			if canShadowmeld then
-				soundSpecWarnDominateMind:Play("Interface\\AddOns\\DBM-Core\\sounds\\PlayerAbilities\\Shadowmeld.ogg")
-			elseif canVanish then
+			if canVanish then
 				soundSpecWarnDominateMind:Play("Interface\\AddOns\\DBM-Core\\sounds\\PlayerAbilities\\Vanish.ogg")
 			end
 			if checkWeaponRemovalSetting(self) then
