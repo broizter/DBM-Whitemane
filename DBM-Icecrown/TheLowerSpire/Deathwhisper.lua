@@ -318,6 +318,20 @@ local function isAggroOnUntargetedUnit()
 		end
 	end
 
+	-- Check awesome-wotlk nameplates
+	if C_NamePlate then
+		local nameplateFrames = C_NamePlate.GetNamePlates()
+		for i = 1, #nameplateFrames do
+			local unitID = "nameplate"..i
+			if UnitExists(unitID) then
+				local threatStatus = UnitThreatSituation("player", unitID)
+				if threatStatus and threatStatus >= 2 then
+					return -- Found threat on a nameplate target
+				end
+			end
+		end
+	end
+
 	 -- Check all raid members' targets
 	local numRaidMembers = GetNumRaidMembers()
 	if numRaidMembers > 0 then
