@@ -305,51 +305,35 @@ do	-- add the additional Shield Bar
 end
 
 local function isAggroOnUntargetedUnit()
-	local knownUnits = {}
 	local playerThreatStatus = UnitThreatSituation("player")
-
-	-- Only continue if player has high threat
-	if not playerThreatStatus or playerThreatStatus < 2 then 
+	if not playerThreatStatus or playerThreatStatus < 2 then
 	    return
 	end
 
-	-- Check player's target
+	-- Check player's target first
 	if UnitExists("target") then
-	    local guid = UnitGUID("target")
-	    if guid then knownUnits[guid] = true end
+		local threatStatus = UnitThreatSituation("player", "target")
+		if threatStatus and threatStatus >= 2 then
+			return -- Found threat on player's target
+		end
 	end
 
-	-- Check all raid members' targets
+	 -- Check all raid members' targets
 	local numRaidMembers = GetNumRaidMembers()
 	if numRaidMembers > 0 then
-	    for i = 1, numRaidMembers do
-		-- Add raid member's GUID
-		local raidMemberGUID = UnitGUID("raid"..i)
-		if raidMemberGUID then
-		knownUnits[raidMemberGUID] = true
+		-- Check raid targets
+		for i = 1, numRaidMembers do
+			local unitID = "raid"..i.."target"
+			if UnitExists(unitID) then
+				local threatStatus = UnitThreatSituation("player", unitID)
+				if threatStatus and threatStatus >= 2 then
+					return -- Found threat on a raid member's target
+				end
+			end
 		end
-
-		-- Add raid member's target's GUID
-		local unitID = "raid"..i.."target"
-		if UnitExists(unitID) then
-		    local guid = UnitGUID(unitID)
-		    if guid then knownUnits[guid] = true end
-		end
-	    end
 	end
 
-	-- Check if player has threat on any known unit
-	for guid in pairs(knownUnits) do
-	    local unitID = DBM:GetUnitIdFromGUID(guid)
-	    if unitID then
-		local threatStatus = UnitThreatSituation("player", unitID)
-		if threatStatus and threatStatus >= 2 then
-		    return -- Found a known unit we have threat on
-		end
-	    end
-	end
-
-	-- If we have high threat but not on any known unit, we must have threat from an untargeted shade
+	-- If we have high threat but not on anyones target then it's most likely on an untargeted unit
 	specWarnVengefulShadeOnYou:Show()
 	specWarnVengefulShadeOnYou:Play("runaway")
 	yellVengefulShadeOnMe:Yell()
@@ -527,7 +511,7 @@ function mod:SPELL_SUMMON(args)
  		warnSummonSpirit:Show()
  		timerSummonSpiritCD:Start()
  		soundWarnSpirit:Play("Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\spirits.mp3")
-		self:Schedule(2, isAggroOnUntargetedUnit)
+		self:Schedule(1.7, isAggroOnUntargetedUnit)
 	end
 end
 
