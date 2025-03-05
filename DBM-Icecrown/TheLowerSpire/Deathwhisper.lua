@@ -75,7 +75,7 @@ local specWarnCurseTorpor			= mod:NewSpecialWarningYou(71237, nil, nil, nil, 1, 
 local specWarnTouchInsignificance	= mod:NewSpecialWarningStack(71204, nil, 3, nil, nil, 1, 6)
 local specWarnFrostbolt				= mod:NewSpecialWarningInterrupt(72007, "HasInterrupt", nil, 2, 1, 2)
 local specWarnVengefulShadeOnYou	= mod:NewSpecialWarningRun(71426, nil, nil, nil, 4, 2)
-local yellVengefulShadeOnMe			= mod:NewYellMe(71426)
+-- local yellVengefulShadeOnMe			= mod:NewYellMe(71426)
 
 local timerSummonSpiritCD			= mod:NewCDTimer(11, 71426, nil, true, nil, 3, nil, nil, true) -- SUMMON cleu event is fired much later than UNIT_SPELLCAST_SUCCEEDED (11.0-13.8), and with higher variance too. Initially using CLEU, but switched to UNIT event. ~5s variance for CLEU [9.4-14.1]. Added "keep" arg (10H Lordaeron 2022/10/02) - 9.9, 12.1, 11.7, 14.1, 10.1, 11.1, 11.7, 11.7, 13.1, 12.1, 9.4 ||| Stage 2/11.4, 11.3, 11.6, 11.3, 11.1, 11.1, 11.2, 11.5, 12.0, 11.3, 11.5, 11.7, 11.1, 11.7, 11.9, 11.4, 11.2, 11.7, 11.8, 11.1, 13.8
 local timerFrostboltCast			= mod:NewCastTimer(2, 72007, nil, "HasInterrupt")
@@ -350,7 +350,7 @@ local function isAggroOnUntargetedUnit()
 	-- If we have high threat but not on anyones target then it's most likely on an untargeted unit
 	specWarnVengefulShadeOnYou:Show()
 	specWarnVengefulShadeOnYou:Play("runaway")
-	yellVengefulShadeOnMe:Yell()
+	-- yellVengefulShadeOnMe:Yell() -- Disabled since the target detection is not 100% accurate
 end
 
 function mod:OnCombatStart(delay)
