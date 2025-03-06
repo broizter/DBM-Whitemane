@@ -85,6 +85,9 @@ local timerTouchInsignificanceCD	= mod:NewCDTimer(9, 71204, nil, "Tank|Healer", 
 
 local soundWarnSpirit				= mod:NewSound(71426)
 
+-- Variable to check if a player has been warned about being targeted by a spirit in a spell_summon cycle
+local hasBeenWarned = false
+
 local dominateMindTargets = {}
 mod.vb.dominateMindIcon = 1
 local shieldName = DBM:GetSpellInfo(70842)
@@ -335,7 +338,6 @@ local function isAggroOnUntargetedUnit()
 	 -- Check all raid members' targets
 	local numRaidMembers = GetNumRaidMembers()
 	if numRaidMembers > 0 then
-		-- Check raid targets
 		for i = 1, numRaidMembers do
 			local unitID = "raid"..i.."target"
 			if UnitExists(unitID) then
@@ -348,9 +350,11 @@ local function isAggroOnUntargetedUnit()
 	end
 
 	-- If we have high threat but not on anyones target then it's most likely on an untargeted unit
-	specWarnVengefulShadeOnYou:Show()
-	specWarnVengefulShadeOnYou:Play("runaway")
-	-- yellVengefulShadeOnMe:Yell() -- Disabled since the target detection is not 100% accurate
+	if not hasBeenWarned then
+		hasBeenWarned = true
+		specWarnVengefulShadeOnYou:Show()
+		specWarnVengefulShadeOnYou:Play("runaway")
+	end
 end
 
 function mod:OnCombatStart(delay)
@@ -525,7 +529,14 @@ function mod:SPELL_SUMMON(args)
  		warnSummonSpirit:Show()
  		timerSummonSpiritCD:Start()
  		soundWarnSpirit:Play("Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\spirits.mp3")
-		self:Schedule(1.7, isAggroOnUntargetedUnit)
+
+		-- Reset warning flag for new spirit spawn
+		hasBeenWarned = false
+
+		-- Schedule multiple checks to catch late spirit spawn
+		for i = 0, 4 do
+			self:Schedule(1.5 + (i * 1), isAggroOnUntargetedUnit)
+		end
 	end
 end
 
