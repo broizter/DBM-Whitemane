@@ -87,6 +87,12 @@ local soundWarnSpirit				= mod:NewSound(71426)
 
 -- Variable to check if a player has been warned about being targeted by a spirit in a spell_summon cycle
 local hasBeenWarned = false
+local aggroScanFrequency = 0.1
+local aggroScanDuration = 6.7
+local lastAggroScanTime = GetTime()
+local aggroScanEndTime = GetTime()
+local schedulerFrame = CreateFrame("Frame", "DBMLDWScheduler")
+schedulerFrame:Hide()
 
 local dominateMindTargets = {}
 mod.vb.dominateMindIcon = 1
@@ -357,6 +363,33 @@ local function isAggroOnUntargetedUnit()
 	end
 end
 
+local function onUpdate()
+  local now = GetTime()
+
+  if hasBeenWarned or now >= aggroScanEndTime then
+    hasBeenWarned = true
+    aggroScanEndTime = now
+		schedulerFrame:SetScript("OnUpdate", nil)
+		schedulerFrame:Hide()
+    return
+	end
+
+  if now - lastAggroScanTime < aggroScanFrequency then
+    return
+  end
+
+  lastAggroScanTime = now
+
+  isAggroOnUntargetedUnit()
+end
+
+local function startScheduler()
+	if not schedulerFrame:IsShown() then
+		schedulerFrame:Show()
+    schedulerFrame:SetScript("OnUpdate", onUpdate)
+	end
+end
+
 function mod:OnCombatStart(delay)
 	self:SetStage(1)
 	if self.Options.ShieldHealthFrame then
@@ -532,11 +565,8 @@ function mod:SPELL_SUMMON(args)
 
 		-- Reset warning flag for new spirit spawn
 		hasBeenWarned = false
-
-		-- Schedule multiple checks to catch late spirit spawn
-		for i = 0, 9 do
-			self:Schedule(1.7 + (i * 0.5), isAggroOnUntargetedUnit)
-		end
+    aggroScanEndTime = GetTime() + aggroScanDuration
+    startScheduler()
 	end
 end
 
