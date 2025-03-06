@@ -79,7 +79,7 @@ local timerChokingGasBombExplosion	= mod:NewCastTimer(12, 71279, nil, nil, nil, 
 local timerMalleableGooCD			= mod:NewNextTimer(20, 72295, nil, nil, nil, 3) -- (25H Lordaeron 2022/09/07) - pull:113.6/Stage 2/10.1, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0; pull:114.4/Stage 2/10.1, 20.0, 20.1, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, Stage 2.5/8.1, Stage 3/31.9, 10.0/41.9/50.0, 20.0, 20.0, 20.0, 20.0"
 
 local soundSpecWarnMalleableGoo		= mod:NewSound(72295, nil, "Ranged")
-local soundMalleableGooSoon			= mod:NewSoundSoon(72295, nil, "Ranged")
+-- local soundMalleableGooSoon			= mod:NewSoundSoon(72295, nil, "Ranged")
 local soundSpecWarnChokingGasBomb	= mod:NewSound(71255, nil, "Melee")
 local soundChokingGasSoon			= mod:NewSoundSoon(71255, nil, "Melee")
 
@@ -125,7 +125,7 @@ local function NextPhase(self)
 		timerUnstableExperimentCD:Start(43.6) -- 19/04/2024: (Heroic) Unstable Experiement scheduled 30 seconds after Create Concoction finishes. https://www.warmane.com/bugtracker/report/121798#comment-114099
 		warnUnstableExperimentSoon:Schedule(38.6)
 		timerMalleableGooCD:Start(17.7) -- Fixed timer after phase 2: 15s
-		soundMalleableGooSoon:Schedule(17.7-3, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\malleable_soon.mp3")
+		-- soundMalleableGooSoon:Schedule(17.7-3, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\malleable_soon.mp3")
 		timerChokingGasBombCD:Start(24) -- timer after phasing: 5s variance [25-30s]
 		soundChokingGasSoon:Schedule(24-3, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\choking_soon.mp3")
 		warnChokingGasBombSoon:Schedule(24-5)
@@ -204,7 +204,7 @@ function mod:SPELL_CAST_START(args)
 		if self.vb.phase == 2.5 then -- Usual timer delta is not reliable for Malleable Goo, it's a different logic, commented below
 			local gooElapsed = timerMalleableGooCD:GetTime() -- On second Normal intermission, the next Malleable Goo will always be [44:25N/44:10N]s after the previous Malleable Goo cast, so calculate elapsed time and update timer
 			timerMalleableGooCD:Update(gooElapsed, 44)
-			soundMalleableGooSoon:Schedule(44-gooElapsed-3, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\malleable_soon.mp3")
+			-- soundMalleableGooSoon:Schedule(44-gooElapsed-3, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\malleable_soon.mp3")
 			local chokingElapsed = timerChokingGasBombCD:GetTime() -- On second Normal intermission, the next Choking Gas Bomb will always be [59.28-61.10:25N/60.17:10N]s after the previous Choking Gas Bomb cast, so calculate elapsed time and update timer
 			timerChokingGasBombCD:Update(chokingElapsed, 59)
 			soundChokingGasSoon:Schedule(59-chokingElapsed-3, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\choking_soon.mp3")
@@ -231,7 +231,7 @@ function mod:SPELL_CAST_START(args)
 			local gooElapsed = timerMalleableGooCD:GetTime() -- On second Heroic intermission, the next Malleable Goo will always be [60:25H/70:10H]s after the previous Malleable Goo cast, so calculate elapsed time and update timer
 			local gooMaxTimePerDifficulty = self:IsDifficulty("heroic25") and 60 or self:IsDifficulty("heroic10") and 70 or 44 -- REVIEW! 25H confirmed, 10H need more data, 25N only one log, 10N only one log
 			timerMalleableGooCD:Update(gooElapsed, gooMaxTimePerDifficulty)
-			soundMalleableGooSoon:Schedule(gooMaxTimePerDifficulty-gooElapsed-3, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\malleable_soon.mp3")
+			-- soundMalleableGooSoon:Schedule(gooMaxTimePerDifficulty-gooElapsed-3, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\malleable_soon.mp3")
 			local chokingElapsed = timerChokingGasBombCD:GetTime() -- On second Heroic intermission, the next Choking Gas Bomb will always be [75-80:25H/89.39:10H]s after the previous Choking Gas Bomb cast, so calculate elapsed time and update timer
 			local chokingMaxTimePerDifficulty = self:IsDifficulty("heroic25") and 75 or self:IsDifficulty("heroic10") and 85 or 59 -- REVIEW! 25H confirmed, 10H only one log, 25N only two log, 10N only one log
 			timerChokingGasBombCD:Update(chokingElapsed, chokingMaxTimePerDifficulty)
@@ -435,7 +435,7 @@ function mod:UNIT_HEALTH(uId)
 	elseif self:GetUnitCreatureId(uId) == 36678 and UnitHealth(uId) / UnitHealthMax(uId) == 0.35 then
 		warnUnstableExperimentSoon:Cancel()
 		warnChokingGasBombSoon:Cancel()
-		soundMalleableGooSoon:Cancel()
+		-- soundMalleableGooSoon:Cancel()
 		soundChokingGasSoon:Cancel()
 	end
 end
@@ -476,8 +476,8 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
 		--specWarnMalleableGooCast:Play("watchstep")
 		timerMalleableGooCD:Start()
 		soundSpecWarnMalleableGoo:Play("Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\malleable.mp3")
-		soundMalleableGooSoon:Cancel()
-		soundMalleableGooSoon:Schedule(20-3, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\malleable_soon.mp3")	
+		-- soundMalleableGooSoon:Cancel()
+		-- soundMalleableGooSoon:Schedule(20-3, "Interface\\AddOns\\DBM-Core\\sounds\\RaidAbilities\\malleable_soon.mp3")	
 	end
 end
 
