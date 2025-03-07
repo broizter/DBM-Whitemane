@@ -534,8 +534,8 @@ function mod:SPELL_SUMMON(args)
 		hasBeenWarned = false
 
 		-- Schedule multiple checks to catch late spirit spawn
-		for i = 0, 4 do
-			self:Schedule(1.5 + (i * 1), isAggroOnUntargetedUnit)
+		for i = 0, 16 do
+			self:Schedule(1.5 + (i * 0.25), isAggroOnUntargetedUnit)
 		end
 	end
 end
