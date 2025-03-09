@@ -68,11 +68,7 @@ function mod:OnCombatStart(delay)
 	warnAddsSoon:Schedule(7-delay)
 --	self:Schedule(12-delay, Adds, self)
 	self.vb.firstMage = false
-	if UnitFactionGroup("player") == "Alliance" then
-		timerBelowZeroCD:Start(25.24-delay) --Approximate, since it depends on cannon damage. Corrected on yell later
-	else
-		timerBelowZeroCD:Start(21.68-delay) --Approximate, since it depends on cannon damage. Corrected on yell later
-	end
+	timerBelowZeroCD:Start(25.24-delay) --Approximate, since it depends on cannon damage. Corrected on yell later
 end
 
 function mod:SPELL_AURA_APPLIED(args)
@@ -131,17 +127,17 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		Adds(self)
 	elseif (msg:find(L.MageAlliance) or msg == L.MageAlliance) and self:IsInCombat() then
 		if not self.vb.firstMage then
-			timerBelowZeroCD:Update(34, 39)
+			timerBelowZeroCD:Update(37, 39)
 			self.vb.firstMage = true
 		else
-			timerBelowZeroCD:Update(30, 35)--Update the below zero timer to correct it with yells since it tends to be off depending on how bad your cannon operators are.
+			timerBelowZeroCD:Update(33, 35)--Update the below zero timer to correct it with yells since it tends to be off depending on how bad your cannon operators are.
 		end
 	elseif (msg:find(L.MageHorde) or msg == L.MageHorde) and self:IsInCombat() then
 		if not self.vb.firstMage then
-			timerBelowZeroCD:Update(34.5, 37)
+			timerBelowZeroCD:Update(37.5, 37)
 			self.vb.firstMage = true
 		else
-			timerBelowZeroCD:Update(32.5, 35)--Update the below zero timer to correct it with yells since it tends to be off depending on how bad your cannon operators are.
+			timerBelowZeroCD:Update(35.5, 35)--Update the below zero timer to correct it with yells since it tends to be off depending on how bad your cannon operators are.
 		end
 	end
 end
