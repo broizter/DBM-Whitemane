@@ -39,7 +39,7 @@ local timerOozeExplosion		= mod:NewCastTimer(4, 69839, nil, nil, nil, 2, nil, DB
 local timerVileGasCD			= mod:NewCDTimer(29.1, 72272, nil, nil, nil, 3) -- REVIEW! ~5s variance [29.1-35]? (25H Lordaeron 2022/07/09 || 25H Lordaeron 2022/09/23 || 10H Lordaeron 2022/10/02) "Vile Gas-72273-npc:36678 = pull:28.9[+2], 1.4, 0.9, 28.5[+1], 0.8, 0.7, 31.7, 2.2[+1], 35.6, 0.1[+3], 38.9, 1.0, 0.8[+1], 30.4, 2.0, 0.9, 30.2, 0.4, 0.1, 33.4, 0.3[+1], 1.5[+1], 38.2" || "Vile Gas-72273-npc:36678-1684 = pull:29.1, 1.5[+1], 0.2, 29.9[+2], 1.9, 30.9[+2], 1.4, 33.9[+1], 2.0, 0.7, 29.8[+1], 0.8[+1], 29.6, 1.1[+2], 0.1, 28.4, 0.6, 1.6, 28.8[+1], 0.1, 2.0" || "Vile Gas-72273-npc:36678-577 = pull:31.1, 0.1, 0.6, 28.4[+2], 1.3, 29.7[+2], 1.7, 0.1, 36.3[+1], 0.1, 1.2, 32.2, 1.6, 0.6[+1], 30.7, 0.8[+1], 1.5, 31.3, 1.6, 0.9[+1], 27.1, 1.2, 0.4[+2]"
 
 
-mod:AddRangeFrameOption(10, 72272, "Ranged")
+mod:AddRangeFrameOption(8, 72272, "Ranged")
 mod:AddSetIconOption("InfectionIcon", 69674, true, 0, {1, 2})
 mod:AddBoolOption("TankArrow", true, nil, nil, nil, nil, 69674)
 
@@ -64,7 +64,7 @@ function mod:OnCombatStart(delay)
 	self.vb.InfectionIcon = 1
 	spamOoze = 0
 	if self.Options.RangeFrame and self:IsHeroic() then
-		DBM.RangeCheck:Show(10) -- Increased from 8 to 10
+		DBM.RangeCheck:Show(8) -- Increased from 8 to 10
 	end
 	self:RegisterShortTermEvents(
 		"SPELL_DAMAGE", -- unfiltered for DBM arrow
