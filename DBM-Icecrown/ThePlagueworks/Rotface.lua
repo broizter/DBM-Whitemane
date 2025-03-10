@@ -10,7 +10,6 @@ mod:RegisterEventsInCombat(
 	"SPELL_CAST_START 69508 69774 69839",
 	"SPELL_AURA_APPLIED 71208 69760 69558 69674 71224 73022 73023 72272 72273",
 	"SPELL_AURA_APPLIED_DOSE 69558",
-	"SPELL_CAST_SUCCESS 72272 72273",
 	"SPELL_AURA_REMOVED 69674 71224 73022 73023",
 	"CHAT_MSG_MONSTER_YELL"
 )
@@ -141,13 +140,6 @@ function mod:SPELL_AURA_APPLIED(args)
 	end
 end
 mod.SPELL_AURA_APPLIED_DOSE = mod.SPELL_AURA_APPLIED
-
-function mod:SPELL_CAST_SUCCESS(args)
-	if args:IsSpellID(72272, 72273) then
-		DBM:AddMsg("Vile Gas SPELL_CAST_SUCCESS unhidden from combat log. Notify Zidras on Discord or GitHub")
-		timerVileGasCD:Start()
-	end
-end
 
 function mod:SPELL_AURA_REMOVED(args)
 	if args:IsSpellID(69674, 71224, 73022, 73023) then
